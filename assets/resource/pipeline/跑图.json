@@ -1,0 +1,334 @@
+{
+  "$__mpe_config_跑图": {
+    "$__mpe_code": {
+      "filePath": "D:\\Projects\\MSA\\assets\\resource\\pipeline\\跑图.json",
+      "filename": "跑图",
+      "lastSyncTime": 1766479210740,
+      "prefix": "",
+      "savedViewport": {
+        "x": -75,
+        "y": 83,
+        "zoom": 0.49
+      },
+      "version": "v0.13.0_beta_2"
+    }
+  },
+  "下一区": {
+    "$__mpe_code": {
+      "position": {
+        "x": 1238,
+        "y": 529
+      }
+    },
+    "action": {
+      "param": {},
+      "type": "Click"
+    },
+    "next": [
+      "开始跑图"
+    ],
+    "recognition": {
+      "param": {
+        "template": [
+          "跑图/下一区.png"
+        ]
+      },
+      "type": "TemplateMatch"
+    }
+  },
+  "初次获得卡牌": {
+    "$__mpe_code": {
+      "position": {
+        "x": 481,
+        "y": 420
+      }
+    },
+    "action": {
+      "param": {},
+      "type": "Click"
+    },
+    "next": [
+      "结束意外处理"
+    ],
+    "recognition": {
+      "param": {
+        "template": [
+          "意外/确定.png"
+        ]
+      },
+      "type": "TemplateMatch"
+    }
+  },
+  "前进": {
+    "$__mpe_code": {
+      "position": {
+        "x": 1241,
+        "y": 736
+      }
+    },
+    "action": {
+      "param": {},
+      "type": "Click"
+    },
+    "next": [
+      "开始跑图"
+    ],
+    "recognition": {
+      "param": {
+        "template": [
+          "跑图/前进.png"
+        ]
+      },
+      "type": "TemplateMatch"
+    }
+  },
+  "卡组三": {
+    "$__mpe_code": {
+      "position": {
+        "x": 1623,
+        "y": 401
+      }
+    },
+    "action": {
+      "param": {},
+      "type": "Click"
+    },
+    "next": [
+      "跳过战斗"
+    ],
+    "recognition": {
+      "param": {
+        "template": [
+          "战斗/卡组三.png"
+        ]
+      },
+      "type": "TemplateMatch"
+    }
+  },
+  "卡组二": {
+    "$__mpe_code": {
+      "position": {
+        "x": 1966,
+        "y": 195
+      }
+    },
+    "action": {
+      "param": {},
+      "type": "Click"
+    },
+    "next": [
+      "跳过战斗"
+    ],
+    "recognition": {
+      "param": {
+        "template": [
+          "战斗/卡组二.png"
+        ]
+      },
+      "type": "TemplateMatch"
+    }
+  },
+  "开始意外处理": {
+    "$__mpe_code": {
+      "position": {
+        "x": 178,
+        "y": 455
+      }
+    },
+    "action": {
+      "param": {},
+      "type": "DoNothing"
+    },
+    "next": [
+      {
+        "jump_back": true,
+        "name": "无法连接至服务器"
+      },
+      {
+        "jump_back": true,
+        "name": "初次获得卡牌"
+      },
+      "结束意外处理"
+    ],
+    "recognition": {
+      "param": {},
+      "type": "DirectHit"
+    }
+  },
+  "开始跑图": {
+    "$__mpe_code": {
+      "position": {
+        "x": -117,
+        "y": 466
+      }
+    },
+    "action": {
+      "param": {},
+      "type": "DoNothing"
+    },
+    "next": [
+      "开始意外处理"
+    ],
+    "recognition": {
+      "param": {},
+      "type": "DirectHit"
+    }
+  },
+  "感染者出现": {
+    "$__mpe_code": {
+      "position": {
+        "x": 1252,
+        "y": 279
+      }
+    },
+    "action": {
+      "param": {},
+      "type": "DoNothing"
+    },
+    "next": [
+      "暴走检测",
+      "卡组三"
+    ],
+    "recognition": {
+      "param": {
+        "template": [
+          "战斗/放弃.png"
+        ]
+      },
+      "type": "TemplateMatch"
+    }
+  },
+  "战斗处理结束": {
+    "$__mpe_code": {
+      "position": {
+        "x": 2499,
+        "y": 374
+      }
+    },
+    "action": {
+      "param": {},
+      "type": "DoNothing"
+    },
+    "next": [
+      "开始跑图"
+    ],
+    "recognition": {
+      "param": {},
+      "type": "DirectHit"
+    }
+  },
+  "无法连接至服务器": {
+    "$__mpe_code": {
+      "position": {
+        "x": 483,
+        "y": 228
+      }
+    },
+    "action": {
+      "param": {},
+      "type": "Click"
+    },
+    "next": [
+      "结束意外处理"
+    ],
+    "recognition": {
+      "param": {
+        "template": [
+          "意外/重试.png"
+        ]
+      },
+      "type": "TemplateMatch"
+    }
+  },
+  "暴走检测": {
+    "$__mpe_code": {
+      "position": {
+        "x": 1601,
+        "y": 175
+      }
+    },
+    "action": {
+      "param": {},
+      "type": "DoNothing"
+    },
+    "next": [
+      "卡组二"
+    ],
+    "recognition": {
+      "param": {
+        "expected": [
+          "暴走的"
+        ]
+      },
+      "type": "OCR"
+    }
+  },
+  "点击屏幕跳过": {
+    "$__mpe_code": {
+      "position": {
+        "x": 1243,
+        "y": 940
+      }
+    },
+    "action": {
+      "param": {},
+      "type": "Click"
+    },
+    "next": [
+      "开始跑图"
+    ],
+    "recognition": {
+      "param": {
+        "template": [
+          "卡牌/点击屏幕跳过.png"
+        ]
+      },
+      "type": "FeatureMatch"
+    }
+  },
+  "结束意外处理": {
+    "$__mpe_code": {
+      "position": {
+        "x": 904,
+        "y": 446
+      }
+    },
+    "action": {
+      "param": {},
+      "type": "DoNothing"
+    },
+    "next": [
+      "感染者出现",
+      "下一区",
+      "前进",
+      "点击屏幕跳过"
+    ],
+    "recognition": {
+      "param": {},
+      "type": "DirectHit"
+    }
+  },
+  "跳过战斗": {
+    "$__mpe_code": {
+      "position": {
+        "x": 2118,
+        "y": 364
+      }
+    },
+    "action": {
+      "param": {},
+      "type": "Click"
+    },
+    "next": [
+      "战斗处理结束"
+    ],
+    "recognition": {
+      "param": {
+        "template": [
+          "战斗/跳过.png"
+        ]
+      },
+      "type": "TemplateMatch"
+    }
+  }
+}
