@@ -118,7 +118,7 @@
     "recognition": {
       "param": {
         "template": [
-          "战斗/放弃"
+          "战斗/放弃.png"
         ]
       },
       "type": "TemplateMatch"
