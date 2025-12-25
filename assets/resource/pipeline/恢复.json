@@ -1,0 +1,313 @@
+{
+  "$__mpe_config_恢复": {
+    "$__mpe_code": {
+      "filePath": "D:\\Projects\\MSA\\assets\\resource\\pipeline/恢复.json",
+      "filename": "恢复",
+      "lastSyncTime": 1766649085394,
+      "prefix": "",
+      "savedViewport": {
+        "x": 301,
+        "y": 64,
+        "zoom": 0.57
+      },
+      "version": "v0.13.0"
+    }
+  },
+  "AP不足": {
+    "$__mpe_code": {
+      "position": {
+        "x": 300,
+        "y": 283
+      }
+    },
+    "action": {
+      "param": {},
+      "type": "DoNothing"
+    },
+    "next": [
+      "判断使用大AP药",
+      "判断使用小AP药",
+      "判断停止使用AP药"
+    ],
+    "recognition": {
+      "param": {
+        "template": [
+          "恢复/行动力恢复药-大.png"
+        ]
+      },
+      "type": "TemplateMatch"
+    }
+  },
+  "BC不足": {
+    "$__mpe_code": {
+      "position": {
+        "x": 300,
+        "y": 501
+      }
+    },
+    "action": {
+      "param": {},
+      "type": "DoNothing"
+    },
+    "next": [
+      "判断使用大BC药",
+      "判断使用小BC药",
+      "判断停止使用BC药"
+    ],
+    "recognition": {
+      "param": {
+        "template": [
+          "恢复/战斗力恢复药-大.png"
+        ]
+      },
+      "type": "TemplateMatch"
+    }
+  },
+  "使用大恢复药": {
+    "$__mpe_code": {
+      "position": {
+        "x": 900,
+        "y": 267
+      }
+    },
+    "action": {
+      "param": {},
+      "type": "Click"
+    },
+    "recognition": {
+      "param": {
+        "roi": [
+          883,
+          388,
+          95,
+          42
+        ],
+        "template": [
+          "恢复/使用药品.png"
+        ]
+      },
+      "type": "TemplateMatch"
+    }
+  },
+  "使用小恢复药": {
+    "$__mpe_code": {
+      "position": {
+        "x": 900,
+        "y": 703
+      }
+    },
+    "action": {
+      "param": {},
+      "type": "Click"
+    },
+    "recognition": {
+      "param": {
+        "roi": [
+          879,
+          503,
+          102,
+          42
+        ],
+        "template": [
+          "恢复/使用药品.png"
+        ]
+      },
+      "type": "TemplateMatch"
+    }
+  },
+  "免费恢复": {
+    "$__mpe_code": {
+      "position": {
+        "x": 300,
+        "y": 0
+      }
+    },
+    "action": {
+      "param": {},
+      "type": "Click"
+    },
+    "enabled": true,
+    "focus": {
+      "Node.Recognition.Succeeded": "使用免费状态回复"
+    },
+    "recognition": {
+      "param": {
+        "template": [
+          "恢复/免费恢复.png"
+        ]
+      },
+      "type": "TemplateMatch"
+    }
+  },
+  "判断使用大AP药": {
+    "$__mpe_code": {
+      "position": {
+        "x": 600,
+        "y": 271
+      }
+    },
+    "action": {
+      "param": {},
+      "type": "DoNothing"
+    },
+    "focus": {
+      "Node.Recognition.Succeeded": "使用大AP药"
+    },
+    "next": [
+      "使用大恢复药"
+    ],
+    "recognition": {
+      "param": {},
+      "type": "DirectHit"
+    }
+  },
+  "判断使用大BC药": {
+    "$__mpe_code": {
+      "position": {
+        "x": 600,
+        "y": 489
+      }
+    },
+    "action": {
+      "param": {},
+      "type": "DoNothing"
+    },
+    "focus": {
+      "Node.Recognition.Succeeded": "使用大BC药"
+    },
+    "next": [
+      "使用大恢复药"
+    ],
+    "recognition": {
+      "param": {},
+      "type": "DirectHit"
+    }
+  },
+  "判断使用小AP药": {
+    "$__mpe_code": {
+      "position": {
+        "x": 600,
+        "y": 707
+      }
+    },
+    "action": {
+      "param": {},
+      "type": "DoNothing"
+    },
+    "focus": {
+      "Node.Recognition.Succeeded": "使用小AP药"
+    },
+    "next": [
+      "使用小恢复药"
+    ],
+    "recognition": {
+      "param": {},
+      "type": "DirectHit"
+    }
+  },
+  "判断使用小BC药": {
+    "$__mpe_code": {
+      "position": {
+        "x": 600,
+        "y": 925
+      }
+    },
+    "action": {
+      "param": {},
+      "type": "DoNothing"
+    },
+    "focus": {
+      "Node.Recognition.Succeeded": "使用小BC药"
+    },
+    "next": [
+      "使用小恢复药"
+    ],
+    "recognition": {
+      "param": {},
+      "type": "DirectHit"
+    }
+  },
+  "判断停止使用AP药": {
+    "$__mpe_code": {
+      "position": {
+        "x": 600,
+        "y": 1143
+      }
+    },
+    "action": {
+      "param": {},
+      "type": "DoNothing"
+    },
+    "focus": "AP药使用已达到上限，终止跑图",
+    "next": [
+      "吃药达到上限"
+    ],
+    "recognition": {
+      "param": {},
+      "type": "DirectHit"
+    }
+  },
+  "判断停止使用BC药": {
+    "$__mpe_code": {
+      "position": {
+        "x": 600,
+        "y": 1361
+      }
+    },
+    "action": {
+      "param": {},
+      "type": "DoNothing"
+    },
+    "focus": {
+      "Node.Recognition.Succeeded": "BC药使用已达到上限，终止跑图"
+    },
+    "next": [
+      "吃药达到上限"
+    ],
+    "recognition": {
+      "param": {},
+      "type": "DirectHit"
+    }
+  },
+  "吃药达到上限": {
+    "$__mpe_code": {
+      "position": {
+        "x": 900,
+        "y": 1171
+      }
+    },
+    "action": {
+      "param": {},
+      "type": "StopTask"
+    },
+    "recognition": {
+      "param": {},
+      "type": "DirectHit"
+    }
+  },
+  "开始恢复": {
+    "$__mpe_code": {
+      "position": {
+        "x": 0,
+        "y": 45
+      }
+    },
+    "action": {
+      "param": {},
+      "type": "DoNothing"
+    },
+    "next": [
+      "免费恢复",
+      "AP不足",
+      "BC不足"
+    ],
+    "recognition": {
+      "param": {
+        "template": [
+          "恢复/恢复看板娘.png"
+        ]
+      },
+      "type": "TemplateMatch"
+    }
+  }
+}

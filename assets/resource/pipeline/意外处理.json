@@ -3,14 +3,72 @@
     "$__mpe_code": {
       "filePath": "D:\\Projects\\MSA\\assets\\resource\\pipeline\\意外处理.json",
       "filename": "意外处理",
-      "lastSyncTime": 1766640427273,
+      "lastSyncTime": 1766645922952,
       "prefix": "",
       "savedViewport": {
-        "x": -1838,
-        "y": -276,
+        "x": -1720,
+        "y": -669,
         "zoom": 0.76
       },
       "version": "v0.13.0"
+    }
+  },
+  "关闭加点弹窗": {
+    "$__mpe_code": {
+      "position": {
+        "x": 3204,
+        "y": 1298
+      }
+    },
+    "action": {
+      "param": {},
+      "type": "Click"
+    },
+    "recognition": {
+      "param": {
+        "roi": [
+          909,
+          122,
+          97,
+          44
+        ],
+        "template": [
+          "意外/关闭信息窗口.png"
+        ]
+      },
+      "type": "TemplateMatch"
+    }
+  },
+  "升级": {
+    "$__mpe_code": {
+      "position": {
+        "x": 2854,
+        "y": 1321
+      }
+    },
+    "action": {
+      "param": {},
+      "type": "DoNothing"
+    },
+    "focus": {
+      "Node.Recognition.Succeeded": "升级了，暂不支持自动加点,先给你把弹窗关了，记得之后回来加点。"
+    },
+    "next": [
+      "关闭加点弹窗"
+    ],
+    "recognition": {
+      "param": {
+        "roi": [
+          812,
+          258,
+          153,
+          99
+        ],
+        "template": [
+          "意外/洗点.png"
+        ]
+      },
+      "type": "TemplateMatch"
     }
   },
   "弹窗确定": {
@@ -51,13 +109,15 @@
     "next": [
       "连接断开重新启动",
       "弹窗确定",
-      "掉线重试"
+      "掉线重试",
+      "升级"
     ],
     "recognition": {
       "param": {
         "template": [
           "意外/确定.png",
-          "意外/重试.png"
+          "意外/重试.png",
+          "意外/洗点.png"
         ]
       },
       "type": "TemplateMatch"
@@ -96,10 +156,10 @@
     },
     "action": {
       "param": {},
-      "type": "Click"
+      "type": "StopTask"
     },
     "focus": {
-      "Node.Action.Starting": "游戏掉线了，未检测到重试按钮，已自动关闭游戏，请手动重启"
+      "Node.Action.Starting": "游戏掉线了，未检测到重试按钮，请手动重启"
     },
     "recognition": {
       "param": {

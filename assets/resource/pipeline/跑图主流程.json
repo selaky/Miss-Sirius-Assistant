@@ -4,14 +4,22 @@
       "filePath": "D:\\Projects\\MSA\\assets\\resource\\pipeline\\跑图主流程.json",
       "filename": "跑图主流程",
       "isModifiedExternally": true,
-      "lastSyncTime": 1766644948440,
+      "lastSyncTime": 1766648847216,
       "prefix": "",
       "savedViewport": {
-        "x": -50,
-        "y": -619,
-        "zoom": 1
+        "x": 63,
+        "y": -164,
+        "zoom": 0.76
       },
       "version": "v0.13.0"
+    }
+  },
+  "$__mpe_external_开始恢复_跑图主流程": {
+    "$__mpe_code": {
+      "position": {
+        "x": 602,
+        "y": 23
+      }
     }
   },
   "$__mpe_external_开始战斗_跑图主流程": {
@@ -25,8 +33,8 @@
   "$__mpe_external_意外处理_跑图主流程": {
     "$__mpe_code": {
       "position": {
-        "x": 605,
-        "y": 31
+        "x": 601,
+        "y": -67
       }
     }
   },
@@ -105,23 +113,6 @@
       "type": "DirectHit"
     }
   },
-  "终止跑图循环": {
-    "$__mpe_code": {
-      "position": {
-        "x": 585,
-        "y": 1093
-      }
-    },
-    "action": {
-      "param": {},
-      "type": "StopTask"
-    },
-    "enabled": false,
-    "recognition": {
-      "param": {},
-      "type": "DirectHit"
-    }
-  },
   "跑图循环开始": {
     "$__mpe_code": {
       "position": {
@@ -134,10 +125,13 @@
       "type": "DoNothing"
     },
     "next": [
-      "终止跑图循环",
       {
         "jump_back": true,
         "name": "意外处理"
+      },
+      {
+        "jump_back": true,
+        "name": "开始恢复"
       },
       {
         "jump_back": true,
