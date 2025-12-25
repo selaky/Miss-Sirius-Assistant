@@ -54,52 +54,253 @@
     "task": [
         {
             "name": "跑图",
-            "entry": "开始跑图"
+            "entry": "开始跑图",
+            "option": [
+                "自动前往下一区",
+                "自动进行战斗",
+                "自动使用每日免费回复",
+                "恢复药使用上限"
+            ]
         }
-        // {
-        //     "name": "普通任务",
-        //     "entry": "MyTask1"
-        // },
-        // {
-        //     "name": "选项任务",
-        //     "entry": "MyTask2",
-        //     "option": [
-        //         "任务选项1"
-        //     ]
-        // },
-        // {
-        //     "name": "参数任务",
-        //     "entry": "MyTask3",
-        //     "option": [
-        //         "任务选项1"
-        //     ],
-        //     "pipeline_override": {}
-        // },
-        // {
-        //     "name": "带Custom的任务",
-        //     "entry": "MyTask4"
-        // }
     ],
     "option": {
-        "任务选项1": {
+        "自动前往下一区": {
+            "type": "switch",
+            "label": "自动前往下一区",
+            "description": "开启后，跑图时会自动点击【下一区】按钮前往下一个区域",
+            "default_case": "Yes",
             "cases": [
                 {
-                    "name": "文本1",
+                    "name": "Yes",
+                    "label": "开启",
                     "pipeline_override": {
-                        "OcrTask": {
-                            "text": "文本1"
+                        "下一区": {
+                            "enabled": true
                         }
                     }
                 },
                 {
-                    "name": "文本2",
+                    "name": "No",
+                    "label": "关闭",
                     "pipeline_override": {
-                        "OcrTask": {
-                            "text": "文本2"
+                        "下一区": {
+                            "enabled": false
                         }
                     }
                 }
             ]
+        },
+        "自动进行战斗": {
+            "type": "switch",
+            "label": "自动进行战斗",
+            "description": "开启后，遇到战斗会自动选择卡组进行战斗。关闭后，遇到战斗会自动点击【放弃】按钮",
+            "default_case": "Yes",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "label": "开启",
+                    "option": [
+                        "普通感染者卡组",
+                        "暴走感染者卡组"
+                    ],
+                    "pipeline_override": {
+                        "放弃战斗": {
+                            "enabled": false
+                        }
+                    }
+                },
+                {
+                    "name": "No",
+                    "label": "关闭（自动放弃战斗）",
+                    "pipeline_override": {
+                        "放弃战斗": {
+                            "enabled": true
+                        }
+                    }
+                }
+            ]
+        },
+        "普通感染者卡组": {
+            "type": "select",
+            "label": "普通感染者卡组",
+            "description": "遇到普通感染者时使用的卡组",
+            "default_case": "卡组二",
+            "cases": [
+                {
+                    "name": "卡组一",
+                    "label": "卡组一",
+                    "pipeline_override": {
+                        "普通卡组": {
+                            "recognition": {
+                                "param": {
+                                    "expected": ["卡组一"]
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "卡组二",
+                    "label": "卡组二",
+                    "pipeline_override": {
+                        "普通卡组": {
+                            "recognition": {
+                                "param": {
+                                    "expected": ["卡组二"]
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "卡组三",
+                    "label": "卡组三",
+                    "pipeline_override": {
+                        "普通卡组": {
+                            "recognition": {
+                                "param": {
+                                    "expected": ["卡组三"]
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "卡组四",
+                    "label": "卡组四",
+                    "pipeline_override": {
+                        "普通卡组": {
+                            "recognition": {
+                                "param": {
+                                    "expected": ["卡组四"]
+                                }
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        "暴走感染者卡组": {
+            "type": "select",
+            "label": "暴走感染者卡组",
+            "description": "遇到暴走感染者时使用的卡组",
+            "default_case": "卡组三",
+            "cases": [
+                {
+                    "name": "卡组一",
+                    "label": "卡组一",
+                    "pipeline_override": {
+                        "暴走卡组": {
+                            "recognition": {
+                                "param": {
+                                    "expected": ["卡组一"]
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "卡组二",
+                    "label": "卡组二",
+                    "pipeline_override": {
+                        "暴走卡组": {
+                            "recognition": {
+                                "param": {
+                                    "expected": ["卡组二"]
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "卡组三",
+                    "label": "卡组三",
+                    "pipeline_override": {
+                        "暴走卡组": {
+                            "recognition": {
+                                "param": {
+                                    "expected": ["卡组三"]
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "卡组四",
+                    "label": "卡组四",
+                    "pipeline_override": {
+                        "暴走卡组": {
+                            "recognition": {
+                                "param": {
+                                    "expected": ["卡组四"]
+                                }
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        "自动使用每日免费回复": {
+            "type": "switch",
+            "label": "自动使用每日免费回复",
+            "description": "开启后，会自动使用每日免费的行动力和战斗力回复（功能开发中）",
+            "default_case": "No",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "label": "开启",
+                    "pipeline_override": {}
+                },
+                {
+                    "name": "No",
+                    "label": "关闭",
+                    "pipeline_override": {}
+                }
+            ]
+        },
+        "恢复药使用上限": {
+            "type": "input",
+            "label": "恢复药使用上限",
+            "description": "设置各类恢复药的使用上限。输入 0 表示不使用，输入 -1 表示无限使用（功能开发中）",
+            "inputs": [
+                {
+                    "name": "大行动力恢复药",
+                    "label": "大行动力恢复药",
+                    "description": "大行动力恢复药的使用上限（0=不使用，-1=无限使用）",
+                    "default": "0",
+                    "pipeline_type": "int",
+                    "verify": "^-?\\d+$",
+                    "pattern_msg": "请输入整数（0、-1或正整数）"
+                },
+                {
+                    "name": "小行动力恢复药",
+                    "label": "小行动力恢复药",
+                    "description": "小行动力恢复药的使用上限（0=不使用，-1=无限使用）",
+                    "default": "0",
+                    "pipeline_type": "int",
+                    "verify": "^-?\\d+$",
+                    "pattern_msg": "请输入整数（0、-1或正整数）"
+                },
+                {
+                    "name": "大战斗力恢复药",
+                    "label": "大战斗力恢复药",
+                    "description": "大战斗力恢复药的使用上限（0=不使用，-1=无限使用）",
+                    "default": "0",
+                    "pipeline_type": "int",
+                    "verify": "^-?\\d+$",
+                    "pattern_msg": "请输入整数（0、-1或正整数）"
+                },
+                {
+                    "name": "小战斗力恢复药",
+                    "label": "小战斗力恢复药",
+                    "description": "小战斗力恢复药的使用上限（0=不使用，-1=无限使用）",
+                    "default": "0",
+                    "pipeline_type": "int",
+                    "verify": "^-?\\d+$",
+                    "pattern_msg": "请输入整数（0、-1或正整数）"
+                }
+            ],
+            "pipeline_override": {}
         }
     }
 }

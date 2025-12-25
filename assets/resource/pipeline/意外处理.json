@@ -3,12 +3,13 @@
     "$__mpe_code": {
       "filePath": "D:\\Projects\\MSA\\assets\\resource\\pipeline\\意外处理.json",
       "filename": "意外处理",
-      "lastSyncTime": 1766628810282,
+      "isModifiedExternally": true,
+      "lastSyncTime": 1766639757006,
       "prefix": "",
       "savedViewport": {
-        "x": -2352,
-        "y": -543,
-        "zoom": 1.15
+        "x": -1814,
+        "y": -234,
+        "zoom": 0.76
       },
       "version": "v0.13.0"
     }
@@ -22,8 +23,12 @@
     },
     "action": {
       "param": {},
-      "type": "Click"
+      "type": "DoNothing"
     },
+    "next": [
+      "连接断开重新启动",
+      "意外按钮点击"
+    ],
     "recognition": {
       "param": {
         "template": [
@@ -32,6 +37,91 @@
         ]
       },
       "type": "TemplateMatch"
+    }
+  },
+  "意外按钮点击": {
+    "$__mpe_code": {
+      "position": {
+        "x": 2844,
+        "y": 753
+      }
+    },
+    "action": {
+      "param": {},
+      "type": "Click"
+    },
+    "recognition": {
+      "param": {
+        "roi": "意外处理",
+        "template": [
+          "意外/确定.png",
+          "意外/重试.png"
+        ]
+      },
+      "type": "TemplateMatch"
+    }
+  },
+  "点击重启": {
+    "$__mpe_code": {
+      "position": {
+        "x": 3196,
+        "y": 552
+      }
+    },
+    "action": {
+      "param": {},
+      "type": "Click"
+    },
+    "next": [
+      "重新启动"
+    ],
+    "recognition": {
+      "param": {
+        "roi": "连接断开重新启动",
+        "template": [
+          "意外/确定.png"
+        ]
+      },
+      "type": "TemplateMatch"
+    }
+  },
+  "连接断开重新启动": {
+    "$__mpe_code": {
+      "position": {
+        "x": 2846,
+        "y": 550
+      }
+    },
+    "action": {
+      "param": {},
+      "type": "DoNothing"
+    },
+    "next": [
+      "点击重启"
+    ],
+    "recognition": {
+      "param": {
+        "template": [
+          "意外/连接断开.png"
+        ]
+      },
+      "type": "TemplateMatch"
+    }
+  },
+  "重新启动": {
+    "$__mpe_code": {
+      "position": {
+        "x": 3529,
+        "y": 572
+      }
+    },
+    "action": {
+      "param": {},
+      "type": "DoNothing"
+    },
+    "recognition": {
+      "param": {},
+      "type": "DirectHit"
     }
   }
 }
