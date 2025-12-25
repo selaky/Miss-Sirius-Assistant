@@ -3,14 +3,22 @@
     "$__mpe_code": {
       "filePath": "D:\\Projects\\MSA\\assets\\resource\\pipeline/恢复.json",
       "filename": "恢复",
-      "lastSyncTime": 1766650566597,
+      "lastSyncTime": 1766655796110,
       "prefix": "",
       "savedViewport": {
-        "x": 200,
-        "y": 72,
-        "zoom": 0.5
+        "x": -42,
+        "y": -606,
+        "zoom": 0.76
       },
       "version": "v0.13.0"
+    }
+  },
+  "$__mpe_external_放弃战斗_恢复": {
+    "$__mpe_code": {
+      "position": {
+        "x": 930,
+        "y": 1416
+      }
     }
   },
   "AP不足": {
@@ -275,7 +283,7 @@
     },
     "focus": "AP药使用已达到上限，终止跑图",
     "next": [
-      "吃药达到上限"
+      "行动力耗尽"
     ],
     "recognition": {
       "param": {},
@@ -294,27 +302,11 @@
       "type": "DoNothing"
     },
     "focus": {
-      "Node.Recognition.Succeeded": "BC药使用已达到上限，终止跑图"
+      "Node.Recognition.Succeeded": "BC药使用已达到上限，开启纯跑图模式"
     },
     "next": [
-      "吃药达到上限"
+      "放弃战斗"
     ],
-    "recognition": {
-      "param": {},
-      "type": "DirectHit"
-    }
-  },
-  "吃药达到上限": {
-    "$__mpe_code": {
-      "position": {
-        "x": 900,
-        "y": 1171
-      }
-    },
-    "action": {
-      "param": {},
-      "type": "StopTask"
-    },
     "recognition": {
       "param": {},
       "type": "DirectHit"
@@ -343,6 +335,22 @@
         ]
       },
       "type": "TemplateMatch"
+    }
+  },
+  "行动力耗尽": {
+    "$__mpe_code": {
+      "position": {
+        "x": 900,
+        "y": 1171
+      }
+    },
+    "action": {
+      "param": {},
+      "type": "StopTask"
+    },
+    "recognition": {
+      "param": {},
+      "type": "DirectHit"
     }
   }
 }
