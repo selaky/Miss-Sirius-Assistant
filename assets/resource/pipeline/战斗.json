@@ -1,16 +1,16 @@
 {
   "$__mpe_config_战斗": {
     "$__mpe_code": {
-      "filePath": "D:\\Projects\\MSA\\assets\\resource\\pipeline/战斗.json",
+      "filePath": "D:\\Projects\\MSA\\assets\\resource\\pipeline\\战斗.json",
       "filename": "战斗",
-      "lastSyncTime": 1766566287109,
+      "lastSyncTime": 1766628886539,
       "prefix": "",
       "savedViewport": {
-        "x": -217,
-        "y": 105,
-        "zoom": 0.66
+        "x": -415,
+        "y": -7,
+        "zoom": 0.76
       },
-      "version": "v0.13.0_beta_2"
+      "version": "v0.13.0"
     }
   },
   "开始战斗": {
@@ -31,11 +31,14 @@
     ],
     "recognition": {
       "param": {
+        "roi": [
+          1158,
+          522,
+          122,
+          77
+        ],
         "template": [
-          "战斗/卡组一.png",
-          "战斗/卡组二.png",
-          "战斗/卡组三.png",
-          "战斗/卡组四.png"
+          "战斗/放弃.png"
         ]
       },
       "type": "TemplateMatch"
@@ -44,8 +47,8 @@
   "战斗失败": {
     "$__mpe_code": {
       "position": {
-        "x": 1200,
-        "y": 445
+        "x": 1186,
+        "y": 544
       }
     },
     "action": {
@@ -54,6 +57,12 @@
     },
     "recognition": {
       "param": {
+        "roi": [
+          693,
+          3,
+          588,
+          277
+        ],
         "template": [
           "战斗/战斗失败.png"
         ]
@@ -64,8 +73,8 @@
   "战斗胜利": {
     "$__mpe_code": {
       "position": {
-        "x": 1200,
-        "y": 251
+        "x": 1825,
+        "y": 241
       }
     },
     "action": {
@@ -74,8 +83,68 @@
     },
     "recognition": {
       "param": {
+        "roi": [
+          693,
+          3,
+          588,
+          277
+        ],
         "template": [
           "战斗/战斗胜利.png"
+        ]
+      },
+      "type": "TemplateMatch"
+    }
+  },
+  "战斗获得卡牌一": {
+    "$__mpe_code": {
+      "position": {
+        "x": 1213,
+        "y": 238
+      }
+    },
+    "action": {
+      "param": {},
+      "type": "Click"
+    },
+    "focus": {
+      "Node.Recognition.Succeeded": "战斗获得卡牌一"
+    },
+    "next": [
+      "战斗获得卡牌二"
+    ],
+    "pre_wait_freezes": 2000,
+    "recognition": {
+      "param": {
+        "template": [
+          "卡牌/点击屏幕跳过.png"
+        ]
+      },
+      "type": "TemplateMatch"
+    }
+  },
+  "战斗获得卡牌二": {
+    "$__mpe_code": {
+      "position": {
+        "x": 1527,
+        "y": 237
+      }
+    },
+    "action": {
+      "param": {},
+      "type": "Click"
+    },
+    "focus": {
+      "Node.Recognition.Succeeded": "战斗获得卡牌二"
+    },
+    "next": [
+      "战斗胜利"
+    ],
+    "pre_wait_freezes": 3000,
+    "recognition": {
+      "param": {
+        "template": [
+          "卡牌/点击屏幕跳过.png"
         ]
       },
       "type": "TemplateMatch"
@@ -95,6 +164,12 @@
     "enabled": false,
     "recognition": {
       "param": {
+        "roi": [
+          1158,
+          522,
+          122,
+          77
+        ],
         "template": [
           "战斗/放弃.png"
         ]
@@ -123,6 +198,12 @@
       "param": {
         "expected": [
           "卡组三"
+        ],
+        "roi": [
+          1144,
+          4,
+          136,
+          713
         ]
       },
       "type": "OCR"
@@ -146,6 +227,12 @@
       "param": {
         "expected": [
           "卡组二"
+        ],
+        "roi": [
+          1144,
+          4,
+          136,
+          713
         ]
       },
       "type": "OCR"
@@ -155,7 +242,7 @@
     "$__mpe_code": {
       "position": {
         "x": 300,
-        "y": 223
+        "y": 220
       }
     },
     "action": {
@@ -172,6 +259,12 @@
       "param": {
         "expected": [
           "暴走的"
+        ],
+        "roi": [
+          445,
+          415,
+          490,
+          56
         ]
       },
       "type": "OCR"
@@ -189,11 +282,17 @@
       "type": "Click"
     },
     "next": [
-      "战斗胜利",
+      "战斗获得卡牌一",
       "战斗失败"
     ],
     "recognition": {
       "param": {
+        "roi": [
+          1169,
+          534,
+          114,
+          109
+        ],
         "template": [
           "战斗/跳过.png"
         ]

@@ -3,14 +3,14 @@
     "$__mpe_code": {
       "filePath": "D:\\Projects\\MSA\\assets\\resource\\pipeline\\意外处理.json",
       "filename": "意外处理",
-      "lastSyncTime": 1766566273175,
+      "lastSyncTime": 1766628810282,
       "prefix": "",
       "savedViewport": {
-        "x": -2024,
-        "y": -377,
-        "zoom": 1
+        "x": -2352,
+        "y": -543,
+        "zoom": 1.15
       },
-      "version": "v0.13.0_beta_2"
+      "version": "v0.13.0"
     }
   },
   "意外处理": {
@@ -31,7 +31,7 @@
           "意外/重试.png"
         ]
       },
-      "type": "FeatureMatch"
+      "type": "TemplateMatch"
     }
   }
 }

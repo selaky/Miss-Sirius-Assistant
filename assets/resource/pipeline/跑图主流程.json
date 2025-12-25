@@ -1,16 +1,16 @@
 {
   "$__mpe_config_跑图主流程": {
     "$__mpe_code": {
-      "filePath": "D:\\Projects\\MSA\\assets\\resource\\pipeline/跑图主流程.json",
+      "filePath": "D:\\Projects\\MSA\\assets\\resource\\pipeline\\跑图主流程.json",
       "filename": "跑图主流程",
-      "lastSyncTime": 1766567193877,
+      "lastSyncTime": 1766628804250,
       "prefix": "",
       "savedViewport": {
-        "x": 216,
-        "y": 110,
-        "zoom": 0.66
+        "x": 156,
+        "y": 103,
+        "zoom": 0.76
       },
-      "version": "v0.13.0_beta_2"
+      "version": "v0.13.0"
     }
   },
   "$__mpe_external_开始战斗_跑图主流程": {
@@ -32,8 +32,8 @@
   "下一区": {
     "$__mpe_code": {
       "position": {
-        "x": 615,
-        "y": 428
+        "x": 611,
+        "y": 444
       }
     },
     "action": {
@@ -43,6 +43,12 @@
     "enabled": true,
     "recognition": {
       "param": {
+        "roi": [
+          1122,
+          3,
+          157,
+          619
+        ],
         "template": [
           "跑图/下一区.png"
         ]
@@ -53,8 +59,8 @@
   "前进": {
     "$__mpe_code": {
       "position": {
-        "x": 618,
-        "y": 659
+        "x": 621,
+        "y": 697
       }
     },
     "action": {
@@ -63,6 +69,12 @@
     },
     "recognition": {
       "param": {
+        "roi": [
+          1122,
+          3,
+          157,
+          619
+        ],
         "template": [
           "跑图/前进.png"
         ]
@@ -92,8 +104,8 @@
   "终止跑图循环": {
     "$__mpe_code": {
       "position": {
-        "x": 600,
-        "y": 813
+        "x": 614,
+        "y": 947
       }
     },
     "action": {
@@ -148,8 +160,8 @@
   "跑图获得卡牌": {
     "$__mpe_code": {
       "position": {
-        "x": 612,
-        "y": 235
+        "x": 615,
+        "y": 227
       }
     },
     "action": {
@@ -162,7 +174,7 @@
           "卡牌/点击屏幕跳过.png"
         ]
       },
-      "type": "TemplateMatch"
+      "type": "FeatureMatch"
     }
   }
 }
