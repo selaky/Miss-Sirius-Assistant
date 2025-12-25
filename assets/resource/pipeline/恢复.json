@@ -3,12 +3,12 @@
     "$__mpe_code": {
       "filePath": "D:\\Projects\\MSA\\assets\\resource\\pipeline/恢复.json",
       "filename": "恢复",
-      "lastSyncTime": 1766649085394,
+      "lastSyncTime": 1766650566597,
       "prefix": "",
       "savedViewport": {
-        "x": 301,
-        "y": 64,
-        "zoom": 0.57
+        "x": 200,
+        "y": 72,
+        "zoom": 0.5
       },
       "version": "v0.13.0"
     }
@@ -74,6 +74,9 @@
       "param": {},
       "type": "Click"
     },
+    "next": [
+      "关闭恢复界面"
+    ],
     "recognition": {
       "param": {
         "roi": [
@@ -100,6 +103,9 @@
       "param": {},
       "type": "Click"
     },
+    "next": [
+      "关闭恢复界面"
+    ],
     "recognition": {
       "param": {
         "roi": [
@@ -130,10 +136,39 @@
     "focus": {
       "Node.Recognition.Succeeded": "使用免费状态回复"
     },
+    "next": [
+      "关闭恢复界面"
+    ],
     "recognition": {
       "param": {
         "template": [
           "恢复/免费恢复.png"
+        ]
+      },
+      "type": "TemplateMatch"
+    }
+  },
+  "关闭恢复界面": {
+    "$__mpe_code": {
+      "position": {
+        "x": 1446,
+        "y": 346
+      }
+    },
+    "action": {
+      "param": {},
+      "type": "Click"
+    },
+    "recognition": {
+      "param": {
+        "roi": [
+          974,
+          244,
+          54,
+          51
+        ],
+        "template": [
+          "恢复/关闭恢复界面.png"
         ]
       },
       "type": "TemplateMatch"
