@@ -133,7 +133,9 @@
                         "普通卡组": {
                             "recognition": {
                                 "param": {
-                                    "expected": ["卡组一"]
+                                    "expected": [
+                                        "卡组一"
+                                    ]
                                 }
                             }
                         }
@@ -146,7 +148,9 @@
                         "普通卡组": {
                             "recognition": {
                                 "param": {
-                                    "expected": ["卡组二"]
+                                    "expected": [
+                                        "卡组二"
+                                    ]
                                 }
                             }
                         }
@@ -159,7 +163,9 @@
                         "普通卡组": {
                             "recognition": {
                                 "param": {
-                                    "expected": ["卡组三"]
+                                    "expected": [
+                                        "卡组三"
+                                    ]
                                 }
                             }
                         }
@@ -172,7 +178,9 @@
                         "普通卡组": {
                             "recognition": {
                                 "param": {
-                                    "expected": ["卡组四"]
+                                    "expected": [
+                                        "卡组四"
+                                    ]
                                 }
                             }
                         }
@@ -193,7 +201,9 @@
                         "暴走卡组": {
                             "recognition": {
                                 "param": {
-                                    "expected": ["卡组一"]
+                                    "expected": [
+                                        "卡组一"
+                                    ]
                                 }
                             }
                         }
@@ -206,7 +216,9 @@
                         "暴走卡组": {
                             "recognition": {
                                 "param": {
-                                    "expected": ["卡组二"]
+                                    "expected": [
+                                        "卡组二"
+                                    ]
                                 }
                             }
                         }
@@ -219,7 +231,9 @@
                         "暴走卡组": {
                             "recognition": {
                                 "param": {
-                                    "expected": ["卡组三"]
+                                    "expected": [
+                                        "卡组三"
+                                    ]
                                 }
                             }
                         }
@@ -232,7 +246,9 @@
                         "暴走卡组": {
                             "recognition": {
                                 "param": {
-                                    "expected": ["卡组四"]
+                                    "expected": [
+                                        "卡组四"
+                                    ]
                                 }
                             }
                         }
