@@ -45,12 +45,12 @@
         }
     ],
     // 可选的 agent 示例
-    // "agent": {
-    //     "child_exec": "python",
-    //     "child_args": [
-    //         "./agent/main.py"
-    //     ]
-    // },
+    "agent": {
+        "child_exec": "python",
+        "child_args": [
+            "../agent/main.py"
+        ]
+    },
     "task": [
         {
             "name": "跑图",
@@ -260,17 +260,25 @@
             "type": "switch",
             "label": "自动使用每日免费回复",
             "description": "开启后，会自动使用每日免费的行动力和战斗力回复（功能开发中）",
-            "default_case": "No",
+            "default_case": "Yes",
             "cases": [
                 {
                     "name": "Yes",
                     "label": "开启",
-                    "pipeline_override": {}
+                    "pipeline_override": {
+                        "免费恢复": {
+                            "enabled": true
+                        }
+                    }
                 },
                 {
                     "name": "No",
                     "label": "关闭",
-                    "pipeline_override": {}
+                    "pipeline_override": {
+                        "免费恢复": {
+                            "enabled": false
+                        }
+                    }
                 }
             ]
         },
@@ -316,7 +324,44 @@
                     "pattern_msg": "请输入整数（0、-1或正整数）"
                 }
             ],
-            "pipeline_override": {}
+            "pipeline_override": {
+                "判断使用大AP药": {
+                    "recognition": {
+                        "param": {
+                            "custom_recognition_param": {
+                                "max_use": "大行动力恢复药"
+                            }
+                        }
+                    }
+                },
+                "判断使用小AP药": {
+                    "recognition": {
+                        "param": {
+                            "custom_recognition_param": {
+                                "max_use": "小行动力恢复药"
+                            }
+                        }
+                    }
+                },
+                "判断使用大BC药": {
+                    "recognition": {
+                        "param": {
+                            "custom_recognition_param": {
+                                "max_use": "大战斗力恢复药"
+                            }
+                        }
+                    }
+                },
+                "判断使用小BC药": {
+                    "recognition": {
+                        "param": {
+                            "custom_recognition_param": {
+                                "max_use": "小战斗力恢复药"
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }

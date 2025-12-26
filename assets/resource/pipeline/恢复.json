@@ -264,8 +264,13 @@
       }
     },
     "action": {
-      "param": {},
-      "type": "DoNothing"
+      "param": {
+        "custom_action": "msa_potion_increment_used",
+        "custom_action_param": {
+          "potion_key": "ap_big"
+        }
+      },
+      "type": "Custom"
     },
     "focus": {
       "Node.Recognition.Succeeded": "使用大AP药"
@@ -274,8 +279,15 @@
       "使用大恢复药"
     ],
     "recognition": {
-      "param": {},
-      "type": "DirectHit"
+      "param": {
+        "custom_recognition": "msa_potion_can_use",
+        "custom_recognition_param": {
+          "potion_key": "ap_big",
+          "count_node": "统计大AP药数量",
+          "max_use": 0
+        }
+      },
+      "type": "Custom"
     }
   },
   "判断使用大BC药": {
@@ -286,8 +298,13 @@
       }
     },
     "action": {
-      "param": {},
-      "type": "DoNothing"
+      "param": {
+        "custom_action": "msa_potion_increment_used",
+        "custom_action_param": {
+          "potion_key": "bc_big"
+        }
+      },
+      "type": "Custom"
     },
     "focus": {
       "Node.Recognition.Succeeded": "使用大BC药"
@@ -296,8 +313,15 @@
       "使用大恢复药"
     ],
     "recognition": {
-      "param": {},
-      "type": "DirectHit"
+      "param": {
+        "custom_recognition": "msa_potion_can_use",
+        "custom_recognition_param": {
+          "potion_key": "bc_big",
+          "count_node": "统计大BC药数量",
+          "max_use": 0
+        }
+      },
+      "type": "Custom"
     }
   },
   "判断使用小AP药": {
@@ -308,8 +332,13 @@
       }
     },
     "action": {
-      "param": {},
-      "type": "DoNothing"
+      "param": {
+        "custom_action": "msa_potion_increment_used",
+        "custom_action_param": {
+          "potion_key": "ap_small"
+        }
+      },
+      "type": "Custom"
     },
     "focus": {
       "Node.Recognition.Succeeded": "使用小AP药"
@@ -318,8 +347,15 @@
       "使用小恢复药"
     ],
     "recognition": {
-      "param": {},
-      "type": "DirectHit"
+      "param": {
+        "custom_recognition": "msa_potion_can_use",
+        "custom_recognition_param": {
+          "potion_key": "ap_small",
+          "count_node": "统计小AP药数量",
+          "max_use": 0
+        }
+      },
+      "type": "Custom"
     }
   },
   "判断使用小BC药": {
@@ -330,8 +366,13 @@
       }
     },
     "action": {
-      "param": {},
-      "type": "DoNothing"
+      "param": {
+        "custom_action": "msa_potion_increment_used",
+        "custom_action_param": {
+          "potion_key": "bc_small"
+        }
+      },
+      "type": "Custom"
     },
     "focus": {
       "Node.Recognition.Succeeded": "使用小BC药"
@@ -340,8 +381,15 @@
       "使用小恢复药"
     ],
     "recognition": {
-      "param": {},
-      "type": "DirectHit"
+      "param": {
+        "custom_recognition": "msa_potion_can_use",
+        "custom_recognition_param": {
+          "potion_key": "bc_small",
+          "count_node": "统计小BC药数量",
+          "max_use": 0
+        }
+      },
+      "type": "Custom"
     }
   },
   "判断停止使用AP药": {

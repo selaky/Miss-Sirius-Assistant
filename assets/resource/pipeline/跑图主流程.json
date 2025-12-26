@@ -76,8 +76,11 @@
       }
     },
     "action": {
-      "param": {},
-      "type": "DoNothing"
+      "param": {
+        "custom_action": "msa_potion_reset_state",
+        "custom_action_param": null
+      },
+      "type": "Custom"
     },
     "next": [
       "跑图循环开始"
