@@ -324,44 +324,7 @@
                     "pattern_msg": "请输入整数（0、-1或正整数）"
                 }
             ],
-            "pipeline_override": {
-                "判断使用大AP药": {
-                    "recognition": {
-                        "param": {
-                            "custom_recognition_param": {
-                                "max_use": "大行动力恢复药"
-                            }
-                        }
-                    }
-                },
-                "判断使用小AP药": {
-                    "recognition": {
-                        "param": {
-                            "custom_recognition_param": {
-                                "max_use": "小行动力恢复药"
-                            }
-                        }
-                    }
-                },
-                "判断使用大BC药": {
-                    "recognition": {
-                        "param": {
-                            "custom_recognition_param": {
-                                "max_use": "大战斗力恢复药"
-                            }
-                        }
-                    }
-                },
-                "判断使用小BC药": {
-                    "recognition": {
-                        "param": {
-                            "custom_recognition_param": {
-                                "max_use": "小战斗力恢复药"
-                            }
-                        }
-                    }
-                }
-            }
+            "pipeline_override": {}
         }
     }
 }
