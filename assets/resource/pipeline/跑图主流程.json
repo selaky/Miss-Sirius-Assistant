@@ -4,12 +4,12 @@
       "filePath": "D:\\Projects\\MSA\\assets\\resource\\pipeline\\跑图主流程.json",
       "filename": "跑图主流程",
       "isModifiedExternally": true,
-      "lastSyncTime": 1766758944415,
+      "lastSyncTime": 1766794377613,
       "prefix": "",
       "savedViewport": {
-        "x": 121,
-        "y": -158,
-        "zoom": 0.57
+        "x": -53,
+        "y": -108,
+        "zoom": 0.76
       },
       "version": "v0.13.0"
     }
@@ -41,8 +41,8 @@
   "下一区": {
     "$__mpe_code": {
       "position": {
-        "x": 900,
-        "y": 512
+        "x": 899,
+        "y": 347
       }
     },
     "action": {
@@ -90,27 +90,24 @@
   "前进": {
     "$__mpe_code": {
       "position": {
-        "x": 900,
-        "y": 827
+        "x": 903,
+        "y": 688
       }
     },
     "action": {
-      "param": {},
+      "param": {
+        "target": [
+          1164,
+          287,
+          4,
+          20
+        ]
+      },
       "type": "Click"
     },
     "recognition": {
-      "param": {
-        "roi": [
-          1151,
-          233,
-          130,
-          139
-        ],
-        "template": [
-          "跑图/前进.png"
-        ]
-      },
-      "type": "TemplateMatch"
+      "param": {},
+      "type": "DirectHit"
     }
   },
   "开始跑图": {
@@ -158,10 +155,6 @@
       },
       {
         "jump_back": true,
-        "name": "跑图获得卡牌"
-      },
-      {
-        "jump_back": true,
         "name": "下一区"
       },
       {
@@ -172,27 +165,6 @@
     "recognition": {
       "param": {},
       "type": "DirectHit"
-    }
-  },
-  "跑图获得卡牌": {
-    "$__mpe_code": {
-      "position": {
-        "x": 900,
-        "y": 318
-      }
-    },
-    "action": {
-      "param": {},
-      "type": "Click"
-    },
-    "recognition": {
-      "param": {
-        "template": [
-          "卡牌/点击屏幕跳过.png",
-          "卡牌/点击屏幕跳过-小.png"
-        ]
-      },
-      "type": "TemplateMatch"
     }
   }
 }

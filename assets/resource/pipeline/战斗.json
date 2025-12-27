@@ -4,21 +4,29 @@
       "filePath": "D:\\Projects\\MSA\\assets\\resource\\pipeline\\战斗.json",
       "filename": "战斗",
       "isModifiedExternally": true,
-      "lastSyncTime": 1766641009225,
+      "lastSyncTime": 1766795100439,
       "prefix": "",
       "savedViewport": {
-        "x": 204,
-        "y": 36,
-        "zoom": 0.87
+        "x": 158,
+        "y": 69,
+        "zoom": 0.43
       },
       "version": "v0.13.0"
+    }
+  },
+  "$__mpe_external_跑图循环开始_战斗": {
+    "$__mpe_code": {
+      "position": {
+        "x": 1805,
+        "y": 879
+      }
     }
   },
   "开始战斗": {
     "$__mpe_code": {
       "position": {
         "x": 0,
-        "y": 29
+        "y": 45
       }
     },
     "action": {
@@ -29,6 +37,9 @@
       "放弃战斗",
       "暴走识别",
       "普通卡组"
+    ],
+    "on_error": [
+      "跑图循环开始"
     ],
     "recognition": {
       "param": {
@@ -48,8 +59,8 @@
   "战斗失败": {
     "$__mpe_code": {
       "position": {
-        "x": 1186,
-        "y": 544
+        "x": 1200,
+        "y": 654
       }
     },
     "action": {
@@ -77,8 +88,8 @@
   "战斗胜利": {
     "$__mpe_code": {
       "position": {
-        "x": 1825,
-        "y": 241
+        "x": 1800,
+        "y": 355
       }
     },
     "action": {
@@ -106,8 +117,8 @@
   "战斗获得卡牌一": {
     "$__mpe_code": {
       "position": {
-        "x": 1213,
-        "y": 238
+        "x": 1200,
+        "y": 339
       }
     },
     "action": {
@@ -120,6 +131,9 @@
     "next": [
       "战斗获得卡牌二"
     ],
+    "on_error": [
+      "跑图循环开始"
+    ],
     "pre_wait_freezes": 2000,
     "recognition": {
       "param": {
@@ -128,13 +142,14 @@
         ]
       },
       "type": "TemplateMatch"
-    }
+    },
+    "timeout": 15000
   },
   "战斗获得卡牌二": {
     "$__mpe_code": {
       "position": {
-        "x": 1527,
-        "y": 237
+        "x": 1500,
+        "y": 355
       }
     },
     "action": {
@@ -146,6 +161,9 @@
     },
     "next": [
       "战斗胜利"
+    ],
+    "on_error": [
+      "跑图循环开始"
     ],
     "pre_wait_freezes": 3000,
     "recognition": {
@@ -160,8 +178,8 @@
   "放弃战斗": {
     "$__mpe_code": {
       "position": {
-        "x": 1216,
-        "y": -38
+        "x": 1500,
+        "y": 0
       }
     },
     "action": {
@@ -172,6 +190,9 @@
     "focus": {
       "Node.Action.Starting": "捡垃圾要紧，溜了溜了~"
     },
+    "on_error": [
+      "跑图循环开始"
+    ],
     "recognition": {
       "param": {
         "roi": [
@@ -191,7 +212,7 @@
     "$__mpe_code": {
       "position": {
         "x": 600,
-        "y": 445
+        "y": 977
       }
     },
     "action": {
@@ -203,6 +224,9 @@
     },
     "next": [
       "跳过战斗"
+    ],
+    "on_error": [
+      "跑图循环开始"
     ],
     "recognition": {
       "param": {
@@ -223,7 +247,7 @@
     "$__mpe_code": {
       "position": {
         "x": 600,
-        "y": 251
+        "y": 196
       }
     },
     "action": {
@@ -232,6 +256,9 @@
     },
     "next": [
       "跳过战斗"
+    ],
+    "on_error": [
+      "跑图循环开始"
     ],
     "recognition": {
       "param": {
@@ -252,7 +279,7 @@
     "$__mpe_code": {
       "position": {
         "x": 300,
-        "y": 220
+        "y": 168
       }
     },
     "action": {
@@ -264,6 +291,9 @@
     },
     "next": [
       "暴走卡组"
+    ],
+    "on_error": [
+      "跑图循环开始"
     ],
     "recognition": {
       "param": {
@@ -284,7 +314,7 @@
     "$__mpe_code": {
       "position": {
         "x": 900,
-        "y": 251
+        "y": 339
       }
     },
     "action": {
@@ -297,6 +327,9 @@
     "next": [
       "战斗获得卡牌一",
       "战斗失败"
+    ],
+    "on_error": [
+      "跑图循环开始"
     ],
     "recognition": {
       "param": {
@@ -311,6 +344,7 @@
         ]
       },
       "type": "TemplateMatch"
-    }
+    },
+    "timeout": 15000
   }
 }
