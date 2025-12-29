@@ -9,7 +9,7 @@
     "title": "天狼星小助手",
     "description": "MSA 是一款专门为《星纪元》开发的自动化辅助脚本，旨在简化重复操作，提升游戏体验。在此阶段，脚本已实现基础的核心自动化功能。",
     // "contact": "QQ群: 123456789",
-    "icon": "./Sirius.ico",
+    "icon": "./logo.ico",
     "license": "MIT",
     "welcome": "./welcome.md",
     // 填写项目地址和版本号可实现自动更新功能
@@ -58,6 +58,7 @@
         {
             "name": "跑图",
             "entry": "开始跑图",
+            "default_check": true,
             "option": [
                 "自动前往下一区",
                 "自动进行战斗",
