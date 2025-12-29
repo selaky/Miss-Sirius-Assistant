@@ -119,7 +119,7 @@ jobs:
 
               # ⬇️ 新增：强制把自己的 logo 复制到 GUI 的资源目录里覆盖默认文件
               # 假设你的文件在 assets/logo.ico，目标是 install/Assets/logo.ico
-              cp assets/logo.ico install/Assets/logo.ico || echo "Logo copy failed!
+              cp assets/logo.ico install/Assets/logo.ico || echo "Logo copy failed!"
               # 复制结束
 
               echo "MFA files copied successfully."
