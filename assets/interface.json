@@ -295,36 +295,49 @@
                     "pipeline_type": "int",
                     "verify": "^-?\\d+$",
                     "pattern_msg": "请输入整数（0、-1或正整数）"
-                },
-                {
-                    "name": "小行动力恢复药",
-                    "label": "小行动力恢复药",
-                    "description": "小行动力恢复药的使用上限（0=不使用，-1=无限使用）",
-                    "default": "0",
-                    "pipeline_type": "int",
-                    "verify": "^-?\\d+$",
-                    "pattern_msg": "请输入整数（0、-1或正整数）"
-                },
-                {
-                    "name": "大战斗力恢复药",
-                    "label": "大战斗力恢复药",
-                    "description": "大战斗力恢复药的使用上限（0=不使用，-1=无限使用）",
-                    "default": "0",
-                    "pipeline_type": "int",
-                    "verify": "^-?\\d+$",
-                    "pattern_msg": "请输入整数（0、-1或正整数）"
-                },
-                {
-                    "name": "小战斗力恢复药",
-                    "label": "小战斗力恢复药",
-                    "description": "小战斗力恢复药的使用上限（0=不使用，-1=无限使用）",
-                    "default": "0",
-                    "pipeline_type": "int",
-                    "verify": "^-?\\d+$",
-                    "pattern_msg": "请输入整数（0、-1或正整数）"
                 }
-            ],
-            "pipeline_override": {}
+            },
+            {
+                "name": "小行动力恢复药",
+                "label": "小行动力恢复药",
+                "description": "小行动力恢复药的使用上限（0=不使用，-1=无限使用）",
+                "default": "0",
+                "pipeline_type": "int",
+                "verify": "^-?\\d+$",
+                "pattern_msg": "请输入整数（0、-1或正整数）"
+            },
+            {
+                "name": "大战斗力恢复药",
+                "label": "大战斗力恢复药",
+                "description": "大战斗力恢复药的使用上限（0=不使用，-1=无限使用）",
+                "default": "0",
+                "pipeline_type": "int",
+                "verify": "^-?\\d+$",
+                "pattern_msg": "请输入整数（0、-1或正整数）"
+            },
+            {
+                "name": "小战斗力恢复药",
+                "label": "小战斗力恢复药",
+                "description": "小战斗力恢复药的使用上限（0=不使用，-1=无限使用）",
+                "default": "0",
+                "pipeline_type": "int",
+                "verify": "^-?\\d+$",
+                "pattern_msg": "请输入整数（0、-1或正整数）"
+            }
+        ],
+        "pipeline_override": {
+            "初始化吃药数据": {
+                "action": {
+                    "param": {
+                        "custom_action_param": {
+                            "ap_big": "{大行动力恢复药}",
+                            "ap_small": "{小行动力恢复药}",
+                            "bc_big": "{大战斗力恢复药}",
+                            "bc_small": "{小战斗力恢复药}"
+                        }
+                    }
+                }
+            }
         }
     }
 }

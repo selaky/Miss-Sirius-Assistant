@@ -37,6 +37,10 @@ class PotionType:
         self.big.reset_usage()
         self.small.reset_usage()
 
+    def set_limit(self,big_num,small_num):
+        self.big.limit = big_num
+        self.small.limit = small_num
+
 
 @dataclass 
 class PotionManager:
@@ -50,6 +54,11 @@ class PotionManager:
         self.ap.small.name = "小行动力恢复药"
         self.bc.big.name = "大战斗力恢复药"
         self.bc.small.name = "小战斗力恢复药"
+
+    def reset_usage(self):
+        """清除所有药品使用量"""
+        self.ap.reset_usage()
+        self.bc.reset_usage()
 
 # 创建总管
 potion_stats = PotionManager()

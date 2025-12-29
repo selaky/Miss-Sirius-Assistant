@@ -1,6 +1,7 @@
 # 🎓 自定义动作（Custom Action）新手学习指南
 
 ## 📖 目录
+
 1. [什么是自定义动作](#什么是自定义动作)
 2. [代码结构详解](#代码结构详解)
 3. [核心知识点](#核心知识点)
@@ -12,11 +13,14 @@
 ## 🎯 什么是自定义动作
 
 ### 简单理解
+
 想象你在玩一个需要自动化的游戏：
+
 - **JSON 配置文件**：就像一份菜单，列出了一系列简单的动作（点击、识别文字等）
 - **自定义动作（Custom Action）**：就像你自己编写的特殊菜谱，可以实现复杂的逻辑
 
 ### 工作流程
+
 ```
 用户启动任务
   ↓
@@ -46,6 +50,7 @@ from states import potion_stats                 # 我们自己的药水管理模
 ```
 
 **知识点：什么是 import？**
+
 - `import` 就像去图书馆借书，把别人写好的代码拿来用
 - 你不需要重新造轮子，直接使用已有的功能即可
 
@@ -66,25 +71,31 @@ class InitPotionData(CustomAction):             # ← 定义一个类，继承 C
 **知识点解析：**
 
 #### 1. 装饰器（Decorator）`@`
+
 ```python
 @AgentServer.custom_action("init_potion_data")
 ```
+
 - **作用**：告诉 MaaFramework "我有一个自定义动作叫 `init_potion_data`"
 - **类比**：就像给你的函数贴了一个标签，方便 JSON 配置文件调用
 - **重要**：括号里的名字 `"init_potion_data"` 要和 JSON 配置文件中的 `custom_action` 字段一致
 
 #### 2. 类（Class）
+
 ```python
 class InitPotionData(CustomAction):
 ```
+
 - **作用**：把相关的代码组织在一起
 - **继承**：`(CustomAction)` 表示继承基类，获得基础功能
 - **命名**：类名通常用大驼峰命名（每个单词首字母大写）
 
 #### 3. run 方法
+
 ```python
 def run(self, context: Context, argv: CustomAction.RunArg) -> bool:
 ```
+
 - **self**：指向当前对象本身（Python 类方法的第一个参数）
 - **context**：包含游戏画面、控制器等信息的上下文对象
 - **argv**：包含从 JSON 传过来的参数
@@ -112,7 +123,8 @@ except Exception as e:
 
 **关键知识点：**
 
-#### 1. `argv.custom_action_param` 是字符串！
+#### 1. `argv.custom_action_param` 是字符串
+
 ```python
 # ❌ 错误写法（会报错）
 value = argv.custom_action_param['big_ap']
@@ -123,14 +135,19 @@ value = params.get('big_ap')                    # 再获取值
 ```
 
 #### 2. `try-except` 异常处理
+
+(开发者注:我强烈反对这个板块.除去那些依赖外部传入或者用户自己设备情况的内容,业务代码就不该出错,如果出错就是设计有问题。不想着怎么排查，却在这里用默认值让程序继续运行下去，这不是掩耳盗铃吗？程序不崩溃有什么用？他也没在按照预期运行啊)
+
 - **try**：尝试执行代码
 - **except**：如果出错了，执行这里的代码
 - **作用**：避免程序崩溃，提供默认值
 
 #### 3. `dict.get(key, default)` 方法
+
 ```python
 small_limit = params.get("small_ap_limit", 60)
 ```
+
 - 如果 `params` 字典中有 `"small_ap_limit"` 键，返回对应的值
 - 如果没有，返回默认值 `60`
 - **好处**：比直接用 `params["small_ap_limit"]` 更安全，不会因为键不存在而报错
@@ -159,14 +176,17 @@ else:
 ```
 
 **知识点：if-elif-else 条件判断**
+
 - **if**：如果条件成立，执行这里
 - **elif**：否则如果（else if 的缩写）
 - **else**：以上条件都不成立时执行
 
 **知识点：f-string 格式化字符串**
+
 ```python
 print(f"已用 {potion_stats.ap.small.usage}/{small_limit}")
 ```
+
 - `f` 开头的字符串可以在 `{}` 中嵌入变量
 - 输出示例：`已用 5/60`
 
@@ -266,6 +286,7 @@ import my_reco
 ### Q1: 为什么 `argv.custom_action_param` 需要用 `json.loads()` 解析？
 
 **A:** MaaFramework 将参数作为 JSON 字符串传递，例如：
+
 ```python
 # argv.custom_action_param 的值是字符串：
 '{"small_ap_limit": 60, "big_ap_limit": 999}'
@@ -279,12 +300,14 @@ params = json.loads(argv.custom_action_param)
 ### Q2: `return True` 和 `return False` 有什么区别？
 
 **A:**
+
 - `return True`：告诉 MaaFramework 这个动作**执行成功**，继续执行后续任务
 - `return False`：告诉 MaaFramework 这个动作**执行失败**，可能会触发错误处理流程
 
 ### Q3: 如何在自定义动作中点击屏幕？
 
 **A:** 使用 `context.controller`：
+
 ```python
 def run(self, context, argv):
     # 点击坐标 (100, 200)
@@ -299,6 +322,7 @@ def run(self, context, argv):
 ### Q4: 如何调试我的代码？
 
 **A:** 使用 `print()` 输出调试信息：
+
 ```python
 print(f"调试：small_limit = {small_limit}")
 print(f"调试：当前使用量 = {potion_stats.ap.small.usage}")
@@ -307,6 +331,7 @@ print(f"调试：当前使用量 = {potion_stats.ap.small.usage}")
 ### Q5: 类名和装饰器里的名字要一样吗？
 
 **A:** 不需要！
+
 - **类名**（如 `InitPotionData`）：只在 Python 代码内部使用
 - **装饰器名字**（如 `"init_potion_data"`）：在 JSON 配置文件中使用
 

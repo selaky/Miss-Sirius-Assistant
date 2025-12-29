@@ -3,12 +3,11 @@
     "$__mpe_code": {
       "filePath": "D:\\Projects\\MSA\\assets\\resource\\pipeline\\跑图主流程.json",
       "filename": "跑图主流程",
-      "isModifiedExternally": true,
-      "lastSyncTime": 1766794377613,
+      "lastSyncTime": 1766976224102,
       "prefix": "",
       "savedViewport": {
-        "x": -53,
-        "y": -108,
+        "x": 199,
+        "y": 184,
         "zoom": 0.76
       },
       "version": "v0.13.0"
@@ -76,8 +75,16 @@
       }
     },
     "action": {
-      "param": {},
-      "type": "DoNothing"
+      "param": {
+        "custom_action": "init_potion_data",
+        "custom_action_param": {
+          "ap_big": 0,
+          "ap_small": 0,
+          "bc_big": 0,
+          "bc_small": 0
+        }
+      },
+      "type": "Custom"
     },
     "next": [
       "跑图循环开始"

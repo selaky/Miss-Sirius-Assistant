@@ -1,148 +1,48 @@
-# -*- coding: utf-8 -*-
-"""
-recover_action.py
-Author: Beginner Learning Project
-Description: Custom actions for managing and using recovery potions (AP/BC)
-"""
+# input: states
+# output: 暂无
+# pos: 这里是恢复流程中执行的动作
 
-import json
 from maa.agent.agent_server import AgentServer
 from maa.custom_action import CustomAction
 from maa.context import Context
+import recover_helper
+import logging
+import json
 
-# Import potion data manager from states module
-from states import potion_stats
-
+# 把日志级别调成 info, 看一下数据有没有正常读取。
+logging.basicConfig(level=logging.INFO) 
 
 @AgentServer.custom_action("init_potion_data")
 class InitPotionData(CustomAction):
-    """Initialize potion usage data"""
+    """初始化药水数据"""
+    def run(self,context:Context,argv:CustomAction.RunArg) -> bool:
+        logging.info(f"[初始化吃药数据] 正在重置已使用药水数量")
+        recover_helper.potion_stats.reset_usage()
 
-    def run(
-        self,
-        context: Context,
-        argv: CustomAction.RunArg,
-    ) -> bool:
-        print("=== Initializing potion data ===")
-
-        # Reset usage counters for all potions
-        potion_stats.ap.reset_usage()
-        potion_stats.bc.reset_usage()
-
-        print("AP small/big potion usage has been reset")
-        print("BC small/big potion usage has been reset")
-
-        return True
-
-
-@AgentServer.custom_action("use_ap_potion")
-class UseAPPotion(CustomAction):
-    """Use AP (Action Points) recovery potion"""
-
-    def run(
-        self,
-        context: Context,
-        argv: CustomAction.RunArg,
-    ) -> bool:
-        print("=== Using AP recovery potion ===")
-
-        # Get user-configured limits from parameters
-        # Note: custom_action_param is a JSON string, needs parsing
         try:
-            if argv.custom_action_param:
-                params = json.loads(argv.custom_action_param)
-                small_limit = params.get("small_ap_limit", 60)
-                big_limit = params.get("big_ap_limit", 999)
-            else:
-                # Use default values if no parameters
-                small_limit = 60
-                big_limit = 999
+            # 读取参数
+            params = json.loads(argv.custom_action_param)
+            ap_big = int(params.get("ap_big",0))
+            ap_small = int(params.get("ap_small",0))
+            bc_big = int(params.get("bc_big",0))
+            bc_small = int(params.get("bc_small",0))
+            # 设置药水限制数
+            stats = recover_helper.potion_stats # 简写一下
+            stats.ap.set_limit(ap_big,ap_small)
+            stats.bc.set_limit(bc_big,bc_small)
+            logging.info(
+                f"[初始化吃药数据] 药品使用上限载入\n"
+                f"大行动力恢复药: {stats.ap.big.limit}\n"
+                f"小行动力恢复药: {stats.ap.small.limit}\n"
+                f"大战斗力恢复药: {stats.bc.big.limit}\n"
+                f"小战斗力恢复药: {stats.bc.small.limit}"
+            )
+
+            # logging.info(f"debug: ap_big 的类型是 {type(ap_big)}")
+            
+            return True
         except Exception as e:
-            print(f"Failed to parse parameters: {e}")
-            small_limit = 60
-            big_limit = 999
-
-        # Business logic: decide which potion to use
-        if potion_stats.ap.small.usage < small_limit:
-            # Use small potion if limit not reached
-            potion_stats.ap.small.inc_usage()
-            print(f"Used small AP potion (count: {potion_stats.ap.small.usage}/{small_limit})")
-
-            # TODO: Add actual screen click code here
-            # context.controller.post_click(x, y).wait()
-
-        elif potion_stats.ap.big.usage < big_limit:
-            # Use big potion if small potion limit reached
-            potion_stats.ap.big.inc_usage()
-            print(f"Used big AP potion (count: {potion_stats.ap.big.usage}/{big_limit})")
-
-            # TODO: Add actual screen click code here
-
-        else:
-            # Both potions exhausted
-            print("WARNING: All AP potions exhausted!")
+            logging.error(f"[初始化吃药数据]参数解析失败或设置出错:{e}")
             return False
 
-        return True
-
-
-@AgentServer.custom_action("use_bc_potion")
-class UseBCPotion(CustomAction):
-    """Use BC (Battle Cost) recovery potion"""
-
-    def run(
-        self,
-        context: Context,
-        argv: CustomAction.RunArg,
-    ) -> bool:
-        print("=== Using BC recovery potion ===")
-
-        # Parse parameters
-        try:
-            if argv.custom_action_param:
-                params = json.loads(argv.custom_action_param)
-                small_limit = params.get("small_bc_limit", 60)
-                big_limit = params.get("big_bc_limit", 999)
-            else:
-                small_limit = 60
-                big_limit = 999
-        except Exception as e:
-            print(f"Failed to parse parameters: {e}")
-            small_limit = 60
-            big_limit = 999
-
-        # Business logic
-        if potion_stats.bc.small.usage < small_limit:
-            potion_stats.bc.small.inc_usage()
-            print(f"Used small BC potion (count: {potion_stats.bc.small.usage}/{small_limit})")
-            return True
-
-        elif potion_stats.bc.big.usage < big_limit:
-            potion_stats.bc.big.inc_usage()
-            print(f"Used big BC potion (count: {potion_stats.bc.big.usage}/{big_limit})")
-            return True
-
-        else:
-            print("WARNING: All BC potions exhausted!")
-            return False
-
-
-@AgentServer.custom_action("show_potion_stats")
-class ShowPotionStats(CustomAction):
-    """Display current potion usage statistics"""
-
-    def run(
-        self,
-        context: Context,
-        argv: CustomAction.RunArg,
-    ) -> bool:
-        print("\n" + "="*50)
-        print("Potion Usage Statistics")
-        print("="*50)
-        print(f"AP small potion: {potion_stats.ap.small.usage} used")
-        print(f"AP big potion: {potion_stats.ap.big.usage} used")
-        print(f"BC small potion: {potion_stats.bc.small.usage} used")
-        print(f"BC big potion: {potion_stats.bc.big.usage} used")
-        print("="*50 + "\n")
-
-        return True
+        
