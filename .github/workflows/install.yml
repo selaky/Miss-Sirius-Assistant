@@ -132,14 +132,14 @@ jobs:
         run: |
           # 配置 python312._pth 文件，添加 packages 目录
           PTH_FILE="install/python/python312._pth"
-          cat > "${PTH_FILE}" << 'EOF'
-python312.zip
-.
-packages
-
-# Uncomment to run site.main() automatically
-#import site
-EOF
+          printf '%s\n' \
+            "python312.zip" \
+            "." \
+            "packages" \
+            "" \
+            "# Uncomment to run site.main() automatically" \
+            "#import site" \
+            > "${PTH_FILE}"
 
           # 创建 packages 目录
           mkdir -p install/python/packages
