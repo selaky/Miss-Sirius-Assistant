@@ -107,7 +107,82 @@ jobs:
         shell: bash
         run: |
           rm -rf MFA/runtimes
-      
+
+      - name: Download Embedded Python (Windows)
+        if: matrix.os == 'win'
+        shell: bash
+        run: |
+          PYTHON_VERSION="3.12.8"
+          if [[ "${{ matrix.arch }}" == "x86_64" ]]; then
+            PYTHON_ARCH="amd64"
+          else
+            PYTHON_ARCH="arm64"
+          fi
+          PYTHON_URL="https://www.python.org/ftp/python/${PYTHON_VERSION}/python-${PYTHON_VERSION}-embed-${PYTHON_ARCH}.zip"
+          echo "Downloading Python from: ${PYTHON_URL}"
+          mkdir -p install/python
+          curl -L -o python-embed.zip "${PYTHON_URL}"
+          unzip -o python-embed.zip -d install/python
+          rm python-embed.zip
+          echo "Python embedded downloaded successfully."
+
+      - name: Configure Embedded Python and Install Packages (Windows)
+        if: matrix.os == 'win'
+        shell: bash
+        run: |
+          # 配置 python312._pth 文件，添加 packages 目录
+          PTH_FILE="install/python/python312._pth"
+          cat > "${PTH_FILE}" << 'EOF'
+python312.zip
+.
+packages
+
+# Uncomment to run site.main() automatically
+#import site
+EOF
+
+          # 创建 packages 目录
+          mkdir -p install/python/packages
+
+          # 确定目标平台
+          if [[ "${{ matrix.arch }}" == "x86_64" ]]; then
+            PLATFORM="win_amd64"
+          else
+            PLATFORM="win_arm64"
+          fi
+
+          # 下载纯 Python 包（不需要指定平台）
+          python -m pip download --no-deps -d temp_packages maafw strenum MaaAgentBinary
+
+          # 下载平台特定的包（numpy 有 native 代码）
+          python -m pip download --no-deps --only-binary=:all: \
+            --platform "${PLATFORM}" \
+            --python-version 312 \
+            -d temp_packages \
+            numpy
+
+          # 解压 wheel 包到 packages 目录
+          for whl in temp_packages/*.whl; do
+            if [ -f "$whl" ]; then
+              echo "Extracting: $whl"
+              unzip -o "$whl" -d install/python/packages
+            fi
+          done
+
+          # 清理临时文件
+          rm -rf temp_packages
+
+          echo "Python packages installed successfully."
+
+      # 非 Windows 平台：修改 interface.json 使用系统 Python
+      - name: Fix interface.json for non-Windows platforms
+        if: matrix.os != 'win' && matrix.os != 'android'
+        shell: bash
+        run: |
+          # 将 ./python/python.exe 替换为 python3
+          sed -i 's|"./python/python.exe"|"python3"|g' assets/interface.json
+          echo "interface.json updated for ${{ matrix.os }} platform."
+
       - name: Install
         shell: bash
         run: |
