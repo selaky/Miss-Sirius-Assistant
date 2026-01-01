@@ -69,8 +69,8 @@ class StoreArenaResult(CustomAction):
             logging.error(f"竞技场战斗结果记录失败: {e}")
             return False
             
-@AgentServer.custom_action("display_arena_results")
-class DisplayArenaResults(CustomAction):
+@AgentServer.custom_action("set_arena_results")
+class SetArenaResults(CustomAction):
     """在 GUI 界面展示竞技场相关结果"""
     def run(self,context:Context,argv:CustomAction.RunArg) -> bool:
         try:
@@ -93,7 +93,7 @@ class DisplayArenaResults(CustomAction):
 
             # 使用 override_pipeline 修改当前节点的 focus 为完整字符串
             context.override_pipeline({
-                argv.node_name:{
+                "输出竞技场数据统计":{
                     "focus":{
                         "Node.Action.Succeeded": message
                     }

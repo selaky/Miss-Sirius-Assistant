@@ -3,12 +3,12 @@
     "$__mpe_code": {
       "filePath": "D:\\Projects\\MSA\\assets\\resource\\pipeline\\竞技场.json",
       "filename": "竞技场",
-      "lastSyncTime": 1767275354702,
+      "lastSyncTime": 1767277287364,
       "prefix": "",
       "savedViewport": {
-        "x": -298,
-        "y": 45,
-        "zoom": 0.66
+        "x": -828,
+        "y": -67,
+        "zoom": 0.76
       },
       "version": "v0.14.1"
     }
@@ -323,6 +323,27 @@
       "type": "OCR"
     }
   },
+  "设置竞技场数据统计": {
+    "$__mpe_code": {
+      "position": {
+        "x": 1800,
+        "y": 514
+      }
+    },
+    "action": {
+      "param": {
+        "custom_action": "set_arena_results"
+      },
+      "type": "Custom"
+    },
+    "next": [
+      "输出竞技场数据统计"
+    ],
+    "recognition": {
+      "param": {},
+      "type": "DirectHit"
+    }
+  },
   "跳过竞技场战斗": {
     "$__mpe_code": {
       "position": {
@@ -356,19 +377,13 @@
   "输出竞技场数据统计": {
     "$__mpe_code": {
       "position": {
-        "x": 1800,
-        "y": 514
+        "x": 2101,
+        "y": 524
       }
     },
     "action": {
-      "param": {
-        "custom_action": "display_arena_results"
-      },
-      "type": "Custom"
-    },
-    "focus": {
-      "Node.Action.Failed": "出现未知错误，竞技场数据统计失败。",
-      "Node.Action.Succeeded": "如果你看到这句话，说明统计数据替换失败了，这是个 bug。"
+      "param": {},
+      "type": "DoNothing"
     },
     "recognition": {
       "param": {},
@@ -388,7 +403,7 @@
     },
     "next": [
       "选择竞技场防御卡组",
-      "输出竞技场数据统计"
+      "设置竞技场数据统计"
     ],
     "recognition": {
       "param": {},
@@ -437,7 +452,7 @@
     },
     "enabled": false,
     "next": [
-      "输出竞技场数据统计"
+      "设置竞技场数据统计"
     ],
     "recognition": {
       "param": {
