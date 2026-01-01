@@ -9,9 +9,6 @@ from . import recover_helper
 import logging
 import json
 
-# 把日志级别调成 info, 看一下数据有没有正常读取。
-logging.basicConfig(level=logging.INFO) 
-
 @AgentServer.custom_action("init_potion_data")
 class InitPotionData(CustomAction):
     """初始化药水数据"""

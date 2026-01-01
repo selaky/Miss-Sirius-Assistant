@@ -72,7 +72,10 @@ potion_stats = PotionManager()
 potion_stats.init_names()
 
 def node_name_extract(node_name):
-    """节点名称解析.通过调用的节点名字来判断当前要处理的药品是哪一类。识别方法是看节点名字中出现了 AP 还是 BC, 以及是大还是小。"""
+    """
+    节点名称解析.通过调用的节点名字来判断当前要处理的药品是哪一类。
+    识别方法是看节点名字中出现了 AP 还是 BC, 以及是大还是小。
+    """
     if ("AP" in node_name):
         if ("大" in node_name):
             return potion_stats.ap.big
