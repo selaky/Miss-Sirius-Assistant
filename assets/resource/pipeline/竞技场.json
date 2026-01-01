@@ -3,12 +3,12 @@
     "$__mpe_code": {
       "filePath": "D:\\Projects\\MSA\\assets\\resource\\pipeline\\竞技场.json",
       "filename": "竞技场",
-      "lastSyncTime": 1767251339124,
+      "lastSyncTime": 1767253827598,
       "prefix": "",
       "savedViewport": {
-        "x": -733,
-        "y": 24,
-        "zoom": 0.87
+        "x": -479,
+        "y": 101,
+        "zoom": 0.76
       },
       "version": "v0.14.0"
     }
@@ -27,6 +27,25 @@
     "next": [
       "竞技场循环开始"
     ],
+    "recognition": {
+      "param": {},
+      "type": "DirectHit"
+    }
+  },
+  "不在竞技场界面": {
+    "$__mpe_code": {
+      "position": {
+        "x": 841,
+        "y": 435
+      }
+    },
+    "action": {
+      "param": {},
+      "type": "DoNothing"
+    },
+    "focus": {
+      "Node.Action.Starting": "当前不在竞技场界面，请切换到竞技场界面，再开始此任务。"
+    },
     "recognition": {
       "param": {},
       "type": "DirectHit"
@@ -115,6 +134,7 @@
       },
       "type": "Click"
     },
+    "enabled": false,
     "next": [
       "选择竞技场战斗卡组"
     ],
@@ -285,6 +305,9 @@
     "next": [
       "判断继续竞技场"
     ],
+    "on_error": [
+      "不在竞技场界面"
+    ],
     "recognition": {
       "param": {
         "expected": [
@@ -393,7 +416,7 @@
     "recognition": {
       "param": {
         "expected": [
-          "卡组四"
+          "卡组4"
         ],
         "roi": [
           131,
@@ -416,13 +439,14 @@
       "param": {},
       "type": "Click"
     },
+    "enabled": false,
     "next": [
       "输出竞技场数据统计"
     ],
     "recognition": {
       "param": {
         "expected": [
-          "卡组一"
+          "卡组1"
         ],
         "roi": [
           131,
