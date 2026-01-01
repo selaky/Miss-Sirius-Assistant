@@ -3,12 +3,12 @@
     "$__mpe_code": {
       "filePath": "D:\\Projects\\MSA\\assets\\resource\\pipeline\\竞技场.json",
       "filename": "竞技场",
-      "lastSyncTime": 1767257364362,
+      "lastSyncTime": 1767275354702,
       "prefix": "",
       "savedViewport": {
-        "x": -1209,
-        "y": -294,
-        "zoom": 1
+        "x": -298,
+        "y": 45,
+        "zoom": 0.66
       },
       "version": "v0.14.1"
     }
@@ -35,8 +35,8 @@
   "不在竞技场界面": {
     "$__mpe_code": {
       "position": {
-        "x": 898,
-        "y": 346
+        "x": 919,
+        "y": 372
       }
     },
     "action": {
@@ -233,6 +233,9 @@
     "next": [
       "记录竞技场积分"
     ],
+    "on_error": [
+      "不在竞技场界面"
+    ],
     "recognition": {
       "param": {},
       "type": "DirectHit"
@@ -363,16 +366,9 @@
       },
       "type": "Custom"
     },
-    "attach": {
-      "current_points": 0,
-      "loss_count": 0,
-      "target_points": 100,
-      "win_count": 0,
-      "win_rate": 0
-    },
     "focus": {
       "Node.Action.Failed": "出现未知错误，竞技场数据统计失败。",
-      "Node.Action.Succeeded": "竞技场战斗任务结束，目标 {attach.target_points} 积分，当前 {attach.current_points} 积分。\\n胜利 {attach.win_count} 场，失败 {attach.loss_count} 场，胜率 {attach.win_rate}"
+      "Node.Action.Succeeded": "如果你看到这句话，说明统计数据替换失败了，这是个 bug。"
     },
     "recognition": {
       "param": {},

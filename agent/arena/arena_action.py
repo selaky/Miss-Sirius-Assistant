@@ -84,19 +84,19 @@ class DisplayArenaResults(CustomAction):
             else:
                 win_rate = 0
 
-            # 设置要展示的 attach 数据。
-            display_data = {
-                "current_points": stats.current_points,
-                "target_points": stats.target_points,
-                "win_count": win,
-                "loss_count": loss,
-                "win_rate": win_rate
-            }
+            # 直接拼接完整的消息字符串
+            message = (
+                f"竞技场战斗任务结束，目标 {stats.target_points} 积分，"
+                f"当前 {stats.current_points} 积分。\n"
+                f"胜利 {win} 场，失败 {loss} 场，胜率 {win_rate:.2%}"
+            )
 
-            # 使用 override_pipeline 修改当前节点的 attach 
+            # 使用 override_pipeline 修改当前节点的 focus 为完整字符串
             context.override_pipeline({
                 argv.node_name:{
-                    "attach":display_data
+                    "focus":{
+                        "Node.Action.Succeeded": message
+                    }
                 }
             })
 
