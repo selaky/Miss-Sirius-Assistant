@@ -3,21 +3,29 @@
     "$__mpe_code": {
       "filePath": "D:\\Projects\\MSA\\assets\\resource\\pipeline\\竞技场.json",
       "filename": "竞技场",
-      "lastSyncTime": 1767520736861,
+      "lastSyncTime": 1767525970354,
       "prefix": "",
       "savedViewport": {
-        "x": -587,
-        "y": -118,
+        "x": -154,
+        "y": 81,
         "zoom": 0.66
       },
       "version": "v0.14.2"
+    }
+  },
+  "$__mpe_external_意外处理_竞技场": {
+    "$__mpe_code": {
+      "position": {
+        "x": 2705,
+        "y": 603
+      }
     }
   },
   "一轮竞技场结束": {
     "$__mpe_code": {
       "position": {
         "x": 300,
-        "y": 14
+        "y": 0
       }
     },
     "action": {
@@ -36,7 +44,7 @@
     "$__mpe_code": {
       "position": {
         "x": 900,
-        "y": 289
+        "y": 819
       }
     },
     "action": {
@@ -55,7 +63,7 @@
     "$__mpe_code": {
       "position": {
         "x": 300,
-        "y": 307
+        "y": 974
       }
     },
     "action": {
@@ -79,7 +87,7 @@
     "$__mpe_code": {
       "position": {
         "x": 1200,
-        "y": 833
+        "y": 171
       }
     },
     "action": {
@@ -88,7 +96,11 @@
     },
     "next": [
       "星币提升体力",
-      "选择竞技场战斗卡组"
+      "选择竞技场战斗卡组",
+      {
+        "jump_back": true,
+        "name": "意外处理"
+      }
     ],
     "recognition": {
       "param": {
@@ -101,7 +113,7 @@
     "$__mpe_code": {
       "position": {
         "x": 0,
-        "y": 337
+        "y": 1004
       }
     },
     "action": {
@@ -120,34 +132,45 @@
     "$__mpe_code": {
       "position": {
         "x": 1500,
-        "y": 938
+        "y": 109
       }
     },
     "action": {
-      "param": {
-        "target": [
-          90,
-          486,
-          130,
-          27
-        ]
-      },
+      "param": {},
       "type": "Click"
     },
     "enabled": false,
     "next": [
-      "选择竞技场战斗卡组"
+      "选择竞技场战斗卡组",
+      "星币提升体力",
+      {
+        "jump_back": true,
+        "name": "意外处理"
+      }
     ],
     "recognition": {
-      "param": {},
-      "type": "DirectHit"
+      "param": {
+        "roi": [
+          67,
+          468,
+          177,
+          63
+        ],
+        "template": [
+          "竞技场/星币提升体力.png"
+        ],
+        "threshold": [
+          0.9
+        ]
+      },
+      "type": "TemplateMatch"
     }
   },
   "点击匹配": {
     "$__mpe_code": {
       "position": {
         "x": 2100,
-        "y": 816
+        "y": 153
       }
     },
     "action": {
@@ -155,6 +178,10 @@
       "type": "Click"
     },
     "next": [
+      {
+        "jump_back": true,
+        "name": "意外处理"
+      },
       "点击匹配",
       "跳过竞技场战斗"
     ],
@@ -167,7 +194,7 @@
           114
         ],
         "template": [
-          "战斗/点击匹配.png"
+          "竞技场/点击匹配.png"
         ]
       },
       "type": "TemplateMatch"
@@ -177,7 +204,7 @@
     "$__mpe_code": {
       "position": {
         "x": 2700,
-        "y": 816
+        "y": 378
       }
     },
     "action": {
@@ -206,7 +233,7 @@
     "$__mpe_code": {
       "position": {
         "x": 3000,
-        "y": 0
+        "y": 398
       }
     },
     "action": {
@@ -227,7 +254,7 @@
     "$__mpe_code": {
       "position": {
         "x": 600,
-        "y": 317
+        "y": 187
       }
     },
     "action": {
@@ -235,7 +262,11 @@
       "type": "DoNothing"
     },
     "next": [
-      "记录竞技场积分"
+      "记录竞技场积分",
+      {
+        "jump_back": true,
+        "name": "意外处理"
+      }
     ],
     "on_error": [
       "不在竞技场界面"
@@ -249,7 +280,7 @@
     "$__mpe_code": {
       "position": {
         "x": 2700,
-        "y": 1041
+        "y": 153
       }
     },
     "action": {
@@ -278,7 +309,7 @@
     "$__mpe_code": {
       "position": {
         "x": 3000,
-        "y": 186
+        "y": 6
       }
     },
     "action": {
@@ -299,7 +330,7 @@
     "$__mpe_code": {
       "position": {
         "x": 900,
-        "y": 503
+        "y": 141
       }
     },
     "action": {
@@ -330,8 +361,8 @@
   "设置竞技场数据统计": {
     "$__mpe_code": {
       "position": {
-        "x": 1800,
-        "y": 535
+        "x": 3000,
+        "y": 760
       }
     },
     "action": {
@@ -352,7 +383,7 @@
     "$__mpe_code": {
       "position": {
         "x": 2400,
-        "y": 816
+        "y": 153
       }
     },
     "action": {
@@ -360,6 +391,10 @@
       "type": "Click"
     },
     "next": [
+      {
+        "jump_back": true,
+        "name": "意外处理"
+      },
       "竞技场胜利",
       "竞技场失败"
     ],
@@ -381,8 +416,8 @@
   "输出竞技场数据统计": {
     "$__mpe_code": {
       "position": {
-        "x": 2100,
-        "y": 549
+        "x": 3300,
+        "y": 774
       }
     },
     "action": {
@@ -397,8 +432,8 @@
   "进入竞技场结束流程": {
     "$__mpe_code": {
       "position": {
-        "x": 1200,
-        "y": 549
+        "x": 2400,
+        "y": 774
       }
     },
     "action": {
@@ -407,7 +442,11 @@
     },
     "next": [
       "选择竞技场防御卡组",
-      "设置竞技场数据统计"
+      "设置竞技场数据统计",
+      {
+        "jump_back": true,
+        "name": "意外处理"
+      }
     ],
     "recognition": {
       "param": {},
@@ -418,7 +457,7 @@
     "$__mpe_code": {
       "position": {
         "x": 1800,
-        "y": 816
+        "y": 153
       }
     },
     "action": {
@@ -426,7 +465,11 @@
       "type": "Click"
     },
     "next": [
-      "点击匹配"
+      "点击匹配",
+      {
+        "jump_back": true,
+        "name": "意外处理"
+      }
     ],
     "recognition": {
       "param": {
@@ -446,8 +489,8 @@
   "选择竞技场防御卡组": {
     "$__mpe_code": {
       "position": {
-        "x": 1500,
-        "y": 638
+        "x": 2700,
+        "y": 713
       }
     },
     "action": {

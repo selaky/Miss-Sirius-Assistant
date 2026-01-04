@@ -3,211 +3,14 @@
     "$__mpe_code": {
       "filePath": "D:\\Projects\\MSA\\assets\\resource\\pipeline\\意外处理.json",
       "filename": "意外处理",
-      "lastSyncTime": 1767521232278,
+      "lastSyncTime": 1767521322736,
       "prefix": "",
       "savedViewport": {
-        "x": 438,
-        "y": 90,
-        "zoom": 0.76
+        "x": 391,
+        "y": 78,
+        "zoom": 0.57
       },
       "version": "v0.14.2"
-    }
-  },
-  "不分配属性点": {
-    "$__mpe_code": {
-      "position": {
-        "x": 900,
-        "y": 1270
-      }
-    },
-    "action": {
-      "param": {},
-      "type": "DoNothing"
-    },
-    "focus": {
-      "Node.Recognition.Succeeded": "升级了，已自动关闭属性分配弹窗"
-    },
-    "next": [
-      "关闭加点弹窗"
-    ],
-    "recognition": {
-      "param": {},
-      "type": "DirectHit"
-    }
-  },
-  "关闭加点弹窗": {
-    "$__mpe_code": {
-      "position": {
-        "x": 1200,
-        "y": 832
-      }
-    },
-    "action": {
-      "param": {},
-      "type": "Click"
-    },
-    "next": [
-      "关闭加点弹窗"
-    ],
-    "recognition": {
-      "param": {
-        "roi": [
-          909,
-          122,
-          97,
-          44
-        ],
-        "template": [
-          "意外/关闭信息窗口.png"
-        ]
-      },
-      "type": "TemplateMatch"
-    }
-  },
-  "分配属性后确定": {
-    "$__mpe_code": {
-      "position": {
-        "x": 900,
-        "y": 832
-      }
-    },
-    "action": {
-      "param": {},
-      "type": "Click"
-    },
-    "next": [
-      "关闭加点弹窗"
-    ],
-    "recognition": {
-      "param": {
-        "roi": [
-          575,
-          521,
-          128,
-          47
-        ],
-        "template": [
-          "意外/确定.png"
-        ]
-      },
-      "type": "TemplateMatch"
-    }
-  },
-  "分配行动力": {
-    "$__mpe_code": {
-      "position": {
-        "x": 600,
-        "y": 803
-      }
-    },
-    "action": {
-      "param": {
-        "target": [
-          878,
-          379,
-          35,
-          20
-        ]
-      },
-      "type": "Click"
-    },
-    "enabled": false,
-    "focus": {
-      "Node.Action.Succeeded": "将升级属性点加至行动力"
-    },
-    "next": [
-      "分配属性后确定"
-    ],
-    "recognition": {
-      "param": {},
-      "type": "DirectHit"
-    }
-  },
-  "分配领导力": {
-    "$__mpe_code": {
-      "position": {
-        "x": 600,
-        "y": 1086
-      }
-    },
-    "action": {
-      "param": {
-        "target": [
-          877,
-          459,
-          37,
-          21
-        ]
-      },
-      "type": "Click"
-    },
-    "enabled": false,
-    "focus": {
-      "Node.Action.Succeeded": "将升级属性点加至领导力"
-    },
-    "next": [
-      "分配属性后确定"
-    ],
-    "recognition": {
-      "param": {},
-      "type": "DirectHit"
-    }
-  },
-  "升级": {
-    "$__mpe_code": {
-      "position": {
-        "x": 300,
-        "y": 804
-      }
-    },
-    "action": {
-      "param": {},
-      "type": "DoNothing"
-    },
-    "focus": {
-      "Node.Recognition.Succeeded": ""
-    },
-    "next": [
-      "分配行动力",
-      "分配领导力",
-      "不分配属性点"
-    ],
-    "recognition": {
-      "param": {
-        "roi": [
-          812,
-          258,
-          153,
-          99
-        ],
-        "template": [
-          "意外/洗点.png"
-        ]
-      },
-      "type": "TemplateMatch"
-    }
-  },
-  "弹窗确定": {
-    "$__mpe_code": {
-      "position": {
-        "x": 300,
-        "y": 238
-      }
-    },
-    "action": {
-      "param": {},
-      "type": "Click"
-    },
-    "focus": {
-      "Node.Action.Starting": "检测到弹窗，点击确定"
-    },
-    "recognition": {
-      "param": {
-        "template": [
-          "意外/确定.png"
-        ]
-      },
-      "type": "FeatureMatch"
     }
   },
   "意外处理": {
@@ -224,39 +27,36 @@
     "next": [
       "连接断开重新启动",
       "掉线重试",
-      "升级",
       "弹窗确定"
     ],
     "recognition": {
       "param": {
         "template": [
           "意外/确定.png",
-          "意外/重试.png",
-          "意外/洗点.png"
+          "意外/重试.png"
         ]
       },
       "type": "TemplateMatch"
     }
   },
-  "掉线重试": {
+  "连接断开重新启动": {
     "$__mpe_code": {
       "position": {
         "x": 300,
-        "y": 521
+        "y": 45
       }
     },
     "action": {
       "param": {},
-      "type": "Click"
+      "type": "DoNothing"
     },
-    "focus": {
-      "Node.Action.Starting": "游戏掉线了，已自动点击重试"
-    },
+    "next": [
+      "点击重启"
+    ],
     "recognition": {
       "param": {
-        "roi": "意外处理",
         "template": [
-          "意外/重试.png"
+          "意外/连接断开.png"
         ]
       },
       "type": "TemplateMatch"
@@ -286,27 +86,51 @@
       "type": "FeatureMatch"
     }
   },
-  "连接断开重新启动": {
+  "掉线重试": {
     "$__mpe_code": {
       "position": {
         "x": 300,
-        "y": 45
+        "y": 521
       }
     },
     "action": {
       "param": {},
-      "type": "DoNothing"
+      "type": "Click"
     },
-    "next": [
-      "点击重启"
-    ],
+    "focus": {
+      "Node.Action.Starting": "游戏掉线了，已自动点击重试"
+    },
     "recognition": {
       "param": {
+        "roi": "意外处理",
         "template": [
-          "意外/连接断开.png"
+          "意外/重试.png"
         ]
       },
       "type": "TemplateMatch"
+    }
+  },
+  "弹窗确定": {
+    "$__mpe_code": {
+      "position": {
+        "x": 300,
+        "y": 238
+      }
+    },
+    "action": {
+      "param": {},
+      "type": "Click"
+    },
+    "focus": {
+      "Node.Action.Starting": "检测到弹窗，点击确定"
+    },
+    "recognition": {
+      "param": {
+        "template": [
+          "意外/确定.png"
+        ]
+      },
+      "type": "FeatureMatch"
     }
   }
 }

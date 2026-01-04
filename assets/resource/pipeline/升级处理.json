@@ -1,0 +1,187 @@
+{
+  "$__mpe_config_升级处理": {
+    "$__mpe_code": {
+      "filePath": "D:\\Projects\\MSA\\assets\\resource\\pipeline\\升级处理.json",
+      "filename": "升级处理",
+      "lastSyncTime": 1767526993380,
+      "prefix": "",
+      "savedViewport": {
+        "x": 342,
+        "y": 177,
+        "zoom": 0.57
+      },
+      "version": "v0.14.2"
+    }
+  },
+  "不分配属性点": {
+    "$__mpe_code": {
+      "position": {
+        "x": 300,
+        "y": 560
+      }
+    },
+    "action": {
+      "param": {},
+      "type": "DoNothing"
+    },
+    "focus": {
+      "Node.Recognition.Succeeded": "升级了，已自动关闭属性分配弹窗"
+    },
+    "next": [
+      "关闭加点弹窗"
+    ],
+    "recognition": {
+      "param": {},
+      "type": "DirectHit"
+    }
+  },
+  "关闭加点弹窗": {
+    "$__mpe_code": {
+      "position": {
+        "x": 900,
+        "y": 140
+      }
+    },
+    "action": {
+      "param": {},
+      "type": "Click"
+    },
+    "next": [
+      "关闭加点弹窗"
+    ],
+    "recognition": {
+      "param": {
+        "roi": [
+          909,
+          122,
+          97,
+          44
+        ],
+        "template": [
+          "意外/关闭信息窗口.png"
+        ]
+      },
+      "type": "TemplateMatch"
+    }
+  },
+  "分配属性后确定": {
+    "$__mpe_code": {
+      "position": {
+        "x": 600,
+        "y": 140
+      }
+    },
+    "action": {
+      "param": {},
+      "type": "Click"
+    },
+    "next": [
+      "关闭加点弹窗"
+    ],
+    "recognition": {
+      "param": {
+        "roi": [
+          575,
+          521,
+          128,
+          47
+        ],
+        "template": [
+          "意外/确定.png"
+        ]
+      },
+      "type": "TemplateMatch"
+    }
+  },
+  "分配行动力": {
+    "$__mpe_code": {
+      "position": {
+        "x": 300,
+        "y": 0
+      }
+    },
+    "action": {
+      "param": {
+        "target": [
+          878,
+          379,
+          35,
+          20
+        ]
+      },
+      "type": "Click"
+    },
+    "enabled": false,
+    "focus": {
+      "Node.Action.Succeeded": "将升级属性点加至行动力"
+    },
+    "next": [
+      "分配属性后确定"
+    ],
+    "recognition": {
+      "param": {},
+      "type": "DirectHit"
+    }
+  },
+  "分配领导力": {
+    "$__mpe_code": {
+      "position": {
+        "x": 300,
+        "y": 280
+      }
+    },
+    "action": {
+      "param": {
+        "target": [
+          877,
+          459,
+          37,
+          21
+        ]
+      },
+      "type": "Click"
+    },
+    "enabled": false,
+    "focus": {
+      "Node.Action.Succeeded": "将升级属性点加至领导力"
+    },
+    "next": [
+      "分配属性后确定"
+    ],
+    "recognition": {
+      "param": {},
+      "type": "DirectHit"
+    }
+  },
+  "升级": {
+    "$__mpe_code": {
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    "action": {
+      "param": {},
+      "type": "DoNothing"
+    },
+    "next": [
+      "分配行动力",
+      "分配领导力",
+      "不分配属性点"
+    ],
+    "recognition": {
+      "param": {
+        "roi": [
+          812,
+          258,
+          153,
+          99
+        ],
+        "template": [
+          "意外/洗点.png"
+        ]
+      },
+      "type": "TemplateMatch"
+    }
+  }
+}

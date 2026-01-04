@@ -3,14 +3,14 @@
     "$__mpe_code": {
       "filePath": "D:\\Projects\\MSA\\assets\\resource\\pipeline\\战斗.json",
       "filename": "战斗",
-      "lastSyncTime": 1767242698550,
+      "lastSyncTime": 1767527504337,
       "prefix": "",
       "savedViewport": {
-        "x": 239,
-        "y": 124,
-        "zoom": 0.44
+        "x": 96,
+        "y": 101,
+        "zoom": 0.5
       },
-      "version": "v0.14.0"
+      "version": "v0.14.2"
     }
   },
   "$__mpe_external_BC不足_战斗": {
@@ -18,6 +18,14 @@
       "position": {
         "x": 1079,
         "y": -15
+      }
+    }
+  },
+  "$__mpe_external_意外处理_战斗": {
+    "$__mpe_code": {
+      "position": {
+        "x": 1166,
+        "y": 146
       }
     }
   },
@@ -43,7 +51,11 @@
     "next": [
       "放弃战斗",
       "暴走识别",
-      "普通卡组"
+      "普通卡组",
+      {
+        "jump_back": true,
+        "name": "意外处理"
+      }
     ],
     "on_error": [
       "跑图循环开始"
@@ -225,6 +237,10 @@
     },
     "next": [
       "跳过战斗",
+      {
+        "jump_back": true,
+        "name": "意外处理"
+      },
       "BC不足"
     ],
     "on_error": [
@@ -257,6 +273,10 @@
       "type": "Click"
     },
     "next": [
+      {
+        "jump_back": true,
+        "name": "意外处理"
+      },
       "跳过战斗",
       "BC不足"
     ],
@@ -293,7 +313,11 @@
       "Node.Recognition.Succeeded": "检测到暴走感染者，准备战斗！"
     },
     "next": [
-      "暴走卡组"
+      "暴走卡组",
+      {
+        "jump_back": true,
+        "name": "意外处理"
+      }
     ],
     "on_error": [
       "跑图循环开始"
@@ -328,6 +352,11 @@
       "Node.Action.Starting": "跳过战斗"
     },
     "next": [
+      {
+        "jump_back": true,
+        "name": "意外处理"
+      },
+      "跳过战斗",
       "战斗获得卡牌一",
       "战斗失败"
     ],
