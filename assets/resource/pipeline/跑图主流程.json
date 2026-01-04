@@ -3,21 +3,21 @@
     "$__mpe_code": {
       "filePath": "D:\\Projects\\MSA\\assets\\resource\\pipeline\\跑图主流程.json",
       "filename": "跑图主流程",
-      "lastSyncTime": 1766976224102,
+      "lastSyncTime": 1767523637305,
       "prefix": "",
       "savedViewport": {
-        "x": 199,
-        "y": 184,
-        "zoom": 0.76
+        "x": 123,
+        "y": -99,
+        "zoom": 0.66
       },
-      "version": "v0.13.0"
+      "version": "v0.14.2"
     }
   },
   "$__mpe_external_开始恢复_跑图主流程": {
     "$__mpe_code": {
       "position": {
         "x": 905,
-        "y": 128
+        "y": 164
       }
     }
   },
@@ -25,7 +25,7 @@
     "$__mpe_code": {
       "position": {
         "x": 905,
-        "y": 223
+        "y": 274
       }
     }
   },
@@ -33,15 +33,15 @@
     "$__mpe_code": {
       "position": {
         "x": 905,
-        "y": 33
+        "y": 54
       }
     }
   },
   "下一区": {
     "$__mpe_code": {
       "position": {
-        "x": 899,
-        "y": 347
+        "x": 900,
+        "y": 384
       }
     },
     "action": {
@@ -97,31 +97,34 @@
   "前进": {
     "$__mpe_code": {
       "position": {
-        "x": 903,
-        "y": 688
+        "x": 900,
+        "y": 681
       }
     },
     "action": {
-      "param": {
-        "target": [
-          1164,
-          287,
-          4,
-          20
-        ]
-      },
+      "param": {},
       "type": "Click"
     },
     "recognition": {
-      "param": {},
-      "type": "DirectHit"
+      "param": {
+        "roi": [
+          1152,
+          237,
+          123,
+          124
+        ],
+        "template": [
+          "跑图/前进.png"
+        ]
+      },
+      "type": "TemplateMatch"
     }
   },
   "开始跑图": {
     "$__mpe_code": {
       "position": {
         "x": 0,
-        "y": 0
+        "y": 30
       }
     },
     "action": {
@@ -140,7 +143,7 @@
     "$__mpe_code": {
       "position": {
         "x": 600,
-        "y": 0
+        "y": 2
       }
     },
     "action": {
@@ -167,8 +170,36 @@
       {
         "jump_back": true,
         "name": "前进"
+      },
+      {
+        "jump_back": true,
+        "name": "随便点击"
       }
     ],
+    "rate_limit": 500,
+    "recognition": {
+      "param": {},
+      "type": "DirectHit"
+    }
+  },
+  "随便点击": {
+    "$__mpe_code": {
+      "position": {
+        "x": 894,
+        "y": 899
+      }
+    },
+    "action": {
+      "param": {
+        "target": [
+          607,
+          409,
+          64,
+          20
+        ]
+      },
+      "type": "Click"
+    },
     "recognition": {
       "param": {},
       "type": "DirectHit"

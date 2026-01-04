@@ -34,7 +34,7 @@
                 // 文档: https://maafw.xyz/docs/2.4-ControlMethods
                 "screencap": "FramePool", // 截图方式
                 "mouse": "Seize", // 鼠标控制方式
-                "keyboard": "PostMessageWithCursorPos" // 键盘控制方式
+                "keyboard": "SendMessageWithCursorPos" // 键盘控制方式
             }
         }
     ],
