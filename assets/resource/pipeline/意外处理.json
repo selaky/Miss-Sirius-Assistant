@@ -3,15 +3,14 @@
     "$__mpe_code": {
       "filePath": "D:\\Projects\\MSA\\assets\\resource\\pipeline\\意外处理.json",
       "filename": "意外处理",
-      "isModifiedExternally": true,
-      "lastSyncTime": 1767154111501,
+      "lastSyncTime": 1767521232278,
       "prefix": "",
       "savedViewport": {
-        "x": 340,
-        "y": 141,
-        "zoom": 0.57
+        "x": 438,
+        "y": 90,
+        "zoom": 0.76
       },
-      "version": "v0.14.0"
+      "version": "v0.14.2"
     }
   },
   "不分配属性点": {
@@ -47,6 +46,9 @@
       "param": {},
       "type": "Click"
     },
+    "next": [
+      "关闭加点弹窗"
+    ],
     "recognition": {
       "param": {
         "roi": [
@@ -205,7 +207,7 @@
           "意外/确定.png"
         ]
       },
-      "type": "TemplateMatch"
+      "type": "FeatureMatch"
     }
   },
   "意外处理": {
@@ -278,10 +280,10 @@
       "param": {
         "roi": "连接断开重新启动",
         "template": [
-          "意外/确定.png"
+          "意外/确定-连接断开.png"
         ]
       },
-      "type": "TemplateMatch"
+      "type": "FeatureMatch"
     }
   },
   "连接断开重新启动": {

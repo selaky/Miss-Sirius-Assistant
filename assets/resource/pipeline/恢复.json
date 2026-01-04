@@ -4,14 +4,14 @@
       "filePath": "D:\\Projects\\MSA\\assets\\resource\\pipeline\\恢复.json",
       "filename": "恢复",
       "isModifiedExternally": true,
-      "lastSyncTime": 1767243165928,
+      "lastSyncTime": 1767521061837,
       "prefix": "",
       "savedViewport": {
-        "x": 232,
-        "y": 171,
-        "zoom": 0.5
+        "x": -261,
+        "y": -42,
+        "zoom": 0.66
       },
-      "version": "v0.14.0"
+      "version": "v0.14.2"
     }
   },
   "AP不足": {
@@ -217,22 +217,25 @@
       }
     },
     "action": {
-      "param": {
-        "target": [
-          991,
-          257,
-          28,
-          25
-        ]
-      },
+      "param": {},
       "type": "Click"
     },
     "next": [
-      "等待恢复界面关闭"
+      "关闭恢复界面"
     ],
     "recognition": {
-      "param": {},
-      "type": "DirectHit"
+      "param": {
+        "roi": [
+          980,
+          248,
+          48,
+          45
+        ],
+        "template": [
+          "恢复/关闭恢复界面.png"
+        ]
+      },
+      "type": "TemplateMatch"
     }
   },
   "判断使用大AP药": {
@@ -417,22 +420,6 @@
         ]
       },
       "type": "TemplateMatch"
-    }
-  },
-  "等待恢复界面关闭": {
-    "$__mpe_code": {
-      "position": {
-        "x": 2107,
-        "y": 402
-      }
-    },
-    "action": {
-      "param": {},
-      "type": "DoNothing"
-    },
-    "recognition": {
-      "param": {},
-      "type": "DirectHit"
     }
   },
   "行动力耗尽": {
