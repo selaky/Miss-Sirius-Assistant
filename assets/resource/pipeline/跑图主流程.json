@@ -6,8 +6,8 @@
       "lastSyncTime": 1767527128800,
       "prefix": "",
       "savedViewport": {
-        "x": 88,
-        "y": 75,
+        "x": -102,
+        "y": -277,
         "zoom": 0.76
       },
       "version": "v0.14.2"
@@ -202,18 +202,17 @@
       }
     },
     "action": {
-      "param": {
-        "target": [
-          607,
-          409,
-          64,
-          20
-        ]
-      },
+      "param": {},
       "type": "Click"
     },
     "recognition": {
       "param": {
+        "roi": [
+          390,
+          545,
+          495,
+          143
+        ],
         "template": [
           "卡牌/点击屏幕跳过.png",
           "卡牌/点击屏幕跳过-小.png"
