@@ -11,7 +11,8 @@
       "WebFetch(domain:raw.githubusercontent.com)",
       "mcp__mcp-router__fetch_content",
       "Bash(curl:*)",
-      "Bash(cat:*)"
+      "Bash(cat:*)",
+      "WebFetch(domain:maafw.xyz)"
     ],
     "deny": [],
     "ask": []
