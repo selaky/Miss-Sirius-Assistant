@@ -54,6 +54,7 @@ set(CONTROLLER_SOURCES
     controller/controller.cpp
     controller/shared_memory.cpp
     controller/screencap.cpp
+    controller/injector.cpp
 )
 
 add_library(msa_controller STATIC ${CONTROLLER_SOURCES})
@@ -129,20 +130,47 @@ set_target_properties(msa_hook msa_controller click_test screencap_test PROPERTI
     ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib"
 )
 
+# ==================== 第三阶段测试程序（完整功能测试） ====================
+set(CONTROLLER_TEST_SOURCES
+    test/controller_test.cpp
+)
+
+add_executable(controller_test ${CONTROLLER_TEST_SOURCES})
+
+target_include_directories(controller_test PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}
+    ${CMAKE_CURRENT_SOURCE_DIR}/common
+    ${MAA_FRAMEWORK_DIR}/include
+)
+
+# 链接控制器库和 MAA Framework
+target_link_libraries(controller_test PRIVATE
+    msa_controller
+    ${MAA_FRAMEWORK_DIR}/lib/MaaFramework.lib
+    user32
+    kernel32
+)
+
+# 设置测试程序为 Windows 控制台应用
+set_target_properties(controller_test PROPERTIES
+    WIN32_EXECUTABLE FALSE
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+)
+
 # 安装目标
-install(TARGETS msa_hook msa_controller click_test screencap_test
+install(TARGETS msa_hook msa_controller click_test screencap_test controller_test
     RUNTIME DESTINATION bin
     LIBRARY DESTINATION bin
     ARCHIVE DESTINATION lib
 )
 
 # 复制 MAA Framework DLL 到输出目录
-add_custom_command(TARGET screencap_test POST_BUILD
+add_custom_command(TARGET controller_test POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy_if_different
         "${MAA_FRAMEWORK_DIR}/bin/MaaFramework.dll"
-        "$<TARGET_FILE_DIR:screencap_test>"
+        "$<TARGET_FILE_DIR:controller_test>"
     COMMAND ${CMAKE_COMMAND} -E copy_if_different
         "${MAA_FRAMEWORK_DIR}/bin/MaaToolkit.dll"
-        "$<TARGET_FILE_DIR:screencap_test>"
+        "$<TARGET_FILE_DIR:controller_test>"
     COMMENT "Copying MAA Framework DLLs..."
 )
