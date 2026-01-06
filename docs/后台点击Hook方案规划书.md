@@ -1,6 +1,6 @@
 # MSA 后台点击 Hook 方案规划书
 
-> 版本：1.2
+> 版本：1.3
 > 日期：2026-01-06
 > 状态：待实施
 
@@ -75,8 +75,8 @@ MSA 当前使用 MAA Framework 内置的 `Seize` 模式，需要游戏窗口前�
 
 **技术选型**：
 
-- 注入方式：`CreateRemoteThread` + `LoadLibraryW`（标准方式，不影响其他进程）
-- Hook 库：MinHook（轻量、稳定、BSD 协议）
+- 注入方式：`CreateRemoteThread` + `LoadLibraryW`
+- Hook 库：MinHook
 
 ### 2.4 通信机制
 
@@ -202,18 +202,23 @@ MSA/
 
 - MinHook 集成
 - GetCursorPos / GetForegroundWindow Hook
-- 共享内存通信
+- 共享内存通信（DLL 端）
 - **验收**：手动注入后，用测试程序发送消息能触发游戏点击
 
-### 阶段二：自定义控制器
+### 阶段二：控制器框架 + 截图
 
-- MaaCustomControllerCallbacks 实现
-- Windows Graphics Capture 截图
-- 点击/触摸输入
+- MaaCustomControllerCallbacks 框架搭建
+- 共享内存通信（控制器端）
+- Windows Graphics Capture 截图实现
+- **验收**：通过 MAA API 调用控制器能完成后台截图
+
+### 阶段三：控制器输入 + 自动注入
+
+- 点击/触摸输入实现
 - 注入逻辑集成（`ensure_injection` 状态检测）
 - **验收**：通过 MAA API 调用控制器能完成截图和点击，支持游戏重启后自动重新注入
 
-### 阶段三：集成与测试
+### 阶段四：集成与测试
 
 - interface.json 配置
 - 错误处理和日志
