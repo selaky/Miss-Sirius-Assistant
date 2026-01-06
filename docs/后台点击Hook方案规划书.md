@@ -1,6 +1,6 @@
 # MSA 后台点击 Hook 方案规划书
 
-> 版本：1.3
+> 版本：1.4
 > 日期：2026-01-06
 > 状态：待实施
 
@@ -64,6 +64,12 @@ MSA 当前使用 MAA Framework 内置的 `Seize` 模式，需要游戏窗口前�
 - 保持接口和行为与 MAA 一致，减少学习成本和兼容性问题
 - MAA 的实现方式已经是经过大量实践验证的最佳实践，没必要重复造轮子,能抄的尽量抄
 
+**坐标与 DPI 处理**：
+
+- MAA Framework 会自动完成图像空间→设备空间的坐标转换，控制器收到的坐标已是客户区坐标
+- 控制器在 `connect` 时设置 `SetThreadDpiAwarenessContext(DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2)`，确保 API 返回物理像素
+- 控制器直接将客户区坐标写入共享内存，不做额外转换
+
 ### 2.3 Hook DLL
 
 **Hook 目标**：
@@ -72,6 +78,13 @@ MSA 当前使用 MAA Framework 内置的 `Seize` 模式，需要游戏窗口前�
 |-----|------|
 | `GetCursorPos` | 返回共享内存中的目标坐标（需做客户区→屏幕坐标转换） |
 | `GetForegroundWindow` | 返回游戏窗口句柄 |
+
+**坐标转换**：
+
+`GetCursorPos` Hook 负责将共享内存中的客户区坐标转换为屏幕坐标：
+- 读取共享内存中的 `(target_x, target_y)` 客户区坐标
+- 使用 `ClientToScreen(game_hwnd, &point)` 转换为屏幕坐标
+- 返回转换后的屏幕坐标
 
 **技术选型**：
 
@@ -196,13 +209,15 @@ MSA/
 ### 阶段一：Hook DLL
 
 - MinHook 集成
-- GetCursorPos / GetForegroundWindow Hook
+- GetCursorPos Hook（含客户区→屏幕坐标转换）
+- GetForegroundWindow Hook
 - 共享内存通信（DLL 端）
 - **验收**：手动注入后，用测试程序发送消息能触发游戏点击
 
 ### 阶段二：控制器框架 + 截图
 
 - MaaCustomControllerCallbacks 框架搭建
+- `connect` 中设置 DPI 感知（`DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2`）
 - 共享内存通信（控制器端）
 - Windows Graphics Capture 截图实现
 - **验收**：通过 MAA API 调用控制器能完成后台截图
