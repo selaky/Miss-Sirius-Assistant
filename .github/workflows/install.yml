@@ -10,6 +10,7 @@ on:
       - ".github/workflows/install.yml"
       - "assets/**"
       - "**.py"
+      - "hook/**"
   pull_request:
     branches:
       - "**"
@@ -17,6 +18,7 @@ on:
       - ".github/workflows/install.yml"
       - "assets/**"
       - "**.py"
+      - "hook/**"
   workflow_dispatch:
 
 jobs:
@@ -60,13 +62,13 @@ jobs:
       is_release: ${{ steps.set_tag.outputs.is_release }}
       is_prerelease: ${{ steps.set_tag.outputs.is_prerelease }}
 
-  install:
+  # Windows 平台单独构建（需要编译 Hook DLL）
+  install-windows:
     needs: meta
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     strategy:
       matrix:
-        os: [win, macos, linux, android]
-        arch: [aarch64, x86_64]
+        arch: [x86_64]
       fail-fast: false
 
     steps:
@@ -78,24 +80,22 @@ jobs:
         uses: robinraju/release-downloader@v1
         with:
           repository: MaaXYZ/MaaFramework
-          fileName: "MAA-${{ matrix.os }}-${{ matrix.arch }}*"
+          fileName: "MAA-win-${{ matrix.arch }}*"
           latest: true
           out-file-path: "deps"
           extract: true
 
       - name: Download MFAAvalonia
-        if: matrix.os != 'android'
         id: download_mfa
         uses: robinraju/release-downloader@v1
         with:
           repository: SweetSmellFox/MFAAvalonia
-          fileName: "MFAAvalonia-*-${{ (matrix.os == 'win' && 'win') || (matrix.os == 'macos' && 'osx') || (matrix.os == 'linux' && 'linux') }}-${{ (matrix.arch == 'x86_64' && 'x64') || (matrix.arch == 'aarch64' && 'arm64') }}*"
+          fileName: "MFAAvalonia-*-win-${{ (matrix.arch == 'x86_64' && 'x64') || (matrix.arch == 'aarch64' && 'arm64') }}*"
           latest: true
           out-file-path: "MFA"
           extract: true
 
       - name: Clean up MFAAvalonia archive
-        if: matrix.os != 'android'
         shell: bash
         run: |
           ARCHIVE_FILE_PATH="${{ fromJson(steps.download_mfa.outputs.downloaded_files)[0] }}"
@@ -103,13 +103,35 @@ jobs:
           echo "Archive cleanup command executed for MFAAvalonia."
 
       - name: Remove built-in runtime in MFA
-        if: matrix.os != 'android'
         shell: bash
         run: |
           rm -rf MFA/runtimes
 
-      - name: Download Embedded Python (Windows)
-        if: matrix.os == 'win'
+      - name: Download OpenCV headers
+        shell: bash
+        run: |
+          # 下载 OpenCV 4.10.0 源码获取头文件
+          curl -sL "https://github.com/opencv/opencv/archive/refs/tags/4.10.0.zip" -o opencv.zip
+          unzip -q opencv.zip
+          mkdir -p hook/third_party/opencv/include
+          cp -r opencv-4.10.0/modules/core/include/opencv2 hook/third_party/opencv/include/
+          # 创建 opencv_modules.hpp
+          echo '#pragma once' > hook/third_party/opencv/include/opencv2/opencv_modules.hpp
+          echo '#define HAVE_OPENCV_CORE' >> hook/third_party/opencv/include/opencv2/opencv_modules.hpp
+          rm -rf opencv.zip opencv-4.10.0
+          echo "OpenCV headers downloaded successfully."
+
+      - name: Build Hook DLLs
+        shell: cmd
+        run: |
+          cd hook
+          mkdir build
+          cd build
+          cmake .. -A x64
+          cmake --build . --config Release
+          echo "Hook DLLs built successfully."
+
+      - name: Download Embedded Python
         shell: bash
         run: |
           PYTHON_VERSION="3.12.8"
@@ -126,8 +148,7 @@ jobs:
           rm python-embed.zip
           echo "Python embedded downloaded successfully."
 
-      - name: Configure Embedded Python and Install Packages (Windows)
-        if: matrix.os == 'win'
+      - name: Configure Embedded Python and Install Packages
         shell: bash
         run: |
           # 配置 python312._pth 文件，添加 packages 目录
@@ -174,9 +195,99 @@ jobs:
 
           echo "Python packages installed successfully."
 
+      - name: Install
+        shell: bash
+        run: |
+          if [ -d "MFA" ]; then
+            echo "Copying MFA files to install directory..."
+            mkdir -p install
+            rsync -av --ignore-existing MFA/ install/
+
+            # 强制把自己的 logo 复制到 GUI 的资源目录里覆盖默认文件
+            cp assets/logo.ico install/Assets/logo.ico || echo "Logo copy failed!"
+
+            echo "MFA files copied successfully."
+          else
+            echo "MFA directory not found, skipping copy."
+          fi
+
+          cd tools/
+          python -m pip install -r ./requirements.txt
+          python ./install.py ${{ needs.meta.outputs.tag }} win ${{ matrix.arch }}
+          cd ..
+
+      - name: Customize exe icon and name
+        shell: pwsh
+        run: |
+          # 下载 rcedit 工具
+          $RCEDIT_VERSION = "v2.0.0"
+          Invoke-WebRequest -Uri "https://github.com/electron/rcedit/releases/download/${RCEDIT_VERSION}/rcedit-x64.exe" -OutFile "rcedit.exe"
+
+          # 使用 rcedit 修改 exe 图标
+          .\rcedit.exe install\MFAAvalonia.exe --set-icon assets\logo.ico
+
+          # 重命名 exe 文件
+          Rename-Item -Path "install\MFAAvalonia.exe" -NewName "MSA天狼星小助手.exe"
+
+          Write-Host "Exe customization completed: icon changed and renamed to MSA天狼星小助手.exe"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: MSA-win-${{ matrix.arch }}
+          path: "install"
+
+  # 非 Windows 平台在 Ubuntu 上构建
+  install:
+    needs: meta
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: [macos, linux, android]
+        arch: [aarch64, x86_64]
+      fail-fast: false
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+
+      - name: Download MaaFramework
+        uses: robinraju/release-downloader@v1
+        with:
+          repository: MaaXYZ/MaaFramework
+          fileName: "MAA-${{ matrix.os }}-${{ matrix.arch }}*"
+          latest: true
+          out-file-path: "deps"
+          extract: true
+
+      - name: Download MFAAvalonia
+        if: matrix.os != 'android'
+        id: download_mfa
+        uses: robinraju/release-downloader@v1
+        with:
+          repository: SweetSmellFox/MFAAvalonia
+          fileName: "MFAAvalonia-*-${{ (matrix.os == 'macos' && 'osx') || (matrix.os == 'linux' && 'linux') }}-${{ (matrix.arch == 'x86_64' && 'x64') || (matrix.arch == 'aarch64' && 'arm64') }}*"
+          latest: true
+          out-file-path: "MFA"
+          extract: true
+
+      - name: Clean up MFAAvalonia archive
+        if: matrix.os != 'android'
+        shell: bash
+        run: |
+          ARCHIVE_FILE_PATH="${{ fromJson(steps.download_mfa.outputs.downloaded_files)[0] }}"
+          rm -f "${ARCHIVE_FILE_PATH}"
+          echo "Archive cleanup command executed for MFAAvalonia."
+
+      - name: Remove built-in runtime in MFA
+        if: matrix.os != 'android'
+        shell: bash
+        run: |
+          rm -rf MFA/runtimes
+
       # 非 Windows 平台：修改 interface.json 使用系统 Python
       - name: Fix interface.json for non-Windows platforms
-        if: matrix.os != 'win' && matrix.os != 'android'
+        if: matrix.os != 'android'
         shell: bash
         run: |
           # 将 ./python/python.exe 替换为 python3
@@ -192,10 +303,8 @@ jobs:
               mkdir -p install
               rsync -av --ignore-existing MFA/ install/
 
-              # ⬇️ 新增：强制把自己的 logo 复制到 GUI 的资源目录里覆盖默认文件
-              # 假设你的文件在 assets/logo.ico，目标是 install/Assets/logo.ico
+              # 强制把自己的 logo 复制到 GUI 的资源目录里覆盖默认文件
               cp assets/logo.ico install/Assets/logo.ico || echo "Logo copy failed!"
-              # 复制结束
 
               echo "MFA files copied successfully."
             else
@@ -209,27 +318,6 @@ jobs:
           python -m pip install -r ./requirements.txt
           python ./install.py ${{ needs.meta.outputs.tag }} ${{ matrix.os }} ${{ matrix.arch }}
           cd ..
-
-      # 自定义 exe 图标和名称（仅 Windows）
-      - name: Customize exe icon and name (Windows)
-        if: matrix.os == 'win'
-        shell: bash
-        run: |
-          # 安装 wine
-          sudo apt-get update
-          sudo apt-get install -y wine64
-
-          # 下载 rcedit 工具
-          RCEDIT_VERSION="v2.0.0"
-          curl -L -o rcedit.exe "https://github.com/electron/rcedit/releases/download/${RCEDIT_VERSION}/rcedit-x64.exe"
-
-          # 使用 rcedit 修改 exe 图标
-          wine rcedit.exe install/MFAAvalonia.exe --set-icon assets/logo.ico
-
-          # 重命名 exe 文件
-          mv install/MFAAvalonia.exe "install/MSA天狼星小助手.exe"
-
-          echo "Exe customization completed: icon changed and renamed to MSA天狼星小助手.exe"
 
       - uses: actions/upload-artifact@v4
         with:
@@ -259,7 +347,7 @@ jobs:
 
   release:
     if: ${{ needs.meta.outputs.is_release == 'true' }}
-    needs: [meta, install, changelog]
+    needs: [meta, install, install-windows, changelog]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/download-artifact@v4
