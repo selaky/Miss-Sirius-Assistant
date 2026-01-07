@@ -3,21 +3,37 @@
     "$__mpe_code": {
       "filePath": "D:\\Projects\\MSA\\assets\\resource\\pipeline\\升级处理.json",
       "filename": "升级处理",
-      "lastSyncTime": 1767526993380,
+      "lastSyncTime": 1767796634818,
       "prefix": "",
       "savedViewport": {
-        "x": 342,
-        "y": 177,
-        "zoom": 0.57
+        "x": 195,
+        "y": 122,
+        "zoom": 0.65
       },
       "version": "v0.14.2"
+    }
+  },
+  "$__mpe_external_意外处理_升级处理": {
+    "$__mpe_code": {
+      "position": {
+        "x": 1011,
+        "y": 392
+      }
+    }
+  },
+  "$__mpe_external_跑图循环开始_升级处理": {
+    "$__mpe_code": {
+      "position": {
+        "x": 1334,
+        "y": 82
+      }
     }
   },
   "不分配属性点": {
     "$__mpe_code": {
       "position": {
-        "x": 300,
-        "y": 560
+        "x": 508,
+        "y": -27
       }
     },
     "action": {
@@ -28,7 +44,14 @@
       "Node.Recognition.Succeeded": "升级了，已自动关闭属性分配弹窗"
     },
     "next": [
-      "关闭加点弹窗"
+      "关闭加点弹窗",
+      {
+        "jump_back": true,
+        "name": "意外处理"
+      }
+    ],
+    "on_error": [
+      "跑图循环开始"
     ],
     "recognition": {
       "param": {},
@@ -39,7 +62,7 @@
     "$__mpe_code": {
       "position": {
         "x": 900,
-        "y": 140
+        "y": 0
       }
     },
     "action": {
@@ -47,7 +70,8 @@
       "type": "Click"
     },
     "next": [
-      "关闭加点弹窗"
+      "关闭加点弹窗",
+      "跑图循环开始"
     ],
     "recognition": {
       "param": {
@@ -67,8 +91,8 @@
   "分配属性后确定": {
     "$__mpe_code": {
       "position": {
-        "x": 600,
-        "y": 140
+        "x": 606,
+        "y": 225
       }
     },
     "action": {
@@ -76,7 +100,12 @@
       "type": "Click"
     },
     "next": [
-      "关闭加点弹窗"
+      "关闭加点弹窗",
+      "分配属性后确定",
+      {
+        "jump_back": true,
+        "name": "意外处理"
+      }
     ],
     "recognition": {
       "param": {
@@ -97,7 +126,7 @@
     "$__mpe_code": {
       "position": {
         "x": 300,
-        "y": 0
+        "y": 196
       }
     },
     "action": {
@@ -116,7 +145,15 @@
       "Node.Action.Succeeded": "将升级属性点加至行动力"
     },
     "next": [
-      "分配属性后确定"
+      "未成功分配行动力",
+      "分配属性后确定",
+      {
+        "jump_back": true,
+        "name": "意外处理"
+      }
+    ],
+    "on_error": [
+      "跑图循环开始"
     ],
     "recognition": {
       "param": {},
@@ -127,7 +164,7 @@
     "$__mpe_code": {
       "position": {
         "x": 300,
-        "y": 280
+        "y": 476
       }
     },
     "action": {
@@ -146,7 +183,15 @@
       "Node.Action.Succeeded": "将升级属性点加至领导力"
     },
     "next": [
-      "分配属性后确定"
+      "未成功分配领导力",
+      "分配属性后确定",
+      {
+        "jump_back": true,
+        "name": "意外处理"
+      }
+    ],
+    "on_error": [
+      "跑图循环开始"
     ],
     "recognition": {
       "param": {},
@@ -157,7 +202,7 @@
     "$__mpe_code": {
       "position": {
         "x": 0,
-        "y": 0
+        "y": 1
       }
     },
     "action": {
@@ -167,7 +212,11 @@
     "next": [
       "分配行动力",
       "分配领导力",
-      "不分配属性点"
+      "不分配属性点",
+      {
+        "jump_back": true,
+        "name": "意外处理"
+      }
     ],
     "recognition": {
       "param": {
@@ -178,7 +227,65 @@
           99
         ],
         "template": [
-          "意外/洗点.png"
+          "升级/洗点.png"
+        ]
+      },
+      "type": "TemplateMatch"
+    }
+  },
+  "未成功分配行动力": {
+    "$__mpe_code": {
+      "position": {
+        "x": 0,
+        "y": 224
+      }
+    },
+    "action": {
+      "param": {},
+      "type": "DoNothing"
+    },
+    "next": [
+      "分配行动力"
+    ],
+    "recognition": {
+      "param": {
+        "roi": [
+          782,
+          348,
+          85,
+          82
+        ],
+        "template": [
+          "升级/分配属性-加号.png"
+        ]
+      },
+      "type": "TemplateMatch"
+    }
+  },
+  "未成功分配领导力": {
+    "$__mpe_code": {
+      "position": {
+        "x": 0,
+        "y": 504
+      }
+    },
+    "action": {
+      "param": {},
+      "type": "DoNothing"
+    },
+    "next": [
+      "分配领导力"
+    ],
+    "recognition": {
+      "param": {
+        "roi": [
+          783,
+          432,
+          79,
+          72
+        ],
+        "template": [
+          "升级/分配属性-加号.png"
         ]
       },
       "type": "TemplateMatch"

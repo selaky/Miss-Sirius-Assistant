@@ -3,12 +3,12 @@
     "$__mpe_code": {
       "filePath": "D:\\Projects\\MSA\\assets\\resource\\pipeline\\战斗.json",
       "filename": "战斗",
-      "lastSyncTime": 1767527504337,
+      "lastSyncTime": 1767796084147,
       "prefix": "",
       "savedViewport": {
-        "x": 96,
-        "y": 101,
-        "zoom": 0.5
+        "x": -395,
+        "y": -13,
+        "zoom": 0.58
       },
       "version": "v0.14.2"
     }
@@ -16,24 +16,24 @@
   "$__mpe_external_BC不足_战斗": {
     "$__mpe_code": {
       "position": {
-        "x": 1079,
-        "y": -15
+        "x": 905,
+        "y": 1244
       }
     }
   },
   "$__mpe_external_意外处理_战斗": {
     "$__mpe_code": {
       "position": {
-        "x": 1166,
-        "y": 146
+        "x": 2100,
+        "y": 1139
       }
     }
   },
   "$__mpe_external_跑图循环开始_战斗": {
     "$__mpe_code": {
       "position": {
-        "x": 1805,
-        "y": 879
+        "x": 2196,
+        "y": 758
       }
     }
   },
@@ -78,8 +78,8 @@
   "战斗失败": {
     "$__mpe_code": {
       "position": {
-        "x": 1200,
-        "y": 654
+        "x": 1800,
+        "y": 873
       }
     },
     "action": {
@@ -89,6 +89,14 @@
     "focus": {
       "Node.Action.Starting": "战斗失败"
     },
+    "next": [
+      {
+        "jump_back": true,
+        "name": "意外处理"
+      },
+      "战斗失败",
+      "跑图循环开始"
+    ],
     "recognition": {
       "param": {
         "roi": [
@@ -108,7 +116,7 @@
     "$__mpe_code": {
       "position": {
         "x": 1800,
-        "y": 355
+        "y": 502
       }
     },
     "action": {
@@ -118,6 +126,14 @@
     "focus": {
       "Node.Action.Starting": "战斗胜利啦"
     },
+    "next": [
+      {
+        "jump_back": true,
+        "name": "意外处理"
+      },
+      "战斗胜利",
+      "跑图循环开始"
+    ],
     "recognition": {
       "param": {
         "roi": [
@@ -137,7 +153,7 @@
     "$__mpe_code": {
       "position": {
         "x": 1200,
-        "y": 339
+        "y": 502
       }
     },
     "action": {
@@ -145,12 +161,16 @@
       "type": "Click"
     },
     "next": [
-      "战斗获得卡牌二"
+      "战斗获得卡牌二",
+      {
+        "jump_back": true,
+        "name": "意外处理"
+      }
     ],
     "on_error": [
       "跑图循环开始"
     ],
-    "pre_wait_freezes": 2000,
+    "pre_delay": 2000,
     "recognition": {
       "param": {
         "template": [
@@ -165,7 +185,7 @@
     "$__mpe_code": {
       "position": {
         "x": 1500,
-        "y": 355
+        "y": 518
       }
     },
     "action": {
@@ -178,7 +198,7 @@
     "on_error": [
       "跑图循环开始"
     ],
-    "pre_wait_freezes": 3000,
+    "pre_delay": 2000,
     "recognition": {
       "param": {
         "template": [
@@ -191,7 +211,7 @@
   "放弃战斗": {
     "$__mpe_code": {
       "position": {
-        "x": 1500,
+        "x": 1800,
         "y": 0
       }
     },
@@ -203,7 +223,8 @@
     "focus": {
       "Node.Action.Starting": "捡垃圾要紧，溜了溜了~"
     },
-    "on_error": [
+    "next": [
+      "放弃战斗",
       "跑图循环开始"
     ],
     "recognition": {
@@ -225,7 +246,7 @@
     "$__mpe_code": {
       "position": {
         "x": 600,
-        "y": 977
+        "y": 1374
       }
     },
     "action": {
@@ -237,11 +258,12 @@
     },
     "next": [
       "跳过战斗",
+      "BC不足",
       {
         "jump_back": true,
         "name": "意外处理"
       },
-      "BC不足"
+      "普通卡组"
     ],
     "on_error": [
       "跑图循环开始"
@@ -265,7 +287,7 @@
     "$__mpe_code": {
       "position": {
         "x": 600,
-        "y": 196
+        "y": 193
       }
     },
     "action": {
@@ -277,6 +299,7 @@
         "jump_back": true,
         "name": "意外处理"
       },
+      "暴走卡组",
       "跳过战斗",
       "BC不足"
     ],
@@ -302,7 +325,7 @@
     "$__mpe_code": {
       "position": {
         "x": 300,
-        "y": 168
+        "y": 167
       }
     },
     "action": {
@@ -341,7 +364,7 @@
     "$__mpe_code": {
       "position": {
         "x": 900,
-        "y": 339
+        "y": 336
       }
     },
     "action": {

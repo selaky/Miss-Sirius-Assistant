@@ -8,9 +8,9 @@ pipeline 快速自检脚本
 4) 任务入口校验：interface.json 的 task.entry 指向不存在的节点
 
 用法示例：
-  python check_pipeline.py
-  python check_pipeline.py --strict 严格模式（有 WARN 也返回非 0）
-  python check_pipeline.py --no-unreachable 不提示“可能未触达的遗留节点”
+  python my_tools/check_pipeline.py
+  python my_tools/check_pipeline.py --strict 严格模式（有 WARN 也返回非 0）
+  python my_tools/check_pipeline.py --no-unreachable 不提示“可能未触达的遗留节点”
 """
 
 from __future__ import annotations

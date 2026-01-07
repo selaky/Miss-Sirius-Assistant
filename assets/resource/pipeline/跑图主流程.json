@@ -3,12 +3,13 @@
     "$__mpe_code": {
       "filePath": "D:\\Projects\\MSA\\assets\\resource\\pipeline\\跑图主流程.json",
       "filename": "跑图主流程",
-      "lastSyncTime": 1767532762266,
+      "isModifiedExternally": true,
+      "lastSyncTime": 1767796676253,
       "prefix": "",
       "savedViewport": {
-        "x": 336,
-        "y": -34,
-        "zoom": 0.43
+        "x": 23,
+        "y": 138,
+        "zoom": 0.66
       },
       "version": "v0.14.2"
     }
@@ -17,7 +18,7 @@
     "$__mpe_code": {
       "position": {
         "x": 905,
-        "y": 1143
+        "y": 1425
       }
     }
   },
@@ -33,7 +34,7 @@
     "$__mpe_code": {
       "position": {
         "x": 905,
-        "y": 274
+        "y": 1315
       }
     }
   },
@@ -49,7 +50,7 @@
     "$__mpe_code": {
       "position": {
         "x": 900,
-        "y": 384
+        "y": 274
       }
     },
     "action": {
@@ -106,7 +107,7 @@
     "$__mpe_code": {
       "position": {
         "x": 900,
-        "y": 697
+        "y": 587
       }
     },
     "action": {
@@ -131,8 +132,8 @@
   "地图探索完毕": {
     "$__mpe_code": {
       "position": {
-        "x": 892,
-        "y": 1251
+        "x": 900,
+        "y": 1037
       }
     },
     "action": {
@@ -185,15 +186,8 @@
         "jump_back": true,
         "name": "意外处理"
       },
-      {
-        "jump_back": true,
-        "name": "升级"
-      },
       "开始恢复",
-      {
-        "jump_back": true,
-        "name": "开始战斗"
-      },
+      "升级",
       {
         "jump_back": true,
         "name": "下一区"
@@ -206,19 +200,21 @@
         "jump_back": true,
         "name": "跑图获得卡牌"
       },
-      "地图探索完毕"
+      "地图探索完毕",
+      "开始战斗"
     ],
-    "rate_limit": 500,
+    "rate_limit": 200,
     "recognition": {
       "param": {},
       "type": "DirectHit"
-    }
+    },
+    "timeout": 200000
   },
   "跑图获得卡牌": {
     "$__mpe_code": {
       "position": {
         "x": 900,
-        "y": 922
+        "y": 812
       }
     },
     "action": {

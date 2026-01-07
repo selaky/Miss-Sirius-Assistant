@@ -4,21 +4,29 @@
       "filePath": "D:\\Projects\\MSA\\assets\\resource\\pipeline\\恢复.json",
       "filename": "恢复",
       "isModifiedExternally": true,
-      "lastSyncTime": 1767532711796,
+      "lastSyncTime": 1767795039320,
       "prefix": "",
       "savedViewport": {
-        "x": -1662,
-        "y": -133,
-        "zoom": 1
+        "x": -514,
+        "y": -212,
+        "zoom": 0.5
       },
       "version": "v0.14.2"
+    }
+  },
+  "$__mpe_external_意外处理_恢复": {
+    "$__mpe_code": {
+      "position": {
+        "x": 2400,
+        "y": 1722
+      }
     }
   },
   "$__mpe_external_跑图循环开始_恢复": {
     "$__mpe_code": {
       "position": {
-        "x": 2621,
-        "y": 400
+        "x": 2400,
+        "y": 2193
       }
     }
   },
@@ -26,7 +34,7 @@
     "$__mpe_code": {
       "position": {
         "x": 300,
-        "y": 392
+        "y": 215
       }
     },
     "action": {
@@ -36,7 +44,10 @@
     "next": [
       "记录大AP药库存"
     ],
-    "rate_limit": 100,
+    "on_error": [
+      "跑图循环开始"
+    ],
+    "rate_limit": 10,
     "recognition": {
       "param": {
         "roi": [
@@ -56,7 +67,7 @@
     "$__mpe_code": {
       "position": {
         "x": 300,
-        "y": 1174
+        "y": 1348
       }
     },
     "action": {
@@ -66,7 +77,10 @@
     "next": [
       "记录大BC药库存"
     ],
-    "rate_limit": 100,
+    "on_error": [
+      "跑图循环开始"
+    ],
+    "rate_limit": 10,
     "recognition": {
       "param": {
         "roi": [
@@ -86,7 +100,7 @@
     "$__mpe_code": {
       "position": {
         "x": 1500,
-        "y": 1694
+        "y": 1941
       }
     },
     "action": {
@@ -101,24 +115,40 @@
       "type": "Click"
     },
     "next": [
+      "BC药不足，关闭恢复界面",
       "BC药不足，放弃战斗"
     ],
+    "rate_limit": 10,
     "recognition": {
-      "param": {},
-      "type": "DirectHit"
+      "param": {
+        "roi": [
+          980,
+          248,
+          48,
+          45
+        ],
+        "template": [
+          "恢复/关闭恢复界面.png"
+        ]
+      },
+      "type": "TemplateMatch"
     }
   },
   "BC药不足，放弃战斗": {
     "$__mpe_code": {
       "position": {
         "x": 1800,
-        "y": 1730
+        "y": 1978
       }
     },
     "action": {
       "param": {},
       "type": "Click"
     },
+    "next": [
+      "BC药不足，放弃战斗",
+      "跑图循环开始"
+    ],
     "recognition": {
       "param": {
         "template": [
@@ -132,7 +162,7 @@
     "$__mpe_code": {
       "position": {
         "x": 1500,
-        "y": 347
+        "y": 712
       }
     },
     "action": {
@@ -158,7 +188,7 @@
     "$__mpe_code": {
       "position": {
         "x": 1500,
-        "y": 1411
+        "y": 1123
       }
     },
     "action": {
@@ -220,8 +250,8 @@
   "关闭恢复界面": {
     "$__mpe_code": {
       "position": {
-        "x": 2212,
-        "y": 326
+        "x": 2100,
+        "y": 694
       }
     },
     "action": {
@@ -230,7 +260,11 @@
     },
     "next": [
       "关闭恢复界面",
-      "跑图循环开始"
+      "跑图循环开始",
+      {
+        "jump_back": true,
+        "name": "意外处理"
+      }
     ],
     "recognition": {
       "param": {
@@ -251,7 +285,7 @@
     "$__mpe_code": {
       "position": {
         "x": 1200,
-        "y": 348
+        "y": 199
       }
     },
     "action": {
@@ -264,9 +298,13 @@
       "Node.Recognition.Succeeded": "使用大AP药"
     },
     "next": [
-      "使用大恢复药"
+      "使用大恢复药",
+      {
+        "jump_back": true,
+        "name": "意外处理"
+      }
     ],
-    "rate_limit": 100,
+    "rate_limit": 10,
     "recognition": {
       "param": {
         "custom_recognition": "should_use_potion"
@@ -278,7 +316,7 @@
     "$__mpe_code": {
       "position": {
         "x": 1200,
-        "y": 1130
+        "y": 1332
       }
     },
     "action": {
@@ -291,9 +329,13 @@
       "Node.Recognition.Succeeded": "使用大BC药"
     },
     "next": [
-      "使用大恢复药"
+      "使用大恢复药",
+      {
+        "jump_back": true,
+        "name": "意外处理"
+      }
     ],
-    "rate_limit": 100,
+    "rate_limit": 10,
     "recognition": {
       "param": {
         "custom_recognition": "should_use_potion"
@@ -305,7 +347,7 @@
     "$__mpe_code": {
       "position": {
         "x": 1200,
-        "y": 630
+        "y": 509
       }
     },
     "action": {
@@ -318,9 +360,13 @@
       "Node.Recognition.Succeeded": "使用小AP药"
     },
     "next": [
-      "使用小恢复药"
+      "使用小恢复药",
+      {
+        "jump_back": true,
+        "name": "意外处理"
+      }
     ],
-    "rate_limit": 100,
+    "rate_limit": 10,
     "recognition": {
       "param": {
         "custom_recognition": "should_use_potion"
@@ -332,7 +378,7 @@
     "$__mpe_code": {
       "position": {
         "x": 1200,
-        "y": 1412
+        "y": 1642
       }
     },
     "action": {
@@ -345,9 +391,13 @@
       "Node.Recognition.Succeeded": "使用小BC药"
     },
     "next": [
-      "使用小恢复药"
+      "使用小恢复药",
+      {
+        "jump_back": true,
+        "name": "意外处理"
+      }
     ],
-    "rate_limit": 100,
+    "rate_limit": 10,
     "recognition": {
       "param": {
         "custom_recognition": "should_use_potion"
@@ -359,7 +409,7 @@
     "$__mpe_code": {
       "position": {
         "x": 1200,
-        "y": 912
+        "y": 857
       }
     },
     "action": {
@@ -370,7 +420,7 @@
     "next": [
       "行动力耗尽"
     ],
-    "rate_limit": 200,
+    "rate_limit": 10,
     "recognition": {
       "param": {},
       "type": "DirectHit"
@@ -380,7 +430,7 @@
     "$__mpe_code": {
       "position": {
         "x": 1200,
-        "y": 1718
+        "y": 1952
       }
     },
     "action": {
@@ -393,7 +443,7 @@
     "next": [
       "BC药不足，关闭恢复界面"
     ],
-    "rate_limit": 100,
+    "rate_limit": 10,
     "recognition": {
       "param": {},
       "type": "DirectHit"
@@ -403,7 +453,7 @@
     "$__mpe_code": {
       "position": {
         "x": 0,
-        "y": 77
+        "y": 50
       }
     },
     "action": {
@@ -413,9 +463,16 @@
     "next": [
       "免费恢复",
       "AP不足",
-      "BC不足"
+      "BC不足",
+      {
+        "jump_back": true,
+        "name": "意外处理"
+      }
     ],
-    "rate_limit": 100,
+    "on_error": [
+      "跑图循环开始"
+    ],
+    "rate_limit": 10,
     "recognition": {
       "param": {
         "roi": [
@@ -434,8 +491,8 @@
   "恢复点击完毕": {
     "$__mpe_code": {
       "position": {
-        "x": 1890,
-        "y": 356
+        "x": 1800,
+        "y": 727
       }
     },
     "action": {
@@ -454,7 +511,7 @@
     "$__mpe_code": {
       "position": {
         "x": 1500,
-        "y": 940
+        "y": 901
       }
     },
     "action": {
@@ -470,7 +527,7 @@
     "$__mpe_code": {
       "position": {
         "x": 600,
-        "y": 362
+        "y": 199
       }
     },
     "action": {
@@ -482,7 +539,10 @@
     "next": [
       "记录小 AP 药库存"
     ],
-    "rate_limit": 100,
+    "on_error": [
+      "跑图循环开始"
+    ],
+    "rate_limit": 10,
     "recognition": {
       "param": {
         "expected": [
@@ -502,7 +562,7 @@
     "$__mpe_code": {
       "position": {
         "x": 600,
-        "y": 1144
+        "y": 1332
       }
     },
     "action": {
@@ -514,7 +574,10 @@
     "next": [
       "记录小BC药库存"
     ],
-    "rate_limit": 100,
+    "on_error": [
+      "跑图循环开始"
+    ],
+    "rate_limit": 10,
     "recognition": {
       "param": {
         "expected": [
@@ -534,7 +597,7 @@
     "$__mpe_code": {
       "position": {
         "x": 900,
-        "y": 362
+        "y": 199
       }
     },
     "action": {
@@ -548,7 +611,7 @@
       "判断使用小AP药",
       "判断停止使用AP药"
     ],
-    "rate_limit": 100,
+    "rate_limit": 10,
     "recognition": {
       "param": {
         "expected": [
@@ -568,7 +631,7 @@
     "$__mpe_code": {
       "position": {
         "x": 900,
-        "y": 1144
+        "y": 1332
       }
     },
     "action": {
@@ -582,7 +645,10 @@
       "判断使用小BC药",
       "判断停止使用BC药"
     ],
-    "rate_limit": 100,
+    "on_error": [
+      "跑图循环开始"
+    ],
+    "rate_limit": 10,
     "recognition": {
       "param": {
         "expected": [
