@@ -10,9 +10,9 @@ MSA (Miss.Sirius Assistant) 是基于 [MAA Framework](https://github.com/MaaXYZ/
 
 ```bash
 # Pipeline 配置检查（检测悬空引用、重复节点、缺失模板图片等）
-python check_pipeline.py
-python check_pipeline.py --strict          # 严格模式，WARN 也视为失败
-python check_pipeline.py --no-unreachable  # 不提示未触达节点
+  python my_tools/check_pipeline.py
+  python my_tools/check_pipeline.py --strict 严格模式（有 WARN 也返回非 0）
+  python my_tools/check_pipeline.py --no-unreachable 不提示“可能未触达的遗留节点”
 
 # JSON/YAML 格式化（使用 prettier）
 npx prettier --write "assets/**/*.json"
@@ -23,6 +23,7 @@ npx prettier --write "assets/**/*.json"
 ### MAA Framework Pipeline 机制
 
 项目基于 MAA Framework 的任务流水线（Pipeline）协议。Pipeline 由 JSON 文件定义，每个节点包含：
+
 - `recognition`: 识别算法（TemplateMatch、OCR、DirectHit、Custom 等）
 - `action`: 执行动作（Click、Swipe、DoNothing、Custom、StopTask 等）
 - `next`: 后继节点列表（按顺序检测，首个匹配成功的节点被执行）
@@ -65,11 +66,13 @@ tools/                           # 构建和检查工具
 ### 关键配置文件
 
 **interface.json** - 定义 UI 和任务：
+
 - `task`: 任务列表，每个任务有 `entry`（入口节点）和 `option`（用户选项）
 - `option`: 用户可配置选项，通过 `pipeline_override` 动态修改节点属性
 - `controller`: 控制器配置（Win32 桌面端）
 
 **Pipeline JSON** - 节点定义示例：
+
 ```jsonc
 {
     "节点名": {

@@ -383,7 +383,7 @@ def main(argv: list[str]) -> int:
             print(i.format_one_line())
         return 2
 
-    pipeline_files = sorted([p for p in pipeline_dir.glob("*.json") if p.is_file()])
+    pipeline_files = sorted([p for p in pipeline_dir.glob("**/*.json") if p.is_file()])
     if not pipeline_files:
         issues.append(Issue(level="ERROR", code="PIPELINE_EMPTY", message="pipeline 目录下没有任何 .json 文件", file=pipeline_dir))
         for i in issues:
