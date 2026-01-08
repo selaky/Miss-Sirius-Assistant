@@ -1,0 +1,145 @@
+{
+  "$__mpe_config_前往竞技场": {
+    "$__mpe_code": {
+      "filePath": "D:\\Projects\\MSA\\assets\\resource\\pipeline\\导航/前往竞技场.json",
+      "filename": "前往竞技场",
+      "lastSyncTime": 1767877172293,
+      "prefix": "",
+      "savedViewport": {
+        "x": -264,
+        "y": -429,
+        "zoom": 0.58
+      },
+      "version": "v0.14.2"
+    }
+  },
+  "$__mpe_external_意外处理_前往竞技场": {
+    "$__mpe_code": {
+      "position": {
+        "x": 1520,
+        "y": 895
+      }
+    }
+  },
+  "前往竞技场": {
+    "$__mpe_code": {
+      "position": {
+        "x": 1665,
+        "y": 1179
+      }
+    },
+    "action": {
+      "param": {},
+      "type": "Click"
+    },
+    "next": [
+      {
+        "jump_back": true,
+        "name": "意外处理"
+      },
+      "前往竞技场",
+      "确认已进入竞技场"
+    ],
+    "recognition": {
+      "param": {
+        "roi": [
+          336,
+          130,
+          305,
+          505
+        ],
+        "template": [
+          "竞技场/对战-竞技场.png"
+        ]
+      },
+      "type": "TemplateMatch"
+    }
+  },
+  "对战分流": {
+    "$__mpe_code": {
+      "position": {
+        "x": 1291,
+        "y": 1283
+      }
+    },
+    "action": {
+      "param": {},
+      "type": "DoNothing"
+    },
+    "next": [
+      "前往竞技场"
+    ],
+    "rate_limit": 10,
+    "recognition": {
+      "param": {},
+      "type": "DirectHit"
+    }
+  },
+  "开始前往对战": {
+    "$__mpe_code": {
+      "position": {
+        "x": 919,
+        "y": 1247
+      }
+    },
+    "action": {
+      "param": {},
+      "type": "Click"
+    },
+    "focus": {
+      "Node.Action.Succeeded": "正在前往对战"
+    },
+    "next": [
+      {
+        "jump_back": true,
+        "name": "意外处理"
+      },
+      "开始前往对战",
+      "对战分流"
+    ],
+    "rate_limit": 10,
+    "recognition": {
+      "param": {
+        "roi": [
+          1157,
+          432,
+          124,
+          138
+        ],
+        "template": [
+          "竞技场/主界面-对战.png"
+        ]
+      },
+      "type": "TemplateMatch"
+    }
+  },
+  "确认已进入竞技场": {
+    "$__mpe_code": {
+      "position": {
+        "x": 2088,
+        "y": 1162
+      }
+    },
+    "action": {
+      "param": {},
+      "type": "DoNothing"
+    },
+    "focus": {
+      "Node.Action.Succeeded": "已进入竞技场"
+    },
+    "recognition": {
+      "param": {
+        "roi": [
+          354,
+          280,
+          115,
+          114
+        ],
+        "template": [
+          "竞技场/点击匹配.png"
+        ]
+      },
+      "type": "TemplateMatch"
+    }
+  }
+}

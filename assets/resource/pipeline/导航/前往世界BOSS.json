@@ -1,0 +1,85 @@
+{
+  "$__mpe_config_前往世界BOSS": {
+    "$__mpe_code": {
+      "filename": "前往世界BOSS",
+      "prefix": "",
+      "savedViewport": {
+        "x": -808,
+        "y": -758,
+        "zoom": 0.77
+      },
+      "version": "v0.14.2"
+    }
+  },
+  "$__mpe_external_意外处理_前往世界BOSS": {
+    "$__mpe_code": {
+      "position": {
+        "x": 1809,
+        "y": 1124
+      }
+    }
+  },
+  "开始前往世界BOSS": {
+    "$__mpe_code": {
+      "position": {
+        "x": 1391,
+        "y": 1159
+      }
+    },
+    "action": {
+      "param": {},
+      "type": "Click"
+    },
+    "next": [
+      {
+        "jump_back": true,
+        "name": "意外处理"
+      },
+      "开始前往世界BOSS",
+      "确认已进入世界BOSS"
+    ],
+    "recognition": {
+      "param": {
+        "roi": [
+          1143,
+          538,
+          139,
+          143
+        ],
+        "template": [
+          "BOSS/世界BOSS.png"
+        ]
+      },
+      "type": "TemplateMatch"
+    }
+  },
+  "确认已进入世界BOSS": {
+    "$__mpe_code": {
+      "position": {
+        "x": 1766,
+        "y": 1305
+      }
+    },
+    "action": {
+      "param": {},
+      "type": "DoNothing"
+    },
+    "focus": {
+      "Node.Action.Succeeded": "已进入世界 BOSS 界面"
+    },
+    "recognition": {
+      "param": {
+        "expected": [
+          "我的排名"
+        ],
+        "roi": [
+          63,
+          214,
+          88,
+          32
+        ]
+      },
+      "type": "OCR"
+    }
+  }
+}

@@ -4,12 +4,12 @@
       "filePath": "D:\\Projects\\MSA\\assets\\resource\\pipeline\\跑图主流程.json",
       "filename": "跑图主流程",
       "isModifiedExternally": true,
-      "lastSyncTime": 1767796676253,
+      "lastSyncTime": 1767796700145,
       "prefix": "",
       "savedViewport": {
-        "x": 23,
-        "y": 138,
-        "zoom": 0.66
+        "x": 338,
+        "y": -152,
+        "zoom": 0.44
       },
       "version": "v0.14.2"
     }
@@ -18,7 +18,7 @@
     "$__mpe_code": {
       "position": {
         "x": 905,
-        "y": 1425
+        "y": 1264
       }
     }
   },
@@ -26,7 +26,7 @@
     "$__mpe_code": {
       "position": {
         "x": 905,
-        "y": 164
+        "y": 178
       }
     }
   },
@@ -34,7 +34,7 @@
     "$__mpe_code": {
       "position": {
         "x": 905,
-        "y": 1315
+        "y": 1154
       }
     }
   },
@@ -42,7 +42,7 @@
     "$__mpe_code": {
       "position": {
         "x": 905,
-        "y": 54
+        "y": 68
       }
     }
   },
@@ -50,7 +50,7 @@
     "$__mpe_code": {
       "position": {
         "x": 900,
-        "y": 274
+        "y": 288
       }
     },
     "action": {
@@ -76,11 +76,34 @@
       "type": "TemplateMatch"
     }
   },
+  "保底点击": {
+    "$__mpe_code": {
+      "position": {
+        "x": 900,
+        "y": 1374
+      }
+    },
+    "action": {
+      "param": {
+        "target": [
+          1212,
+          579,
+          43,
+          26
+        ]
+      },
+      "type": "Click"
+    },
+    "recognition": {
+      "param": {},
+      "type": "DirectHit"
+    }
+  },
   "初始化吃药数据": {
     "$__mpe_code": {
       "position": {
         "x": 300,
-        "y": 0
+        "y": 14
       }
     },
     "action": {
@@ -107,7 +130,7 @@
     "$__mpe_code": {
       "position": {
         "x": 900,
-        "y": 587
+        "y": 601
       }
     },
     "action": {
@@ -133,7 +156,7 @@
     "$__mpe_code": {
       "position": {
         "x": 900,
-        "y": 1037
+        "y": 876
       }
     },
     "action": {
@@ -155,7 +178,7 @@
     "$__mpe_code": {
       "position": {
         "x": 0,
-        "y": 30
+        "y": 44
       }
     },
     "action": {
@@ -174,7 +197,7 @@
     "$__mpe_code": {
       "position": {
         "x": 600,
-        "y": 2
+        "y": 0
       }
     },
     "action": {
@@ -196,12 +219,12 @@
         "jump_back": true,
         "name": "前进"
       },
+      "地图探索完毕",
+      "开始战斗",
       {
         "jump_back": true,
-        "name": "跑图获得卡牌"
-      },
-      "地图探索完毕",
-      "开始战斗"
+        "name": "保底点击"
+      }
     ],
     "rate_limit": 200,
     "recognition": {
@@ -209,32 +232,5 @@
       "type": "DirectHit"
     },
     "timeout": 200000
-  },
-  "跑图获得卡牌": {
-    "$__mpe_code": {
-      "position": {
-        "x": 900,
-        "y": 812
-      }
-    },
-    "action": {
-      "param": {},
-      "type": "Click"
-    },
-    "recognition": {
-      "param": {
-        "roi": [
-          390,
-          545,
-          495,
-          143
-        ],
-        "template": [
-          "卡牌/点击屏幕跳过.png",
-          "卡牌/点击屏幕跳过-小.png"
-        ]
-      },
-      "type": "TemplateMatch"
-    }
   }
 }

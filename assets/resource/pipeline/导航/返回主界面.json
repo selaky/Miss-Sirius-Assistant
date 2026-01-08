@@ -1,0 +1,199 @@
+{
+  "$__mpe_config_返回主界面": {
+    "$__mpe_code": {
+      "filePath": "D:\\Projects\\MSA\\assets\\resource\\pipeline\\导航\\返回主界面.json",
+      "filename": "返回主界面",
+      "lastSyncTime": 1767877095257,
+      "prefix": "",
+      "savedViewport": {
+        "x": 368,
+        "y": -378,
+        "zoom": 0.58
+      },
+      "version": "v0.14.2"
+    }
+  },
+  "$__mpe_external_意外处理_返回主界面": {
+    "$__mpe_code": {
+      "position": {
+        "x": 740,
+        "y": 751
+      }
+    }
+  },
+  "关闭各类弹窗": {
+    "$__mpe_code": {
+      "position": {
+        "x": 726,
+        "y": 859
+      }
+    },
+    "action": {
+      "param": {},
+      "type": "Click"
+    },
+    "recognition": {
+      "param": {
+        "template": [
+          "恢复/关闭恢复界面.png",
+          "意外/关闭信息窗口.png"
+        ]
+      },
+      "type": "TemplateMatch"
+    }
+  },
+  "导航后续路线": {
+    "$__mpe_code": {
+      "position": {
+        "x": 1047,
+        "y": 1377
+      }
+    },
+    "action": {
+      "param": {},
+      "type": "DoNothing"
+    },
+    "focus": {
+      "Node.Action.Succeeded": "已回到主界面"
+    },
+    "next": [
+      {
+        "jump_back": true,
+        "name": "意外处理"
+      },
+      "无后续路线"
+    ],
+    "rate_limit": 10,
+    "recognition": {
+      "param": {},
+      "type": "DirectHit"
+    }
+  },
+  "已回到主界面": {
+    "$__mpe_code": {
+      "position": {
+        "x": 716,
+        "y": 1330
+      }
+    },
+    "action": {
+      "param": {},
+      "type": "DoNothing"
+    },
+    "next": [
+      "导航后续路线"
+    ],
+    "rate_limit": 10,
+    "recognition": {
+      "param": {
+        "roi": [
+          1143,
+          538,
+          139,
+          143
+        ],
+        "template": [
+          "BOSS/世界BOSS.png"
+        ]
+      },
+      "type": "TemplateMatch"
+    }
+  },
+  "开始前往指定界面": {
+    "$__mpe_code": {
+      "position": {
+        "x": 29,
+        "y": 972
+      }
+    },
+    "action": {
+      "param": {},
+      "type": "DoNothing"
+    },
+    "next": [
+      "开始返回主界面"
+    ],
+    "rate_limit": 10,
+    "recognition": {
+      "param": {},
+      "type": "DirectHit"
+    }
+  },
+  "开始返回主界面": {
+    "$__mpe_code": {
+      "position": {
+        "x": 370,
+        "y": 938
+      }
+    },
+    "action": {
+      "param": {},
+      "type": "DoNothing"
+    },
+    "focus": {
+      "Node.Recognition.Starting": "正在返回主界面"
+    },
+    "next": [
+      {
+        "jump_back": true,
+        "name": "意外处理"
+      },
+      {
+        "jump_back": true,
+        "name": "关闭各类弹窗"
+      },
+      {
+        "jump_back": true,
+        "name": "点击主界面"
+      },
+      "已回到主界面"
+    ],
+    "rate_limit": 500,
+    "recognition": {
+      "param": {},
+      "type": "DirectHit"
+    }
+  },
+  "无后续路线": {
+    "$__mpe_code": {
+      "position": {
+        "x": 1422,
+        "y": 1417
+      }
+    },
+    "action": {
+      "param": {},
+      "type": "DoNothing"
+    },
+    "recognition": {
+      "param": {},
+      "type": "DirectHit"
+    }
+  },
+  "点击主界面": {
+    "$__mpe_code": {
+      "position": {
+        "x": 722,
+        "y": 1051
+      }
+    },
+    "action": {
+      "param": {},
+      "type": "Click"
+    },
+    "recognition": {
+      "param": {
+        "expected": [
+          "主界面"
+        ],
+        "roi": [
+          1101,
+          631,
+          175,
+          89
+        ]
+      },
+      "type": "OCR"
+    }
+  }
+}

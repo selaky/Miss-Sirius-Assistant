@@ -1,0 +1,260 @@
+{
+  "$__mpe_config_前往地图": {
+    "$__mpe_code": {
+      "filePath": "D:\\Projects\\MSA\\assets\\resource\\pipeline\\导航/前往地图.json",
+      "filename": "前往地图",
+      "lastSyncTime": 1767876690751,
+      "prefix": "",
+      "savedViewport": {
+        "x": 29,
+        "y": -427,
+        "zoom": 0.58
+      },
+      "version": "v0.14.2"
+    }
+  },
+  "$__mpe_external_意外处理_前往地图": {
+    "$__mpe_code": {
+      "position": {
+        "x": 1023,
+        "y": 800
+      }
+    }
+  },
+  "前往日常地图": {
+    "$__mpe_code": {
+      "position": {
+        "x": 1032,
+        "y": 1246
+      }
+    },
+    "action": {
+      "param": {},
+      "type": "Click"
+    },
+    "next": [
+      {
+        "jump_back": true,
+        "name": "意外处理"
+      },
+      "前往日常地图",
+      "重复点击直到进入地图"
+    ],
+    "recognition": {
+      "param": {
+        "roi": [
+          998,
+          11,
+          148,
+          79
+        ],
+        "template": [
+          "跑图/日常.png"
+        ]
+      },
+      "type": "TemplateMatch"
+    }
+  },
+  "前往普通地图": {
+    "$__mpe_code": {
+      "position": {
+        "x": 1035,
+        "y": 1546
+      }
+    },
+    "action": {
+      "param": {},
+      "type": "Click"
+    },
+    "next": [
+      {
+        "jump_back": true,
+        "name": "意外处理"
+      },
+      "前往普通地图",
+      "重复点击直到进入地图"
+    ],
+    "recognition": {
+      "param": {
+        "roi": [
+          1111,
+          7,
+          152,
+          86
+        ],
+        "template": [
+          "跑图/普通.png"
+        ]
+      },
+      "type": "TemplateMatch"
+    }
+  },
+  "前往活动地图": {
+    "$__mpe_code": {
+      "position": {
+        "x": 1039,
+        "y": 948
+      }
+    },
+    "action": {
+      "param": {},
+      "type": "Click"
+    },
+    "next": [
+      {
+        "jump_back": true,
+        "name": "意外处理"
+      },
+      "前往活动地图",
+      "活动地图暂未适配"
+    ],
+    "recognition": {
+      "param": {
+        "roi": [
+          893,
+          7,
+          146,
+          90
+        ],
+        "template": [
+          "跑图/活动.png"
+        ]
+      },
+      "type": "TemplateMatch"
+    }
+  },
+  "地图分流": {
+    "$__mpe_code": {
+      "position": {
+        "x": 593,
+        "y": 1012
+      }
+    },
+    "action": {
+      "param": {},
+      "type": "DoNothing"
+    },
+    "next": [
+      "前往活动地图",
+      "前往日常地图",
+      "前往普通地图"
+    ],
+    "rate_limit": 10,
+    "recognition": {
+      "param": {},
+      "type": "DirectHit"
+    }
+  },
+  "开始前往地图": {
+    "$__mpe_code": {
+      "position": {
+        "x": 236,
+        "y": 956
+      }
+    },
+    "action": {
+      "param": {},
+      "type": "Click"
+    },
+    "focus": {
+      "Node.Action.Succeeded": "正在前往指定地图"
+    },
+    "next": [
+      "开始前往地图",
+      {
+        "jump_back": true,
+        "name": "意外处理"
+      },
+      "地图分流"
+    ],
+    "rate_limit": 10,
+    "recognition": {
+      "param": {
+        "template": [
+          "跑图/主界面-探索.png"
+        ]
+      },
+      "type": "TemplateMatch"
+    }
+  },
+  "活动地图暂未适配": {
+    "$__mpe_code": {
+      "position": {
+        "x": 1496,
+        "y": 919
+      }
+    },
+    "action": {
+      "param": {},
+      "type": "DoNothing"
+    },
+    "focus": {
+      "Node.Recognition.Starting": "暂不支持进入活动地图，请等待更新。"
+    },
+    "recognition": {
+      "param": {},
+      "type": "DirectHit"
+    }
+  },
+  "确认已进入地图": {
+    "$__mpe_code": {
+      "position": {
+        "x": 1802,
+        "y": 1388
+      }
+    },
+    "action": {
+      "param": {},
+      "type": "DoNothing"
+    },
+    "focus": {
+      "Node.Action.Succeeded": "已进入指定地图"
+    },
+    "recognition": {
+      "param": {
+        "roi": [
+          1152,
+          237,
+          123,
+          124
+        ],
+        "template": [
+          "跑图/前进.png"
+        ]
+      },
+      "type": "TemplateMatch"
+    }
+  },
+  "重复点击直到进入地图": {
+    "$__mpe_code": {
+      "position": {
+        "x": 1425,
+        "y": 1386
+      }
+    },
+    "action": {
+      "param": {
+        "target": [
+          1012,
+          118,
+          133,
+          59
+        ]
+      },
+      "type": "Click"
+    },
+    "next": [
+      {
+        "jump_back": true,
+        "name": "意外处理"
+      },
+      "重复点击直到进入地图",
+      "确认已进入地图"
+    ],
+    "rate_limit": 200,
+    "recognition": {
+      "param": {},
+      "type": "DirectHit"
+    }
+  }
+}

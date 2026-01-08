@@ -3,7 +3,7 @@
     "$__mpe_code": {
       "filePath": "D:\\Projects\\MSA\\assets\\resource\\pipeline\\升级处理.json",
       "filename": "升级处理",
-      "lastSyncTime": 1767796634818,
+      "lastSyncTime": 1767873275343,
       "prefix": "",
       "savedViewport": {
         "x": 195,
@@ -71,7 +71,11 @@
     },
     "next": [
       "关闭加点弹窗",
-      "跑图循环开始"
+      "跑图循环开始",
+      {
+        "jump_back": true,
+        "name": "意外处理"
+      }
     ],
     "recognition": {
       "param": {
