@@ -1,15 +1,14 @@
 {
   "$__mpe_config_恢复": {
     "$__mpe_code": {
-      "filePath": "D:\\Projects\\MSA\\assets\\resource\\pipeline\\恢复.json",
+      "filePath": "D:\\Projects\\MSA\\assets\\resource\\pipeline\\跑图\\恢复.json",
       "filename": "恢复",
-      "isModifiedExternally": true,
-      "lastSyncTime": 1767795039320,
+      "lastSyncTime": 1767938655110,
       "prefix": "",
       "savedViewport": {
-        "x": -514,
-        "y": -212,
-        "zoom": 0.5
+        "x": 346,
+        "y": -73,
+        "zoom": 0.43
       },
       "version": "v0.14.2"
     }
@@ -226,7 +225,8 @@
       "Node.Recognition.Succeeded": "使用免费状态回复"
     },
     "next": [
-      "恢复点击完毕"
+      "恢复点击完毕",
+      "免费恢复"
     ],
     "rate_limit": 200,
     "recognition": {
@@ -260,12 +260,9 @@
     },
     "next": [
       "关闭恢复界面",
-      "跑图循环开始",
-      {
-        "jump_back": true,
-        "name": "意外处理"
-      }
+      "跑图循环开始"
     ],
+    "rate_limit": 10,
     "recognition": {
       "param": {
         "roi": [
@@ -298,11 +295,11 @@
       "Node.Recognition.Succeeded": "使用大AP药"
     },
     "next": [
-      "使用大恢复药",
       {
         "jump_back": true,
         "name": "意外处理"
-      }
+      },
+      "使用大恢复药"
     ],
     "rate_limit": 10,
     "recognition": {
@@ -329,11 +326,11 @@
       "Node.Recognition.Succeeded": "使用大BC药"
     },
     "next": [
-      "使用大恢复药",
       {
         "jump_back": true,
         "name": "意外处理"
-      }
+      },
+      "使用大恢复药"
     ],
     "rate_limit": 10,
     "recognition": {
@@ -360,11 +357,11 @@
       "Node.Recognition.Succeeded": "使用小AP药"
     },
     "next": [
-      "使用小恢复药",
       {
         "jump_back": true,
         "name": "意外处理"
-      }
+      },
+      "使用小恢复药"
     ],
     "rate_limit": 10,
     "recognition": {
@@ -391,11 +388,11 @@
       "Node.Recognition.Succeeded": "使用小BC药"
     },
     "next": [
-      "使用小恢复药",
       {
         "jump_back": true,
         "name": "意外处理"
-      }
+      },
+      "使用小恢复药"
     ],
     "rate_limit": 10,
     "recognition": {
@@ -461,13 +458,13 @@
       "type": "DoNothing"
     },
     "next": [
-      "免费恢复",
-      "AP不足",
-      "BC不足",
       {
         "jump_back": true,
         "name": "意外处理"
-      }
+      },
+      "免费恢复",
+      "AP不足",
+      "BC不足"
     ],
     "on_error": [
       "跑图循环开始"
@@ -500,8 +497,13 @@
       "type": "DoNothing"
     },
     "next": [
-      "关闭恢复界面"
+      "关闭恢复界面",
+      {
+        "jump_back": true,
+        "name": "意外处理"
+      }
     ],
+    "rate_limit": 10,
     "recognition": {
       "param": {},
       "type": "DirectHit"
