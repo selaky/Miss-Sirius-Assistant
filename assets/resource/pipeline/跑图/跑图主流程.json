@@ -1,15 +1,14 @@
 {
   "$__mpe_config_跑图主流程": {
     "$__mpe_code": {
-      "filePath": "D:\\Projects\\MSA\\assets\\resource\\pipeline\\跑图主流程.json",
+      "filePath": "D:\\Projects\\MSA\\assets\\resource\\pipeline\\跑图\\跑图主流程.json",
       "filename": "跑图主流程",
-      "isModifiedExternally": true,
-      "lastSyncTime": 1767796700145,
+      "lastSyncTime": 1767922919259,
       "prefix": "",
       "savedViewport": {
-        "x": 338,
-        "y": -152,
-        "zoom": 0.44
+        "x": 322,
+        "y": 180,
+        "zoom": 0.57
       },
       "version": "v0.14.2"
     }
@@ -76,7 +75,30 @@
       "type": "TemplateMatch"
     }
   },
-  "保底点击": {
+  "保底点击-前进": {
+    "$__mpe_code": {
+      "position": {
+        "x": 1239,
+        "y": 1372
+      }
+    },
+    "action": {
+      "param": {
+        "target": [
+          1162,
+          286,
+          6,
+          28
+        ]
+      },
+      "type": "Click"
+    },
+    "recognition": {
+      "param": {},
+      "type": "DirectHit"
+    }
+  },
+  "保底点击-确定": {
     "$__mpe_code": {
       "position": {
         "x": 900,
@@ -94,6 +116,10 @@
       },
       "type": "Click"
     },
+    "next": [
+      "保底点击-前进"
+    ],
+    "rate_limit": 100,
     "recognition": {
       "param": {},
       "type": "DirectHit"
@@ -223,14 +249,13 @@
       "开始战斗",
       {
         "jump_back": true,
-        "name": "保底点击"
+        "name": "保底点击-确定"
       }
     ],
     "rate_limit": 200,
     "recognition": {
       "param": {},
       "type": "DirectHit"
-    },
-    "timeout": 200000
+    }
   }
 }
