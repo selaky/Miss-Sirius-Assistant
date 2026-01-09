@@ -1,6 +1,7 @@
 {
   "$__mpe_config_重置统计数据": {
     "$__mpe_code": {
+      "filePath": "D:\\Projects\\MSA\\assets\\resource\\pipeline/重置统计数据.json",
       "filename": "重置统计数据",
       "prefix": "",
       "savedViewport": {
@@ -51,6 +52,9 @@
       "type": "Custom"
     },
     "enabled": false,
+    "focus": {
+      "Node.Action.Succeeded": "吃药数据已重置"
+    },
     "max_hit": 1,
     "recognition": {
       "param": {},
@@ -71,6 +75,9 @@
       "type": "Custom"
     },
     "enabled": false,
+    "focus": {
+      "Node.Action.Succeeded": "竞技场数据已重置"
+    },
     "max_hit": 1,
     "recognition": {
       "param": {},

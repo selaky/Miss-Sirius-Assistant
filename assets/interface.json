@@ -55,6 +55,16 @@
     },
     "task": [
         {
+            "name": "重置统计数据",
+            "entry": "开始重置统计数据",
+            "default_check": false,
+            "description": "### 每次重启小助手，系统会自动重置统计数据。也可通过执行本任务，在不重启小助手的情况下重置相关数据。",
+            "option": [
+                "重置吃药数据",
+                "重置竞技场数据"
+            ]
+        },
+        {
             "name": "前往指定界面",
             "entry": "开始前往指定界面",
             "default_check": false,
@@ -91,6 +101,58 @@
         }
     ],
     "option": {
+        "重置吃药数据": {
+            "type": "switch",
+            "label": "重置吃药数据",
+            "description": "开启后，重置已使用的药水数量统计",
+            "default_case": "Yes",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "label": "开启",
+                    "pipeline_override": {
+                        "重置吃药数据": {
+                            "enabled": true
+                        }
+                    }
+                },
+                {
+                    "name": "No",
+                    "label": "关闭",
+                    "pipeline_override": {
+                        "重置吃药数据": {
+                            "enabled": false
+                        }
+                    }
+                }
+            ]
+        },
+        "重置竞技场数据": {
+            "type": "switch",
+            "label": "重置竞技场数据",
+            "description": "开启后，重置竞技场已战斗数据统计",
+            "default_case": "Yes",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "label": "开启",
+                    "pipeline_override": {
+                        "重置竞技场数据": {
+                            "enabled": true
+                        }
+                    }
+                },
+                {
+                    "name": "No",
+                    "label": "关闭",
+                    "pipeline_override": {
+                        "重置竞技场数据": {
+                            "enabled": false
+                        }
+                    }
+                }
+            ]
+        },
         "目标界面": {
             "type": "select",
             "label": "目标界面",

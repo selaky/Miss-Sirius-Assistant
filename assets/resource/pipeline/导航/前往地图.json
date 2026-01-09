@@ -1,14 +1,14 @@
 {
   "$__mpe_config_前往地图": {
     "$__mpe_code": {
-      "filePath": "D:\\Projects\\MSA\\assets\\resource\\pipeline\\导航/前往地图.json",
+      "filePath": "D:\\Projects\\MSA\\assets\\resource\\pipeline\\导航\\前往地图.json",
       "filename": "前往地图",
-      "lastSyncTime": 1767922630017,
+      "lastSyncTime": 1767937797070,
       "prefix": "",
       "savedViewport": {
-        "x": 19,
-        "y": -410,
-        "zoom": 0.58
+        "x": -191,
+        "y": -619,
+        "zoom": 0.75
       },
       "version": "v0.14.2"
     }
@@ -161,11 +161,11 @@
       "Node.Action.Succeeded": "正在前往指定地图"
     },
     "next": [
-      "开始前往地图",
       {
         "jump_back": true,
         "name": "意外处理"
       },
+      "开始前往地图",
       "地图分流"
     ],
     "rate_limit": 10,
