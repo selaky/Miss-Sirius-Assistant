@@ -160,12 +160,18 @@ bool MsaControlUnit::touch_down(int contact, int x, int y, int pressure)
     (void)pressure;
 
     if (!ensure_injected()) {
+        OutputDebugStringW(L"[MSA] touch_down: 注入失败，回退到原版实现\n");
         return original_->touch_down(contact, x, y, pressure);
     }
 
     // 设置目标坐标
     shared_memory_->set_target(x, y);
     shared_memory_->enable();
+
+    // 诊断日志
+    wchar_t log_buffer[256];
+    swprintf_s(log_buffer, L"[MSA] touch_down: (%d, %d), contact=%d\n", x, y, contact);
+    OutputDebugStringW(log_buffer);
 
     // 发送 WM_ACTIVATE 伪造激活
     SendMessageW(hwnd_, WM_ACTIVATE, WA_ACTIVE, 0);
@@ -189,6 +195,11 @@ bool MsaControlUnit::touch_move(int contact, int x, int y, int pressure)
     // 更新目标坐标
     shared_memory_->set_target(x, y);
 
+    // 诊断日志
+    wchar_t log_buffer[256];
+    swprintf_s(log_buffer, L"[MSA] touch_move: (%d, %d), contact=%d\n", x, y, contact);
+    OutputDebugStringW(log_buffer);
+
     // 发送鼠标移动消息
     LPARAM lParam = MAKELPARAM(x, y);
     SendMessageW(hwnd_, WM_MOUSEMOVE, MK_LBUTTON, lParam);
@@ -204,12 +215,24 @@ bool MsaControlUnit::touch_up(int contact)
         return original_->touch_up(contact);
     }
 
+    // 诊断日志
+    wchar_t log_buffer[256];
+    swprintf_s(log_buffer, L"[MSA] touch_up: contact=%d\n", contact);
+    OutputDebugStringW(log_buffer);
+
     // 发送鼠标抬起消息（使用当前坐标）
     LPARAM lParam = MAKELPARAM(0, 0);  // 坐标在 touch_down/move 中已设置
+    DWORD tick_up = GetTickCount();
     SendMessageW(hwnd_, WM_LBUTTONUP, 0, lParam);
+    swprintf_s(log_buffer, L"[MSA] WM_LBUTTONUP 发送完成, tick=%u\n", tick_up);
+    OutputDebugStringW(log_buffer);
+
+    // 延迟禁用 Hook：等待游戏采样鼠标位置
+    Sleep(50);
 
     // 禁用 Hook
     shared_memory_->disable();
+    OutputDebugStringW(L"[MSA] touch_up: Hook 已禁用\n");
 
     return true;
 }
@@ -255,6 +278,7 @@ bool MsaControlUnit::do_background_click(int x, int y)
     // 确保注入已完成
     if (!ensure_injected()) {
         // 注入失败，回退到原版实现
+        OutputDebugStringW(L"[MSA] 后台点击: 注入失败，回退到原版实现\n");
         return original_->click(x, y);
     }
 
@@ -264,21 +288,37 @@ bool MsaControlUnit::do_background_click(int x, int y)
     // 启用 Hook
     shared_memory_->enable();
 
+    // 诊断日志：点击开始
+    wchar_t log_buffer[256];
+    swprintf_s(log_buffer, L"[MSA] 后台点击开始: (%d, %d)\n", x, y);
+    OutputDebugStringW(log_buffer);
+
     // 发送 WM_ACTIVATE 伪造激活
     SendMessageW(hwnd_, WM_ACTIVATE, WA_ACTIVE, 0);
 
     // 发送鼠标按下消息
     LPARAM lParam = MAKELPARAM(x, y);
+    DWORD tick_down = GetTickCount();
     SendMessageW(hwnd_, WM_LBUTTONDOWN, MK_LBUTTON, lParam);
+    swprintf_s(log_buffer, L"[MSA] WM_LBUTTONDOWN 发送完成, tick=%u\n", tick_down);
+    OutputDebugStringW(log_buffer);
 
-    // 短暂延迟
-    Sleep(10);
+    // 按下/抬起延迟：50ms
+    Sleep(50);
 
     // 发送鼠标抬起消息
+    DWORD tick_up = GetTickCount();
     SendMessageW(hwnd_, WM_LBUTTONUP, 0, lParam);
+    swprintf_s(log_buffer, L"[MSA] WM_LBUTTONUP 发送完成, tick=%u, 间隔=%ums\n",
+               tick_up, tick_up - tick_down);
+    OutputDebugStringW(log_buffer);
+
+    // 延迟禁用 Hook：等待游戏采样鼠标位置
+    Sleep(50);
 
     // 禁用 Hook
     shared_memory_->disable();
+    OutputDebugStringW(L"[MSA] Hook 已禁用，点击流程结束\n");
 
     return true;
 }
