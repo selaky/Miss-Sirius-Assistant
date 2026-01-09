@@ -3,10 +3,11 @@
     "$__mpe_code": {
       "filePath": "D:\\Projects\\MSA\\assets\\resource\\pipeline/重置统计数据.json",
       "filename": "重置统计数据",
+      "lastSyncTime": 1767931604795,
       "prefix": "",
       "savedViewport": {
-        "x": 188,
-        "y": -276,
+        "x": 100,
+        "y": -497,
         "zoom": 0.86
       },
       "version": "v0.14.2"
@@ -31,7 +32,8 @@
       {
         "jump_back": true,
         "name": "重置竞技场数据"
-      }
+      },
+      "重置结束"
     ],
     "recognition": {
       "param": {},
@@ -79,6 +81,22 @@
       "Node.Action.Succeeded": "竞技场数据已重置"
     },
     "max_hit": 1,
+    "recognition": {
+      "param": {},
+      "type": "DirectHit"
+    }
+  },
+  "重置结束": {
+    "$__mpe_code": {
+      "position": {
+        "x": 570,
+        "y": 1077
+      }
+    },
+    "action": {
+      "param": {},
+      "type": "DoNothing"
+    },
     "recognition": {
       "param": {},
       "type": "DirectHit"
