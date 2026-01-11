@@ -21,7 +21,10 @@
       "Bash(objdump:*)",
       "Bash(where:*)",
       "Bash(\"C:/Program Files \\(x86\\)/Microsoft Visual Studio/18/BuildTools/VC/Tools/MSVC/14.50.35717/bin/Hostx64/x64/dumpbin.exe\":*)",
-      "Bash(./build.bat)"
+      "Bash(./build.bat)",
+      "mcp__mcp-router__list_dir",
+      "mcp__mcp-router__read_file",
+      "mcp__mcp-router__activate_project"
     ],
     "deny": [],
     "ask": []
