@@ -3,11 +3,11 @@
     "$__mpe_code": {
       "filePath": "D:\\Projects\\MSA\\assets\\resource\\pipeline\\跑图\\跑图主流程.json",
       "filename": "跑图主流程",
-      "lastSyncTime": 1768103565582,
+      "lastSyncTime": 1768104091483,
       "prefix": "",
       "savedViewport": {
-        "x": -228,
-        "y": -765,
+        "x": 129,
+        "y": -31,
         "zoom": 0.86
       },
       "version": "v0.14.2"
@@ -17,7 +17,7 @@
     "$__mpe_code": {
       "position": {
         "x": 905,
-        "y": 1264
+        "y": 447
       }
     }
   },
@@ -25,7 +25,7 @@
     "$__mpe_code": {
       "position": {
         "x": 905,
-        "y": 178
+        "y": 335
       }
     }
   },
@@ -33,15 +33,15 @@
     "$__mpe_code": {
       "position": {
         "x": 905,
-        "y": 1154
+        "y": 1371
       }
     }
   },
   "$__mpe_external_意外处理_跑图主流程": {
     "$__mpe_code": {
       "position": {
-        "x": 915,
-        "y": 40
+        "x": 905,
+        "y": 225
       }
     }
   },
@@ -49,7 +49,7 @@
     "$__mpe_code": {
       "position": {
         "x": 900,
-        "y": 288
+        "y": 555
       }
     },
     "action": {
@@ -78,8 +78,8 @@
   "保底点击-前进": {
     "$__mpe_code": {
       "position": {
-        "x": 1563,
-        "y": 1394
+        "x": 1280,
+        "y": 1511
       }
     },
     "action": {
@@ -102,7 +102,7 @@
     "$__mpe_code": {
       "position": {
         "x": 900,
-        "y": 1374
+        "y": 1481
       }
     },
     "action": {
@@ -112,33 +112,6 @@
           579,
           43,
           26
-        ]
-      },
-      "type": "Click"
-    },
-    "next": [
-      "保底点击-获得卡牌"
-    ],
-    "rate_limit": 100,
-    "recognition": {
-      "param": {},
-      "type": "DirectHit"
-    }
-  },
-  "保底点击-获得卡牌": {
-    "$__mpe_code": {
-      "position": {
-        "x": 1215,
-        "y": 1384
-      }
-    },
-    "action": {
-      "param": {
-        "target": [
-          759,
-          565,
-          86,
-          22
         ]
       },
       "type": "Click"
@@ -155,8 +128,8 @@
   "前进": {
     "$__mpe_code": {
       "position": {
-        "x": 909,
-        "y": 617
+        "x": 900,
+        "y": 868
       }
     },
     "action": {
@@ -182,7 +155,7 @@
     "$__mpe_code": {
       "position": {
         "x": 900,
-        "y": 876
+        "y": 1093
       }
     },
     "action": {
@@ -204,7 +177,7 @@
     "$__mpe_code": {
       "position": {
         "x": 0,
-        "y": 44
+        "y": 34
       }
     },
     "action": {
@@ -223,7 +196,7 @@
     "$__mpe_code": {
       "position": {
         "x": 300,
-        "y": 14
+        "y": 4
       }
     },
     "action": {
@@ -250,7 +223,7 @@
     "$__mpe_code": {
       "position": {
         "x": 600,
-        "y": 0
+        "y": 6
       }
     },
     "action": {
@@ -277,12 +250,42 @@
       {
         "jump_back": true,
         "name": "保底点击-确定"
+      },
+      {
+        "jump_back": true,
+        "name": "跑图获得卡牌"
       }
     ],
     "rate_limit": 200,
     "recognition": {
       "param": {},
       "type": "DirectHit"
+    }
+  },
+  "跑图获得卡牌": {
+    "$__mpe_code": {
+      "position": {
+        "x": 900,
+        "y": 0
+      }
+    },
+    "action": {
+      "param": {},
+      "type": "Click"
+    },
+    "recognition": {
+      "param": {
+        "roi": [
+          713,
+          542,
+          177,
+          69
+        ],
+        "template": [
+          "意外/确定-获得卡牌.png"
+        ]
+      },
+      "type": "TemplateMatch"
     }
   }
 }
