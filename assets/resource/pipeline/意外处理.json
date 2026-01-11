@@ -3,29 +3,26 @@
     "$__mpe_code": {
       "filePath": "D:\\Projects\\MSA\\assets\\resource\\pipeline\\意外处理.json",
       "filename": "意外处理",
-      "lastSyncTime": 1767932199511,
+      "lastSyncTime": 1768100335835,
       "prefix": "",
       "savedViewport": {
-        "x": 314,
-        "y": 142,
-        "zoom": 0.86
+        "x": 513,
+        "y": 0,
+        "zoom": 0.76
       },
       "version": "v0.14.2"
     }
   },
-  "弹窗确定": {
+  "一般确定": {
     "$__mpe_code": {
       "position": {
-        "x": 300,
-        "y": 238
+        "x": 296,
+        "y": 799
       }
     },
     "action": {
       "param": {},
       "type": "Click"
-    },
-    "focus": {
-      "Node.Action.Starting": "检测到弹窗，点击确定"
     },
     "recognition": {
       "param": {
@@ -36,10 +33,10 @@
           206
         ],
         "template": [
-          "意外/确定.png"
+          "意外/确定-连接断开.png"
         ]
       },
-      "type": "FeatureMatch"
+      "type": "TemplateMatch"
     }
   },
   "意外处理": {
@@ -56,7 +53,8 @@
     "next": [
       "连接断开重新启动",
       "掉线重试",
-      "弹窗确定"
+      "获得卡牌确定",
+      "一般确定"
     ],
     "recognition": {
       "param": {
@@ -67,8 +65,9 @@
           206
         ],
         "template": [
-          "意外/确定.png",
-          "意外/重试.png"
+          "意外/确定-获得卡牌.png",
+          "意外/重试.png",
+          "意外/确定-连接断开.png"
         ]
       },
       "type": "TemplateMatch"
@@ -127,6 +126,35 @@
         ],
         "template": [
           "意外/确定-连接断开.png"
+        ]
+      },
+      "type": "FeatureMatch"
+    }
+  },
+  "获得卡牌确定": {
+    "$__mpe_code": {
+      "position": {
+        "x": 300,
+        "y": 238
+      }
+    },
+    "action": {
+      "param": {},
+      "type": "Click"
+    },
+    "focus": {
+      "Node.Action.Starting": "检测到获得卡牌，点击确定"
+    },
+    "recognition": {
+      "param": {
+        "roi": [
+          423,
+          376,
+          473,
+          206
+        ],
+        "template": [
+          "意外/确定-获得卡牌.png"
         ]
       },
       "type": "FeatureMatch"

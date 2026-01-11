@@ -1,14 +1,14 @@
 {
   "$__mpe_config_升级处理": {
     "$__mpe_code": {
-      "filePath": "D:\\Projects\\MSA\\assets\\resource\\pipeline\\升级处理.json",
+      "filePath": "D:\\Projects\\MSA\\assets\\resource\\pipeline\\跑图\\升级处理.json",
       "filename": "升级处理",
-      "lastSyncTime": 1767873275343,
+      "lastSyncTime": 1768101078936,
       "prefix": "",
       "savedViewport": {
-        "x": 195,
-        "y": 122,
-        "zoom": 0.65
+        "x": 318,
+        "y": 88,
+        "zoom": 0.76
       },
       "version": "v0.14.2"
     }
@@ -16,8 +16,8 @@
   "$__mpe_external_意外处理_升级处理": {
     "$__mpe_code": {
       "position": {
-        "x": 1011,
-        "y": 392
+        "x": 1130,
+        "y": 393
       }
     }
   },
@@ -44,11 +44,11 @@
       "Node.Recognition.Succeeded": "升级了，已自动关闭属性分配弹窗"
     },
     "next": [
-      "关闭加点弹窗",
       {
         "jump_back": true,
         "name": "意外处理"
-      }
+      },
+      "关闭加点弹窗"
     ],
     "on_error": [
       "跑图循环开始"
@@ -70,12 +70,12 @@
       "type": "Click"
     },
     "next": [
-      "关闭加点弹窗",
-      "跑图循环开始",
       {
         "jump_back": true,
         "name": "意外处理"
-      }
+      },
+      "关闭加点弹窗",
+      "跑图循环开始"
     ],
     "recognition": {
       "param": {
@@ -95,42 +95,38 @@
   "分配属性后确定": {
     "$__mpe_code": {
       "position": {
-        "x": 606,
-        "y": 225
+        "x": 638,
+        "y": 251
       }
     },
     "action": {
-      "param": {},
+      "param": {
+        "target": [
+          601,
+          534,
+          78,
+          21
+        ]
+      },
       "type": "Click"
     },
     "next": [
-      "关闭加点弹窗",
-      "分配属性后确定",
       {
         "jump_back": true,
         "name": "意外处理"
-      }
+      },
+      "关闭加点弹窗"
     ],
     "recognition": {
-      "param": {
-        "roi": [
-          575,
-          521,
-          128,
-          47
-        ],
-        "template": [
-          "意外/确定.png"
-        ]
-      },
-      "type": "TemplateMatch"
+      "param": {},
+      "type": "DirectHit"
     }
   },
   "分配行动力": {
     "$__mpe_code": {
       "position": {
-        "x": 300,
-        "y": 196
+        "x": 247,
+        "y": 247
       }
     },
     "action": {
@@ -149,12 +145,12 @@
       "Node.Action.Succeeded": "将升级属性点加至行动力"
     },
     "next": [
-      "未成功分配行动力",
-      "分配属性后确定",
       {
         "jump_back": true,
         "name": "意外处理"
-      }
+      },
+      "未成功分配行动力",
+      "分配属性后确定"
     ],
     "on_error": [
       "跑图循环开始"
@@ -187,12 +183,12 @@
       "Node.Action.Succeeded": "将升级属性点加至领导力"
     },
     "next": [
-      "未成功分配领导力",
-      "分配属性后确定",
       {
         "jump_back": true,
         "name": "意外处理"
-      }
+      },
+      "未成功分配领导力",
+      "分配属性后确定"
     ],
     "on_error": [
       "跑图循环开始"
@@ -214,13 +210,13 @@
       "type": "DoNothing"
     },
     "next": [
-      "分配行动力",
-      "分配领导力",
-      "不分配属性点",
       {
         "jump_back": true,
         "name": "意外处理"
-      }
+      },
+      "分配行动力",
+      "分配领导力",
+      "不分配属性点"
     ],
     "recognition": {
       "param": {
@@ -246,7 +242,7 @@
     },
     "action": {
       "param": {},
-      "type": "DoNothing"
+      "type": "Click"
     },
     "next": [
       "分配行动力"
@@ -275,7 +271,7 @@
     },
     "action": {
       "param": {},
-      "type": "DoNothing"
+      "type": "Click"
     },
     "next": [
       "分配领导力"
