@@ -3,11 +3,11 @@
     "$__mpe_code": {
       "filePath": "D:\\Projects\\MSA\\assets\\resource\\pipeline\\意外处理.json",
       "filename": "意外处理",
-      "lastSyncTime": 1768102492616,
+      "lastSyncTime": 1768104056642,
       "prefix": "",
       "savedViewport": {
-        "x": 435,
-        "y": 86,
+        "x": 420,
+        "y": 89,
         "zoom": 0.76
       },
       "version": "v0.14.2"
@@ -16,8 +16,8 @@
   "一般确定": {
     "$__mpe_code": {
       "position": {
-        "x": 296,
-        "y": 799
+        "x": 303,
+        "y": 598
       }
     },
     "action": {
@@ -30,10 +30,10 @@
     "recognition": {
       "param": {
         "roi": [
-          423,
-          376,
-          473,
-          235
+          515,
+          385,
+          246,
+          63
         ],
         "template": [
           "意外/确定-连接断开.png"
@@ -56,19 +56,17 @@
     "next": [
       "连接断开重新启动",
       "掉线重试",
-      "获得卡牌确定",
       "一般确定"
     ],
     "recognition": {
       "param": {
         "roi": [
-          423,
-          376,
-          473,
-          235
+          515,
+          385,
+          246,
+          63
         ],
         "template": [
-          "意外/确定-获得卡牌.png",
           "意外/重试.png",
           "意外/确定-连接断开.png"
         ]
@@ -79,8 +77,8 @@
   "掉线重试": {
     "$__mpe_code": {
       "position": {
-        "x": 300,
-        "y": 521
+        "x": 312,
+        "y": 319
       }
     },
     "action": {
@@ -93,10 +91,10 @@
     "recognition": {
       "param": {
         "roi": [
-          423,
-          376,
-          473,
-          235
+          515,
+          385,
+          246,
+          63
         ],
         "template": [
           "意外/重试.png"
@@ -128,36 +126,7 @@
           "意外/确定-连接断开.png"
         ]
       },
-      "type": "FeatureMatch"
-    }
-  },
-  "获得卡牌确定": {
-    "$__mpe_code": {
-      "position": {
-        "x": 295,
-        "y": 280
-      }
-    },
-    "action": {
-      "param": {},
-      "type": "Click"
-    },
-    "focus": {
-      "Node.Action.Succeeded": "检测到确定按钮，已自动点击"
-    },
-    "recognition": {
-      "param": {
-        "roi": [
-          423,
-          376,
-          473,
-          235
-        ],
-        "template": [
-          "意外/确定-获得卡牌.png"
-        ]
-      },
-      "type": "FeatureMatch"
+      "type": "TemplateMatch"
     }
   },
   "连接断开重新启动": {

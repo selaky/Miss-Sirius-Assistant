@@ -3,11 +3,11 @@
     "$__mpe_code": {
       "filePath": "D:\\Projects\\MSA\\assets\\resource\\pipeline\\跑图\\跑图主流程.json",
       "filename": "跑图主流程",
-      "lastSyncTime": 1767930238348,
+      "lastSyncTime": 1768103565582,
       "prefix": "",
       "savedViewport": {
-        "x": 217,
-        "y": 157,
+        "x": -228,
+        "y": -765,
         "zoom": 0.86
       },
       "version": "v0.14.2"
@@ -40,8 +40,8 @@
   "$__mpe_external_意外处理_跑图主流程": {
     "$__mpe_code": {
       "position": {
-        "x": 905,
-        "y": 68
+        "x": 915,
+        "y": 40
       }
     }
   },
@@ -78,8 +78,8 @@
   "保底点击-前进": {
     "$__mpe_code": {
       "position": {
-        "x": 1239,
-        "y": 1372
+        "x": 1563,
+        "y": 1394
       }
     },
     "action": {
@@ -117,6 +117,33 @@
       "type": "Click"
     },
     "next": [
+      "保底点击-获得卡牌"
+    ],
+    "rate_limit": 100,
+    "recognition": {
+      "param": {},
+      "type": "DirectHit"
+    }
+  },
+  "保底点击-获得卡牌": {
+    "$__mpe_code": {
+      "position": {
+        "x": 1215,
+        "y": 1384
+      }
+    },
+    "action": {
+      "param": {
+        "target": [
+          759,
+          565,
+          86,
+          22
+        ]
+      },
+      "type": "Click"
+    },
+    "next": [
       "保底点击-前进"
     ],
     "rate_limit": 100,
@@ -128,8 +155,8 @@
   "前进": {
     "$__mpe_code": {
       "position": {
-        "x": 900,
-        "y": 601
+        "x": 909,
+        "y": 617
       }
     },
     "action": {
