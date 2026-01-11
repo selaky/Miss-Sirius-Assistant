@@ -24,7 +24,8 @@
       "Bash(./build.bat)",
       "mcp__mcp-router__list_dir",
       "mcp__mcp-router__read_file",
-      "mcp__mcp-router__activate_project"
+      "mcp__mcp-router__activate_project",
+      "WebFetch(domain:deepwiki.com)"
     ],
     "deny": [],
     "ask": []
