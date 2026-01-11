@@ -3,11 +3,11 @@
     "$__mpe_code": {
       "filePath": "D:\\Projects\\MSA\\assets\\resource\\pipeline\\意外处理.json",
       "filename": "意外处理",
-      "lastSyncTime": 1768101774679,
+      "lastSyncTime": 1768102492616,
       "prefix": "",
       "savedViewport": {
-        "x": 463,
-        "y": -116,
+        "x": 435,
+        "y": 86,
         "zoom": 0.76
       },
       "version": "v0.14.2"
@@ -33,7 +33,7 @@
           423,
           376,
           473,
-          206
+          235
         ],
         "template": [
           "意外/确定-连接断开.png"
@@ -65,7 +65,7 @@
           423,
           376,
           473,
-          206
+          235
         ],
         "template": [
           "意外/确定-获得卡牌.png",
@@ -96,7 +96,7 @@
           423,
           376,
           473,
-          206
+          235
         ],
         "template": [
           "意外/重试.png"
@@ -116,9 +116,6 @@
       "param": {},
       "type": "Click"
     },
-    "focus": {
-      "Node.Action.Starting": "游戏掉线了，未检测到重试按钮，请手动重启"
-    },
     "recognition": {
       "param": {
         "roi": [
@@ -137,8 +134,8 @@
   "获得卡牌确定": {
     "$__mpe_code": {
       "position": {
-        "x": 300,
-        "y": 238
+        "x": 295,
+        "y": 280
       }
     },
     "action": {
@@ -154,7 +151,7 @@
           423,
           376,
           473,
-          206
+          235
         ],
         "template": [
           "意外/确定-获得卡牌.png"
@@ -173,6 +170,9 @@
     "action": {
       "param": {},
       "type": "DoNothing"
+    },
+    "focus": {
+      "Node.Action.Succeeded": "检测到连接断开"
     },
     "next": [
       "点击重启"
