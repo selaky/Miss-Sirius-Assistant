@@ -3,21 +3,21 @@
     "$__mpe_code": {
       "filePath": "D:\\Projects\\MSA\\assets\\resource\\pipeline\\跑图\\跑图主流程.json",
       "filename": "跑图主流程",
-      "lastSyncTime": 1768129604221,
+      "lastSyncTime": 1768199604684,
       "prefix": "",
       "savedViewport": {
-        "x": -452,
-        "y": -1199,
-        "zoom": 1
+        "x": 250,
+        "y": 82,
+        "zoom": 0.57
       },
-      "version": "v0.14.2"
+      "version": "v0.15.2"
     }
   },
   "$__mpe_external_升级_跑图主流程": {
     "$__mpe_code": {
       "position": {
         "x": 905,
-        "y": 447
+        "y": 746
       }
     }
   },
@@ -25,7 +25,7 @@
     "$__mpe_code": {
       "position": {
         "x": 905,
-        "y": 335
+        "y": 636
       }
     }
   },
@@ -33,7 +33,7 @@
     "$__mpe_code": {
       "position": {
         "x": 905,
-        "y": 1371
+        "y": 1672
       }
     }
   },
@@ -41,7 +41,7 @@
     "$__mpe_code": {
       "position": {
         "x": 905,
-        "y": 225
+        "y": 526
       }
     }
   },
@@ -49,7 +49,7 @@
     "$__mpe_code": {
       "position": {
         "x": 900,
-        "y": 555
+        "y": 856
       }
     },
     "action": {
@@ -78,8 +78,8 @@
   "保底点击-前进": {
     "$__mpe_code": {
       "position": {
-        "x": 1280,
-        "y": 1511
+        "x": 1200,
+        "y": 308
       }
     },
     "action": {
@@ -102,7 +102,7 @@
     "$__mpe_code": {
       "position": {
         "x": 900,
-        "y": 1481
+        "y": 278
       }
     },
     "action": {
@@ -125,11 +125,34 @@
       "type": "DirectHit"
     }
   },
+  "判断达到跑图时限": {
+    "$__mpe_code": {
+      "position": {
+        "x": 900,
+        "y": 0
+      }
+    },
+    "action": {
+      "param": {},
+      "type": "StopTask"
+    },
+    "enabled": false,
+    "recognition": {
+      "param": {
+        "custom_recognition": "check_deadline",
+        "custom_recognition_param": {
+          "target_hour": 23,
+          "target_minute": 59
+        }
+      },
+      "type": "Custom"
+    }
+  },
   "前进": {
     "$__mpe_code": {
       "position": {
         "x": 900,
-        "y": 868
+        "y": 1169
       }
     },
     "action": {
@@ -155,7 +178,7 @@
     "$__mpe_code": {
       "position": {
         "x": 900,
-        "y": 1093
+        "y": 1394
       }
     },
     "action": {
@@ -177,7 +200,7 @@
     "$__mpe_code": {
       "position": {
         "x": 0,
-        "y": 34
+        "y": 60
       }
     },
     "action": {
@@ -196,7 +219,7 @@
     "$__mpe_code": {
       "position": {
         "x": 300,
-        "y": 4
+        "y": 30
       }
     },
     "action": {
@@ -223,7 +246,7 @@
     "$__mpe_code": {
       "position": {
         "x": 600,
-        "y": 6
+        "y": 32
       }
     },
     "action": {
@@ -235,6 +258,7 @@
         "jump_back": true,
         "name": "意外处理"
       },
+      "判断达到跑图时限",
       "开始恢复",
       "升级",
       {
@@ -266,7 +290,7 @@
     "$__mpe_code": {
       "position": {
         "x": 900,
-        "y": 0
+        "y": 1782
       }
     },
     "action": {
