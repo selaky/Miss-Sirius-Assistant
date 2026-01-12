@@ -3,12 +3,12 @@
     "$__mpe_code": {
       "filePath": "D:\\Projects\\MSA\\assets\\resource\\pipeline\\世界BOSS.json",
       "filename": "世界BOSS",
-      "lastSyncTime": 1768213188752,
+      "lastSyncTime": 1768213197367,
       "prefix": "",
       "savedViewport": {
-        "x": 137,
-        "y": -296,
-        "zoom": 0.61
+        "x": -2538,
+        "y": -1628,
+        "zoom": 0.8
       },
       "version": "v0.15.2"
     }
@@ -351,8 +351,8 @@
   "判断暂停BOSS战": {
     "$__mpe_code": {
       "position": {
-        "x": 4060,
-        "y": 2425
+        "x": 4208,
+        "y": 2414
       }
     },
     "action": {
