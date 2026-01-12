@@ -61,7 +61,8 @@
             "description": "### 每次重启小助手，系统会自动重置统计数据。也可通过执行本任务，在不重启小助手的情况下重置相关数据。",
             "option": [
                 "重置吃药数据",
-                "重置竞技场数据"
+                "重置竞技场数据",
+                "重置BOSS数据"
             ]
         },
         {
@@ -97,6 +98,19 @@
                 "使用星币提升体力",
                 "竞技场战斗卡组",
                 "使用单独的防御卡组"
+            ]
+        },
+        {
+            "name": "世界BOSS",
+            "entry": "开始世界BOSS",
+            "default_check": false,
+            "description": "### 可自动重复打世界 boss，需提前前往 boss 界面。\n**注意：程序自动操作有风险，可能会出现逻辑错误、程序卡死等情况，建议能手打还是手打，此任务主要提供给有事出门回不来的人作为备用方案。**",
+            "option": [
+                "BOSS最大战斗次数",
+                "BOSS目标排名",
+                "BOSS战斗卡组",
+                "BOSS吃药类型",
+                "BOSS强制截止时间"
             ]
         }
     ],
@@ -853,6 +867,205 @@
                     }
                 }
             ]
+        },
+        "重置BOSS数据": {
+            "type": "switch",
+            "label": "重置BOSS数据",
+            "description": "开启后，重置 boss 战相关统计数据",
+            "default_case": "Yes",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "label": "开启",
+                    "pipeline_override": {
+                        "重置BOSS数据": {
+                            "enabled": true
+                        }
+                    }
+                },
+                {
+                    "name": "No",
+                    "label": "关闭",
+                    "pipeline_override": {
+                        "重置BOSS数据": {
+                            "enabled": false
+                        }
+                    }
+                }
+            ]
+        },
+        "BOSS最大战斗次数": {
+            "type": "input",
+            "label": "最大战斗次数",
+            "description": "boss 战战斗次数不会超过设定上限。如果填 -1，则为无限战斗。",
+            "inputs": [
+                {
+                    "name": "max_battles",
+                    "label": "最大战斗次数",
+                    "description": "填入自然数或 -1（-1 表示无限战斗）",
+                    "default": "-1",
+                    "pipeline_type": "int",
+                    "verify": "^-?\\d+$",
+                    "pattern_msg": "请输入自然数或 -1"
+                }
+            ],
+            "pipeline_override": {
+                "读取BOSS设置": {
+                    "action": {
+                        "param": {
+                            "custom_action_param": {
+                                "max_battles": "{max_battles}"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "BOSS目标排名": {
+            "type": "input",
+            "label": "目标排名",
+            "description": "如果当前排名没达到目标排名会继续战斗，如果已达到目标排名，则暂停等待排名变动。建议把目标排名设的比心理预期略高一点。填 -1 表示不限制排名。",
+            "inputs": [
+                {
+                    "name": "target_rank",
+                    "label": "目标排名",
+                    "description": "填入自然数或 -1（-1 表示不限制排名）",
+                    "default": "-1",
+                    "pipeline_type": "int",
+                    "verify": "^-?\\d+$",
+                    "pattern_msg": "请输入自然数或 -1"
+                }
+            ],
+            "pipeline_override": {
+                "读取BOSS设置": {
+                    "action": {
+                        "param": {
+                            "custom_action_param": {
+                                "target_rank": "{target_rank}"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "BOSS战斗卡组": {
+            "type": "select",
+            "label": "战斗卡组",
+            "description": "在 boss 战中使用的卡组",
+            "default_case": "卡组一",
+            "cases": [
+                {
+                    "name": "卡组一",
+                    "label": "卡组一",
+                    "pipeline_override": {
+                        "开始选择BOSS卡组": {
+                            "next": [
+                                "点击BOSS卡组一"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "卡组二",
+                    "label": "卡组二",
+                    "pipeline_override": {
+                        "开始选择BOSS卡组": {
+                            "next": [
+                                "点击BOSS卡组二"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "卡组三",
+                    "label": "卡组三",
+                    "pipeline_override": {
+                        "开始选择BOSS卡组": {
+                            "next": [
+                                "点击BOSS卡组三"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "卡组四",
+                    "label": "卡组四",
+                    "pipeline_override": {
+                        "开始选择BOSS卡组": {
+                            "next": [
+                                "点击BOSS卡组四"
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        "BOSS吃药类型": {
+            "type": "select",
+            "label": "吃药类型",
+            "description": "为保证操作速度，boss 战中不再识别判断药水数量，而是直接点击吃药按钮，请确保你有足够的对应药水；推荐使用大药，小药需要点两次，出错概率更大。",
+            "default_case": "大恢复药",
+            "cases": [
+                {
+                    "name": "大恢复药",
+                    "label": "大恢复药",
+                    "pipeline_override": {
+                        "开始BOSS吃药": {
+                            "next": [
+                                "BOSS大恢复药"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "小恢复药",
+                    "label": "小恢复药",
+                    "pipeline_override": {
+                        "开始BOSS吃药": {
+                            "next": [
+                                "BOSS小恢复药1"
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        "BOSS强制截止时间": {
+            "type": "input",
+            "label": "强制截止时间",
+            "description": "当晚于此时间时，直接停止本任务。使用 24 小时制。",
+            "inputs": [
+                {
+                    "name": "target_hour",
+                    "label": "小时",
+                    "description": "截止时间的小时部分（0-23）",
+                    "default": "19",
+                    "pipeline_type": "int",
+                    "verify": "^([0-9]|1[0-9]|2[0-3])$",
+                    "pattern_msg": "请输入 0-23 之间的整数"
+                },
+                {
+                    "name": "target_minute",
+                    "label": "分钟",
+                    "description": "截止时间的分钟部分（0-59）",
+                    "default": "15",
+                    "pipeline_type": "int",
+                    "verify": "^([0-9]|[1-5][0-9])$",
+                    "pattern_msg": "请输入 0-59 之间的整数"
+                }
+            ],
+            "pipeline_override": {
+                "判断达到BOSS时限": {
+                    "recognition": {
+                        "param": {
+                            "custom_recognition_param": {
+                                "target_hour": "{target_hour}",
+                                "target_minute": "{target_minute}"
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }
