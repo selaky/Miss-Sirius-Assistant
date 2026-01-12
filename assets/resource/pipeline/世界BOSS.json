@@ -3,12 +3,12 @@
     "$__mpe_code": {
       "filePath": "D:\\Projects\\MSA\\assets\\resource\\pipeline\\世界BOSS.json",
       "filename": "世界BOSS",
-      "lastSyncTime": 1768213197367,
+      "lastSyncTime": 1768221554813,
       "prefix": "",
       "savedViewport": {
-        "x": -2538,
-        "y": -1628,
-        "zoom": 0.8
+        "x": -1321,
+        "y": 13,
+        "zoom": 0.61
       },
       "version": "v0.15.2"
     }
@@ -94,8 +94,8 @@
   "BOSS战斗失败": {
     "$__mpe_code": {
       "position": {
-        "x": 2697,
-        "y": 1919
+        "x": 2700,
+        "y": 1383
       }
     },
     "action": {
@@ -126,8 +126,8 @@
   "BOSS界面重试": {
     "$__mpe_code": {
       "position": {
-        "x": 4060,
-        "y": 1488
+        "x": 4280,
+        "y": 865
       }
     },
     "action": {
@@ -153,7 +153,7 @@
     "$__mpe_code": {
       "position": {
         "x": 3000,
-        "y": 1945
+        "y": 1430
       }
     },
     "action": {
@@ -174,7 +174,7 @@
     "$__mpe_code": {
       "position": {
         "x": 2400,
-        "y": 1681
+        "y": 1247
       }
     },
     "action": {
@@ -262,7 +262,7 @@
     "$__mpe_code": {
       "position": {
         "x": 600,
-        "y": 745
+        "y": 1058
       }
     },
     "action": {
@@ -299,7 +299,7 @@
     "$__mpe_code": {
       "position": {
         "x": 2100,
-        "y": 1074
+        "y": 1265
       }
     },
     "action": {
@@ -333,13 +333,16 @@
   "判断停止BOSS战": {
     "$__mpe_code": {
       "position": {
-        "x": 3760,
-        "y": 662
+        "x": 3980,
+        "y": 682
       }
     },
     "action": {
       "param": {},
       "type": "StopTask"
+    },
+    "focus": {
+      "Node.Recognition.Succeeded": "达到 boss 战次数上线，任务停止。"
     },
     "recognition": {
       "param": {
@@ -351,14 +354,15 @@
   "判断暂停BOSS战": {
     "$__mpe_code": {
       "position": {
-        "x": 4208,
-        "y": 2414
+        "x": 4280,
+        "y": 2022
       }
     },
     "action": {
       "param": {},
       "type": "DoNothing"
     },
+    "enabled": true,
     "next": [
       "继续BOSS战"
     ],
@@ -366,6 +370,29 @@
     "recognition": {
       "param": {
         "custom_recognition": "should_boss_pause"
+      },
+      "type": "Custom"
+    }
+  },
+  "判断达到BOSS时限": {
+    "$__mpe_code": {
+      "position": {
+        "x": 3600,
+        "y": 384
+      }
+    },
+    "action": {
+      "param": {},
+      "type": "StopTask"
+    },
+    "focus": "已达到规定时间,任务停止。",
+    "recognition": {
+      "param": {
+        "custom_recognition": "check_deadline",
+        "custom_recognition_param": {
+          "target_hour": 19,
+          "target_minute": 15
+        }
       },
       "type": "Custom"
     }
@@ -404,7 +431,7 @@
     "$__mpe_code": {
       "position": {
         "x": 3300,
-        "y": 2201
+        "y": 1781
       }
     },
     "action": {
@@ -417,7 +444,8 @@
       {
         "jump_back": true,
         "name": "BOSS界面重试"
-      }
+      },
+      "判断达到BOSS时限"
     ],
     "recognition": {
       "param": {},
@@ -427,8 +455,8 @@
   "开始世界BOSS": {
     "$__mpe_code": {
       "position": {
-        "x": 2700,
-        "y": 2201
+        "x": 1995,
+        "y": 1962
       }
     },
     "action": {
@@ -447,7 +475,7 @@
     "$__mpe_code": {
       "position": {
         "x": 1200,
-        "y": 900
+        "y": 1091
       }
     },
     "action": {
@@ -468,8 +496,8 @@
   "未进入BOSS战": {
     "$__mpe_code": {
       "position": {
-        "x": 903,
-        "y": 864
+        "x": 900,
+        "y": 1059
       }
     },
     "action": {
@@ -477,7 +505,8 @@
       "type": "DoNothing"
     },
     "next": [
-      "开始选择BOSS卡组"
+      "开始选择BOSS卡组",
+      "判断达到BOSS时限"
     ],
     "recognition": {
       "param": {
@@ -498,7 +527,7 @@
     "$__mpe_code": {
       "position": {
         "x": 1500,
-        "y": 885
+        "y": 1076
       }
     },
     "action": {
@@ -524,7 +553,7 @@
     "$__mpe_code": {
       "position": {
         "x": 1500,
-        "y": 1074
+        "y": 1265
       }
     },
     "action": {
@@ -550,7 +579,7 @@
     "$__mpe_code": {
       "position": {
         "x": 1500,
-        "y": 1263
+        "y": 1454
       }
     },
     "action": {
@@ -576,7 +605,7 @@
     "$__mpe_code": {
       "position": {
         "x": 1500,
-        "y": 1452
+        "y": 1643
       }
     },
     "action": {
@@ -628,7 +657,7 @@
     "$__mpe_code": {
       "position": {
         "x": 1800,
-        "y": 1089
+        "y": 1280
       }
     },
     "action": {
@@ -646,8 +675,8 @@
   "继续BOSS战": {
     "$__mpe_code": {
       "position": {
-        "x": 3760,
-        "y": 2469
+        "x": 3980,
+        "y": 2082
       }
     },
     "action": {
@@ -671,7 +700,7 @@
     "$__mpe_code": {
       "position": {
         "x": 3000,
-        "y": 2171
+        "y": 1634
       }
     },
     "action": {

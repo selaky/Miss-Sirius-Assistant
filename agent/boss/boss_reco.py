@@ -7,6 +7,7 @@ from maa.custom_recognition import CustomRecognition
 from maa.context import Context
 from . import boss_manager
 import logging
+from .. import utils
 
 
 @AgentServer.custom_recognition("should_boss_stop")
@@ -34,7 +35,7 @@ class ShouldBossStop(CustomRecognition):
         else:
             msg = f"当前战斗次数 {progress},继续战斗。"
             logging.info(f"[{argv.node_name}] {msg}")
-            return CustomRecognition.AnalyzeResult(box=None, detail=msg)
+            return CustomRecognition.AnalyzeResult(box=None, detail=msg)        
         
 @AgentServer.custom_recognition("should_boss_pause")
 class ShouldBossPause(CustomRecognition):
