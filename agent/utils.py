@@ -20,7 +20,7 @@ def is_after_target_time(target_hour:int,target_minute:int) -> bool:
         bool: 如果当前时间 >= 目标时间，返回 True；否则返回 False
     """
         # 获取当前系统时间
-        now = datetime.now
+        now = datetime.now()
 
         # 构建目标时间对象
         target_time = now.replace(
@@ -46,8 +46,8 @@ class CheckDeadline(CustomRecognition):
           
           # 获取用户参数
           params = argv.custom_recognition_param
-          target_hour = int(params.get("end_hour",23))
-          target_minute = int(params.get("end_minute",59))
+          target_hour = int(params.get("target_hour",23))
+          target_minute = int(params.get("target_minute",59))
 
           # 调用判断
           should_stop = is_after_target_time(target_hour,target_minute)

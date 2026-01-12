@@ -3,12 +3,12 @@
     "$__mpe_code": {
       "filePath": "D:\\Projects\\MSA\\assets\\resource\\pipeline\\世界BOSS.json",
       "filename": "世界BOSS",
-      "lastSyncTime": 1768221554813,
+      "lastSyncTime": 1768224514536,
       "prefix": "",
       "savedViewport": {
-        "x": -1321,
-        "y": 13,
-        "zoom": 0.61
+        "x": -1306,
+        "y": -732,
+        "zoom": 0.57
       },
       "version": "v0.15.2"
     }
@@ -182,11 +182,11 @@
       "type": "Click"
     },
     "next": [
-      "BOSS战斗失败",
       {
         "jump_back": true,
         "name": "BOSS界面重试"
-      }
+      },
+      "BOSS战斗失败"
     ],
     "on_error": [
       "开始BOSS循环"
@@ -270,11 +270,11 @@
       "type": "Click"
     },
     "next": [
-      "未进入BOSS战",
       {
         "jump_back": true,
         "name": "BOSS界面重试"
       },
+      "未进入BOSS战",
       "关闭BOSS吃药弹窗"
     ],
     "on_error": [
@@ -314,12 +314,12 @@
       "type": "Click"
     },
     "next": [
-      "开始BOSS吃药",
-      "未进入BOSS战",
       {
         "jump_back": true,
         "name": "BOSS界面重试"
       },
+      "开始BOSS吃药",
+      "未进入BOSS战",
       "BOSS跳过"
     ],
     "on_error": [
@@ -439,13 +439,13 @@
       "type": "Click"
     },
     "next": [
-      "判断停止BOSS战",
-      "继续BOSS战",
       {
         "jump_back": true,
         "name": "BOSS界面重试"
       },
-      "判断达到BOSS时限"
+      "判断停止BOSS战",
+      "判断达到BOSS时限",
+      "继续BOSS战"
     ],
     "recognition": {
       "param": {},
@@ -639,11 +639,11 @@
       "type": "DoNothing"
     },
     "next": [
-      "关闭BOSS吃药弹窗",
       {
         "jump_back": true,
         "name": "BOSS界面重试"
-      }
+      },
+      "关闭BOSS吃药弹窗"
     ],
     "on_error": [
       "开始BOSS循环"
@@ -684,12 +684,12 @@
       "type": "DoNothing"
     },
     "next": [
-      "开始选择BOSS卡组",
       {
         "jump_back": true,
         "name": "BOSS界面重试"
       },
-      "判断暂停BOSS战"
+      "判断暂停BOSS战",
+      "开始选择BOSS卡组"
     ],
     "recognition": {
       "param": {},
