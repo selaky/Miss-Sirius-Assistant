@@ -22,13 +22,28 @@ npx prettier --write "assets/**/*.json"
 
 ### MAA Framework Pipeline 机制
 
-项目基于 MAA Framework 的任务流水线（Pipeline）协议。Pipeline 由 JSON 文件定义，每个节点包含：
+执行逻辑
+流程控制机制
+任务触发
 
-- `recognition`: 识别算法（TemplateMatch、OCR、DirectHit、Custom 等）
-- `action`: 执行动作（Click、Swipe、DoNothing、Custom、StopTask 等）
-- `next`: 后继节点列表（按顺序检测，首个匹配成功的节点被执行）
+通过 tasker.post_task 接口指定入口节点启动任务
+顺序检测
 
-执行流程：入口节点 → 顺序检测 next 列表 → 匹配成功则执行 action → 切换到匹配节点继续循环。
+对当前节点的 next 列表进行顺序检测
+依次尝试识别每个子节点配置的 recognition 特征
+中断机制
+
+当检测到某个子节点匹配成功时，立即终止后续节点检测
+执行匹配节点的 action 定义的操作
+后继处理
+
+操作执行完成后，将激活节点切换为当前节点
+重复执行上述检测流程
+终止条件
+当满足以下任意条件时，任务流程终止：
+
+当前节点的 next 列表为空
+所有后继节点持续检测失败直至超时
 
 ### 目录结构
 

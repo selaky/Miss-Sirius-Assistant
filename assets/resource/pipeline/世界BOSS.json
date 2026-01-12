@@ -1,23 +1,23 @@
 {
   "$__mpe_config_世界BOSS": {
     "$__mpe_code": {
-      "filePath": "D:\\Projects\\MSA\\assets\\resource\\pipeline/世界BOSS.json",
+      "filePath": "D:\\Projects\\MSA\\assets\\resource\\pipeline\\世界BOSS.json",
       "filename": "世界BOSS",
-      "lastSyncTime": 1768134890731,
+      "lastSyncTime": 1768213188752,
       "prefix": "",
       "savedViewport": {
-        "x": 89,
-        "y": 216,
-        "zoom": 0.53
+        "x": 137,
+        "y": -296,
+        "zoom": 0.61
       },
-      "version": "v0.14.2"
+      "version": "v0.15.2"
     }
   },
   "BOSS大恢复药": {
     "$__mpe_code": {
       "position": {
-        "x": 3600,
-        "y": 106
+        "x": 0,
+        "y": 448
       }
     },
     "action": {
@@ -42,8 +42,8 @@
   "BOSS小恢复药1": {
     "$__mpe_code": {
       "position": {
-        "x": 3300,
-        "y": 1114
+        "x": 2700,
+        "y": 416
       }
     },
     "action": {
@@ -68,8 +68,8 @@
   "BOSS小恢复药2": {
     "$__mpe_code": {
       "position": {
-        "x": 3600,
-        "y": 1114
+        "x": 3000,
+        "y": 416
       }
     },
     "action": {
@@ -94,13 +94,16 @@
   "BOSS战斗失败": {
     "$__mpe_code": {
       "position": {
-        "x": 3300,
-        "y": 262
+        "x": 2697,
+        "y": 1919
       }
     },
     "action": {
       "param": {},
       "type": "Click"
+    },
+    "focus": {
+      "Node.Action.Succeeded": "顺利进行一场 boss 战"
     },
     "next": [
       "BOSS计数增加"
@@ -123,8 +126,8 @@
   "BOSS界面重试": {
     "$__mpe_code": {
       "position": {
-        "x": 4500,
-        "y": 1200
+        "x": 4060,
+        "y": 1488
       }
     },
     "action": {
@@ -149,16 +152,18 @@
   "BOSS计数增加": {
     "$__mpe_code": {
       "position": {
-        "x": 3600,
-        "y": 295
+        "x": 3000,
+        "y": 1945
       }
     },
     "action": {
-      "param": {},
-      "type": "DoNothing"
+      "param": {
+        "custom_action": "add_boss_battles"
+      },
+      "type": "Custom"
     },
     "next": [
-      "判断BOSS操作"
+      "开始BOSS循环"
     ],
     "recognition": {
       "param": {},
@@ -168,8 +173,8 @@
   "BOSS跳过": {
     "$__mpe_code": {
       "position": {
-        "x": 3000,
-        "y": 678
+        "x": 2400,
+        "y": 1681
       }
     },
     "action": {
@@ -184,7 +189,7 @@
       }
     ],
     "on_error": [
-      "判断BOSS操作"
+      "开始BOSS循环"
     ],
     "recognition": {
       "param": {
@@ -201,11 +206,63 @@
       "type": "TemplateMatch"
     }
   },
+  "BossPage": {
+    "$__mpe_code": {
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    "action": {
+      "param": {},
+      "type": "DoNothing"
+    },
+    "recognition": {
+      "param": {
+        "roi": [
+          45,
+          196,
+          112,
+          58
+        ],
+        "template": [
+          "BOSS/我的排名.png"
+        ]
+      },
+      "type": "TemplateMatch"
+    }
+  },
+  "CurrentRank": {
+    "$__mpe_code": {
+      "position": {
+        "x": 0,
+        "y": 223
+      }
+    },
+    "action": {
+      "param": {},
+      "type": "Click"
+    },
+    "recognition": {
+      "param": {
+        "expected": [
+          ""
+        ],
+        "roi": [
+          83,
+          241,
+          168,
+          29
+        ]
+      },
+      "type": "OCR"
+    }
+  },
   "关闭BOSS吃药弹窗": {
     "$__mpe_code": {
       "position": {
-        "x": 4200,
-        "y": 1343
+        "x": 600,
+        "y": 745
       }
     },
     "action": {
@@ -221,7 +278,7 @@
       "关闭BOSS吃药弹窗"
     ],
     "on_error": [
-      "判断BOSS操作"
+      "开始BOSS循环"
     ],
     "recognition": {
       "param": {
@@ -241,8 +298,8 @@
   "关闭BOSS弹窗": {
     "$__mpe_code": {
       "position": {
-        "x": 2700,
-        "y": 696
+        "x": 2100,
+        "y": 1074
       }
     },
     "action": {
@@ -266,18 +323,36 @@
       "BOSS跳过"
     ],
     "on_error": [
-      "判断BOSS操作"
+      "开始BOSS循环"
     ],
     "recognition": {
       "param": {},
       "type": "DirectHit"
     }
   },
-  "判断BOSS操作": {
+  "判断停止BOSS战": {
     "$__mpe_code": {
       "position": {
-        "x": 900,
-        "y": 0
+        "x": 3760,
+        "y": 662
+      }
+    },
+    "action": {
+      "param": {},
+      "type": "StopTask"
+    },
+    "recognition": {
+      "param": {
+        "custom_recognition": "should_boss_stop"
+      },
+      "type": "Custom"
+    }
+  },
+  "判断暂停BOSS战": {
+    "$__mpe_code": {
+      "position": {
+        "x": 4060,
+        "y": 2425
       }
     },
     "action": {
@@ -285,32 +360,21 @@
       "type": "DoNothing"
     },
     "next": [
-      {
-        "jump_back": true,
-        "name": "BOSS界面重试"
-      },
-      "进入BOSS分支"
+      "继续BOSS战"
     ],
+    "post_delay": 1000,
     "recognition": {
       "param": {
-        "roi": [
-          45,
-          196,
-          112,
-          58
-        ],
-        "template": [
-          "BOSS/我的排名.png"
-        ]
+        "custom_recognition": "should_boss_pause"
       },
-      "type": "TemplateMatch"
+      "type": "Custom"
     }
   },
   "开始BOSS吃药": {
     "$__mpe_code": {
       "position": {
-        "x": 3000,
-        "y": 89
+        "x": 2400,
+        "y": 399
       }
     },
     "action": {
@@ -339,16 +403,21 @@
   "开始BOSS循环": {
     "$__mpe_code": {
       "position": {
-        "x": 600,
-        "y": 0
+        "x": 3300,
+        "y": 2201
       }
     },
     "action": {
       "param": {},
-      "type": "DoNothing"
+      "type": "Click"
     },
     "next": [
-      "判断BOSS操作"
+      "判断停止BOSS战",
+      "继续BOSS战",
+      {
+        "jump_back": true,
+        "name": "BOSS界面重试"
+      }
     ],
     "recognition": {
       "param": {},
@@ -358,8 +427,8 @@
   "开始世界BOSS": {
     "$__mpe_code": {
       "position": {
-        "x": 0,
-        "y": 0
+        "x": 2700,
+        "y": 2201
       }
     },
     "action": {
@@ -377,8 +446,8 @@
   "开始选择BOSS卡组": {
     "$__mpe_code": {
       "position": {
-        "x": 1800,
-        "y": 522
+        "x": 1200,
+        "y": 900
       }
     },
     "action": {
@@ -396,30 +465,11 @@
       "type": "DirectHit"
     }
   },
-  "暂停BOSS战": {
-    "$__mpe_code": {
-      "position": {
-        "x": 1500,
-        "y": 329
-      }
-    },
-    "action": {
-      "param": {},
-      "type": "DoNothing"
-    },
-    "next": [
-      "判断BOSS操作"
-    ],
-    "recognition": {
-      "param": {},
-      "type": "DirectHit"
-    }
-  },
   "未进入BOSS战": {
     "$__mpe_code": {
       "position": {
-        "x": 4500,
-        "y": 1536
+        "x": 903,
+        "y": 864
       }
     },
     "action": {
@@ -447,8 +497,8 @@
   "点击BOSS卡组一": {
     "$__mpe_code": {
       "position": {
-        "x": 2100,
-        "y": 507
+        "x": 1500,
+        "y": 885
       }
     },
     "action": {
@@ -473,8 +523,8 @@
   "点击BOSS卡组三": {
     "$__mpe_code": {
       "position": {
-        "x": 2100,
-        "y": 885
+        "x": 1500,
+        "y": 1074
       }
     },
     "action": {
@@ -499,8 +549,8 @@
   "点击BOSS卡组二": {
     "$__mpe_code": {
       "position": {
-        "x": 2100,
-        "y": 696
+        "x": 1500,
+        "y": 1263
       }
     },
     "action": {
@@ -525,8 +575,8 @@
   "点击BOSS卡组四": {
     "$__mpe_code": {
       "position": {
-        "x": 2100,
-        "y": 1074
+        "x": 1500,
+        "y": 1452
       }
     },
     "action": {
@@ -551,8 +601,8 @@
   "结束BOSS吃药": {
     "$__mpe_code": {
       "position": {
-        "x": 3900,
-        "y": 1129
+        "x": 300,
+        "y": 553
       }
     },
     "action": {
@@ -567,24 +617,8 @@
       }
     ],
     "on_error": [
-      "判断BOSS操作"
+      "开始BOSS循环"
     ],
-    "recognition": {
-      "param": {},
-      "type": "DirectHit"
-    }
-  },
-  "结束BOSS战": {
-    "$__mpe_code": {
-      "position": {
-        "x": 1500,
-        "y": 0
-      }
-    },
-    "action": {
-      "param": {},
-      "type": "DoNothing"
-    },
     "recognition": {
       "param": {},
       "type": "DirectHit"
@@ -593,8 +627,8 @@
   "结束选择BOSS卡组": {
     "$__mpe_code": {
       "position": {
-        "x": 2400,
-        "y": 711
+        "x": 1800,
+        "y": 1089
       }
     },
     "action": {
@@ -612,8 +646,8 @@
   "继续BOSS战": {
     "$__mpe_code": {
       "position": {
-        "x": 1493,
-        "y": 519
+        "x": 3760,
+        "y": 2469
       }
     },
     "action": {
@@ -621,7 +655,12 @@
       "type": "DoNothing"
     },
     "next": [
-      "开始选择BOSS卡组"
+      "开始选择BOSS卡组",
+      {
+        "jump_back": true,
+        "name": "BOSS界面重试"
+      },
+      "判断暂停BOSS战"
     ],
     "recognition": {
       "param": {},
@@ -631,8 +670,8 @@
   "读取BOSS设置": {
     "$__mpe_code": {
       "position": {
-        "x": 297,
-        "y": -16
+        "x": 3000,
+        "y": 2171
       }
     },
     "action": {
@@ -647,27 +686,6 @@
     },
     "next": [
       "开始BOSS循环"
-    ],
-    "recognition": {
-      "param": {},
-      "type": "DirectHit"
-    }
-  },
-  "进入BOSS分支": {
-    "$__mpe_code": {
-      "position": {
-        "x": 1200,
-        "y": 0
-      }
-    },
-    "action": {
-      "param": {},
-      "type": "DoNothing"
-    },
-    "next": [
-      "继续BOSS战",
-      "暂停BOSS战",
-      "结束BOSS战"
     ],
     "recognition": {
       "param": {},
