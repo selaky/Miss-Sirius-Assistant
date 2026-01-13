@@ -7,13 +7,13 @@
     "name": "MSA",
     "label": "MSA",
     "title": "天狼星小助手",
-    "description": "MSA 是一款专门为《星纪元》开发的自动化辅助脚本，旨在简化重复操作，提升游戏体验。在此阶段，脚本已实现基础的核心自动化功能。",
+    "description": "Miss Sirius Assistant (MSA) 是一款专门为《星纪元》开发的自动化辅助脚本，旨在简化重复操作，提升游戏体验。在此阶段，脚本已实现基础的核心自动化功能。",
     // "contact": "QQ群: 123456789",
     "icon": "./logo.ico",
     "license": "MIT",
     // 填写项目地址和版本号可实现自动更新功能
-    "github": "https://github.com/selaky/MSA",
-    "version": "0.4.1",
+    "github": "https://github.com/selaky/Miss-Sirius-Assistant",
+    "version": "0.5.0",
     // Mirror酱为第三方分发服务，新项目默认关闭
     // 若有需要请联系 Mirror酱 开通，直接自行开启是无法使用的
     // "mirrorchyan_rid": "MaaXXX",
