@@ -1,16 +1,16 @@
 {
   "$__mpe_config_战斗": {
     "$__mpe_code": {
-      "filePath": "D:\\Projects\\MSA\\assets\\resource\\pipeline\\战斗.json",
+      "filePath": "D:\\Projects\\MSA\\assets\\resource\\pipeline\\跑图\\战斗.json",
       "filename": "战斗",
-      "lastSyncTime": 1767839149203,
+      "lastSyncTime": 1768278622916,
       "prefix": "",
       "savedViewport": {
-        "x": 197,
-        "y": 82,
-        "zoom": 0.44
+        "x": 132,
+        "y": -303,
+        "zoom": 0.57
       },
-      "version": "v0.14.2"
+      "version": "v0.15.2"
     }
   },
   "$__mpe_external_BC不足_战斗": {
@@ -261,9 +261,9 @@
         "jump_back": true,
         "name": "意外处理"
       },
+      "BC不足",
       "普通卡组",
-      "跳过战斗",
-      "BC不足"
+      "跳过战斗"
     ],
     "on_error": [
       "跑图循环开始"
@@ -299,8 +299,8 @@
         "jump_back": true,
         "name": "意外处理"
       },
-      "暴走卡组",
       "BC不足",
+      "暴走卡组",
       "跳过战斗"
     ],
     "on_error": [
