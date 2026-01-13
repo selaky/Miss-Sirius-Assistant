@@ -225,8 +225,8 @@
       "Node.Recognition.Succeeded": "使用免费状态回复"
     },
     "next": [
-      "恢复点击完毕",
-      "免费恢复"
+      "免费恢复",
+      "恢复点击完毕"
     ],
     "rate_limit": 200,
     "recognition": {
@@ -497,11 +497,11 @@
       "type": "DoNothing"
     },
     "next": [
-      "关闭恢复界面",
       {
         "jump_back": true,
         "name": "意外处理"
-      }
+      },
+      "关闭恢复界面"
     ],
     "rate_limit": 100,
     "recognition": {

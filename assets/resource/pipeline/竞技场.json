@@ -71,12 +71,12 @@
       "type": "DoNothing"
     },
     "next": [
-      "星币提升体力",
-      "选择竞技场战斗卡组",
       {
         "jump_back": true,
         "name": "意外处理"
-      }
+      },
+      "星币提升体力",
+      "选择竞技场战斗卡组"
     ],
     "recognition": {
       "param": {
@@ -117,12 +117,12 @@
     },
     "enabled": false,
     "next": [
-      "选择竞技场战斗卡组",
-      "星币提升体力",
       {
         "jump_back": true,
         "name": "意外处理"
-      }
+      },
+      "星币提升体力",
+      "选择竞技场战斗卡组"
     ],
     "recognition": {
       "param": {
@@ -238,11 +238,11 @@
       "type": "DoNothing"
     },
     "next": [
-      "记录竞技场积分",
       {
         "jump_back": true,
         "name": "意外处理"
-      }
+      },
+      "记录竞技场积分"
     ],
     "on_error": [
       "不在竞技场界面"
@@ -441,12 +441,12 @@
       "type": "DoNothing"
     },
     "next": [
-      "选择竞技场防御卡组",
-      "设置竞技场数据统计",
       {
         "jump_back": true,
         "name": "意外处理"
-      }
+      },
+      "选择竞技场防御卡组",
+      "设置竞技场数据统计"
     ],
     "recognition": {
       "param": {},
@@ -465,11 +465,11 @@
       "type": "Click"
     },
     "next": [
-      "点击匹配",
       {
         "jump_back": true,
         "name": "意外处理"
-      }
+      },
+      "点击匹配"
     ],
     "recognition": {
       "param": {

@@ -273,11 +273,11 @@
       "开始战斗",
       {
         "jump_back": true,
-        "name": "保底点击-确定"
+        "name": "跑图获得卡牌"
       },
       {
         "jump_back": true,
-        "name": "跑图获得卡牌"
+        "name": "保底点击-确定"
       }
     ],
     "rate_limit": 200,

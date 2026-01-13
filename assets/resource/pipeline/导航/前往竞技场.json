@@ -94,8 +94,8 @@
         "jump_back": true,
         "name": "意外处理"
       },
-      "对战分流",
-      "开始前往对战"
+      "开始前往对战",
+      "对战分流"
     ],
     "rate_limit": 10,
     "recognition": {
