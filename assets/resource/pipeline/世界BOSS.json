@@ -270,12 +270,12 @@
       "type": "Click"
     },
     "next": [
+      "关闭BOSS吃药弹窗",
       {
         "jump_back": true,
         "name": "BOSS界面重试"
       },
-      "未进入BOSS战",
-      "关闭BOSS吃药弹窗"
+      "未进入BOSS战"
     ],
     "on_error": [
       "开始BOSS循环"
@@ -505,8 +505,8 @@
       "type": "DoNothing"
     },
     "next": [
-      "开始选择BOSS卡组",
-      "判断达到BOSS时限"
+      "判断达到BOSS时限",
+      "开始选择BOSS卡组"
     ],
     "recognition": {
       "param": {

@@ -11,6 +11,7 @@ pipeline 节点 next 优先级检查工具
 用法示例：
   python my_tools/check_priority.py
   python my_tools/check_priority.py --strict  # 严格模式
+  python my_tools/check_priority.py --fix     # 自动修正
 """
 
 from __future__ import annotations
@@ -173,6 +174,24 @@ class PriorityIssue:
         return "\n".join(lines)
 
 
+@dataclass
+class FixResult:
+    """修正结果"""
+    node_name: str
+    file_path: Path
+    original_next: list[Any]
+    fixed_next: list[Any]
+
+    def format(self) -> str:
+        original_names = [_get_ref_name(r) or str(r) for r in self.original_next]
+        fixed_names = [_get_ref_name(r) or str(r) for r in self.fixed_next]
+        return (
+            f"[FIXED] 节点={self.node_name} ({self.file_path.as_posix()})\n"
+            f"  修正前: {' -> '.join(original_names)}\n"
+            f"  修正后: {' -> '.join(fixed_names)}"
+        )
+
+
 class PriorityChecker:
     """优先级检查器"""
 
@@ -255,6 +274,56 @@ class PriorityChecker:
 
         return issues
 
+    def fix_node(
+        self,
+        node_name: str,
+        node_obj: dict,
+        all_nodes: dict[str, dict],
+    ) -> Optional[list[Any]]:
+        """
+        修正单个节点的 next 列表顺序。
+
+        使用稳定排序，在相同优先级内保持原有顺序。
+
+        Returns:
+            修正后的 next 列表，如果无需修正则返回 None
+        """
+        next_field = node_obj.get("next")
+        if not next_field:
+            return None
+
+        # 确保 next 是列表
+        original_is_list = isinstance(next_field, list)
+        if not original_is_list:
+            next_field = [next_field]
+
+        if len(next_field) < 2:
+            return None  # 只有一个或零个引用，无需修正
+
+        # 为每个引用计算优先级，保留原始索引以实现稳定排序
+        refs_with_info: list[tuple[int, int, Any]] = []  # (原始索引, 优先级, 原始引用对象)
+
+        for idx, ref in enumerate(next_field):
+            ref_name = _get_ref_name(ref)
+            if ref_name:
+                priority, _ = self.get_priority(node_name, node_obj, ref_name, all_nodes)
+            else:
+                priority = 999  # 无法解析的引用放到最后
+            refs_with_info.append((idx, priority, ref))
+
+        # 稳定排序：先按优先级，相同优先级保持原始顺序（通过原始索引）
+        sorted_refs = sorted(refs_with_info, key=lambda x: (x[1], x[0]))
+
+        # 检查是否需要修正
+        original_indices = [r[0] for r in refs_with_info]
+        sorted_indices = [r[0] for r in sorted_refs]
+
+        if original_indices == sorted_indices:
+            return None  # 顺序已正确，无需修正
+
+        # 返回修正后的列表
+        return [r[2] for r in sorted_refs]
+
 
 # ============================================================================
 # 文件加载工具
@@ -308,6 +377,66 @@ def collect_all_nodes(pipeline_dir: Path) -> tuple[dict[str, dict], dict[str, Pa
     return all_nodes, node_to_file
 
 
+def fix_pipeline_files(
+    pipeline_dir: Path,
+    all_nodes: dict[str, dict],
+    node_to_file: dict[str, Path],
+    checker: PriorityChecker,
+) -> list[FixResult]:
+    """
+    修正所有 pipeline 文件中的 next 优先级顺序。
+
+    Returns:
+        修正结果列表
+    """
+    fix_results: list[FixResult] = []
+
+    # 按文件分组需要修正的节点
+    file_fixes: dict[Path, list[tuple[str, list[Any], list[Any]]]] = {}
+
+    for node_name, node_obj in all_nodes.items():
+        file_path = node_to_file.get(node_name)
+        if not file_path:
+            continue
+
+        fixed_next = checker.fix_node(node_name, node_obj, all_nodes)
+        if fixed_next is not None:
+            original_next = node_obj.get("next", [])
+            if not isinstance(original_next, list):
+                original_next = [original_next]
+
+            if file_path not in file_fixes:
+                file_fixes[file_path] = []
+            file_fixes[file_path].append((node_name, original_next, fixed_next))
+
+            fix_results.append(FixResult(
+                node_name=node_name,
+                file_path=file_path,
+                original_next=original_next,
+                fixed_next=fixed_next,
+            ))
+
+    # 逐文件修正并写回
+    for file_path, fixes in file_fixes.items():
+        obj, err = load_json_file(file_path)
+        if err or not isinstance(obj, dict):
+            continue
+
+        # 应用修正
+        for node_name, _, fixed_next in fixes:
+            if node_name in obj and isinstance(obj[node_name], dict):
+                obj[node_name]["next"] = fixed_next
+
+        # 写回文件（保持格式）
+        try:
+            text = json.dumps(obj, ensure_ascii=False, indent=2)
+            file_path.write_text(text, encoding="utf-8")
+        except (OSError, TypeError) as e:
+            print(f"[ERROR] 写入文件失败 {file_path}: {e}")
+
+    return fix_results
+
+
 # ============================================================================
 # 主函数
 # ============================================================================
@@ -338,6 +467,11 @@ def main(argv: list[str]) -> int:
         "--show-rules",
         action="store_true",
         help="显示当前的优先级规则列表",
+    )
+    parser.add_argument(
+        "--fix",
+        action="store_true",
+        help="自动修正优先级顺序（使用稳定排序）",
     )
     args = parser.parse_args(argv)
 
@@ -370,10 +504,22 @@ def main(argv: list[str]) -> int:
         issues = checker.check_node(node_name, node_obj, all_nodes, file_path)
         all_issues.extend(issues)
 
-    # 输出结果
+    # 输出检查结果
     errors = [i for i in all_issues if i.level == "ERROR"]
     warns = [i for i in all_issues if i.level == "WARN"]
 
+    # 如果指定了 --fix，执行修正
+    if args.fix and warns:
+        fix_results = fix_pipeline_files(pipeline_dir, all_nodes, node_to_file, checker)
+
+        for result in fix_results:
+            print(result.format())
+            print()
+
+        print(f"修正完成：共修正 {len(fix_results)} 个节点")
+        return 0
+
+    # 仅检查模式：输出问题
     for issue in all_issues:
         print(issue.format())
         print()
