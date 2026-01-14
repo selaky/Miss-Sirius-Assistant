@@ -60,6 +60,11 @@ bool MsaControlUnit::connect()
     return result;
 }
 
+bool MsaControlUnit::connected() const
+{
+    return original_->connected();
+}
+
 bool MsaControlUnit::request_uuid(std::string& uuid)
 {
     return original_->request_uuid(uuid);
