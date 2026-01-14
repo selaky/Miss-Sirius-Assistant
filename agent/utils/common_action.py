@@ -2,7 +2,6 @@ from maa.agent.agent_server import AgentServer
 from maa.custom_action import CustomAction
 from maa.context import Context
 import logging
-import json
 from . import common_func
 
 @AgentServer.custom_action("set_next")

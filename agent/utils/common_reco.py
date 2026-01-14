@@ -2,7 +2,6 @@ from maa.agent.agent_server import AgentServer
 from maa.custom_recognition import CustomRecognition
 from maa.context import Context
 import logging
-import json
 from . import common_func
 
 @AgentServer.custom_recognition("check_deadline")
