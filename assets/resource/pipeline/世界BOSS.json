@@ -3,12 +3,12 @@
     "$__mpe_code": {
       "filePath": "D:\\Projects\\MSA\\assets\\resource\\pipeline\\世界BOSS.json",
       "filename": "世界BOSS",
-      "lastSyncTime": 1768385130954,
+      "lastSyncTime": 1768390646806,
       "prefix": "",
       "savedViewport": {
-        "x": -1624,
-        "y": -1144,
-        "zoom": 0.7
+        "x": -155,
+        "y": 7,
+        "zoom": 0.61
       },
       "version": "v0.15.2"
     }
@@ -406,6 +406,9 @@
       "type": "DoNothing"
     },
     "enabled": true,
+    "on_error": [
+      "开始前往主界面等待BOSS"
+    ],
     "pre_delay": 500,
     "recognition": {
       "param": {
@@ -577,8 +580,8 @@
   "开始等待世界BOSS": {
     "$__mpe_code": {
       "position": {
-        "x": 1800,
-        "y": 311
+        "x": 1836,
+        "y": 320
       }
     },
     "action": {
@@ -587,7 +590,10 @@
     },
     "next": [
       "准点进入 boss 界面",
-      "等待世界BOSS"
+      {
+        "jump_back": true,
+        "name": "等待世界BOSS"
+      }
     ],
     "rate_limit": 100,
     "recognition": {
@@ -788,8 +794,8 @@
   "等待世界BOSS": {
     "$__mpe_code": {
       "position": {
-        "x": 2100,
-        "y": 120
+        "x": 2170,
+        "y": 109
       }
     },
     "action": {
