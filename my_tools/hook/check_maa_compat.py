@@ -50,7 +50,15 @@ OFFICIAL_API_URL = f"{MAA_GITHUB_RAW}/source/include/ControlUnit/ControlUnitAPI.
 LOCAL_PATHS = {
     "control_unit_h": "hook/proxy/control_unit.h",
     "maa_def_h": "deps/include/MaaFramework/MaaDef.h",
+    "official_dll": "deps/bin/MaaWin32ControlUnit.dll",
+    "proxy_dll": "hook/proxy/build/MaaWin32ControlUnit.dll",
 }
+
+# 期望的 DLL 导出函数（代理 DLL 必须导出这些函数）
+EXPECTED_DLL_EXPORTS = [
+    "MaaWin32ControlUnitCreate",
+    "MaaWin32ControlUnitDestroy",
+]
 
 # 缓存文件
 CACHE_FILES = {
@@ -79,9 +87,16 @@ class VirtualFunction:
         return self.name == other.name and self.signature == other.signature
 
     def signature_match(self, other: "VirtualFunction") -> bool:
-        """检查签名是否匹配（忽略空格差异）"""
+        """检查签名是否匹配（忽略空格和注释差异）"""
         def normalize(s):
-            return re.sub(r'\s+', ' ', s).strip()
+            # 移除 C 风格注释 /*...*/
+            s = re.sub(r'/\*.*?\*/', '', s)
+            # 规范化空格（多个空格变一个）
+            s = re.sub(r'\s+', ' ', s)
+            # 移除括号内侧的空格: "( x" -> "(x", "x )" -> "x)"
+            s = re.sub(r'\(\s+', '(', s)
+            s = re.sub(r'\s+\)', ')', s)
+            return s.strip()
         return normalize(self.signature) == normalize(other.signature)
 
 
@@ -106,12 +121,38 @@ class VTableDiff:
 
 
 @dataclass
+class DllExportDiff:
+    """DLL 导出函数差异"""
+    official_exports: list = field(default_factory=list)  # 官方 DLL 导出
+    proxy_exports: list = field(default_factory=list)     # 代理 DLL 导出
+    missing_in_proxy: list = field(default_factory=list)  # 代理缺失的导出
+    extra_in_proxy: list = field(default_factory=list)    # 代理多出的导出
+    official_dll_exists: bool = True
+    proxy_dll_exists: bool = True
+
+    @property
+    def has_diff(self) -> bool:
+        return bool(self.missing_in_proxy)
+
+    @property
+    def is_critical(self) -> bool:
+        """是否是严重问题（缺失必要导出）"""
+        return bool(self.missing_in_proxy)
+
+
+@dataclass
 class CompatReport:
     """兼容性报告"""
     compatible: bool
     official_vtable: list
     local_vtable: list
     diff: VTableDiff
+    # Win32ControlUnitAPI 派生类检测
+    official_win32_vtable: list = field(default_factory=list)
+    local_win32_vtable: list = field(default_factory=list)
+    win32_diff: VTableDiff = field(default_factory=VTableDiff)
+    # DLL 导出检测
+    dll_diff: DllExportDiff = field(default_factory=DllExportDiff)
     official_source: str = ""
     local_source: str = ""
     fetch_time: str = ""
@@ -315,6 +356,78 @@ def compare_vtables(official: list[VirtualFunction],
     return diff
 
 
+# ========== DLL 导出检测 ==========
+
+def get_dll_exports(dll_path: Path) -> list[str]:
+    """
+    获取 DLL 的导出函数列表
+
+    复用 analyze_dll_exports.py 的逻辑
+    """
+    if not dll_path.exists():
+        return []
+
+    # 动态导入同目录的分析模块
+    import importlib.util
+    module_path = SCRIPT_DIR / "analyze_dll_exports.py"
+    spec = importlib.util.spec_from_file_location("analyze_dll_exports", module_path)
+    analyze_dll_exports = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(analyze_dll_exports)
+
+    analyzer = analyze_dll_exports.DllAnalyzer(str(dll_path))
+    result = analyzer.analyze()
+
+    if result.get("error"):
+        return []
+
+    return [exp.get("name") for exp in result.get("exports", []) if exp.get("name")]
+
+
+def compare_dll_exports() -> DllExportDiff:
+    """
+    对比官方 DLL 和代理 DLL 的导出函数
+    """
+    diff = DllExportDiff()
+
+    official_path = PROJECT_ROOT / LOCAL_PATHS["official_dll"]
+    proxy_path = PROJECT_ROOT / LOCAL_PATHS["proxy_dll"]
+
+    # 检查文件是否存在
+    diff.official_dll_exists = official_path.exists()
+    diff.proxy_dll_exists = proxy_path.exists()
+
+    if not diff.official_dll_exists:
+        return diff
+
+    # 获取导出函数
+    diff.official_exports = get_dll_exports(official_path)
+
+    if diff.proxy_dll_exists:
+        diff.proxy_exports = get_dll_exports(proxy_path)
+
+    # 对比（只检查必要的导出函数）
+    official_set = set(diff.official_exports)
+    proxy_set = set(diff.proxy_exports) if diff.proxy_dll_exists else set()
+
+    # 代理 DLL 必须导出官方 DLL 的所有函数
+    for func in EXPECTED_DLL_EXPORTS:
+        if func in official_set and func not in proxy_set:
+            diff.missing_in_proxy.append(func)
+
+    # 检查官方新增的导出（可能需要代理）
+    for func in official_set:
+        if func.startswith("MaaWin32") and func not in proxy_set:
+            if func not in diff.missing_in_proxy:
+                diff.missing_in_proxy.append(func)
+
+    # 代理多出的导出（信息性）
+    for func in proxy_set:
+        if func not in official_set:
+            diff.extra_in_proxy.append(func)
+
+    return diff
+
+
 # ========== 报告生成 ==========
 
 def format_report(report: CompatReport, verbose: bool = False) -> str:
@@ -377,20 +490,81 @@ def format_report(report: CompatReport, verbose: bool = False) -> str:
             for vf in diff.extra_in_local:
                 lines.append(f"  - [{vf.index:2d}] {vf.signature}")
 
+    # Win32ControlUnitAPI 派生类检测
+    win32_diff = report.win32_diff
+    if report.official_win32_vtable or report.local_win32_vtable:
+        lines.append("\n" + "-" * 70)
+        lines.append("Win32ControlUnitAPI 派生类检测")
+        lines.append("-" * 70)
+        lines.append(f"\n官方虚函数数量: {len(report.official_win32_vtable)}")
+        lines.append(f"本地虚函数数量: {len(report.local_win32_vtable)}")
+
+        if not win32_diff.has_diff:
+            lines.append("\n[OK] Win32ControlUnitAPI 虚函数表匹配")
+        else:
+            if win32_diff.missing_in_local:
+                lines.append(f"\n[严重] Win32 派生类缺失 {len(win32_diff.missing_in_local)} 个虚函数:")
+                for vf in win32_diff.missing_in_local:
+                    lines.append(f"  + [{vf.index:2d}] {vf.signature}")
+
+    # DLL 导出检测报告
+    dll_diff = report.dll_diff
+    lines.append("\n" + "-" * 70)
+    lines.append("DLL 导出函数检测")
+    lines.append("-" * 70)
+
+    if not dll_diff.official_dll_exists:
+        lines.append("\n[跳过] 官方 DLL 不存在，无法检测导出函数")
+    elif not dll_diff.proxy_dll_exists:
+        lines.append("\n[跳过] 代理 DLL 未编译，无法检测导出函数")
+        lines.append(f"  官方 DLL 导出: {len(dll_diff.official_exports)} 个函数")
+        if verbose:
+            for func in sorted(dll_diff.official_exports):
+                lines.append(f"    - {func}")
+    else:
+        lines.append(f"\n官方 DLL 导出: {len(dll_diff.official_exports)} 个函数")
+        lines.append(f"代理 DLL 导出: {len(dll_diff.proxy_exports)} 个函数")
+
+        if not dll_diff.has_diff:
+            lines.append("\n[OK] DLL 导出函数匹配")
+        else:
+            if dll_diff.missing_in_proxy:
+                lines.append(f"\n[严重] 代理 DLL 缺失 {len(dll_diff.missing_in_proxy)} 个导出函数:")
+                for func in dll_diff.missing_in_proxy:
+                    lines.append(f"  + {func}")
+
+        if dll_diff.extra_in_proxy and verbose:
+            lines.append(f"\n[信息] 代理 DLL 多出 {len(dll_diff.extra_in_proxy)} 个导出函数:")
+            for func in dll_diff.extra_in_proxy:
+                lines.append(f"  - {func}")
+
     # 结论和建议
     lines.append("\n" + "=" * 70)
 
-    if report.compatible:
+    # 综合判断兼容性
+    vtable_ok = not report.diff.is_abi_breaking
+    dll_ok = not dll_diff.is_critical or not dll_diff.proxy_dll_exists  # 代理未编译时不算错误
+
+    if report.compatible and dll_ok:
         lines.append("结论: [兼容] Hook 代理方案应该可以正常工作")
     else:
-        lines.append("结论: [不兼容] 需要更新 hook/proxy/control_unit.h")
+        lines.append("结论: [不兼容] 需要更新代理实现")
         lines.append("")
         lines.append("修复步骤:")
-        lines.append("  1. 对照上方差异，更新 hook/proxy/control_unit.h 中的 ControlUnitAPI 类")
-        lines.append("  2. 确保虚函数顺序与官方完全一致（ABI 兼容的关键）")
-        lines.append("  3. 更新 MsaControlUnit 类实现新增的虚函数")
-        lines.append("  4. 重新编译 proxy DLL")
-        lines.append("  5. 测试验证")
+        step = 1
+        if not vtable_ok:
+            lines.append(f"  {step}. 更新 hook/proxy/control_unit.h 中的 ControlUnitAPI 类")
+            step += 1
+            lines.append(f"  {step}. 确保虚函数顺序与官方完全一致（ABI 兼容的关键）")
+            step += 1
+            lines.append(f"  {step}. 更新 MsaControlUnit 类实现新增的虚函数")
+            step += 1
+        if dll_diff.is_critical and dll_diff.proxy_dll_exists:
+            lines.append(f"  {step}. 在代理 DLL 中导出缺失的函数")
+            step += 1
+        lines.append(f"  {step}. 重新编译 proxy DLL")
+        step += 1
+        lines.append(f"  {step}. 测试验证")
         lines.append("")
         lines.append("官方源码参考:")
         lines.append(f"  {OFFICIAL_API_URL}")
@@ -426,6 +600,15 @@ def format_json(report: CompatReport) -> str:
             ],
             "order_changed": report.diff.order_changed,
             "signature_changed": report.diff.signature_changed,
+        },
+        "dll_diff": {
+            "official_dll_exists": report.dll_diff.official_dll_exists,
+            "proxy_dll_exists": report.dll_diff.proxy_dll_exists,
+            "official_exports": report.dll_diff.official_exports,
+            "proxy_exports": report.dll_diff.proxy_exports,
+            "missing_in_proxy": report.dll_diff.missing_in_proxy,
+            "extra_in_proxy": report.dll_diff.extra_in_proxy,
+            "is_critical": report.dll_diff.is_critical,
         },
         "error": report.error,
     }
@@ -467,11 +650,25 @@ def check_compatibility(offline: bool = False) -> CompatReport:
             report.compatible = False
             return report
 
-        # 对比
+        # 对比 ControlUnitAPI
         report.diff = compare_vtables(report.official_vtable, report.local_vtable)
 
-        # 判断兼容性
-        report.compatible = not report.diff.is_abi_breaking
+        # 解析并对比 Win32ControlUnitAPI（派生类可能新增虚函数）
+        report.official_win32_vtable = parse_vtable(official_content, "Win32ControlUnitAPI")
+        report.local_win32_vtable = parse_vtable(local_content, "Win32ControlUnitAPI")
+        if report.official_win32_vtable and report.local_win32_vtable:
+            report.win32_diff = compare_vtables(
+                report.official_win32_vtable, report.local_win32_vtable
+            )
+
+        # DLL 导出检测
+        report.dll_diff = compare_dll_exports()
+
+        # 判断兼容性（基类和派生类都要 ABI 兼容）
+        report.compatible = (
+            not report.diff.is_abi_breaking and
+            not report.win32_diff.is_abi_breaking
+        )
 
     except Exception as e:
         report.error = str(e)
