@@ -38,6 +38,7 @@ public:
     virtual ~ControlUnitAPI() = default;
 
     virtual bool connect() = 0;
+    virtual bool connected() const = 0;
     virtual bool request_uuid(std::string& uuid) = 0;
     virtual MaaControllerFeature get_features() const = 0;
     virtual bool start_app(const std::string& intent) = 0;
@@ -90,6 +91,7 @@ public:
     // ========== 委托给原版的方法 ==========
 
     bool connect() override;
+    bool connected() const override;
     bool request_uuid(std::string& uuid) override;
     MaaControllerFeature get_features() const override;
     bool start_app(const std::string& intent) override;
