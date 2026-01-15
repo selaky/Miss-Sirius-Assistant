@@ -7,6 +7,7 @@ from maa.custom_recognition import CustomRecognition
 from maa.context import Context
 from . import boss_manager
 import logging
+from utils.common_func import extract_number_from_ocr
 
 
 @AgentServer.custom_recognition("should_boss_stop")
@@ -53,27 +54,14 @@ class ShouldBossPause(CustomRecognition):
             msg = "未识别到 boss 界面."
             return CustomRecognition.AnalyzeResult(box=None, detail=msg)
         
-        # 获取当前排名
+        # ocr 获取当前排名
         current_rank = 999
-        reco_rank = context.run_recognition("CurrentRank",argv.image)
-
-        # 数字 OCR 处理抄 M9A 的代码
-        if reco_rank:
-            if not reco_rank.hit: # 没识别到排名数字,可能还没打过，先去打一场。
-                msg = "未识别到排名,可能尚未进行初次战斗或识别失败,将会继续战斗流程。"
-                return CustomRecognition.AnalyzeResult(box=None, detail=msg)
-            else:
-                best = getattr(reco_rank,"best_result",None)
-                if best:
-                    text = getattr(best,"text","")
-                    digits = "".join(ch for ch in (text or "") if ch.isdigit())
-                    if digits:
-                        current_rank = int(digits)
-                    else:
-                        return CustomRecognition.AnalyzeResult(box=None, detail="OCR警告：识别到区域但无法提取有效数字")
-                else:
-                    msg = "OCR警告：未提取到 best_result,保险起见先进行战斗。"
-                    return CustomRecognition.AnalyzeResult(box=None, detail=msg)
+        try:
+            current_rank = extract_number_from_ocr(context,argv.image,"CurrentRank")
+        except ValueError as e:
+            msg = f"[{argv.node_name}] 排名识别失败，使用默认值继续: {e}"
+            logging.error(msg)
+            return CustomRecognition.AnalyzeResult(box=None, detail=msg)
 
         # 更新储存的当前排名
         stats.current_rank = current_rank

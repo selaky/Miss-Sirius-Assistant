@@ -128,3 +128,37 @@ def dynamic_set_focus(context: Context, target_node: str, trigger: str, focus_ms
         }
     })
     return True
+
+def extract_number_from_ocr(context: Context, image, task_name: str) -> int:
+    """
+    通用工具：执行指定 OCR 任务并提取其中的纯数字。
+    
+    Args:
+        context: MFW 的上下文对象
+        image: 当前画面的图片数据
+        task_name: pipeline.json 中定义的 OCR 任务名称
+        
+    Returns:
+        int: 提取到的数字
+        None: 如果没识别到、没文字、或文字里没有数字，则返回 None
+    """
+    # 执行 ocr 节点
+    reco_detail = context.run_recognition(task_name,image)
+
+    # 校验没有结果或未命中的情况
+    if not reco_detail or not reco_detail.hit:
+        raise ValueError(f"OCR任务 [{task_name}] 未命中或识别失败")
+    
+    # 获取最佳结果
+    best = getattr(reco_detail,"best_result",None)
+    if not best:
+        raise ValueError(f"OCR任务 [{task_name}] 命中但无 best_result")
+    
+    # 提取文本并清洗出数字
+    text = getattr(best,"text","")
+    digits = "".join(ch for ch in (text or "") if ch.isdigit())
+
+    if not digits:
+        raise ValueError(f"OCR任务 [{task_name}] 识别到了文本 '{text}' 但其中不包含数字")
+    
+    return int(digits)

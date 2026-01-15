@@ -4,10 +4,10 @@ from maa.context import Context
 from . import boss_manager
 import logging
 import json
-from utils import common_func
+from utils.common_func import dynamic_set_focus
 
 @AgentServer.custom_action("reset_boss_data")
-class ResetPotionData(CustomAction):
+class ResetBossData(CustomAction):
     """重置BOSS数据"""
     def run(
         self,
@@ -32,7 +32,7 @@ class AddBossBattles(CustomAction):
 
         # 设定战斗计数通知
         focus_msg = f"已完成第 {boss_manager.boss_stats.current_battles} 场BOSS战"
-        common_func.dynamic_set_focus(context,target_node="输出BOSS计数",trigger="RECO_OK",focus_msg=focus_msg)
+        dynamic_set_focus(context,target_node="输出BOSS计数",trigger="RECO_OK",focus_msg=focus_msg)
 
         return CustomAction.RunResult(success=True)
 
