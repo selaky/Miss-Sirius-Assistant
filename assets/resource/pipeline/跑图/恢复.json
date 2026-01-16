@@ -3,12 +3,12 @@
     "$__mpe_code": {
       "filePath": "D:\\Projects\\MSA\\assets\\resource\\pipeline\\跑图\\恢复.json",
       "filename": "恢复",
-      "lastSyncTime": 1768553793571,
+      "lastSyncTime": 1768554461379,
       "prefix": "",
       "savedViewport": {
-        "x": 249,
-        "y": -276,
-        "zoom": 0.66
+        "x": 93,
+        "y": -195,
+        "zoom": 0.57
       },
       "version": "v0.15.3"
     }
@@ -16,8 +16,16 @@
   "$__mpe_external_意外处理_恢复": {
     "$__mpe_code": {
       "position": {
-        "x": 931,
-        "y": 413
+        "x": 2105,
+        "y": 1524
+      }
+    }
+  },
+  "$__mpe_external_跑图循环开始_恢复": {
+    "$__mpe_code": {
+      "position": {
+        "x": 2400,
+        "y": 1629
       }
     }
   },
@@ -25,7 +33,7 @@
     "$__mpe_code": {
       "position": {
         "x": 1800,
-        "y": 949
+        "y": 1091
       }
     },
     "action": {
@@ -44,7 +52,7 @@
     "$__mpe_code": {
       "position": {
         "x": 1500,
-        "y": 1229
+        "y": 1249
       }
     },
     "action": {
@@ -54,6 +62,9 @@
     "next": [
       "BC不可用，关闭吃药",
       "BC不可用，放弃战斗"
+    ],
+    "on_error": [
+      "跑图循环开始"
     ],
     "recognition": {
       "param": {
@@ -74,7 +85,7 @@
     "$__mpe_code": {
       "position": {
         "x": 1800,
-        "y": 1107
+        "y": 1249
       }
     },
     "action": {
@@ -108,7 +119,7 @@
     "$__mpe_code": {
       "position": {
         "x": 1200,
-        "y": 1112
+        "y": 1255
       }
     },
     "action": {
@@ -122,6 +133,9 @@
         "jump_back": true,
         "name": "意外处理"
       }
+    ],
+    "on_error": [
+      "跑图循环开始"
     ],
     "rate_limit": 100,
     "recognition": {
@@ -221,7 +235,10 @@
     "next": [
       "进行AP恢复"
     ],
-    "rate_limit": 100,
+    "on_error": [
+      "跑图循环开始"
+    ],
+    "rate_limit": 10,
     "recognition": {
       "param": {
         "lower": [
@@ -248,7 +265,7 @@
     "$__mpe_code": {
       "position": {
         "x": 300,
-        "y": 961
+        "y": 1699
       }
     },
     "action": {
@@ -257,6 +274,9 @@
     },
     "next": [
       "进行BC恢复"
+    ],
+    "on_error": [
+      "跑图循环开始"
     ],
     "rate_limit": 100,
     "recognition": {
@@ -300,7 +320,10 @@
         "name": "意外处理"
       }
     ],
-    "rate_limit": 100,
+    "on_error": [
+      "跑图循环开始"
+    ],
+    "rate_limit": 10,
     "recognition": {
       "param": {
         "roi": [
@@ -320,13 +343,17 @@
     "$__mpe_code": {
       "position": {
         "x": 2100,
-        "y": 949
+        "y": 1091
       }
     },
     "action": {
       "param": {},
       "type": "DoNothing"
     },
+    "next": [
+      "跑图循环开始"
+    ],
+    "rate_limit": 10,
     "recognition": {
       "param": {},
       "type": "DirectHit"
@@ -336,7 +363,7 @@
     "$__mpe_code": {
       "position": {
         "x": 900,
-        "y": 699
+        "y": 842
       }
     },
     "action": {
@@ -352,7 +379,10 @@
         "name": "意外处理"
       }
     ],
-    "rate_limit": 100,
+    "on_error": [
+      "跑图循环开始"
+    ],
+    "rate_limit": 10,
     "recognition": {
       "param": {},
       "type": "DirectHit"
@@ -362,7 +392,7 @@
     "$__mpe_code": {
       "position": {
         "x": 600,
-        "y": 699
+        "y": 666
       }
     },
     "action": {
@@ -391,7 +421,7 @@
     "$__mpe_code": {
       "position": {
         "x": 600,
-        "y": 1009
+        "y": 1714
       }
     },
     "action": {
@@ -420,7 +450,7 @@
     "$__mpe_code": {
       "position": {
         "x": 1800,
-        "y": 694
+        "y": 836
       }
     },
     "action": {
@@ -435,6 +465,7 @@
         "name": "意外处理"
       }
     ],
+    "rate_limit": 10,
     "recognition": {
       "param": {
         "roi": [
