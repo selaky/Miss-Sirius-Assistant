@@ -1,50 +1,121 @@
-# input: recover_helper
+# input: recover_manager
 # output: 暂无
 # pos: 这里是恢复流程中识别的方式
 
 from maa.agent.agent_server import AgentServer
 from maa.custom_recognition import CustomRecognition
 from maa.context import Context
-from . import recover_helper
+from . import recover_manager
 import logging
+from utils import common_func
 
 logging.basicConfig(level=logging.INFO) 
 
 @AgentServer.custom_recognition("should_use_potion")
 class ShouldUsePotion(CustomRecognition):
+
+    # 需要点击的区域
+    # ROI 可以写死,缩放问题框架会解决
+    click_rois = {
+        "big":[904,398,48,21], 
+        "small":[902,514,49,21], 
+        "free":[660,582,60,21], 
+        "close":[994,259,20,21]
+    }
+
+    # 当免费恢复按钮的识别分数达到0.9以上时，说明按钮可点击。
+    free_available_threshold = 0.9
+
     def analyze(self, context: Context, argv: CustomRecognition.AnalyzeArg) -> CustomRecognition.AnalyzeResult:
-        """判断是否使用当前节点对应的药水"""
+        """判断如何使用药水,并返回对应药水按钮的使用位置，或者是关闭按钮的位置,以供点击"""
+
+        # 获取设置参数
         try:
-            # 获得节点名并提取相应类型
-            node_name = argv.node_name
-            potion_type = recover_helper.node_name_extract(node_name)
-            logging.info(f"开始判断是否使用{potion_type.name}")
-            
-            # 条件A: 库存大于 0
-            has_stock = potion_type.stock > 0
-            
-            # 条件B: 限制为 -1 (无限用) 或者 使用量小于限制
-            can_use_more = (potion_type.limit == -1) or (potion_type.usage < potion_type.limit)
-
-            if has_stock and can_use_more:
-                # 可以使用药水的情况
-                msg = f"{potion_type.name}有余量"
+             params = common_func.parse_params(
+                param_str=argv.custom_action_param,
+                node_name=argv.node_name,
+                required_keys=["potion_type"]
+            )
+        except ValueError as e:
+            # 参数检查不通过，打印失败原因
+            msg = f"[{argv.node_name}] 参数解析失败: {e}"
+            logging.error(msg)
+            return CustomRecognition.AnalyzeResult(box=None, detail=msg)
+        
+        # 获取当前处理的药水种类
+        potion_type = str(params["potion_type"]).upper()
+        if potion_type == "AP":
+            stats = recover_manager.potion_stats.ap
+        elif potion_type == "BC":
+            stats = recover_manager.potion_stats.bc
+        else:
+            raise ValueError(f"[{argv.node_name}] 药水种类参数填写错误,未识别到 ap 或者 bc.")
+        
+        # 利用免费恢复按钮，既确认是否在吃药界面，又能确认是否需要免费吃药
+        reco_free = context.run_recognition("FreeRecover",argv.image)
+        if not reco_free or not reco_free.hit:
+            msg = f"[{argv.node_name}] 不在恢复界面"
+            return CustomRecognition.AnalyzeResult(box=None, detail=msg)
+        
+        # 判断是否使用免费恢复
+        best_free = getattr(reco_free,"best_result",None)
+        if best_free:
+            score = float(getattr(best_free,"score",""))
+            if score > self.free_available_threshold:
+                click_roi = self.click_rois["free"]
+                msg = f"使用免费恢复"
+                next_node = "顺利完成吃药"
+                common_func.dynamic_set_focus(context,target_node="输出恢复反馈",trigger="RECO_OK",focus_msg=msg)
+                common_func.dynamic_set_next(context,pre_node="输出恢复反馈",next_node=next_node)
                 logging.info(msg)
-                return CustomRecognition.AnalyzeResult(box=(0, 0, 100, 100), detail=msg)
+                return CustomRecognition.AnalyzeResult(box=click_roi, detail=msg)
             
-            else:
-                # 失败的情况：要么没库存，要么到上限
-                # 为了日志清楚，可以简单区分一下
-                if not has_stock:
-                    msg = f"{potion_type.name}数量为 0，药水用尽"
-                else:
-                    msg = f"{potion_type.name}使用已达到上限"
-                
-                logging.info(msg)
-                # 返回失败 (坐标全 0)
-                return CustomRecognition.AnalyzeResult(box=None, detail=msg)
+        # OCR 获取当前药水库存
+        try:
+            big_stock = common_func.extract_number_from_ocr(context,argv.image,task_name="BigPotion")
+            small_stock = common_func.extract_number_from_ocr(context,argv.image,task_name="SmallPotion")
+        except ValueError as e:
+            msg = f"[{argv.node_name}] {e}"
+            return CustomRecognition.AnalyzeResult(box=None, detail=msg)
+        
+        # 储存 ocr 数字
+        stats.big.stock = big_stock
+        stats.small.stock = small_stock
 
-        except Exception as e:
-            # 出错时捕捉异常
-            logging.error(f"{argv.node_name}出现错误: {e}")
-            return CustomRecognition.AnalyzeResult(box=(0, 0, 0, 0), detail=str(e))
+        if stats.big.should_use(): # 大药可用
+            # 设定点击位置
+            click_roi = self.click_rois["big"]
+            # 修改相应数量
+            stats.big.usage += 1
+            stats.big.stock -= 1
+            # 构造反馈信息
+            msg = stats.big.usage_report()
+            # 设定后续节点
+            next_node = "顺利完成吃药"
+        elif stats.small.should_use(): # 小药可用
+            click_roi = self.click_rois["small"]
+            stats.small.usage += 1
+            stats.small.stock -= 1
+            msg = stats.small.usage_report()
+            next_node = "顺利完成吃药"
+        elif potion_type == "AP": 
+            # 行动力恢复药不足，任务无法继续
+            # 关闭恢复界面
+            click_roi = self.click_rois["close"]
+            # 设定结束跑图相关信息
+            msg = f"行动力恢复药使用达到目标数量或库存不足,跑图任务结束"
+            next_node = "AP药水不可用"
+        else:
+            # 战斗力恢复药不足,可放弃战斗，继续跑图。
+            click_roi = self.click_rois["close"]
+            msg = f"战斗力恢复药使用达到目标数量或库存不足,将放弃战斗继续跑图"
+            next_node = "BC药水不可用"
+
+        # 统一设定输出内容和后续走向
+        common_func.dynamic_set_focus(context,target_node="输出恢复反馈",trigger="RECO_OK",focus_msg=msg)
+        common_func.dynamic_set_next(context,pre_node="输出恢复反馈",next_node=next_node)
+        logging.info(msg)
+        return CustomRecognition.AnalyzeResult(box=click_roi, detail=msg)
+        
+
+        

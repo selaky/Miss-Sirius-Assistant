@@ -1,20 +1,21 @@
-# input: recover_helper
+# input: recover_manager
 # output: 暂无
 # pos: 这里是恢复流程中执行的动作
 
 from maa.agent.agent_server import AgentServer
 from maa.custom_action import CustomAction
 from maa.context import Context
-from . import recover_helper
+from . import recover_manager
 import logging
 import json
+from utils import common_func
 
 
 @AgentServer.custom_action("reset_potion_data")
 class ResetPotionData(CustomAction):
     """重置药水数据"""
     def run(self,context:Context,argv:CustomAction.RunArg) -> bool:
-        recover_helper.potion_stats.reset_usage()
+        recover_manager.potion_stats.reset_usage()
         logging.info(f"[重置吃药数据] 重置已使用药水数量")
         return True
 
@@ -24,65 +25,38 @@ class ResetPotionData(CustomAction):
 class LoadPotionData(CustomAction):
     """读取药水设置"""
     def run(self,context:Context,argv:CustomAction.RunArg) -> bool:
+        # 获取设置参数
         try:
-            # 读取参数
-            params = json.loads(argv.custom_action_param)
-            ap_big = int(params.get("ap_big",0))
-            ap_small = int(params.get("ap_small",0))
-            bc_big = int(params.get("bc_big",0))
-            bc_small = int(params.get("bc_small",0))
-            # 设置药水限制数
-            stats = recover_helper.potion_stats # 简写一下
-            stats.ap.set_limit(ap_big,ap_small)
-            stats.bc.set_limit(bc_big,bc_small)
-            logging.info(
-                f"[读取吃药数据] 药品使用上限载入\n"
-                f"大行动力恢复药: {stats.ap.big.limit}\n"
-                f"小行动力恢复药: {stats.ap.small.limit}\n"
-                f"大战斗力恢复药: {stats.bc.big.limit}\n"
-                f"小战斗力恢复药: {stats.bc.small.limit}"
+             params = common_func.parse_params(
+                param_str=argv.custom_action_param,
+                node_name=argv.node_name,
+                required_keys=["ap_big", "ap_small","bc_big","bc_small","free_recover"]
             )
+        except ValueError as e:
+            # 参数检查不通过，打印失败原因
+            logging.error(f"[{argv.node_name}] 参数解析失败: {e}")
+            return CustomAction.RunResult(success=False)
 
-            # logging.info(f"debug: ap_big 的类型是 {type(ap_big)}")
-            
-            return True
-        except Exception as e:
-            logging.error(f"[读取吃药数据]参数解析失败或设置出错:{e}")
-            return False
+        # 提取出每个参数
+        ap_big = int(params["ap_big"])
+        ap_small = int(params["ap_small"])
+        bc_big = int(params["bc_big"])
+        bc_small = int(params["bc_small"])
+        # 使用 str().lower() 是为了兼容 UI 传过来的可能是 JSON 的 true (bool) 
+        # 也可以是字符串的 "True"/"true"。
+        # 只要它是 "true"，结果就是 True；如果是 "false"，结果自动就是 False。
+        free_recover = str(params["free_recover"]).lower() == "true"
 
-@AgentServer.custom_action("store_potion_storage")
-class StorePotionStorage(CustomAction):
-    """储存 OCR 识别到的药水数量"""
-    def run(self,context:Context,argv:CustomAction.RunArg) -> bool:
-        try:
-            node_name = argv.node_name
-            # 获取 OCR 结果
-            ocr_res = int(argv.reco_detail.best_result.text)
-            logging.info(f"{node_name} OCR 识别结果为 {ocr_res}")
-
-            # 进行节点解析
-            
-            potion_type = recover_helper.node_name_extract(node_name)
-
-            # 将 OCR 结果存入对应药水的记录中
-            potion_type.stock = ocr_res
-            logging.info(f"{node_name} 成功保存数据, {potion_type.name} 的剩余数量为 {potion_type.stock}")
-
-            return True
-        except Exception as e:
-            logging.warning(f"[{node_name}]统计数据出错：{e}")
-            return False
-        
-@AgentServer.custom_action("add_potion_usage")
-class AddPotionUsage(CustomAction):
-    """把药品使用计数+1"""
-    def run(self,context:Context,argv:CustomAction.RunArg) -> bool:
-        try:
-            node_name = argv.node_name
-            potion_type = recover_helper.node_name_extract(node_name)
-            potion_type.inc_usage()
-            logging.info(f"{potion_type.name}的使用量增加,现在为{potion_type.usage}")
-            return True
-        except Exception as e:
-            logging.error(f"{potion_type.name}+1失败")
-            return False
+        # 设置药水限制数
+        stats = recover_manager.potion_stats # 简写一下
+        stats.ap.set_limit(ap_big,ap_small)
+        stats.bc.set_limit(bc_big,bc_small)
+        stats.use_free_recover = free_recover
+        msg = (
+            f"[{argv.node_name}] 药水设置载入 | "
+            f"AP(大/小): {stats.ap.big.limit}/{stats.ap.small.limit} | "
+            f"BC(大/小): {stats.bc.big.limit}/{stats.bc.small.limit} | "
+            f"免费吃药: {'是' if stats.use_free_recover else '否'}"
+        )
+        logging.info(msg)
+        return CustomAction.RunResult(success=True)
