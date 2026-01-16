@@ -37,7 +37,7 @@ class SinglePotion:
         """判断当前这种药品是否可用"""
         if self.stock==0 or self.limit ==0: # 没有库存或者设置为不使用
             return False
-        elif self.usage >= self.limit: # 使用数量超过限制
+        elif self.limit != -1 and self.usage >= self.limit: # 使用数量超过限制
             return False
         else:
             return True

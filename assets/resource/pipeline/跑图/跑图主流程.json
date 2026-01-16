@@ -225,7 +225,7 @@
     "action": {
       "param": {
         "custom_action": "load_potion_data",
-        "custom_action_param": "{\"ap_big\":0,\"ap_small\":0,\"bc_big\":0,\"bc_small\":0,\"free_recover\":True}"
+        "custom_action_param": "{\"ap_big\":0,\"ap_small\":0,\"bc_big\":0,\"bc_small\":0,\"free_recover\":true}"
       },
       "type": "Custom"
     },

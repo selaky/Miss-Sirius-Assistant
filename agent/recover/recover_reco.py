@@ -32,7 +32,7 @@ class ShouldUsePotion(CustomRecognition):
         # 获取设置参数
         try:
              params = common_func.parse_params(
-                param_str=argv.custom_action_param,
+                param_str=argv.custom_recognition_param,
                 node_name=argv.node_name,
                 required_keys=["potion_type"]
             )
@@ -59,7 +59,7 @@ class ShouldUsePotion(CustomRecognition):
         
         # 判断是否使用免费恢复
         best_free = getattr(reco_free,"best_result",None)
-        if best_free:
+        if best_free and recover_manager.potion_stats.use_free_recover:
             score = float(getattr(best_free,"score",""))
             if score > self.free_available_threshold:
                 click_roi = self.click_rois["free"]
