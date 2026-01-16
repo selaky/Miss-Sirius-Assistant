@@ -3,11 +3,11 @@
     "$__mpe_code": {
       "filePath": "D:\\Projects\\MSA\\assets\\resource\\pipeline\\竞技场.json",
       "filename": "竞技场",
-      "lastSyncTime": 1768534935173,
+      "lastSyncTime": 1768534996724,
       "prefix": "",
       "savedViewport": {
-        "x": -643,
-        "y": 7,
+        "x": 232,
+        "y": 125,
         "zoom": 0.66
       },
       "version": "v0.15.3"
@@ -347,9 +347,6 @@
     "action": {
       "param": {},
       "type": "DoNothing"
-    },
-    "focus": {
-      "Node.Recognition.Succeeded": "停留在主界面，准备进入竞技场"
     },
     "next": [
       "开始竞技场任务"
