@@ -3,12 +3,12 @@
     "$__mpe_code": {
       "filePath": "D:\\Projects\\MSA\\assets\\resource\\pipeline\\跑图/战斗.json",
       "filename": "战斗",
-      "lastSyncTime": 1768638775620,
+      "lastSyncTime": 1768726813239,
       "prefix": "",
       "savedViewport": {
-        "x": -755,
-        "y": -578,
-        "zoom": 0.76
+        "x": -581,
+        "y": -456,
+        "zoom": 0.65
       },
       "version": "v0.16.0"
     }
@@ -35,6 +35,32 @@
         "x": 1096,
         "y": 611
       }
+    }
+  },
+  "EnemyInfo": {
+    "$__mpe_code": {
+      "position": {
+        "x": 740,
+        "y": 1372
+      }
+    },
+    "action": {
+      "param": {},
+      "type": "DoNothing"
+    },
+    "recognition": {
+      "param": {
+        "expected": [
+          ""
+        ],
+        "roi": [
+          460,
+          425,
+          458,
+          47
+        ]
+      },
+      "type": "OCR"
     }
   },
   "公屏回到战斗": {
@@ -75,6 +101,7 @@
       "捡垃圾模式",
       "提取感染者信息"
     ],
+    "rate_limit": 10,
     "recognition": {
       "param": {
         "roi": [
@@ -120,7 +147,7 @@
       "type": "TemplateMatch"
     }
   },
-  "战斗分支": {
+  "战斗-进入战斗": {
     "$__mpe_code": {
       "position": {
         "x": 2115,
@@ -153,9 +180,10 @@
       "type": "DoNothing"
     },
     "next": [
-      "战斗分支",
-      "放生分支"
+      "战斗-进入战斗",
+      "放生-进入战斗"
     ],
+    "rate_limit": 10,
     "recognition": {
       "param": {},
       "type": "DirectHit"
@@ -301,16 +329,17 @@
     },
     "action": {
       "param": {
-        "custom_action": ""
+        "custom_action": "set_enemy_next"
       },
       "type": "Custom"
     },
     "next": [
       "战斗分流"
     ],
+    "rate_limit": 10,
     "recognition": {
       "param": {
-        "custom_recognition": ""
+        "custom_recognition": "extract_enemy_info"
       },
       "type": "Custom"
     }
@@ -403,7 +432,7 @@
       "type": "TemplateMatch"
     }
   },
-  "放生分支": {
+  "放生-进入战斗": {
     "$__mpe_code": {
       "position": {
         "x": 2162,
