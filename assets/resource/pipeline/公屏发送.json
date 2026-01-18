@@ -3,14 +3,43 @@
     "$__mpe_code": {
       "filePath": "D:\\Projects\\MSA\\assets\\resource\\pipeline/公屏发送.json",
       "filename": "公屏发送",
-      "lastSyncTime": 1768635115063,
+      "lastSyncTime": 1768736354322,
       "prefix": "",
       "savedViewport": {
-        "x": -1833,
-        "y": -467,
+        "x": -1624,
+        "y": -451,
         "zoom": 0.66
       },
       "version": "v0.16.0"
+    }
+  },
+  "$__mpe_external_意外处理_公屏发送": {
+    "$__mpe_code": {
+      "position": {
+        "x": 3408,
+        "y": 785
+      }
+    }
+  },
+  "公屏输入文字": {
+    "$__mpe_code": {
+      "position": {
+        "x": 3767,
+        "y": 1267
+      }
+    },
+    "action": {
+      "param": {
+        "input_text": "这是一条测试信息"
+      },
+      "type": "InputText"
+    },
+    "next": [
+      "点击发送消息"
+    ],
+    "recognition": {
+      "param": {},
+      "type": "DirectHit"
     }
   },
   "开始公屏发送": {
@@ -24,7 +53,12 @@
       "param": {},
       "type": "DoNothing"
     },
+    "enabled": false,
     "next": [
+      {
+        "jump_back": true,
+        "name": "意外处理"
+      },
       {
         "jump_back": true,
         "name": "打开公屏"
@@ -81,7 +115,11 @@
       "type": "Click"
     },
     "next": [
-      "输入文字"
+      {
+        "jump_back": true,
+        "name": "意外处理"
+      },
+      "公屏输入文字"
     ],
     "recognition": {
       "param": {},
@@ -113,27 +151,6 @@
         ]
       },
       "type": "TemplateMatch"
-    }
-  },
-  "输入文字": {
-    "$__mpe_code": {
-      "position": {
-        "x": 3767,
-        "y": 1267
-      }
-    },
-    "action": {
-      "param": {
-        "input_text": "这是一条测试信息"
-      },
-      "type": "InputText"
-    },
-    "next": [
-      "点击发送消息"
-    ],
-    "recognition": {
-      "param": {},
-      "type": "DirectHit"
     }
   }
 }

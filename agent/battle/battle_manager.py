@@ -117,6 +117,9 @@ class UserBattleConfig:
     # --- 2. 放生清单 (对应界面的复选框) ---
     release_targets: set[tuple[str, str]] = field(default_factory=set)
 
+    # --- 3. 公屏信息 (对应输入框) ---
+    broadcast_addition: str = ""
+
     def set_release(self, category: str, mode: str, enable: bool):
         """
         供 UI 调用的辅助函数：切换某个选项的放生开关
@@ -126,6 +129,8 @@ class UserBattleConfig:
             self.release_targets.add(target)
         else:
             self.release_targets.discard(target)
+
+    
 
 @dataclass
 class BattleAction:

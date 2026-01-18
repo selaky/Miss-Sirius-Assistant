@@ -3,12 +3,12 @@
     "$__mpe_code": {
       "filePath": "D:\\Projects\\MSA\\assets\\resource\\pipeline\\跑图/战斗.json",
       "filename": "战斗",
-      "lastSyncTime": 1768726825103,
+      "lastSyncTime": 1768736289375,
       "prefix": "",
       "savedViewport": {
-        "x": -654,
-        "y": -463,
-        "zoom": 0.65
+        "x": -226,
+        "y": -522,
+        "zoom": 0.57
       },
       "version": "v0.16.0"
     }
@@ -16,32 +16,32 @@
   "$__mpe_external_开始公屏发送_战斗": {
     "$__mpe_code": {
       "position": {
-        "x": 3980,
-        "y": 1235
+        "x": 2405,
+        "y": 1939
       }
     }
   },
   "$__mpe_external_开始获得卡牌_战斗": {
     "$__mpe_code": {
       "position": {
-        "x": 3243,
-        "y": 671
+        "x": 1805,
+        "y": 352
       }
     }
   },
   "$__mpe_external_意外处理_战斗": {
     "$__mpe_code": {
       "position": {
-        "x": 1096,
-        "y": 611
+        "x": 2105,
+        "y": 1055
       }
     }
   },
   "EnemyInfo": {
     "$__mpe_code": {
       "position": {
-        "x": 740,
-        "y": 1372
+        "x": 0,
+        "y": 296
       }
     },
     "action": {
@@ -66,8 +66,8 @@
   "公屏回到战斗": {
     "$__mpe_code": {
       "position": {
-        "x": 4149,
-        "y": 1364
+        "x": 2400,
+        "y": 2049
       }
     },
     "action": {
@@ -85,8 +85,8 @@
   "开始战斗": {
     "$__mpe_code": {
       "position": {
-        "x": 859,
-        "y": 925
+        "x": 0,
+        "y": 18
       }
     },
     "action": {
@@ -117,11 +117,11 @@
       "type": "TemplateMatch"
     }
   },
-  "战斗-跳过": {
+  "战斗失败": {
     "$__mpe_code": {
       "position": {
-        "x": 2550,
-        "y": 876
+        "x": 1200,
+        "y": 1120
       }
     },
     "action": {
@@ -129,6 +129,286 @@
       "type": "Click"
     },
     "next": [
+      {
+        "jump_back": true,
+        "name": "意外处理"
+      },
+      "战斗失败",
+      "放生分流"
+    ],
+    "rate_limit": 10,
+    "recognition": {
+      "param": {
+        "roi": [
+          693,
+          3,
+          588,
+          277
+        ],
+        "template": [
+          "战斗/战斗失败.png"
+        ]
+      },
+      "type": "TemplateMatch"
+    }
+  },
+  "战斗失败处理": {
+    "$__mpe_code": {
+      "position": {
+        "x": 2509,
+        "y": 1446
+      }
+    },
+    "action": {
+      "param": {
+        "custom_action": "battle_lose"
+      },
+      "type": "Custom"
+    },
+    "next": [
+      {
+        "jump_back": true,
+        "name": "意外处理"
+      },
+      "进入战斗"
+    ],
+    "recognition": {
+      "param": {},
+      "type": "DirectHit"
+    }
+  },
+  "战斗胜利": {
+    "$__mpe_code": {
+      "position": {
+        "x": 1500,
+        "y": 789
+      }
+    },
+    "action": {
+      "param": {},
+      "type": "Click"
+    },
+    "next": [
+      {
+        "jump_back": true,
+        "name": "意外处理"
+      },
+      "战斗胜利",
+      "战斗胜利处理",
+      {
+        "jump_back": true,
+        "name": "开始获得卡牌"
+      }
+    ],
+    "rate_limit": 10,
+    "recognition": {
+      "param": {
+        "roi": [
+          693,
+          3,
+          588,
+          277
+        ],
+        "template": [
+          "战斗/战斗胜利.png"
+        ]
+      },
+      "type": "TemplateMatch"
+    }
+  },
+  "战斗胜利处理": {
+    "$__mpe_code": {
+      "position": {
+        "x": 1800,
+        "y": 1437
+      }
+    },
+    "action": {
+      "param": {
+        "custom_action": "battle_win"
+      },
+      "type": "Custom"
+    },
+    "next": [
+      "输出战斗信息"
+    ],
+    "recognition": {
+      "param": {},
+      "type": "DirectHit"
+    }
+  },
+  "捡垃圾模式": {
+    "$__mpe_code": {
+      "position": {
+        "x": 300,
+        "y": 0
+      }
+    },
+    "action": {
+      "param": {},
+      "type": "Click"
+    },
+    "enabled": false,
+    "focus": {
+      "Node.Action.Succeeded": "遭遇感染者，自动放弃"
+    },
+    "recognition": {
+      "param": {
+        "roi": [
+          1128,
+          495,
+          152,
+          120
+        ],
+        "template": [
+          "战斗/放弃.png"
+        ]
+      },
+      "type": "TemplateMatch"
+    }
+  },
+  "提取感染者信息": {
+    "$__mpe_code": {
+      "position": {
+        "x": 300,
+        "y": 333
+      }
+    },
+    "action": {
+      "param": {
+        "custom_action": "set_enemy_next"
+      },
+      "type": "Custom"
+    },
+    "next": [
+      {
+        "jump_back": true,
+        "name": "意外处理"
+      },
+      "进入战斗"
+    ],
+    "rate_limit": 10,
+    "recognition": {
+      "param": {
+        "custom_recognition": "extract_enemy_info"
+      },
+      "type": "Custom"
+    }
+  },
+  "放生-放弃感染": {
+    "$__mpe_code": {
+      "position": {
+        "x": 1800,
+        "y": 1595
+      }
+    },
+    "action": {
+      "param": {},
+      "type": "Click"
+    },
+    "next": [
+      {
+        "jump_back": true,
+        "name": "意外处理"
+      },
+      "放生-放弃感染",
+      "放生处理"
+    ],
+    "recognition": {
+      "param": {
+        "roi": [
+          1158,
+          522,
+          122,
+          77
+        ],
+        "template": [
+          "战斗/放弃.png"
+        ]
+      },
+      "type": "TemplateMatch"
+    }
+  },
+  "放生分流": {
+    "$__mpe_code": {
+      "position": {
+        "x": 1500,
+        "y": 1320
+      }
+    },
+    "action": {
+      "param": {},
+      "type": "DoNothing"
+    },
+    "next": [
+      {
+        "jump_back": true,
+        "name": "意外处理"
+      },
+      "战斗失败处理",
+      "放生-放弃感染"
+    ],
+    "rate_limit": 10,
+    "recognition": {
+      "param": {},
+      "type": "DirectHit"
+    }
+  },
+  "放生处理": {
+    "$__mpe_code": {
+      "position": {
+        "x": 2100,
+        "y": 1901
+      }
+    },
+    "action": {
+      "param": {
+        "custom_action": "battle_release"
+      },
+      "type": "Custom"
+    },
+    "next": [
+      "开始公屏发送",
+      "公屏回到战斗"
+    ],
+    "recognition": {
+      "param": {},
+      "type": "DirectHit"
+    }
+  },
+  "结束战斗": {
+    "$__mpe_code": {
+      "position": {
+        "x": 3000,
+        "y": 1781
+      }
+    },
+    "action": {
+      "param": {},
+      "type": "DoNothing"
+    },
+    "recognition": {
+      "param": {},
+      "type": "DirectHit"
+    }
+  },
+  "跳过战斗": {
+    "$__mpe_code": {
+      "position": {
+        "x": 900,
+        "y": 919
+      }
+    },
+    "action": {
+      "param": {},
+      "type": "Click"
+    },
+    "next": [
+      {
+        "jump_back": true,
+        "name": "意外处理"
+      },
+      "跳过战斗",
       "战斗胜利",
       "战斗失败"
     ],
@@ -147,355 +427,11 @@
       "type": "TemplateMatch"
     }
   },
-  "战斗-进入战斗": {
-    "$__mpe_code": {
-      "position": {
-        "x": 2115,
-        "y": 909
-      }
-    },
-    "action": {
-      "param": {},
-      "type": "Click"
-    },
-    "next": [
-      "战斗-跳过"
-    ],
-    "recognition": {
-      "param": {
-        "custom_recognition": "enter_battle"
-      },
-      "type": "Custom"
-    }
-  },
-  "战斗分流": {
-    "$__mpe_code": {
-      "position": {
-        "x": 1715,
-        "y": 1115
-      }
-    },
-    "action": {
-      "param": {},
-      "type": "DoNothing"
-    },
-    "next": [
-      "战斗-进入战斗",
-      "放生-进入战斗"
-    ],
-    "rate_limit": 10,
-    "recognition": {
-      "param": {},
-      "type": "DirectHit"
-    }
-  },
-  "战斗失败": {
-    "$__mpe_code": {
-      "position": {
-        "x": 2981,
-        "y": 1034
-      }
-    },
-    "action": {
-      "param": {},
-      "type": "Click"
-    },
-    "next": [
-      "战斗失败统计"
-    ],
-    "recognition": {
-      "param": {
-        "roi": [
-          693,
-          3,
-          588,
-          277
-        ],
-        "template": [
-          "战斗/战斗失败.png"
-        ]
-      },
-      "type": "TemplateMatch"
-    }
-  },
-  "战斗失败统计": {
-    "$__mpe_code": {
-      "position": {
-        "x": 3408,
-        "y": 1054
-      }
-    },
-    "action": {
-      "param": {},
-      "type": "DoNothing"
-    },
-    "next": [
-      "输出战斗信息"
-    ],
-    "recognition": {
-      "param": {},
-      "type": "DirectHit"
-    }
-  },
-  "战斗胜利": {
-    "$__mpe_code": {
-      "position": {
-        "x": 2951,
-        "y": 746
-      }
-    },
-    "action": {
-      "param": {},
-      "type": "Click"
-    },
-    "next": [
-      "战斗胜利统计",
-      {
-        "jump_back": true,
-        "name": "开始获得卡牌"
-      }
-    ],
-    "recognition": {
-      "param": {
-        "roi": [
-          693,
-          3,
-          588,
-          277
-        ],
-        "template": [
-          "战斗/战斗胜利.png"
-        ]
-      },
-      "type": "TemplateMatch"
-    }
-  },
-  "战斗胜利统计": {
-    "$__mpe_code": {
-      "position": {
-        "x": 3416,
-        "y": 797
-      }
-    },
-    "action": {
-      "param": {},
-      "type": "DoNothing"
-    },
-    "next": [
-      "输出战斗信息"
-    ],
-    "recognition": {
-      "param": {},
-      "type": "DirectHit"
-    }
-  },
-  "捡垃圾模式": {
-    "$__mpe_code": {
-      "position": {
-        "x": 1298,
-        "y": 693
-      }
-    },
-    "action": {
-      "param": {
-        "target": [
-          0,
-          0,
-          0,
-          0
-        ]
-      },
-      "type": "Click"
-    },
-    "enabled": false,
-    "focus": {
-      "Node.Action.Succeeded": "遭遇感染者，自动放弃"
-    },
-    "recognition": {
-      "param": {
-        "template": [
-          "战斗/放弃.png"
-        ]
-      },
-      "type": "TemplateMatch"
-    }
-  },
-  "提取感染者信息": {
-    "$__mpe_code": {
-      "position": {
-        "x": 1336,
-        "y": 1070
-      }
-    },
-    "action": {
-      "param": {
-        "custom_action": "set_enemy_next"
-      },
-      "type": "Custom"
-    },
-    "next": [
-      "战斗分流"
-    ],
-    "rate_limit": 10,
-    "recognition": {
-      "param": {
-        "custom_recognition": "extract_enemy_info"
-      },
-      "type": "Custom"
-    }
-  },
-  "放生-战斗结束": {
-    "$__mpe_code": {
-      "position": {
-        "x": 2961,
-        "y": 1353
-      }
-    },
-    "action": {
-      "param": {},
-      "type": "Click"
-    },
-    "next": [
-      "放生-放弃感染"
-    ],
-    "recognition": {
-      "param": {
-        "roi": [
-          693,
-          3,
-          588,
-          277
-        ],
-        "template": [
-          "战斗/战斗失败.png"
-        ]
-      },
-      "type": "TemplateMatch"
-    }
-  },
-  "放生-放弃感染": {
-    "$__mpe_code": {
-      "position": {
-        "x": 3306,
-        "y": 1352
-      }
-    },
-    "action": {
-      "param": {},
-      "type": "Click"
-    },
-    "next": [
-      "放生结束统计"
-    ],
-    "recognition": {
-      "param": {
-        "roi": [
-          1158,
-          522,
-          122,
-          77
-        ],
-        "template": [
-          "战斗/放弃.png"
-        ]
-      },
-      "type": "TemplateMatch"
-    }
-  },
-  "放生-跳过": {
-    "$__mpe_code": {
-      "position": {
-        "x": 2543,
-        "y": 1377
-      }
-    },
-    "action": {
-      "param": {},
-      "type": "Click"
-    },
-    "next": [
-      "战斗胜利",
-      "放生-战斗结束"
-    ],
-    "recognition": {
-      "param": {
-        "roi": [
-          1169,
-          534,
-          114,
-          109
-        ],
-        "template": [
-          "战斗/跳过.png"
-        ]
-      },
-      "type": "TemplateMatch"
-    }
-  },
-  "放生-进入战斗": {
-    "$__mpe_code": {
-      "position": {
-        "x": 2162,
-        "y": 1405
-      }
-    },
-    "action": {
-      "param": {},
-      "type": "Click"
-    },
-    "next": [
-      "放生-跳过"
-    ],
-    "recognition": {
-      "param": {
-        "custom_recognition": "enter_battle"
-      },
-      "type": "Custom"
-    }
-  },
-  "放生结束统计": {
-    "$__mpe_code": {
-      "position": {
-        "x": 3685,
-        "y": 1373
-      }
-    },
-    "action": {
-      "param": {
-        "custom_action": ""
-      },
-      "type": "Custom"
-    },
-    "next": [
-      "开始公屏发送",
-      "公屏回到战斗"
-    ],
-    "recognition": {
-      "param": {},
-      "type": "DirectHit"
-    }
-  },
-  "结束战斗": {
-    "$__mpe_code": {
-      "position": {
-        "x": 4495,
-        "y": 997
-      }
-    },
-    "action": {
-      "param": {},
-      "type": "DoNothing"
-    },
-    "recognition": {
-      "param": {},
-      "type": "DirectHit"
-    }
-  },
   "输出战斗信息": {
     "$__mpe_code": {
       "position": {
-        "x": 4175,
-        "y": 961
+        "x": 2700,
+        "y": 1781
       }
     },
     "action": {
@@ -505,9 +441,57 @@
     "next": [
       "结束战斗"
     ],
+    "rate_limit": 10,
     "recognition": {
       "param": {},
       "type": "DirectHit"
+    }
+  },
+  "进入战斗": {
+    "$__mpe_code": {
+      "position": {
+        "x": 600,
+        "y": 646
+      }
+    },
+    "action": {
+      "param": {},
+      "type": "Click"
+    },
+    "next": [
+      {
+        "jump_back": true,
+        "name": "意外处理"
+      },
+      "进入战斗",
+      "跳过战斗"
+    ],
+    "recognition": {
+      "param": {
+        "all_of": [
+          {
+            "param": {
+              "custom_recognition": "enter_battle"
+            },
+            "type": "Custom"
+          },
+          {
+            "param": {
+              "roi": [
+                1128,
+                495,
+                152,
+                120
+              ],
+              "template": [
+                "战斗/放弃.png"
+              ]
+            },
+            "type": "TemplateMatch"
+          }
+        ]
+      },
+      "type": "And"
     }
   }
 }
