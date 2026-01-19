@@ -91,6 +91,8 @@ class BattleRelease(CustomAction):
 
             # 执行完公屏模块之后，回到战斗模块(测试期间会关闭点击发送消息的 enabled,防止发送错误消息 )
             common_func.dynamic_set_next(context,"点击发送消息","放生结束")
+        else:
+            common_func.dynamic_set_next(context,"放生广播分流","放生结束")
 
         return CustomAction.RunResult(success=True)
 
