@@ -950,14 +950,16 @@
         },
         "一般感染者卡组设置": {
             "type": "select",
-            "label": "普通一般感染者卡组",
+            "label": "普通一般感染者",
             "description": "遇到普通状态的一般感染者时使用的卡组",
             "default_case": "卡组一",
             "cases": [
                 {
                     "name": "卡组一",
                     "label": "卡组一",
-                    "option": ["暴走一般感染者卡组"],
+                    "option": [
+                        "暴走一般感染者"
+                    ],
                     "pipeline_override": {
                         "保存一般普通卡组": {
                             "action": {
@@ -974,7 +976,9 @@
                 {
                     "name": "卡组二",
                     "label": "卡组二",
-                    "option": ["暴走一般感染者卡组"],
+                    "option": [
+                        "暴走一般感染者"
+                    ],
                     "pipeline_override": {
                         "保存一般普通卡组": {
                             "action": {
@@ -991,7 +995,9 @@
                 {
                     "name": "卡组三",
                     "label": "卡组三",
-                    "option": ["暴走一般感染者卡组"],
+                    "option": [
+                        "暴走一般感染者"
+                    ],
                     "pipeline_override": {
                         "保存一般普通卡组": {
                             "action": {
@@ -1008,7 +1014,9 @@
                 {
                     "name": "卡组四",
                     "label": "卡组四",
-                    "option": ["暴走一般感染者卡组"],
+                    "option": [
+                        "暴走一般感染者"
+                    ],
                     "pipeline_override": {
                         "保存一般普通卡组": {
                             "action": {
@@ -1026,7 +1034,7 @@
         },
         "暴走一般感染者卡组": {
             "type": "select",
-            "label": "暴走一般感染者卡组",
+            "label": "暴走一般感染者",
             "description": "遇到暴走状态的一般感染者时使用的卡组",
             "default_case": "卡组一",
             "cases": [
@@ -1098,14 +1106,16 @@
         },
         "天狼星卡组设置": {
             "type": "select",
-            "label": "普通天狼星卡组",
+            "label": "普通天狼星",
             "description": "遇到普通状态的天狼星（蓝狼/粉狼/红狼）时使用的卡组",
             "default_case": "卡组一",
             "cases": [
                 {
                     "name": "卡组一",
                     "label": "卡组一",
-                    "option": ["暴走天狼星卡组"],
+                    "option": [
+                        "暴走天狼星"
+                    ],
                     "pipeline_override": {
                         "保存天狼星普通卡组": {
                             "action": {
@@ -1122,7 +1132,9 @@
                 {
                     "name": "卡组二",
                     "label": "卡组二",
-                    "option": ["暴走天狼星卡组"],
+                    "option": [
+                        "暴走天狼星"
+                    ],
                     "pipeline_override": {
                         "保存天狼星普通卡组": {
                             "action": {
@@ -1139,7 +1151,9 @@
                 {
                     "name": "卡组三",
                     "label": "卡组三",
-                    "option": ["暴走天狼星卡组"],
+                    "option": [
+                        "暴走天狼星"
+                    ],
                     "pipeline_override": {
                         "保存天狼星普通卡组": {
                             "action": {
@@ -1156,7 +1170,9 @@
                 {
                     "name": "卡组四",
                     "label": "卡组四",
-                    "option": ["暴走天狼星卡组"],
+                    "option": [
+                        "暴走天狼星"
+                    ],
                     "pipeline_override": {
                         "保存天狼星普通卡组": {
                             "action": {
@@ -1174,7 +1190,7 @@
         },
         "暴走天狼星卡组": {
             "type": "select",
-            "label": "暴走天狼星卡组",
+            "label": "暴走天狼星",
             "description": "遇到暴走状态的天狼星（蓝狼/粉狼/红狼）时使用的卡组",
             "default_case": "卡组一",
             "cases": [
@@ -1372,7 +1388,9 @@
                 {
                     "name": "Yes",
                     "label": "开启",
-                    "option": ["放生暴走一般感染者"],
+                    "option": [
+                        "放生暴走一般感染者"
+                    ],
                     "pipeline_override": {
                         "保存放生一般普通": {
                             "action": {
@@ -1389,7 +1407,9 @@
                 {
                     "name": "No",
                     "label": "关闭",
-                    "option": ["放生暴走一般感染者"],
+                    "option": [
+                        "放生暴走一般感染者"
+                    ],
                     "pipeline_override": {
                         "保存放生一般普通": {
                             "action": {
@@ -1454,7 +1474,9 @@
                 {
                     "name": "Yes",
                     "label": "开启",
-                    "option": ["放生暴走蓝狼"],
+                    "option": [
+                        "放生暴走蓝狼"
+                    ],
                     "pipeline_override": {
                         "保存放生蓝狼普通": {
                             "action": {
@@ -1471,7 +1493,9 @@
                 {
                     "name": "No",
                     "label": "关闭",
-                    "option": ["放生暴走蓝狼"],
+                    "option": [
+                        "放生暴走蓝狼"
+                    ],
                     "pipeline_override": {
                         "保存放生蓝狼普通": {
                             "action": {
@@ -1536,7 +1560,9 @@
                 {
                     "name": "Yes",
                     "label": "开启",
-                    "option": ["放生暴走粉狼"],
+                    "option": [
+                        "放生暴走粉狼"
+                    ],
                     "pipeline_override": {
                         "保存放生粉狼普通": {
                             "action": {
@@ -1553,7 +1579,9 @@
                 {
                     "name": "No",
                     "label": "关闭",
-                    "option": ["放生暴走粉狼"],
+                    "option": [
+                        "放生暴走粉狼"
+                    ],
                     "pipeline_override": {
                         "保存放生粉狼普通": {
                             "action": {
@@ -1618,7 +1646,9 @@
                 {
                     "name": "Yes",
                     "label": "开启",
-                    "option": ["放生暴走红狼"],
+                    "option": [
+                        "放生暴走红狼"
+                    ],
                     "pipeline_override": {
                         "保存放生红狼普通": {
                             "action": {
@@ -1635,7 +1665,9 @@
                 {
                     "name": "No",
                     "label": "关闭",
-                    "option": ["放生暴走红狼"],
+                    "option": [
+                        "放生暴走红狼"
+                    ],
                     "pipeline_override": {
                         "保存放生红狼普通": {
                             "action": {

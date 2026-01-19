@@ -51,6 +51,7 @@ class ExtractEnemyInfo(CustomRecognition):
         battle_manager.update_encounter_context(final_name,mode,level)
 
         msg = f"[{argv.node_name}] 识别到 {level}级 {mode} 感染者 {final_name}"
+        logging.info(msg)
         return CustomRecognition.AnalyzeResult(box=(0, 0, 0, 0), detail=msg)
     
 @AgentServer.custom_recognition("enter_battle")
