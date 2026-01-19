@@ -6,6 +6,8 @@
         "action": {
             "type": "DoNothing"
         },
+        "pre_delay": 0,
+        "post_delay": 0,
         "next": ["保存一般普通卡组"]
     },
     "保存一般普通卡组": {
@@ -22,6 +24,8 @@
                 }
             }
         },
+        "pre_delay": 0,
+        "post_delay": 0,
         "rate_limit": 0,
         "next": ["保存一般暴走卡组"]
     },
@@ -39,6 +43,8 @@
                 }
             }
         },
+        "pre_delay": 0,
+        "post_delay": 0,
         "rate_limit": 0,
         "next": ["保存天狼星普通卡组"]
     },
@@ -56,6 +62,8 @@
                 }
             }
         },
+        "pre_delay": 0,
+        "post_delay": 0,
         "rate_limit": 0,
         "next": ["保存天狼星暴走卡组"]
     },
@@ -73,6 +81,8 @@
                 }
             }
         },
+        "pre_delay": 0,
+        "post_delay": 0,
         "rate_limit": 0,
         "next": ["保存放生开关"]
     },
@@ -90,6 +100,8 @@
                 }
             }
         },
+        "pre_delay": 0,
+        "post_delay": 0,
         "rate_limit": 0,
         "next": ["保存放生卡组"]
     },
@@ -107,6 +119,8 @@
                 }
             }
         },
+        "pre_delay": 0,
+        "post_delay": 0,
         "rate_limit": 0,
         "next": ["保存放生一般普通"]
     },
@@ -124,6 +138,8 @@
                 }
             }
         },
+        "pre_delay": 0,
+        "post_delay": 0,
         "rate_limit": 0,
         "next": ["保存放生一般暴走"]
     },
@@ -141,6 +157,8 @@
                 }
             }
         },
+        "pre_delay": 0,
+        "post_delay": 0,
         "rate_limit": 0,
         "next": ["保存放生蓝狼普通"]
     },
@@ -158,6 +176,8 @@
                 }
             }
         },
+        "pre_delay": 0,
+        "post_delay": 0,
         "rate_limit": 0,
         "next": ["保存放生蓝狼暴走"]
     },
@@ -175,6 +195,8 @@
                 }
             }
         },
+        "pre_delay": 0,
+        "post_delay": 0,
         "rate_limit": 0,
         "next": ["保存放生粉狼普通"]
     },
@@ -192,6 +214,8 @@
                 }
             }
         },
+        "pre_delay": 0,
+        "post_delay": 0,
         "rate_limit": 0,
         "next": ["保存放生粉狼暴走"]
     },
@@ -209,6 +233,8 @@
                 }
             }
         },
+        "pre_delay": 0,
+        "post_delay": 0,
         "rate_limit": 0,
         "next": ["保存放生红狼普通"]
     },
@@ -226,6 +252,8 @@
                 }
             }
         },
+        "pre_delay": 0,
+        "post_delay": 0,
         "rate_limit": 0,
         "next": ["保存放生红狼暴走"]
     },
@@ -243,6 +271,8 @@
                 }
             }
         },
+        "pre_delay": 0,
+        "post_delay": 0,
         "rate_limit": 0,
         "next": ["保存公屏开关"]
     },
@@ -260,6 +290,8 @@
                 }
             }
         },
+        "pre_delay": 0,
+        "post_delay": 0,
         "rate_limit": 0,
         "next": ["保存公屏附加信息"]
     },
@@ -277,6 +309,8 @@
                 }
             }
         },
+        "pre_delay": 0,
+        "post_delay": 0,
         "rate_limit": 0,
         "next": ["战斗设置完成"]
     },
@@ -290,6 +324,8 @@
                 "custom_action": "finalize_battle_config"
             }
         },
+        "pre_delay": 0,
+        "post_delay": 0,
         "focus": {
             "Node.Action.Succeeded": "战斗设置已保存"
         }
