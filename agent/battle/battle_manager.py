@@ -144,13 +144,16 @@ class BattleAction:
 # 创建实际存储数据的容器，上面的类是图纸，这里是盖好的房子
 
 # 准备一个字典放所有敌人信息
-archives = {} 
+archives = {}
 
 # 当前正在战斗的上下文
-active_context = EncounterContext() 
+active_context = EncounterContext()
 
 # 实例化全局配置对象
 current_config = UserBattleConfig()
+
+# 配置是否已初始化的标志（必须通过战斗设置任务来设置）
+is_configured = False
 
 # ==========================================
 # 5. 核心逻辑函数区 (Core Logic Functions)
@@ -263,3 +266,104 @@ def archive_battle_result(result_type):
             target_record.max_level = active_context.level
 
     return True
+
+# ==========================================
+# 6. 配置设置函数区 (Config Setters)
+# ==========================================
+# 供 action 调用的配置设置函数
+
+def set_config_value(key: str, value) -> bool:
+    """
+    通用配置设置函数：根据 key 设置对应的配置项
+
+    Args:
+        key: 配置项的键名
+        value: 配置项的值
+
+    Returns:
+        bool: 设置是否成功
+    """
+    global is_configured
+
+    # 卡组配置映射
+    deck_keys = {
+        "deck_general_normal": "deck_general_normal",
+        "deck_general_rampage": "deck_general_rampage",
+        "deck_sirius_normal": "deck_sirius_normal",
+        "deck_sirius_rampage": "deck_sirius_rampage",
+        "deck_release": "deck_release",
+    }
+
+    # 放生配置映射 (category, mode)
+    release_keys = {
+        "release_general_normal": (CAT_GENERAL, MODE_NORMAL),
+        "release_general_rampage": (CAT_GENERAL, MODE_RAMPAGE),
+        "release_blue_normal": (CAT_BLUE, MODE_NORMAL),
+        "release_blue_rampage": (CAT_BLUE, MODE_RAMPAGE),
+        "release_pink_normal": (CAT_PINK, MODE_NORMAL),
+        "release_pink_rampage": (CAT_PINK, MODE_RAMPAGE),
+        "release_red_normal": (CAT_RED, MODE_NORMAL),
+        "release_red_rampage": (CAT_RED, MODE_RAMPAGE),
+    }
+
+    if key in deck_keys:
+        # 设置卡组配置
+        setattr(current_config, deck_keys[key], value)
+        return True
+
+    elif key in release_keys:
+        # 设置放生配置
+        category, mode = release_keys[key]
+        enable = str(value).lower() in ("true", "1", "yes")
+        current_config.set_release(category, mode, enable)
+        return True
+
+    elif key == "broadcast":
+        # 设置公屏发送开关
+        current_config.broadcast = str(value).lower() in ("true", "1", "yes")
+        return True
+
+    elif key == "broadcast_addition":
+        # 设置公屏附加信息
+        current_config.broadcast_addition = str(value) if value else ""
+        return True
+
+    elif key == "enable_release":
+        # 放生总开关（如果关闭，清空所有放生目标）
+        enable = str(value).lower() in ("true", "1", "yes")
+        if not enable:
+            current_config.release_targets.clear()
+        return True
+
+    elif key == "mark_configured":
+        # 标记配置完成
+        is_configured = True
+        return True
+
+    else:
+        raise ValueError(f"未知的配置项: {key}")
+
+def get_config_summary() -> str:
+    """
+    获取当前配置的摘要信息，用于日志输出
+    """
+    lines = [
+        "=== 战斗配置摘要 ===",
+        f"一般普通卡组: {current_config.deck_general_normal}",
+        f"一般暴走卡组: {current_config.deck_general_rampage}",
+        f"天狼星普通卡组: {current_config.deck_sirius_normal}",
+        f"天狼星暴走卡组: {current_config.deck_sirius_rampage}",
+        f"放生卡组: {current_config.deck_release}",
+        f"放生目标: {current_config.release_targets if current_config.release_targets else '无'}",
+        f"公屏发送: {'开启' if current_config.broadcast else '关闭'}",
+    ]
+    if current_config.broadcast:
+        lines.append(f"公屏附加信息: {current_config.broadcast_addition or '(空)'}")
+    lines.append("==================")
+    return "\n".join(lines)
+
+def check_configured() -> bool:
+    """
+    检查战斗配置是否已完成初始化
+    """
+    return is_configured

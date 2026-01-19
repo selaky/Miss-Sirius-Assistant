@@ -7,6 +7,7 @@ from maa.custom_action import CustomAction
 from maa.context import Context
 from . import battle_manager
 import logging
+import json
 from utils import common_func
 
 @AgentServer.custom_action("set_enemy_next")
@@ -97,4 +98,80 @@ class BattleRelease(CustomAction):
         return CustomAction.RunResult(success=True)
 
 
+@AgentServer.custom_action("save_battle_config")
+class SaveBattleConfig(CustomAction):
+    """
+    通用战斗配置保存动作。
+    通过 custom_action_param 传入 config_key 和 config_value，
+    自动将配置项保存到 battle_manager.current_config 中。
+    """
+    def run(self, context: Context, argv: CustomAction.RunArg) -> bool:
+        # 解析参数
+        params = common_func.parse_params(
+            param_str=argv.custom_action_param,
+            node_name=argv.node_name,
+            required_keys=["config_key", "config_value"]
+        )
 
+        config_key = params["config_key"]
+        config_value = params["config_value"]
+
+        # 调用 manager 的设置函数
+        try:
+            battle_manager.set_config_value(config_key, config_value)
+            logging.info(f"[{argv.node_name}] 已保存配置: {config_key} = {config_value}")
+        except ValueError as e:
+            logging.error(f"[{argv.node_name}] 配置保存失败: {e}")
+            return CustomAction.RunResult(success=False)
+
+        return CustomAction.RunResult(success=True)
+
+
+@AgentServer.custom_action("finalize_battle_config")
+class FinalizeBattleConfig(CustomAction):
+    """
+    完成战斗配置设置。
+    标记配置已完成，并输出配置摘要。
+    """
+    def run(self, context: Context, argv: CustomAction.RunArg) -> bool:
+        # 标记配置完成
+        battle_manager.set_config_value("mark_configured", True)
+
+        # 输出配置摘要
+        summary = battle_manager.get_config_summary()
+        logging.info(f"[{argv.node_name}] 战斗配置完成:\n{summary}")
+
+        # 设置 focus 消息显示给用户
+        common_func.dynamic_set_focus(
+            context,
+            "战斗设置完成",
+            "RECO_OK",
+            "战斗设置已保存，可以开始跑图任务"
+        )
+
+        return CustomAction.RunResult(success=True)
+
+
+@AgentServer.custom_action("check_battle_config")
+class CheckBattleConfig(CustomAction):
+    """
+    检查战斗配置是否已完成。
+    如果未配置，通过 focus 提示用户先执行设置任务，并返回失败。
+    """
+    def run(self, context: Context, argv: CustomAction.RunArg) -> bool:
+        if not battle_manager.check_configured():
+            error_msg = "请先执行【跑图战斗设置】任务进行战斗配置！"
+            logging.error(f"[{argv.node_name}] {error_msg}")
+
+            # 设置 focus 消息提示用户
+            common_func.dynamic_set_focus(
+                context,
+                "检查战斗配置",
+                "RECO_OK",
+                error_msg
+            )
+
+            return CustomAction.RunResult(success=False)
+
+        logging.info(f"[{argv.node_name}] 战斗配置检查通过")
+        return CustomAction.RunResult(success=True)

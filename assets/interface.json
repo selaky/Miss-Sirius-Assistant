@@ -55,6 +55,18 @@
     },
     "task": [
         {
+            "name": "跑图战斗设置",
+            "entry": "开始战斗设置",
+            "default_check": true,
+            "description": "### 战斗策略配置\n此任务负责对后续跑图中遇到感染者时的应对策略进行设置。请确保在进行跑图任务之前，此任务已经运行过。\n\n如果觉得前面的描述太复杂或者分不清什么时候该运行此任务，就**永远保持本任务在勾选状态且放在最前面**。",
+            "option": [
+                "一般感染者卡组设置",
+                "天狼星卡组设置",
+                "放生设置",
+                "公屏发送设置"
+            ]
+        },
+        {
             "name": "重置统计数据",
             "entry": "开始重置统计数据",
             "default_check": false,
@@ -252,164 +264,24 @@
         "自动进行战斗": {
             "type": "switch",
             "label": "自动进行战斗",
-            "description": "开启后，遇到战斗会自动选择卡组进行战斗。关闭后，遇到战斗会自动点击【放弃】按钮",
+            "description": "开启后，遇到战斗会根据【跑图战斗设置】中的配置自动进行战斗。关闭后，遇到战斗会自动点击【放弃】按钮（捡垃圾模式）",
             "default_case": "Yes",
             "cases": [
                 {
                     "name": "Yes",
                     "label": "开启",
-                    "option": [
-                        "普通感染者卡组",
-                        "暴走感染者卡组"
-                    ],
                     "pipeline_override": {
-                        "放弃战斗": {
+                        "捡垃圾模式": {
                             "enabled": false
                         }
                     }
                 },
                 {
                     "name": "No",
-                    "label": "关闭（自动放弃战斗）",
+                    "label": "关闭（捡垃圾模式）",
                     "pipeline_override": {
-                        "放弃战斗": {
+                        "捡垃圾模式": {
                             "enabled": true
-                        }
-                    }
-                }
-            ]
-        },
-        "普通感染者卡组": {
-            "type": "select",
-            "label": "普通感染者卡组",
-            "description": "遇到普通感染者时使用的卡组",
-            "default_case": "卡组二",
-            "cases": [
-                {
-                    "name": "卡组一",
-                    "label": "卡组一",
-                    "pipeline_override": {
-                        "普通卡组": {
-                            "recognition": {
-                                "param": {
-                                    "expected": [
-                                        "卡组一"
-                                    ]
-                                }
-                            }
-                        }
-                    }
-                },
-                {
-                    "name": "卡组二",
-                    "label": "卡组二",
-                    "pipeline_override": {
-                        "普通卡组": {
-                            "recognition": {
-                                "param": {
-                                    "expected": [
-                                        "卡组二"
-                                    ]
-                                }
-                            }
-                        }
-                    }
-                },
-                {
-                    "name": "卡组三",
-                    "label": "卡组三",
-                    "pipeline_override": {
-                        "普通卡组": {
-                            "recognition": {
-                                "param": {
-                                    "expected": [
-                                        "卡组三"
-                                    ]
-                                }
-                            }
-                        }
-                    }
-                },
-                {
-                    "name": "卡组四",
-                    "label": "卡组四",
-                    "pipeline_override": {
-                        "普通卡组": {
-                            "recognition": {
-                                "param": {
-                                    "expected": [
-                                        "卡组四"
-                                    ]
-                                }
-                            }
-                        }
-                    }
-                }
-            ]
-        },
-        "暴走感染者卡组": {
-            "type": "select",
-            "label": "暴走感染者卡组",
-            "description": "遇到暴走感染者时使用的卡组",
-            "default_case": "卡组三",
-            "cases": [
-                {
-                    "name": "卡组一",
-                    "label": "卡组一",
-                    "pipeline_override": {
-                        "暴走卡组": {
-                            "recognition": {
-                                "param": {
-                                    "expected": [
-                                        "卡组一"
-                                    ]
-                                }
-                            }
-                        }
-                    }
-                },
-                {
-                    "name": "卡组二",
-                    "label": "卡组二",
-                    "pipeline_override": {
-                        "暴走卡组": {
-                            "recognition": {
-                                "param": {
-                                    "expected": [
-                                        "卡组二"
-                                    ]
-                                }
-                            }
-                        }
-                    }
-                },
-                {
-                    "name": "卡组三",
-                    "label": "卡组三",
-                    "pipeline_override": {
-                        "暴走卡组": {
-                            "recognition": {
-                                "param": {
-                                    "expected": [
-                                        "卡组三"
-                                    ]
-                                }
-                            }
-                        }
-                    }
-                },
-                {
-                    "name": "卡组四",
-                    "label": "卡组四",
-                    "pipeline_override": {
-                        "暴走卡组": {
-                            "recognition": {
-                                "param": {
-                                    "expected": [
-                                        "卡组四"
-                                    ]
-                                }
-                            }
                         }
                     }
                 }
@@ -1070,6 +942,817 @@
                             "custom_recognition_param": {
                                 "target_hour": "{target_hour}",
                                 "target_minute": "{target_minute}"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "一般感染者卡组设置": {
+            "type": "select",
+            "label": "普通一般感染者卡组",
+            "description": "遇到普通状态的一般感染者时使用的卡组",
+            "default_case": "卡组一",
+            "cases": [
+                {
+                    "name": "卡组一",
+                    "label": "卡组一",
+                    "option": ["暴走一般感染者卡组"],
+                    "pipeline_override": {
+                        "保存一般普通卡组": {
+                            "action": {
+                                "param": {
+                                    "custom_action_param": {
+                                        "config_key": "deck_general_normal",
+                                        "config_value": "卡组一"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "卡组二",
+                    "label": "卡组二",
+                    "option": ["暴走一般感染者卡组"],
+                    "pipeline_override": {
+                        "保存一般普通卡组": {
+                            "action": {
+                                "param": {
+                                    "custom_action_param": {
+                                        "config_key": "deck_general_normal",
+                                        "config_value": "卡组二"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "卡组三",
+                    "label": "卡组三",
+                    "option": ["暴走一般感染者卡组"],
+                    "pipeline_override": {
+                        "保存一般普通卡组": {
+                            "action": {
+                                "param": {
+                                    "custom_action_param": {
+                                        "config_key": "deck_general_normal",
+                                        "config_value": "卡组三"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "卡组四",
+                    "label": "卡组四",
+                    "option": ["暴走一般感染者卡组"],
+                    "pipeline_override": {
+                        "保存一般普通卡组": {
+                            "action": {
+                                "param": {
+                                    "custom_action_param": {
+                                        "config_key": "deck_general_normal",
+                                        "config_value": "卡组四"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        "暴走一般感染者卡组": {
+            "type": "select",
+            "label": "暴走一般感染者卡组",
+            "description": "遇到暴走状态的一般感染者时使用的卡组",
+            "default_case": "卡组一",
+            "cases": [
+                {
+                    "name": "卡组一",
+                    "label": "卡组一",
+                    "pipeline_override": {
+                        "保存一般暴走卡组": {
+                            "action": {
+                                "param": {
+                                    "custom_action_param": {
+                                        "config_key": "deck_general_rampage",
+                                        "config_value": "卡组一"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "卡组二",
+                    "label": "卡组二",
+                    "pipeline_override": {
+                        "保存一般暴走卡组": {
+                            "action": {
+                                "param": {
+                                    "custom_action_param": {
+                                        "config_key": "deck_general_rampage",
+                                        "config_value": "卡组二"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "卡组三",
+                    "label": "卡组三",
+                    "pipeline_override": {
+                        "保存一般暴走卡组": {
+                            "action": {
+                                "param": {
+                                    "custom_action_param": {
+                                        "config_key": "deck_general_rampage",
+                                        "config_value": "卡组三"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "卡组四",
+                    "label": "卡组四",
+                    "pipeline_override": {
+                        "保存一般暴走卡组": {
+                            "action": {
+                                "param": {
+                                    "custom_action_param": {
+                                        "config_key": "deck_general_rampage",
+                                        "config_value": "卡组四"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        "天狼星卡组设置": {
+            "type": "select",
+            "label": "普通天狼星卡组",
+            "description": "遇到普通状态的天狼星（蓝狼/粉狼/红狼）时使用的卡组",
+            "default_case": "卡组一",
+            "cases": [
+                {
+                    "name": "卡组一",
+                    "label": "卡组一",
+                    "option": ["暴走天狼星卡组"],
+                    "pipeline_override": {
+                        "保存天狼星普通卡组": {
+                            "action": {
+                                "param": {
+                                    "custom_action_param": {
+                                        "config_key": "deck_sirius_normal",
+                                        "config_value": "卡组一"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "卡组二",
+                    "label": "卡组二",
+                    "option": ["暴走天狼星卡组"],
+                    "pipeline_override": {
+                        "保存天狼星普通卡组": {
+                            "action": {
+                                "param": {
+                                    "custom_action_param": {
+                                        "config_key": "deck_sirius_normal",
+                                        "config_value": "卡组二"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "卡组三",
+                    "label": "卡组三",
+                    "option": ["暴走天狼星卡组"],
+                    "pipeline_override": {
+                        "保存天狼星普通卡组": {
+                            "action": {
+                                "param": {
+                                    "custom_action_param": {
+                                        "config_key": "deck_sirius_normal",
+                                        "config_value": "卡组三"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "卡组四",
+                    "label": "卡组四",
+                    "option": ["暴走天狼星卡组"],
+                    "pipeline_override": {
+                        "保存天狼星普通卡组": {
+                            "action": {
+                                "param": {
+                                    "custom_action_param": {
+                                        "config_key": "deck_sirius_normal",
+                                        "config_value": "卡组四"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        "暴走天狼星卡组": {
+            "type": "select",
+            "label": "暴走天狼星卡组",
+            "description": "遇到暴走状态的天狼星（蓝狼/粉狼/红狼）时使用的卡组",
+            "default_case": "卡组一",
+            "cases": [
+                {
+                    "name": "卡组一",
+                    "label": "卡组一",
+                    "pipeline_override": {
+                        "保存天狼星暴走卡组": {
+                            "action": {
+                                "param": {
+                                    "custom_action_param": {
+                                        "config_key": "deck_sirius_rampage",
+                                        "config_value": "卡组一"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "卡组二",
+                    "label": "卡组二",
+                    "pipeline_override": {
+                        "保存天狼星暴走卡组": {
+                            "action": {
+                                "param": {
+                                    "custom_action_param": {
+                                        "config_key": "deck_sirius_rampage",
+                                        "config_value": "卡组二"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "卡组三",
+                    "label": "卡组三",
+                    "pipeline_override": {
+                        "保存天狼星暴走卡组": {
+                            "action": {
+                                "param": {
+                                    "custom_action_param": {
+                                        "config_key": "deck_sirius_rampage",
+                                        "config_value": "卡组三"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "卡组四",
+                    "label": "卡组四",
+                    "pipeline_override": {
+                        "保存天狼星暴走卡组": {
+                            "action": {
+                                "param": {
+                                    "custom_action_param": {
+                                        "config_key": "deck_sirius_rampage",
+                                        "config_value": "卡组四"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        "放生设置": {
+            "type": "switch",
+            "label": "放生部分感染者",
+            "description": "开启此选项后，遇到指定感染者会使用放生卡组舔一下，然后放弃战斗",
+            "default_case": "No",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "label": "开启",
+                    "option": [
+                        "放生卡组选择",
+                        "放生一般感染者",
+                        "放生蓝狼",
+                        "放生粉狼",
+                        "放生红狼"
+                    ],
+                    "pipeline_override": {
+                        "保存放生开关": {
+                            "action": {
+                                "param": {
+                                    "custom_action_param": {
+                                        "config_key": "enable_release",
+                                        "config_value": "true"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "No",
+                    "label": "关闭",
+                    "pipeline_override": {
+                        "保存放生开关": {
+                            "action": {
+                                "param": {
+                                    "custom_action_param": {
+                                        "config_key": "enable_release",
+                                        "config_value": "false"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        "放生卡组选择": {
+            "type": "select",
+            "label": "放生卡组",
+            "description": "对所有设置为放生的感染者使用此处卡组，建议选择最弱的卡组如伊娜美",
+            "default_case": "卡组一",
+            "cases": [
+                {
+                    "name": "卡组一",
+                    "label": "卡组一",
+                    "pipeline_override": {
+                        "保存放生卡组": {
+                            "action": {
+                                "param": {
+                                    "custom_action_param": {
+                                        "config_key": "deck_release",
+                                        "config_value": "卡组一"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "卡组二",
+                    "label": "卡组二",
+                    "pipeline_override": {
+                        "保存放生卡组": {
+                            "action": {
+                                "param": {
+                                    "custom_action_param": {
+                                        "config_key": "deck_release",
+                                        "config_value": "卡组二"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "卡组三",
+                    "label": "卡组三",
+                    "pipeline_override": {
+                        "保存放生卡组": {
+                            "action": {
+                                "param": {
+                                    "custom_action_param": {
+                                        "config_key": "deck_release",
+                                        "config_value": "卡组三"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "卡组四",
+                    "label": "卡组四",
+                    "pipeline_override": {
+                        "保存放生卡组": {
+                            "action": {
+                                "param": {
+                                    "custom_action_param": {
+                                        "config_key": "deck_release",
+                                        "config_value": "卡组四"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        "放生一般感染者": {
+            "type": "switch",
+            "label": "放生普通一般感染者",
+            "description": "开启后会放生普通状态的一般感染者",
+            "default_case": "No",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "label": "开启",
+                    "option": ["放生暴走一般感染者"],
+                    "pipeline_override": {
+                        "保存放生一般普通": {
+                            "action": {
+                                "param": {
+                                    "custom_action_param": {
+                                        "config_key": "release_general_normal",
+                                        "config_value": "true"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "No",
+                    "label": "关闭",
+                    "option": ["放生暴走一般感染者"],
+                    "pipeline_override": {
+                        "保存放生一般普通": {
+                            "action": {
+                                "param": {
+                                    "custom_action_param": {
+                                        "config_key": "release_general_normal",
+                                        "config_value": "false"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        "放生暴走一般感染者": {
+            "type": "switch",
+            "label": "放生暴走一般感染者",
+            "description": "开启后会放生暴走状态的一般感染者",
+            "default_case": "No",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "label": "开启",
+                    "pipeline_override": {
+                        "保存放生一般暴走": {
+                            "action": {
+                                "param": {
+                                    "custom_action_param": {
+                                        "config_key": "release_general_rampage",
+                                        "config_value": "true"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "No",
+                    "label": "关闭",
+                    "pipeline_override": {
+                        "保存放生一般暴走": {
+                            "action": {
+                                "param": {
+                                    "custom_action_param": {
+                                        "config_key": "release_general_rampage",
+                                        "config_value": "false"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        "放生蓝狼": {
+            "type": "switch",
+            "label": "放生普通蓝狼",
+            "description": "开启后会放生普通状态的蓝狼（天狼星）",
+            "default_case": "No",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "label": "开启",
+                    "option": ["放生暴走蓝狼"],
+                    "pipeline_override": {
+                        "保存放生蓝狼普通": {
+                            "action": {
+                                "param": {
+                                    "custom_action_param": {
+                                        "config_key": "release_blue_normal",
+                                        "config_value": "true"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "No",
+                    "label": "关闭",
+                    "option": ["放生暴走蓝狼"],
+                    "pipeline_override": {
+                        "保存放生蓝狼普通": {
+                            "action": {
+                                "param": {
+                                    "custom_action_param": {
+                                        "config_key": "release_blue_normal",
+                                        "config_value": "false"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        "放生暴走蓝狼": {
+            "type": "switch",
+            "label": "放生暴走蓝狼",
+            "description": "开启后会放生暴走状态的蓝狼（天狼星）",
+            "default_case": "No",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "label": "开启",
+                    "pipeline_override": {
+                        "保存放生蓝狼暴走": {
+                            "action": {
+                                "param": {
+                                    "custom_action_param": {
+                                        "config_key": "release_blue_rampage",
+                                        "config_value": "true"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "No",
+                    "label": "关闭",
+                    "pipeline_override": {
+                        "保存放生蓝狼暴走": {
+                            "action": {
+                                "param": {
+                                    "custom_action_param": {
+                                        "config_key": "release_blue_rampage",
+                                        "config_value": "false"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        "放生粉狼": {
+            "type": "switch",
+            "label": "放生普通粉狼",
+            "description": "开启后会放生普通状态的粉狼（超级天狼星）",
+            "default_case": "No",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "label": "开启",
+                    "option": ["放生暴走粉狼"],
+                    "pipeline_override": {
+                        "保存放生粉狼普通": {
+                            "action": {
+                                "param": {
+                                    "custom_action_param": {
+                                        "config_key": "release_pink_normal",
+                                        "config_value": "true"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "No",
+                    "label": "关闭",
+                    "option": ["放生暴走粉狼"],
+                    "pipeline_override": {
+                        "保存放生粉狼普通": {
+                            "action": {
+                                "param": {
+                                    "custom_action_param": {
+                                        "config_key": "release_pink_normal",
+                                        "config_value": "false"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        "放生暴走粉狼": {
+            "type": "switch",
+            "label": "放生暴走粉狼",
+            "description": "开启后会放生暴走状态的粉狼（超级天狼星）",
+            "default_case": "No",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "label": "开启",
+                    "pipeline_override": {
+                        "保存放生粉狼暴走": {
+                            "action": {
+                                "param": {
+                                    "custom_action_param": {
+                                        "config_key": "release_pink_rampage",
+                                        "config_value": "true"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "No",
+                    "label": "关闭",
+                    "pipeline_override": {
+                        "保存放生粉狼暴走": {
+                            "action": {
+                                "param": {
+                                    "custom_action_param": {
+                                        "config_key": "release_pink_rampage",
+                                        "config_value": "false"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        "放生红狼": {
+            "type": "switch",
+            "label": "放生普通红狼",
+            "description": "开启后会放生普通状态的红狼（终极天狼星）",
+            "default_case": "No",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "label": "开启",
+                    "option": ["放生暴走红狼"],
+                    "pipeline_override": {
+                        "保存放生红狼普通": {
+                            "action": {
+                                "param": {
+                                    "custom_action_param": {
+                                        "config_key": "release_red_normal",
+                                        "config_value": "true"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "No",
+                    "label": "关闭",
+                    "option": ["放生暴走红狼"],
+                    "pipeline_override": {
+                        "保存放生红狼普通": {
+                            "action": {
+                                "param": {
+                                    "custom_action_param": {
+                                        "config_key": "release_red_normal",
+                                        "config_value": "false"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        "放生暴走红狼": {
+            "type": "switch",
+            "label": "放生暴走红狼",
+            "description": "开启后会放生暴走状态的红狼（终极天狼星）",
+            "default_case": "No",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "label": "开启",
+                    "pipeline_override": {
+                        "保存放生红狼暴走": {
+                            "action": {
+                                "param": {
+                                    "custom_action_param": {
+                                        "config_key": "release_red_rampage",
+                                        "config_value": "true"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "No",
+                    "label": "关闭",
+                    "pipeline_override": {
+                        "保存放生红狼暴走": {
+                            "action": {
+                                "param": {
+                                    "custom_action_param": {
+                                        "config_key": "release_red_rampage",
+                                        "config_value": "false"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        "公屏发送设置": {
+            "type": "switch",
+            "label": "公屏发送放生信息",
+            "description": "开启此开关后，会在放生感染者后在世界频道发送感染者名称等信息",
+            "default_case": "No",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "label": "开启",
+                    "option": [
+                        "公屏附加信息"
+                    ],
+                    "pipeline_override": {
+                        "保存公屏开关": {
+                            "action": {
+                                "param": {
+                                    "custom_action_param": {
+                                        "config_key": "broadcast",
+                                        "config_value": "true"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "No",
+                    "label": "关闭",
+                    "pipeline_override": {
+                        "保存公屏开关": {
+                            "action": {
+                                "param": {
+                                    "custom_action_param": {
+                                        "config_key": "broadcast",
+                                        "config_value": "false"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        "公屏附加信息": {
+            "type": "input",
+            "label": "自定义附加输入",
+            "description": "此处文字会被加到感染者名字后面一起发送，可以在这里加上你想对其他人说的话，留空则不发送额外信息（请不要利用此功能批量发送奇怪的内容，谢谢）",
+            "inputs": [
+                {
+                    "name": "broadcast_addition",
+                    "label": "附加信息",
+                    "description": "会附加到感染者信息后面发送",
+                    "default": "随意刀"
+                }
+            ],
+            "pipeline_override": {
+                "保存公屏附加信息": {
+                    "action": {
+                        "param": {
+                            "custom_action_param": {
+                                "config_key": "broadcast_addition",
+                                "config_value": "{broadcast_addition}"
                             }
                         }
                     }

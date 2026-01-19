@@ -25,7 +25,8 @@
       "mcp__mcp-router__list_dir",
       "mcp__mcp-router__read_file",
       "mcp__mcp-router__activate_project",
-      "WebFetch(domain:deepwiki.com)"
+      "WebFetch(domain:deepwiki.com)",
+      "Bash(ls -la \"D:\\\\Projects\\\\MSA\\\\agent\"\" 2>/dev/null || find \"D:ProjectsMSAagent\" -type f -name \"*.py \")"
     ],
     "deny": [],
     "ask": []

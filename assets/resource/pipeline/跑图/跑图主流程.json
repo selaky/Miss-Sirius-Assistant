@@ -208,8 +208,47 @@
       "type": "DoNothing"
     },
     "next": [
+      "检查战斗配置"
+    ],
+    "recognition": {
+      "param": {},
+      "type": "DirectHit"
+    }
+  },
+  "检查战斗配置": {
+    "$__mpe_code": {
+      "position": {
+        "x": 150,
+        "y": 45
+      }
+    },
+    "action": {
+      "param": {
+        "custom_action": "check_battle_config"
+      },
+      "type": "Custom"
+    },
+    "next": [
       "读取吃药上限"
     ],
+    "on_error": ["战斗配置未完成"],
+    "recognition": {
+      "param": {},
+      "type": "DirectHit"
+    }
+  },
+  "战斗配置未完成": {
+    "$__mpe_code": {
+      "position": {
+        "x": 150,
+        "y": 150
+      }
+    },
+    "action": {
+      "param": {},
+      "type": "StopTask"
+    },
+    "focus": "请先执行【跑图战斗设置】任务进行战斗配置！",
     "recognition": {
       "param": {},
       "type": "DirectHit"
