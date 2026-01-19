@@ -3,21 +3,21 @@
     "$__mpe_code": {
       "filePath": "D:\\Projects\\MSA\\assets\\resource\\pipeline\\跑图/战斗.json",
       "filename": "战斗",
-      "lastSyncTime": 1768736289375,
+      "lastSyncTime": 1768788578060,
       "prefix": "",
       "savedViewport": {
-        "x": -226,
-        "y": -522,
+        "x": -600,
+        "y": -721,
         "zoom": 0.57
       },
-      "version": "v0.16.0"
+      "version": "v0.16.1"
     }
   },
   "$__mpe_external_开始公屏发送_战斗": {
     "$__mpe_code": {
       "position": {
-        "x": 2405,
-        "y": 1939
+        "x": 2500,
+        "y": 1767
       }
     }
   },
@@ -61,25 +61,6 @@
         ]
       },
       "type": "OCR"
-    }
-  },
-  "公屏回到战斗": {
-    "$__mpe_code": {
-      "position": {
-        "x": 2400,
-        "y": 2049
-      }
-    },
-    "action": {
-      "param": {},
-      "type": "DoNothing"
-    },
-    "next": [
-      "输出战斗信息"
-    ],
-    "recognition": {
-      "param": {},
-      "type": "DirectHit"
     }
   },
   "开始战斗": {
@@ -357,8 +338,8 @@
   "放生处理": {
     "$__mpe_code": {
       "position": {
-        "x": 2100,
-        "y": 1901
+        "x": 1937,
+        "y": 1924
       }
     },
     "action": {
@@ -368,9 +349,50 @@
       "type": "Custom"
     },
     "next": [
-      "开始公屏发送",
-      "公屏回到战斗"
+      "放生广播分流"
     ],
+    "rate_limit": 10,
+    "recognition": {
+      "param": {},
+      "type": "DirectHit"
+    }
+  },
+  "放生广播分流": {
+    "$__mpe_code": {
+      "position": {
+        "x": 2282,
+        "y": 1927
+      }
+    },
+    "action": {
+      "param": {},
+      "type": "DoNothing"
+    },
+    "next": [
+      "开始公屏发送",
+      "放生结束"
+    ],
+    "rate_limit": 10,
+    "recognition": {
+      "param": {},
+      "type": "DirectHit"
+    }
+  },
+  "放生结束": {
+    "$__mpe_code": {
+      "position": {
+        "x": 2688,
+        "y": 1945
+      }
+    },
+    "action": {
+      "param": {},
+      "type": "DoNothing"
+    },
+    "next": [
+      "输出战斗信息"
+    ],
+    "rate_limit": 10,
     "recognition": {
       "param": {},
       "type": "DirectHit"
@@ -379,8 +401,8 @@
   "结束战斗": {
     "$__mpe_code": {
       "position": {
-        "x": 3000,
-        "y": 1781
+        "x": 3332,
+        "y": 1795
       }
     },
     "action": {
@@ -430,8 +452,8 @@
   "输出战斗信息": {
     "$__mpe_code": {
       "position": {
-        "x": 2700,
-        "y": 1781
+        "x": 3053,
+        "y": 1774
       }
     },
     "action": {

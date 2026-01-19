@@ -118,6 +118,7 @@ class UserBattleConfig:
     release_targets: set[tuple[str, str]] = field(default_factory=set)
 
     # --- 3. 公屏信息 (对应输入框) ---
+    broadcast = False
     broadcast_addition: str = ""
 
     def set_release(self, category: str, mode: str, enable: bool):

@@ -29,5 +29,6 @@
     "[markdown]": {
         "editor.formatOnSave": true,
         "editor.defaultFormatter": "DavidAnson.vscode-markdownlint"
-    }
+    },
+    "cmake.sourceDirectory": "D:/Projects/MSA/hook"
 }

@@ -76,14 +76,21 @@ class BattleRelease(CustomAction):
         focus_msg = f"[👋 放生] {current.level}级 {current.category}感染者 {current.name} | 累计放生: {release_count}"
         common_func.dynamic_set_focus(context,"输出战斗信息","RECO_OK",focus_msg)
 
-        # 整理公屏需要发送的信息(虽然用户可能会关闭发送公屏设置，但是来都来了,也生成一下吧)
-        broadcast_msg = f"[自动发送] {current.category} {current.name} LV.{current.level} {battle_manager.current_config.broadcast_addition}"
-        context.override_pipeline({
-            "公屏输入文字":{
-                "input_text":broadcast_msg
-            }
-        })
-        common_func.dynamic_set_next(context,"点击发送消息","公屏回到战斗")
+        # 如果需要发送公屏信息,进行相关处理
+        if battle_manager.current_config.broadcast:
+            # 将后续节点导向公屏模块
+            common_func.dynamic_set_next(context,"放生广播分流","开始公屏发送")
+
+            # 整理公屏需要发送的信息
+            broadcast_msg = f"[自动发送] {current.category} {current.name} LV.{current.level} {battle_manager.current_config.broadcast_addition}"
+            context.override_pipeline({
+                "公屏输入文字":{
+                    "input_text":broadcast_msg
+                }
+            })
+
+            # 执行完公屏模块之后，回到战斗模块(测试期间会关闭点击发送消息的 enabled,防止发送错误消息 )
+            common_func.dynamic_set_next(context,"点击发送消息","放生结束")
 
         return CustomAction.RunResult(success=True)
 
