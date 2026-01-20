@@ -3,12 +3,13 @@
     "$__mpe_code": {
       "filePath": "D:\\Projects\\MSA\\assets\\resource\\pipeline\\跑图\\战斗.json",
       "filename": "战斗",
-      "lastSyncTime": 1768893619629,
+      "isModifiedExternally": true,
+      "lastSyncTime": 1768899098896,
       "prefix": "",
       "savedViewport": {
-        "x": 162,
-        "y": 39,
-        "zoom": 0.58
+        "x": 286,
+        "y": 95,
+        "zoom": 0.76
       },
       "version": "v0.16.1"
     }
@@ -130,10 +131,10 @@
     "recognition": {
       "param": {
         "roi": [
-          0,
-          0,
-          0,
-          0
+          1158,
+          522,
+          122,
+          77
         ],
         "template": [
           "战斗/放弃.png"
@@ -277,10 +278,10 @@
     "recognition": {
       "param": {
         "roi": [
-          1128,
-          495,
-          152,
-          120
+          1158,
+          522,
+          122,
+          77
         ],
         "template": [
           "战斗/放弃.png"
