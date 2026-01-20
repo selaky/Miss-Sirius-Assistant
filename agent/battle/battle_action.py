@@ -43,10 +43,10 @@ class BattleWin(CustomAction):
         current = battle_manager.active_context
         if current.battle_count == 1:
             # 一次性获得胜利
-            msg = f"[🗡️击杀] {current.name} LV.{current.level} {current.category} "
+            msg = f"[🗡️击杀] {current.name} LV.{current.level} {current.mode} "
         else:
             # 多次战斗获得胜利
-            msg = f"[⚔️击杀] {current.name} LV.{current.level} {current.category} | 击杀花费次数: {current.battle_count}"
+            msg = f"[⚔️击杀] {current.name} LV.{current.level} {current.mode} | 击杀花费次数: {current.battle_count}"
 
         common_func.dynamic_set_focus(context,"输出战斗信息","RECO_OK",msg)
         return CustomAction.RunResult(success=True)
@@ -74,7 +74,7 @@ class BattleRelease(CustomAction):
         release_count = profile.get_record_by_mode(current.mode).release if profile else 1
 
         # 整理用户需要看到的信息
-        focus_msg = f"[👋 放生] {current.name} LV.{current.level} {current.category} | 累计放生: {release_count}"
+        focus_msg = f"[👋 放生] {current.name} LV.{current.level} {current.mode} | 累计放生: {release_count}"
         common_func.dynamic_set_focus(context,"输出战斗信息","RECO_OK",focus_msg)
 
         # 如果需要发送公屏信息,进行相关处理
@@ -83,7 +83,7 @@ class BattleRelease(CustomAction):
             common_func.dynamic_set_next(context,"放生广播分流","开始公屏发送")
 
             # 整理公屏需要发送的信息
-            broadcast_msg = f"[自动发送] {current.category} {current.name} LV.{current.level} {battle_manager.current_config.broadcast_addition}"
+            broadcast_msg = f"[感染者] {current.name} LV.{current.level} {current.mode} {battle_manager.current_config.broadcast_addition}"
             context.override_pipeline({
                 "公屏输入文字":{
                     "input_text":broadcast_msg

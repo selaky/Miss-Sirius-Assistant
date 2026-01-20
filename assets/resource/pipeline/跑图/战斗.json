@@ -6,9 +6,9 @@
       "lastSyncTime": 1768886541562,
       "prefix": "",
       "savedViewport": {
-        "x": -119,
-        "y": -165,
-        "zoom": 0.66
+        "x": 127,
+        "y": -62,
+        "zoom": 0.38
       },
       "version": "v0.16.1"
     }
@@ -115,6 +115,9 @@
       },
       "捡垃圾模式",
       "提取感染者信息"
+    ],
+    "on_error": [
+      "跑图循环开始"
     ],
     "rate_limit": 10,
     "recognition": {
@@ -301,6 +304,9 @@
       },
       "进入战斗"
     ],
+    "on_error": [
+      "跑图循环开始"
+    ],
     "rate_limit": 10,
     "recognition": {
       "param": {
@@ -361,6 +367,9 @@
       },
       "战斗失败处理",
       "放生-放弃感染"
+    ],
+    "on_error": [
+      "跑图循环开始"
     ],
     "rate_limit": 10,
     "recognition": {
@@ -453,8 +462,8 @@
   "跳过战斗": {
     "$__mpe_code": {
       "position": {
-        "x": 895,
-        "y": 925
+        "x": 897,
+        "y": 927
       }
     },
     "action": {
@@ -473,6 +482,9 @@
         "jump_back": true,
         "name": "开始获得卡牌"
       }
+    ],
+    "on_error": [
+      "跑图循环开始"
     ],
     "recognition": {
       "param": {
@@ -527,6 +539,9 @@
       },
       "进入战斗",
       "跳过战斗"
+    ],
+    "on_error": [
+      "跑图循环开始"
     ],
     "recognition": {
       "param": {
