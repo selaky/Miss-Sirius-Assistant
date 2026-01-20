@@ -17,8 +17,21 @@ class ExtractEnemyInfo(CustomRecognition):
         if not reco_detail or not reco_detail.hit:
             logging.warning(f"[{argv.node_name}] 未识别到有效 OCR 结果")
             return None
+        
+        # 少数情况下，感染者名称与等级可能被识别为两个独立区块。
+        # 因此不能直接获取 `best_result`，
+        # 需提取所有识别结果并按横坐标顺序拼接，再进行后续处理
+        all_blocks = reco_detail.filtered_results
+        try:
+            # 排序
+            all_blocks.sort(key=lambda block: block.box[0])
+        except Exception as e:
+            # 如果连坐标都读不出来，说明数据结构异常，报错
+            logging.error(f"[{argv.node_name}] 排序 OCR 结果块时发生严重错误: {e}")
+            return None
+        # 组合文本,即使只识别到一个文本也没有问题
+        ocr_text = "".join([b.text for b in all_blocks])
 
-        ocr_text = reco_detail.best_result.text
         
         # 提取感染者姓名、状态和等级
         # ocr 识别结果示例:
