@@ -1,16 +1,16 @@
 {
   "$__mpe_config_获得卡牌处理": {
     "$__mpe_code": {
-      "filePath": "D:\\Projects\\MSA\\assets\\resource\\pipeline\\跑图/获得卡牌处理.json",
+      "filePath": "D:\\Projects\\MSA\\assets\\resource\\pipeline\\跑图\\获得卡牌处理.json",
       "filename": "获得卡牌处理",
-      "lastSyncTime": 1768634172806,
+      "lastSyncTime": 1768886165013,
       "prefix": "",
       "savedViewport": {
-        "x": -1933,
-        "y": -360,
-        "zoom": 0.76
+        "x": -1364,
+        "y": -326,
+        "zoom": 0.66
       },
-      "version": "v0.16.0"
+      "version": "v0.16.1"
     }
   },
   "开始获得卡牌": {
@@ -22,7 +22,7 @@
     },
     "action": {
       "param": {},
-      "type": "DoNothing"
+      "type": "Click"
     },
     "pre_wait_freezes": 500,
     "recognition": {
