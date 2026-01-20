@@ -33,6 +33,10 @@
         "jump_back": true,
         "name": "重置竞技场数据"
       },
+      {
+        "jump_back": true,
+        "name": "重置战斗信息"
+      },
       "重置结束",
       {
         "jump_back": true,
@@ -103,6 +107,29 @@
     "enabled": false,
     "focus": {
       "Node.Action.Succeeded": "竞技场数据已重置"
+    },
+    "max_hit": 1,
+    "recognition": {
+      "param": {},
+      "type": "DirectHit"
+    }
+  },
+  "重置战斗信息": {
+    "$__mpe_code": {
+      "position": {
+        "x": 300,
+        "y": 465
+      }
+    },
+    "action": {
+      "param": {
+        "custom_action": "reset_battle_data"
+      },
+      "type": "Custom"
+    },
+    "enabled": false,
+    "focus": {
+      "Node.Action.Succeeded": "战斗信息已重置"
     },
     "max_hit": 1,
     "recognition": {

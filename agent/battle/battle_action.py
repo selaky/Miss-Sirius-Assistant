@@ -175,3 +175,12 @@ class CheckBattleConfig(CustomAction):
 
         logging.info(f"[{argv.node_name}] 战斗配置检查通过")
         return CustomAction.RunResult(success=True)
+
+
+@AgentServer.custom_action("reset_battle_data")
+class ResetBattleData(CustomAction):
+    """重置战斗信息"""
+    def run(self, context: Context, argv: CustomAction.RunArg) -> CustomAction.RunResult:
+        battle_manager.reset_enemy_data()
+        logging.info(f"[{argv.node_name}] 重置战斗统计信息（敌人档案、战绩记录）")
+        return CustomAction.RunResult(success=True)
