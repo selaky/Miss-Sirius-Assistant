@@ -3,21 +3,21 @@
     "$__mpe_code": {
       "filePath": "D:\\Projects\\MSA\\assets\\resource\\pipeline\\跑图\\恢复.json",
       "filename": "恢复",
-      "lastSyncTime": 1768554461379,
+      "lastSyncTime": 1768889738004,
       "prefix": "",
       "savedViewport": {
-        "x": 93,
-        "y": -195,
-        "zoom": 0.57
+        "x": 239,
+        "y": -124,
+        "zoom": 0.44
       },
-      "version": "v0.15.3"
+      "version": "v0.16.1"
     }
   },
   "$__mpe_external_意外处理_恢复": {
     "$__mpe_code": {
       "position": {
-        "x": 2105,
-        "y": 1524
+        "x": 2135,
+        "y": 1469
       }
     }
   },
@@ -224,8 +224,8 @@
   "开始AP恢复": {
     "$__mpe_code": {
       "position": {
-        "x": 300,
-        "y": 651
+        "x": 291,
+        "y": 656
       }
     },
     "action": {
@@ -233,6 +233,10 @@
       "type": "DoNothing"
     },
     "next": [
+      {
+        "jump_back": true,
+        "name": "意外处理"
+      },
       "进行AP恢复"
     ],
     "on_error": [

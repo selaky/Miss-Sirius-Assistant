@@ -3,14 +3,22 @@
     "$__mpe_code": {
       "filePath": "D:\\Projects\\MSA\\assets\\resource\\pipeline\\跑图\\战斗.json",
       "filename": "战斗",
-      "lastSyncTime": 1768886541562,
+      "lastSyncTime": 1768893431077,
       "prefix": "",
       "savedViewport": {
-        "x": 127,
-        "y": -62,
-        "zoom": 0.38
+        "x": 244,
+        "y": 86,
+        "zoom": 0.58
       },
       "version": "v0.16.1"
+    }
+  },
+  "$__mpe_external_开始BC恢复_战斗": {
+    "$__mpe_code": {
+      "position": {
+        "x": 978,
+        "y": 619
+      }
     }
   },
   "$__mpe_external_开始公屏发送_战斗": {
@@ -536,6 +544,10 @@
       {
         "jump_back": true,
         "name": "意外处理"
+      },
+      {
+        "jump_back": true,
+        "name": "开始BC恢复"
       },
       "进入战斗",
       "跳过战斗"
