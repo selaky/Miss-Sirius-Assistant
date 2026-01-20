@@ -3,11 +3,11 @@
     "$__mpe_code": {
       "filePath": "D:\\Projects\\MSA\\assets\\resource\\pipeline/公屏发送.json",
       "filename": "公屏发送",
-      "lastSyncTime": 1768788514705,
+      "lastSyncTime": 1768788666778,
       "prefix": "",
       "savedViewport": {
-        "x": -1624,
-        "y": -451,
+        "x": -1872,
+        "y": -499,
         "zoom": 0.66
       },
       "version": "v0.16.1"
@@ -135,9 +135,8 @@
     },
     "action": {
       "param": {},
-      "type": "Click"
+      "type": "DoNothing"
     },
-    "enabled": false,
     "recognition": {
       "param": {
         "roi": [

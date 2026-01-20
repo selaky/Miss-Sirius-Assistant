@@ -43,10 +43,10 @@ class BattleWin(CustomAction):
         current = battle_manager.active_context
         if current.battle_count == 1:
             # 一次性获得胜利
-            msg = f"[🗡️ 一击胜利] {current.level}级 {current.category}感染者 {current.name}"
+            msg = f"[🗡️击杀] {current.name} LV.{current.level}级 {current.category} "
         else:
             # 多次战斗获得胜利
-            msg = f"[⚔️ 多次交战] {current.level}级 {current.category}感染者 {current.name} | 击杀花费次数: {current.battle_count}"
+            msg = f"[⚔️击杀] {current.name} LV.{current.level}级 {current.category} | 击杀花费次数: {current.battle_count}"
 
         common_func.dynamic_set_focus(context,"输出战斗信息","RECO_OK",msg)
         return CustomAction.RunResult(success=True)
@@ -74,7 +74,7 @@ class BattleRelease(CustomAction):
         release_count = profile.get_record_by_mode(current.mode).release if profile else 1
 
         # 整理用户需要看到的信息
-        focus_msg = f"[👋 放生] {current.level}级 {current.category}感染者 {current.name} | 累计放生: {release_count}"
+        focus_msg = f"[👋 放生] {current.name} LV.{current.level}级 {current.category} | 累计放生: {release_count}"
         common_func.dynamic_set_focus(context,"输出战斗信息","RECO_OK",focus_msg)
 
         # 如果需要发送公屏信息,进行相关处理
@@ -90,7 +90,7 @@ class BattleRelease(CustomAction):
                 }
             })
 
-            # 执行完公屏模块之后，回到战斗模块(测试期间会关闭点击发送消息的 enabled,防止发送错误消息 )
+            # 执行完公屏模块之后，回到战斗模块(测试期间会关闭点击发送消息的点击行为,防止发送错误消息 )
             common_func.dynamic_set_next(context,"点击发送消息","放生结束")
         else:
             common_func.dynamic_set_next(context,"放生广播分流","放生结束")
