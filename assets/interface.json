@@ -102,6 +102,15 @@
             ]
         },
         {
+            "name": "实验室",
+            "entry": "开始实验室",
+            "default_check": false,
+            "description": "### 自动将卡牌批量放入实验室分解",
+            "option": [
+                "一二三星"
+            ]
+        },
+        {
             "name": "竞技场",
             "entry": "开始竞技场",
             "default_check": false,
@@ -1776,6 +1785,32 @@
                     }
                 }
             }
+        },
+        "一二三星": {
+            "type": "switch",
+            "label": "一二三星",
+            "description": "开启后，会自动分解一二三星卡牌",
+            "default_case": "Yes",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "label": "开启",
+                    "pipeline_override": {
+                        "开始低星实验": {
+                            "enabled": true
+                        }
+                    }
+                },
+                {
+                    "name": "No",
+                    "label": "关闭",
+                    "pipeline_override": {
+                        "开始低星实验": {
+                            "enabled": false
+                        }
+                    }
+                }
+            ]
         }
     }
 }

@@ -3,12 +3,12 @@
     "$__mpe_code": {
       "filePath": "D:\\Projects\\MSA\\assets\\resource\\pipeline/实验室.json",
       "filename": "实验室",
-      "lastSyncTime": 1768998785002,
+      "lastSyncTime": 1768998820753,
       "prefix": "",
       "savedViewport": {
-        "x": -815,
-        "y": 159,
-        "zoom": 0.65
+        "x": -937,
+        "y": 31,
+        "zoom": 0.57
       },
       "version": "v0.16.1"
     }
@@ -17,23 +17,23 @@
     "$__mpe_code": {
       "position": {
         "x": 605,
-        "y": 24
+        "y": 195
       }
     }
   },
   "$__mpe_external_意外处理_实验室": {
     "$__mpe_code": {
       "position": {
-        "x": 905,
-        "y": 212
+        "x": 3905,
+        "y": 843
       }
     }
   },
   "一轮低星结束": {
     "$__mpe_code": {
       "position": {
-        "x": 4230,
-        "y": 362
+        "x": 4200,
+        "y": 454
       }
     },
     "action": {
@@ -52,7 +52,7 @@
     "$__mpe_code": {
       "position": {
         "x": 3900,
-        "y": 337
+        "y": 436
       }
     },
     "action": {
@@ -75,7 +75,7 @@
     "$__mpe_code": {
       "position": {
         "x": 3600,
-        "y": 321
+        "y": 420
       }
     },
     "action": {
@@ -108,7 +108,7 @@
     "$__mpe_code": {
       "position": {
         "x": 3300,
-        "y": 339
+        "y": 438
       }
     },
     "action": {
@@ -139,7 +139,7 @@
     "$__mpe_code": {
       "position": {
         "x": 2100,
-        "y": 339
+        "y": 438
       }
     },
     "action": {
@@ -154,6 +154,10 @@
       "type": "Click"
     },
     "next": [
+      {
+        "jump_back": true,
+        "name": "意外处理"
+      },
       "全选一星"
     ],
     "recognition": {
@@ -165,7 +169,7 @@
     "$__mpe_code": {
       "position": {
         "x": 2400,
-        "y": 339
+        "y": 438
       }
     },
     "action": {
@@ -180,6 +184,10 @@
       "type": "Click"
     },
     "next": [
+      {
+        "jump_back": true,
+        "name": "意外处理"
+      },
       "全选二星"
     ],
     "recognition": {
@@ -191,7 +199,7 @@
     "$__mpe_code": {
       "position": {
         "x": 3000,
-        "y": 339
+        "y": 438
       }
     },
     "action": {
@@ -206,6 +214,10 @@
       "type": "Click"
     },
     "next": [
+      {
+        "jump_back": true,
+        "name": "意外处理"
+      },
       "低星确定选卡"
     ],
     "recognition": {
@@ -217,7 +229,7 @@
     "$__mpe_code": {
       "position": {
         "x": 2700,
-        "y": 339
+        "y": 438
       }
     },
     "action": {
@@ -232,6 +244,10 @@
       "type": "Click"
     },
     "next": [
+      {
+        "jump_back": true,
+        "name": "意外处理"
+      },
       "全选三星"
     ],
     "recognition": {
@@ -243,7 +259,7 @@
     "$__mpe_code": {
       "position": {
         "x": 1200,
-        "y": 354
+        "y": 454
       }
     },
     "action": {
@@ -265,7 +281,7 @@
     "$__mpe_code": {
       "position": {
         "x": 1500,
-        "y": 326
+        "y": 410
       }
     },
     "action": {
@@ -286,7 +302,7 @@
     "$__mpe_code": {
       "position": {
         "x": 1800,
-        "y": 354
+        "y": 454
       }
     },
     "action": {
@@ -294,6 +310,10 @@
       "type": "DoNothing"
     },
     "next": [
+      {
+        "jump_back": true,
+        "name": "意外处理"
+      },
       "低星选择卡牌"
     ],
     "recognition": {
@@ -305,7 +325,7 @@
     "$__mpe_code": {
       "position": {
         "x": 0,
-        "y": 0
+        "y": 34
       }
     },
     "action": {
@@ -332,7 +352,7 @@
     "$__mpe_code": {
       "position": {
         "x": 600,
-        "y": 277
+        "y": 305
       }
     },
     "action": {
@@ -365,7 +385,7 @@
     "$__mpe_code": {
       "position": {
         "x": 300,
-        "y": 154
+        "y": 0
       }
     },
     "action": {
@@ -398,7 +418,7 @@
     "$__mpe_code": {
       "position": {
         "x": 900,
-        "y": 322
+        "y": 421
       }
     },
     "action": {
@@ -427,7 +447,7 @@
     "$__mpe_code": {
       "position": {
         "x": 3600,
-        "y": 546
+        "y": 645
       }
     },
     "action": {
