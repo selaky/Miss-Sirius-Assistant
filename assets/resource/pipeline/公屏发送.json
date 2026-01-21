@@ -3,12 +3,12 @@
     "$__mpe_code": {
       "filePath": "D:\\Projects\\MSA\\assets\\resource\\pipeline\\公屏发送.json",
       "filename": "公屏发送",
-      "lastSyncTime": 1768919534898,
+      "lastSyncTime": 1768971292344,
       "prefix": "",
       "savedViewport": {
-        "x": -2842,
-        "y": -698,
-        "zoom": 0.87
+        "x": -1560,
+        "y": -437,
+        "zoom": 0.66
       },
       "version": "v0.16.1"
     }
@@ -35,7 +35,11 @@
       "type": "InputText"
     },
     "next": [
-      "点击发送消息"
+      "点击发送消息",
+      {
+        "jump_back": true,
+        "name": "意外处理"
+      }
     ],
     "recognition": {
       "param": {},
@@ -134,7 +138,7 @@
     },
     "action": {
       "param": {},
-      "type": "DoNothing"
+      "type": "Click"
     },
     "recognition": {
       "param": {

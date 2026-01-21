@@ -4,12 +4,12 @@
       "filePath": "D:\\Projects\\MSA\\assets\\resource\\pipeline\\跑图\\跑图主流程.json",
       "filename": "跑图主流程",
       "isModifiedExternally": true,
-      "lastSyncTime": 1768896113760,
+      "lastSyncTime": 1768901039568,
       "prefix": "",
       "savedViewport": {
-        "x": 64,
-        "y": 169,
-        "zoom": 0.76
+        "x": -395,
+        "y": 161,
+        "zoom": 1
       },
       "version": "v0.16.1"
     }
@@ -278,8 +278,8 @@
         "name": "保底点击-确定"
       }
     ],
-    "post_delay": 400,
-    "rate_limit": 200,
+    "post_delay": 500,
+    "rate_limit": 500,
     "recognition": {
       "param": {},
       "type": "DirectHit"
