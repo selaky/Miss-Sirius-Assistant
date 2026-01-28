@@ -168,3 +168,29 @@ def extract_number_from_ocr(context: Context, image, task_name: str) -> int:
         raise ValueError(f"OCR任务 [{task_name}] 识别到了文本 '{ocr_text}' 但其中不包含数字")
     
     return int(digits)
+
+
+def group_click(context: Context, roi_collection):
+    # 如果传入的是字典，先转成列表
+        targets_to_click = []
+        if isinstance(roi_collection, dict):
+            targets_to_click = list(roi_collection.values())
+        elif isinstance(roi_collection,list):
+            targets_to_click = roi_collection
+        else:
+            raise ValueError(f"ROI 清单格式不对，必须为字典或列表,当前收到的内容为: {roi_collection}")
+        
+        # 开始循环点击
+        for roi in targets_to_click:
+            context.run_task(
+                "Click",
+                {
+                    "Click": {
+                        "action": "Click",
+                        "target": roi,
+                        "post_delay": 500,
+                    }
+                },
+            )
+
+        return True

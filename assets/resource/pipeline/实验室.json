@@ -3,14 +3,14 @@
     "$__mpe_code": {
       "filePath": "D:\\Projects\\MSA\\assets\\resource\\pipeline/实验室.json",
       "filename": "实验室",
-      "lastSyncTime": 1769001856037,
+      "lastSyncTime": 1769009424835,
       "prefix": "",
       "savedViewport": {
-        "x": -1632,
-        "y": -6,
-        "zoom": 0.57
+        "x": -1205,
+        "y": -189,
+        "zoom": 0.65
       },
-      "version": "v0.16.1"
+      "version": "v1.0.1"
     }
   },
   "$__mpe_external_开始返回主界面_实验室": {
@@ -29,6 +29,31 @@
       }
     }
   },
+  "LabFilter": {
+    "$__mpe_code": {
+      "position": {
+        "x": -146,
+        "y": 560
+      }
+    },
+    "recognition": {
+      "param": {
+        "lower": [
+          [
+            194,
+            244,
+            241
+          ]
+        ],
+        "upper": [
+          255,
+          255,
+          255
+        ]
+      },
+      "type": "ColorMatch"
+    }
+  },
   "一轮低星结束": {
     "$__mpe_code": {
       "position": {
@@ -36,17 +61,9 @@
         "y": 1204
       }
     },
-    "action": {
-      "param": {},
-      "type": "DoNothing"
-    },
     "next": [
       "开始低星循环"
-    ],
-    "recognition": {
-      "param": {},
-      "type": "DirectHit"
-    }
+    ]
   },
   "低星产物确定": {
     "$__mpe_code": {
@@ -108,16 +125,33 @@
       "type": "TemplateMatch"
     }
   },
+  "低星全部选择": {
+    "$__mpe_code": {
+      "position": {
+        "x": 2656,
+        "y": 862
+      }
+    },
+    "action": {
+      "param": {
+        "custom_action": "select_all_low_star"
+      },
+      "type": "Custom"
+    },
+    "next": [
+      {
+        "jump_back": true,
+        "name": "意外处理"
+      },
+      "低星确定选卡"
+    ]
+  },
   "低星实验-收尾": {
     "$__mpe_code": {
       "position": {
         "x": 3600,
         "y": 154
       }
-    },
-    "action": {
-      "param": {},
-      "type": "DoNothing"
     },
     "next": [
       {
@@ -275,105 +309,8 @@
         "jump_back": true,
         "name": "意外处理"
       },
-      "全选一星"
-    ],
-    "recognition": {
-      "param": {},
-      "type": "DirectHit"
-    }
-  },
-  "全选一星": {
-    "$__mpe_code": {
-      "position": {
-        "x": 2400,
-        "y": 1004
-      }
-    },
-    "action": {
-      "param": {
-        "target": [
-          1152,
-          428,
-          63,
-          14
-        ]
-      },
-      "type": "Click"
-    },
-    "next": [
-      {
-        "jump_back": true,
-        "name": "意外处理"
-      },
-      "全选二星"
-    ],
-    "recognition": {
-      "param": {},
-      "type": "DirectHit"
-    }
-  },
-  "全选三星": {
-    "$__mpe_code": {
-      "position": {
-        "x": 3000,
-        "y": 879
-      }
-    },
-    "action": {
-      "param": {
-        "target": [
-          1153,
-          507,
-          64,
-          15
-        ]
-      },
-      "type": "Click"
-    },
-    "next": [
-      {
-        "jump_back": true,
-        "name": "意外处理"
-      },
-      "低星确定选卡"
-    ],
-    "on_error": [
-      "开始实验室"
-    ],
-    "recognition": {
-      "param": {},
-      "type": "DirectHit"
-    }
-  },
-  "全选二星": {
-    "$__mpe_code": {
-      "position": {
-        "x": 2700,
-        "y": 1004
-      }
-    },
-    "action": {
-      "param": {
-        "target": [
-          1152,
-          467,
-          64,
-          15
-        ]
-      },
-      "type": "Click"
-    },
-    "next": [
-      {
-        "jump_back": true,
-        "name": "意外处理"
-      },
-      "全选三星"
-    ],
-    "recognition": {
-      "param": {},
-      "type": "DirectHit"
-    }
+      "低星全部选择"
+    ]
   },
   "实验分流": {
     "$__mpe_code": {
@@ -382,20 +319,13 @@
         "y": 686
       }
     },
-    "action": {
-      "param": {},
-      "type": "DoNothing"
-    },
     "next": [
       {
         "jump_back": true,
         "name": "开始低星实验"
-      }
-    ],
-    "recognition": {
-      "param": {},
-      "type": "DirectHit"
-    }
+      },
+      "开始四星实验"
+    ]
   },
   "开始低星实验": {
     "$__mpe_code": {
@@ -404,19 +334,11 @@
         "y": 642
       }
     },
-    "action": {
-      "param": {},
-      "type": "DoNothing"
-    },
     "enabled": false,
     "max_hit": 1,
     "next": [
       "开始低星循环"
-    ],
-    "recognition": {
-      "param": {},
-      "type": "DirectHit"
-    }
+    ]
   },
   "开始低星循环": {
     "$__mpe_code": {
@@ -425,20 +347,20 @@
         "y": 686
       }
     },
-    "action": {
-      "param": {},
-      "type": "DoNothing"
-    },
     "next": [
       {
         "jump_back": true,
         "name": "意外处理"
       },
       "低星选择卡牌"
-    ],
-    "recognition": {
-      "param": {},
-      "type": "DirectHit"
+    ]
+  },
+  "开始四星实验": {
+    "$__mpe_code": {
+      "position": {
+        "x": 1489,
+        "y": 974
+      }
     }
   },
   "开始实验室": {
@@ -447,10 +369,6 @@
         "x": 0,
         "y": 0
       }
-    },
-    "action": {
-      "param": {},
-      "type": "DoNothing"
     },
     "next": [
       {
@@ -462,11 +380,7 @@
         "jump_back": true,
         "name": "开始返回主界面"
       }
-    ],
-    "recognition": {
-      "param": {},
-      "type": "DirectHit"
-    }
+    ]
   },
   "点击实验室": {
     "$__mpe_code": {
@@ -495,11 +409,7 @@
     ],
     "on_error": [
       "开始实验室"
-    ],
-    "recognition": {
-      "param": {},
-      "type": "DirectHit"
-    }
+    ]
   },
   "点击强化": {
     "$__mpe_code": {
@@ -541,10 +451,6 @@
         "y": 653
       }
     },
-    "action": {
-      "param": {},
-      "type": "DoNothing"
-    },
     "next": [
       "实验分流"
     ],
@@ -570,13 +476,8 @@
         "y": 173
       }
     },
-    "action": {
-      "param": {},
-      "type": "DoNothing"
-    },
-    "recognition": {
-      "param": {},
-      "type": "DirectHit"
+    "focus": {
+      "Node.Action.Starting": "一二三星卡牌实验室分解完成"
     }
   }
 }
