@@ -10,5 +10,5 @@ from utils import common_func
 class SelectAllLowStar(CustomAction):
     """依次点击所有一二三星卡"""
     def run(self,context:Context,argv:CustomAction.RunArg) -> bool:
-        common_func.group_click(lab_manager.batch_select_rois)
+        common_func.group_click(context,lab_manager.batch_select_rois)
         return CustomAction.RunResult(success=True)
