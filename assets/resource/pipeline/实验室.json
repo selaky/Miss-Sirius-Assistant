@@ -3,12 +3,12 @@
     "$__mpe_code": {
       "filePath": "D:\\Projects\\MSA\\assets\\resource\\pipeline/实验室.json",
       "filename": "实验室",
-      "lastSyncTime": 1769009424835,
+      "lastSyncTime": 1769953151385,
       "prefix": "",
       "savedViewport": {
-        "x": -1205,
-        "y": -189,
-        "zoom": 0.65
+        "x": -1154,
+        "y": -96,
+        "zoom": 0.75
       },
       "version": "v1.0.1"
     }
@@ -24,16 +24,16 @@
   "$__mpe_external_意外处理_实验室": {
     "$__mpe_code": {
       "position": {
-        "x": 3905,
-        "y": 573
+        "x": 1331,
+        "y": -363
       }
     }
   },
   "LabFilter": {
     "$__mpe_code": {
       "position": {
-        "x": -146,
-        "y": 560
+        "x": 0,
+        "y": 158
       }
     },
     "recognition": {
@@ -54,320 +54,11 @@
       "type": "ColorMatch"
     }
   },
-  "一轮低星结束": {
+  "初始化实验室设置": {
     "$__mpe_code": {
       "position": {
-        "x": 4200,
-        "y": 1204
-      }
-    },
-    "next": [
-      "开始低星循环"
-    ]
-  },
-  "低星产物确定": {
-    "$__mpe_code": {
-      "position": {
-        "x": 3900,
-        "y": 1186
-      }
-    },
-    "action": {
-      "param": {},
-      "type": "Click"
-    },
-    "next": [
-      "低星产物确定",
-      "一轮低星结束"
-    ],
-    "recognition": {
-      "param": {
-        "roi": [
-          577,
-          535,
-          121,
-          41
-        ],
-        "template": [
-          "实验室/确定-实验室.png"
-        ]
-      },
-      "type": "TemplateMatch"
-    }
-  },
-  "低星产物确定-收尾": {
-    "$__mpe_code": {
-      "position": {
-        "x": 4365,
-        "y": 171
-      }
-    },
-    "action": {
-      "param": {},
-      "type": "Click"
-    },
-    "next": [
-      "低星产物确定-收尾",
-      "结束低星实验"
-    ],
-    "recognition": {
-      "param": {
-        "roi": [
-          577,
-          535,
-          121,
-          41
-        ],
-        "template": [
-          "实验室/确定-实验室.png"
-        ]
-      },
-      "type": "TemplateMatch"
-    }
-  },
-  "低星全部选择": {
-    "$__mpe_code": {
-      "position": {
-        "x": 2656,
-        "y": 862
-      }
-    },
-    "action": {
-      "param": {
-        "custom_action": "select_all_low_star"
-      },
-      "type": "Custom"
-    },
-    "next": [
-      {
-        "jump_back": true,
-        "name": "意外处理"
-      },
-      "低星确定选卡"
-    ]
-  },
-  "低星实验-收尾": {
-    "$__mpe_code": {
-      "position": {
-        "x": 3600,
-        "y": 154
-      }
-    },
-    "next": [
-      {
-        "jump_back": true,
-        "name": "意外处理"
-      },
-      "低星开始实验-收尾"
-    ],
-    "recognition": {
-      "param": {
-        "roi": [
-          785,
-          300,
-          79,
-          77
-        ],
-        "template": [
-          "实验室/实验室空白.png"
-        ]
-      },
-      "type": "TemplateMatch"
-    }
-  },
-  "低星开始实验-收尾": {
-    "$__mpe_code": {
-      "position": {
-        "x": 3971,
-        "y": 145
-      }
-    },
-    "action": {
-      "param": {},
-      "type": "Click"
-    },
-    "next": [
-      "低星产物确定-收尾",
-      {
-        "jump_back": true,
-        "name": "意外处理"
-      }
-    ],
-    "recognition": {
-      "param": {
-        "roi": [
-          1050,
-          118,
-          140,
-          131
-        ],
-        "template": [
-          "实验室/开始实验.png"
-        ]
-      },
-      "type": "TemplateMatch"
-    }
-  },
-  "低星点击开始实验": {
-    "$__mpe_code": {
-      "position": {
-        "x": 3600,
-        "y": 988
-      }
-    },
-    "action": {
-      "param": {},
-      "type": "Click"
-    },
-    "next": [
-      {
-        "jump_back": true,
-        "name": "意外处理"
-      },
-      "低星产物确定"
-    ],
-    "on_error": [
-      "开始实验室"
-    ],
-    "recognition": {
-      "param": {
-        "roi": [
-          1050,
-          118,
-          140,
-          131
-        ],
-        "template": [
-          "实验室/开始实验.png"
-        ]
-      },
-      "type": "TemplateMatch"
-    }
-  },
-  "低星确定选卡": {
-    "$__mpe_code": {
-      "position": {
-        "x": 3300,
-        "y": 502
-      }
-    },
-    "action": {
-      "param": {
-        "target": [
-          1159,
-          137,
-          53,
-          51
-        ]
-      },
-      "type": "Click"
-    },
-    "next": [
-      {
-        "jump_back": true,
-        "name": "意外处理"
-      },
-      "低星确定选卡",
-      "低星实验-收尾",
-      "低星点击开始实验"
-    ],
-    "recognition": {
-      "param": {
-        "roi": [
-          1124,
-          98,
-          127,
-          137
-        ],
-        "template": [
-          "实验室/确定-选卡.png"
-        ]
-      },
-      "type": "TemplateMatch"
-    }
-  },
-  "低星选择卡牌": {
-    "$__mpe_code": {
-      "position": {
-        "x": 2100,
-        "y": 775
-      }
-    },
-    "action": {
-      "param": {
-        "target": [
-          532,
-          233,
-          190,
-          116
-        ]
-      },
-      "type": "Click"
-    },
-    "next": [
-      {
-        "jump_back": true,
-        "name": "意外处理"
-      },
-      "低星全部选择"
-    ]
-  },
-  "实验分流": {
-    "$__mpe_code": {
-      "position": {
-        "x": 1200,
-        "y": 686
-      }
-    },
-    "next": [
-      {
-        "jump_back": true,
-        "name": "开始低星实验"
-      },
-      "开始四星实验"
-    ]
-  },
-  "开始低星实验": {
-    "$__mpe_code": {
-      "position": {
-        "x": 1500,
-        "y": 642
-      }
-    },
-    "enabled": false,
-    "max_hit": 1,
-    "next": [
-      "开始低星循环"
-    ]
-  },
-  "开始低星循环": {
-    "$__mpe_code": {
-      "position": {
-        "x": 1800,
-        "y": 686
-      }
-    },
-    "next": [
-      {
-        "jump_back": true,
-        "name": "意外处理"
-      },
-      "低星选择卡牌"
-    ]
-  },
-  "开始四星实验": {
-    "$__mpe_code": {
-      "position": {
-        "x": 1489,
-        "y": 974
-      }
-    }
-  },
-  "开始实验室": {
-    "$__mpe_code": {
-      "position": {
-        "x": 0,
-        "y": 0
+        "x": 9,
+        "y": -11
       }
     },
     "next": [
@@ -382,11 +73,242 @@
       }
     ]
   },
+  "四星筛选": {
+    "$__mpe_code": {
+      "position": {
+        "x": 2662,
+        "y": 450
+      }
+    },
+    "action": {
+      "param": {
+        "custom_action": "click_4_star_filter"
+      },
+      "type": "Custom"
+    },
+    "next": [
+      {
+        "jump_back": true,
+        "name": "意外处理"
+      },
+      "批量选择四星"
+    ],
+    "on_error": [
+      "开始实验室"
+    ],
+    "recognition": {
+      "param": {
+        "custom_recognition": "find_4_star_filter"
+      },
+      "type": "Custom"
+    }
+  },
+  "完成实验室卡牌选择": {
+    "$__mpe_code": {
+      "position": {
+        "x": 3634,
+        "y": 354
+      }
+    },
+    "action": {
+      "param": {},
+      "type": "Click"
+    },
+    "next": [
+      {
+        "jump_back": true,
+        "name": "意外处理"
+      },
+      "完成实验室卡牌选择",
+      "点击开始实验"
+    ],
+    "on_error": [
+      "开始实验室"
+    ],
+    "recognition": {
+      "param": {
+        "roi": [
+          1111,
+          75,
+          145,
+          158
+        ],
+        "template": [
+          "实验室/确定-选卡.png"
+        ]
+      },
+      "type": "TemplateMatch"
+    }
+  },
+  "实验室分流": {
+    "$__mpe_code": {
+      "position": {
+        "x": 1956,
+        "y": 299
+      }
+    },
+    "next": [
+      "开始低星实验",
+      "开始四星实验",
+      "开始蓝狼实验"
+    ]
+  },
+  "实验循环开始": {
+    "$__mpe_code": {
+      "position": {
+        "x": 1232,
+        "y": 299
+      }
+    },
+    "next": [
+      {
+        "jump_back": true,
+        "name": "意外处理"
+      },
+      "进入实验室卡牌选择"
+    ]
+  },
+  "实验循环结束": {
+    "$__mpe_code": {
+      "position": {
+        "x": 4957,
+        "y": 384
+      }
+    },
+    "next": [
+      "实验循环开始"
+    ]
+  },
+  "开始低星实验": {
+    "$__mpe_code": {
+      "position": {
+        "x": 2313,
+        "y": 127
+      }
+    },
+    "next": [
+      {
+        "jump_back": true,
+        "name": "意外处理"
+      },
+      "批量选择低星"
+    ]
+  },
+  "开始四星实验": {
+    "$__mpe_code": {
+      "position": {
+        "x": 2294,
+        "y": 436
+      }
+    },
+    "next": [
+      {
+        "jump_back": true,
+        "name": "意外处理"
+      },
+      "四星筛选"
+    ]
+  },
+  "开始实验室": {
+    "$__mpe_code": {
+      "position": {
+        "x": -276,
+        "y": -147
+      }
+    },
+    "next": [
+      "初始化实验室设置"
+    ]
+  },
+  "开始蓝狼实验": {
+    "$__mpe_code": {
+      "position": {
+        "x": 2299,
+        "y": 688
+      }
+    },
+    "next": [
+      {
+        "jump_back": true,
+        "name": "意外处理"
+      }
+    ]
+  },
+  "批量选择低星": {
+    "$__mpe_code": {
+      "position": {
+        "x": 2703,
+        "y": 113
+      }
+    },
+    "action": {
+      "param": {
+        "custom_action": "select_all_low_star"
+      },
+      "type": "Custom"
+    },
+    "next": [
+      {
+        "jump_back": true,
+        "name": "意外处理"
+      },
+      "完成实验室卡牌选择"
+    ]
+  },
+  "批量选择四星": {
+    "$__mpe_code": {
+      "position": {
+        "x": 3051,
+        "y": 471
+      }
+    },
+    "action": {
+      "param": {
+        "custom_action": "click_all_card"
+      },
+      "type": "Custom"
+    },
+    "next": [
+      {
+        "jump_back": true,
+        "name": "意外处理"
+      },
+      "完成实验室卡牌选择"
+    ]
+  },
+  "未选择实验卡牌": {
+    "$__mpe_code": {
+      "position": {
+        "x": 4474,
+        "y": 693
+      }
+    },
+    "next": [
+      {
+        "jump_back": true,
+        "name": "意外处理"
+      }
+    ],
+    "recognition": {
+      "param": {
+        "expected": [
+          "未选择卡牌"
+        ],
+        "roi": [
+          562,
+          306,
+          154,
+          48
+        ]
+      },
+      "type": "OCR"
+    }
+  },
   "点击实验室": {
     "$__mpe_code": {
       "position": {
         "x": 600,
-        "y": 397
+        "y": 294
       }
     },
     "action": {
@@ -409,13 +331,62 @@
     ],
     "on_error": [
       "开始实验室"
-    ]
+    ],
+    "recognition": {
+      "param": {
+        "expected": [
+          "实验室"
+        ],
+        "roi": [
+          29,
+          27,
+          1231,
+          81
+        ]
+      },
+      "type": "OCR"
+    }
+  },
+  "点击开始实验": {
+    "$__mpe_code": {
+      "position": {
+        "x": 4087,
+        "y": 346
+      }
+    },
+    "action": {
+      "param": {},
+      "type": "Click"
+    },
+    "next": [
+      {
+        "jump_back": true,
+        "name": "意外处理"
+      },
+      "点击开始实验",
+      "未选择实验卡牌",
+      "确定实验道具"
+    ],
+    "recognition": {
+      "param": {
+        "roi": [
+          1049,
+          110,
+          144,
+          158
+        ],
+        "template": [
+          "实验室/开始实验.png"
+        ]
+      },
+      "type": "TemplateMatch"
+    }
   },
   "点击强化": {
     "$__mpe_code": {
       "position": {
-        "x": 300,
-        "y": 275
+        "x": 321,
+        "y": 145
       }
     },
     "action": {
@@ -444,15 +415,49 @@
       "type": "OCR"
     }
   },
+  "确定实验道具": {
+    "$__mpe_code": {
+      "position": {
+        "x": 4473,
+        "y": 376
+      }
+    },
+    "action": {
+      "param": {},
+      "type": "Click"
+    },
+    "next": [
+      {
+        "jump_back": true,
+        "name": "意外处理"
+      },
+      "确定实验道具",
+      "实验循环结束"
+    ],
+    "recognition": {
+      "param": {
+        "roi": [
+          564,
+          529,
+          149,
+          53
+        ],
+        "template": [
+          "实验室/确定-实验室.png"
+        ]
+      },
+      "type": "TemplateMatch"
+    }
+  },
   "确认进入实验室": {
     "$__mpe_code": {
       "position": {
         "x": 900,
-        "y": 653
+        "y": 277
       }
     },
     "next": [
-      "实验分流"
+      "实验循环开始"
     ],
     "recognition": {
       "param": {
@@ -469,15 +474,30 @@
       "type": "TemplateMatch"
     }
   },
-  "结束低星实验": {
+  "进入实验室卡牌选择": {
     "$__mpe_code": {
       "position": {
-        "x": 4687,
-        "y": 173
+        "x": 1585,
+        "y": 284
       }
     },
-    "focus": {
-      "Node.Action.Starting": "一二三星卡牌实验室分解完成"
-    }
+    "action": {
+      "param": {
+        "target": [
+          544,
+          256,
+          192,
+          80
+        ]
+      },
+      "type": "Click"
+    },
+    "next": [
+      {
+        "jump_back": true,
+        "name": "意外处理"
+      },
+      "实验室分流"
+    ]
   }
 }

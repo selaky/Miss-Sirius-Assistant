@@ -1,6 +1,14 @@
 # input: 无
 # output: lab_action
-# pos: 存放各种实验室 roi
+# pos: 存放各种实验室 roi 还有其他信息
+
+# 实验室任务列表
+tasks = {
+    "low_star": True,
+    "4_star": False,
+    "blue_sirius": True,
+    "pink_sirius": False
+}
 
 # 一二三星卡全选按钮
 batch_select_rois = {

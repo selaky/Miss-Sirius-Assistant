@@ -21,7 +21,7 @@ from boss import boss_reco
 from utils import common_action
 from utils import common_reco
 from battle import battle_action,battle_reco
-from lab import lab_action
+from lab import lab_action,lab_reco
 
 
 def main():
