@@ -3,11 +3,11 @@
     "$__mpe_code": {
       "filePath": "D:\\Projects\\MSA\\assets\\resource\\pipeline/实验室.json",
       "filename": "实验室",
-      "lastSyncTime": 1770015514776,
+      "lastSyncTime": 1770032668433,
       "prefix": "",
       "savedViewport": {
-        "x": 126,
-        "y": 201,
+        "x": -1798,
+        "y": -52,
         "zoom": 0.61
       },
       "version": "v1.0.2"
@@ -662,9 +662,9 @@
         "jump_back": true,
         "name": "意外处理"
       },
-      "点击开始实验",
       "未选择实验卡牌",
-      "确定实验道具"
+      "确定实验道具",
+      "点击开始实验"
     ],
     "recognition": {
       "param": {
