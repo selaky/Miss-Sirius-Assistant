@@ -3,12 +3,12 @@
     "$__mpe_code": {
       "filePath": "D:\\Projects\\MSA\\assets\\resource\\pipeline/实验室.json",
       "filename": "实验室",
-      "lastSyncTime": 1770032668433,
+      "lastSyncTime": 1770034069145,
       "prefix": "",
       "savedViewport": {
-        "x": -1798,
-        "y": -52,
-        "zoom": 0.61
+        "x": -3093,
+        "y": -410,
+        "zoom": 0.8
       },
       "version": "v1.0.2"
     }
@@ -53,6 +53,32 @@
       },
       "type": "ColorMatch"
     }
+  },
+  "关闭实验未选择弹窗": {
+    "$__mpe_code": {
+      "position": {
+        "x": 4826,
+        "y": 734
+      }
+    },
+    "action": {
+      "param": {
+        "target": [
+          617,
+          412,
+          48,
+          17
+        ]
+      },
+      "type": "Click"
+    },
+    "next": [
+      {
+        "jump_back": true,
+        "name": "意外处理"
+      },
+      "实验循环开始"
+    ]
   },
   "四星筛选": {
     "$__mpe_code": {
@@ -313,8 +339,8 @@
   "实验循环结束": {
     "$__mpe_code": {
       "position": {
-        "x": 4957,
-        "y": 384
+        "x": 4967,
+        "y": 356
       }
     },
     "next": [
@@ -589,11 +615,8 @@
       "type": "Custom"
     },
     "next": [
-      {
-        "jump_back": true,
-        "name": "意外处理"
-      },
-      "实验室分流"
+      "实验室分流",
+      "关闭实验未选择弹窗"
     ],
     "recognition": {
       "param": {
@@ -666,6 +689,7 @@
       "确定实验道具",
       "点击开始实验"
     ],
+    "post_delay": 500,
     "recognition": {
       "param": {
         "roi": [
@@ -733,6 +757,7 @@
       "确定实验道具",
       "实验循环结束"
     ],
+    "post_delay": 500,
     "recognition": {
       "param": {
         "roi": [
