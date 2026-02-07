@@ -13,7 +13,7 @@ from utils import common_func
 @AgentServer.custom_action("set_enemy_next")
 class SetEnemyNext(CustomAction):
     """根据当前敌人信息进行后续分流设置"""
-    def run(self,context:Context,argv:CustomAction.RunArg) -> bool:
+    def run(self, context: Context, argv: CustomAction.RunArg) -> CustomAction.RunResult:
         # 获取当前决策
         info = battle_manager.active_context
         action = battle_manager.get_battle_action(info.name,info.mode)
@@ -32,7 +32,7 @@ class SetEnemyNext(CustomAction):
 @AgentServer.custom_action("battle_win")
 class BattleWin(CustomAction):
     """战斗胜利时进行的相关处理,需要增加战斗次数、归档相关信息，并且输出反馈。"""
-    def run(self,context:Context,argv:CustomAction.RunArg) -> bool:
+    def run(self, context: Context, argv: CustomAction.RunArg) -> CustomAction.RunResult:
         # 增加战斗次数
         battle_manager.active_context.battle_count += 1
 
@@ -54,14 +54,14 @@ class BattleWin(CustomAction):
 @AgentServer.custom_action("battle_lose")
 class BattleLose(CustomAction):
     """战斗失败时进行的相关处理,只需要增加战斗次数"""
-    def run(self,context:Context,argv:CustomAction.RunArg) -> bool:
+    def run(self, context: Context, argv: CustomAction.RunArg) -> CustomAction.RunResult:
         battle_manager.active_context.battle_count += 1
         return CustomAction.RunResult(success=True)
     
 @AgentServer.custom_action("battle_release")
 class BattleRelease(CustomAction):
     """放生结束后的处理。"""
-    def run(self,context:Context,argv:CustomAction.RunArg) -> bool:
+    def run(self, context: Context, argv: CustomAction.RunArg) -> CustomAction.RunResult:
         # 虽然用不上，但还是增加战斗次数。
         current = battle_manager.active_context
         current.battle_count += 1
@@ -105,7 +105,7 @@ class SaveBattleConfig(CustomAction):
     通过 custom_action_param 传入 config_key 和 config_value，
     自动将配置项保存到 battle_manager.current_config 中。
     """
-    def run(self, context: Context, argv: CustomAction.RunArg) -> bool:
+    def run(self, context: Context, argv: CustomAction.RunArg) -> CustomAction.RunResult:
         # 解析参数
         params = common_func.parse_params(
             param_str=argv.custom_action_param,
@@ -133,7 +133,7 @@ class FinalizeBattleConfig(CustomAction):
     完成战斗配置设置。
     标记配置已完成，并输出配置摘要。
     """
-    def run(self, context: Context, argv: CustomAction.RunArg) -> bool:
+    def run(self, context: Context, argv: CustomAction.RunArg) -> CustomAction.RunResult:
         # 标记配置完成
         battle_manager.set_config_value("mark_configured", True)
 
@@ -158,7 +158,7 @@ class CheckBattleConfig(CustomAction):
     检查战斗配置是否已完成。
     如果未配置，通过 focus 提示用户先执行设置任务，并返回失败。
     """
-    def run(self, context: Context, argv: CustomAction.RunArg) -> bool:
+    def run(self, context: Context, argv: CustomAction.RunArg) -> CustomAction.RunResult:
         if not battle_manager.check_configured():
             error_msg = "请先执行【跑图战斗设置】任务进行战斗配置！"
             logging.error(f"[{argv.node_name}] {error_msg}")

@@ -102,10 +102,20 @@
             ]
         },
         {
+            "name": "实验室",
+            "entry": "开始实验室",
+            "default_check": false,
+            "description": "### 自动将卡牌批量放入实验室分解",
+            "option": [
+                "一般卡牌",
+                "实验天狼星"
+            ]
+        },
+        {
             "name": "竞技场",
             "entry": "开始竞技场",
             "default_check": false,
-            "description": "### 自动在竞技场打满指定分数，支持在战斗结束后切换卡组。请确保游戏已进入竞技场界面后再启动任务",
+            "description": "### 在竞技场打满指定分数并统计胜率，支持在全部战斗结束后自动更换弱卡组(需设置),再也不怕忘切卡组了",
             "option": [
                 "竞技场目标积分",
                 "使用星币提升体力",
@@ -117,7 +127,7 @@
             "name": "世界BOSS",
             "entry": "开始世界BOSS",
             "default_check": false,
-            "description": "### 可自动重复打世界 boss，需提前前往 boss 界面。\n**注意：程序自动操作有风险，可能会出现逻辑错误、程序卡死等情况，建议能手打还是手打，此任务主要提供给有事出门回不来的人作为备用方案。**",
+            "description": "### 可自动到点打世界 boss。\n**注意：自动操作有风险，可能会出现程序卡死、网络波动、操作缓慢等情况，本功能更适合咸鱼/挂机党使用此功能混奖励。如果要冲排名,请做好人工接管准备.**",
             "option": [
                 "BOSS战斗设置",
                 "BOSS战斗卡组",
@@ -870,7 +880,7 @@
         "BOSS吃药类型": {
             "type": "select",
             "label": "恢复药类型",
-            "description": "为保证操作速度，boss 战中不再识别判断药水数量，而是直接点击吃药按钮，请确保你有足够的对应药水；推荐使用大药，小药需要点两次，出错概率更大。",
+            "description": "为保证操作速度，boss 战中不再识别判断药水数量，而是直接点击吃药按钮，请确保你有足够的对应药水。",
             "default_case": "大恢复药",
             "cases": [
                 {
@@ -1093,7 +1103,7 @@
         "天狼星": {
             "type": "select",
             "label": "天狼星（普通）",
-            "description": "遇到普通状态的天狼星（蓝狼/粉狼/红狼）时使用的卡组",
+            "description": "遇到普通状态的天狼星时使用的卡组",
             "default_case": "卡组一",
             "cases": [
                 {
@@ -1177,7 +1187,7 @@
         "暴走天狼星卡组": {
             "type": "select",
             "label": "天狼星（暴走）",
-            "description": "遇到暴走状态的天狼星（蓝狼/粉狼/红狼）时使用的卡组",
+            "description": "遇到暴走状态的天狼星时使用的卡组",
             "default_case": "卡组一",
             "cases": [
                 {
@@ -1249,7 +1259,7 @@
         "放生": {
             "type": "switch",
             "label": "放生指定感染者",
-            "description": "开启此选项后，遇到指定感染者会使用放生卡组舔一下，然后放弃战斗",
+            "description": "开启此选项后，遇到指定感染者会使用放生卡组舔一下，然后放弃战斗,随后此感染者会被共享给好友.",
             "default_case": "No",
             "cases": [
                 {
@@ -1776,6 +1786,183 @@
                     }
                 }
             }
+        },
+        "一般卡牌": {
+            "type": "select",
+            "label": "一般卡牌",
+            "description": "将指定星级及以下的卡牌送入实验室",
+            "default_case": "三星及以下",
+            "cases": [
+                {
+                    "name": "三星及以下",
+                    "label": "三星及以下",
+                    "pipeline_override": {
+                        "开始低星实验": {
+                            "enabled": true
+                        },
+                        "开始四星实验": {
+                            "enabled": false
+                        }
+                    }
+                },
+                {
+                    "name": "四星及以下",
+                    "label": "四星及以下",
+                    "pipeline_override": {
+                        "开始低星实验": {
+                            "enabled": true
+                        },
+                        "开始四星实验": {
+                            "enabled": true
+                        }
+                    }
+                }
+            ]
+        },
+        "实验天狼星": {
+            "type": "switch",
+            "label": "天狼星",
+            "description": "将指定品种天狼星送入实验室。注意这里只会选择正好满一页6张的天狼星，执行完后，每个品种大概率会剩几只狼。这不是 bug，是兼顾识别效率和强化卡牌需求的小巧思😈",
+            "default_case": "No",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "label": "开启",
+                    "option": [
+                        "实验蓝狼",
+                        "实验粉狼",
+                        "实验红狼",
+                        "实验黄狼"
+                    ],
+                    "pipeline_override": {
+                        "开始天狼星实验": {
+                            "enabled": true
+                        }
+                    }
+                },
+                {
+                    "name": "No",
+                    "label": "关闭",
+                    "pipeline_override": {
+                        "开始天狼星实验": {
+                            "enabled": false
+                        }
+                    }
+                }
+            ]
+        },
+        "实验蓝狼": {
+            "type": "switch",
+            "label": "蓝狼",
+            "description": "冰冷的小蓝变成了温暖的奖券，说：谢谢小蓝",
+            "default_case": "Yes",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "label": "开启",
+                    "pipeline_override": {
+                        "实验整页蓝狼": {
+                            "enabled": true
+                        }
+                    }
+                },
+                {
+                    "name": "No",
+                    "label": "关闭",
+                    "pipeline_override": {
+                        "实验整页蓝狼": {
+                            "enabled": false
+                        }
+                    }
+                }
+            ]
+        },
+        "实验粉狼": {
+            "type": "switch",
+            "label": "粉狼",
+            "description": "连一刻也没有为小蓝哀悼，立刻赶到实验室的是小粉",
+            "default_case": "No",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "label": "开启",
+                    "pipeline_override": {
+                        "实验整页粉狼": {
+                            "enabled": true
+                        }
+                    }
+                },
+                {
+                    "name": "No",
+                    "label": "关闭",
+                    "pipeline_override": {
+                        "实验整页粉狼": {
+                            "enabled": false
+                        }
+                    }
+                }
+            ]
+        },
+        "实验红狼": {
+            "type": "switch",
+            "label": "🚨红狼",
+            "description": "你确定要把小红也实验了吗？",
+            "default_case": "No",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "label": "开启",
+                    "pipeline_override": {
+                        "实验整页红狼": {
+                            "enabled": true
+                        }
+                    }
+                },
+                {
+                    "name": "No",
+                    "label": "关闭",
+                    "pipeline_override": {
+                        "实验整页红狼": {
+                            "enabled": false
+                        }
+                    }
+                }
+            ]
+        },
+        "实验黄狼": {
+            "type": "switch",
+            "label": "🪙黄狼",
+            "description": "土豪啊，连小黄也舍得？",
+            "default_case": "No",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "label": "开启",
+                    "option": [
+                        "实验黄狼彩蛋"
+                    ]
+                },
+                {
+                    "name": "No",
+                    "label": "关闭"
+                }
+            ]
+        },
+        "实验黄狼彩蛋": {
+            "type": "switch",
+            "label": "🎉并没有这个功能",
+            "description": "恭喜你触发了彩蛋，很遗憾，本软件不支持此功能，因为开发者没有这么多黄狼也舍不得拿来做实验，嘻嘻😭",
+            "default_case": "No",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "label": "开启"
+                },
+                {
+                    "name": "No",
+                    "label": "关闭"
+                }
+            ]
         }
     }
 }

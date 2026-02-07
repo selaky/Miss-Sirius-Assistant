@@ -1,0 +1,850 @@
+{
+  "$__mpe_config_实验室": {
+    "$__mpe_code": {
+      "filePath": "D:\\Projects\\MSA\\assets\\resource\\pipeline/实验室.json",
+      "filename": "实验室",
+      "lastSyncTime": 1770443829102,
+      "prefix": "",
+      "savedViewport": {
+        "x": -1491,
+        "y": -319,
+        "zoom": 0.7
+      },
+      "version": "v1.0.3"
+    }
+  },
+  "$__mpe_external_开始返回主界面_实验室": {
+    "$__mpe_code": {
+      "position": {
+        "x": 605,
+        "y": 24
+      }
+    }
+  },
+  "$__mpe_external_意外处理_实验室": {
+    "$__mpe_code": {
+      "position": {
+        "x": 1331,
+        "y": -363
+      }
+    }
+  },
+  "LabFilter": {
+    "$__mpe_code": {
+      "position": {
+        "x": 0,
+        "y": 158
+      }
+    },
+    "recognition": {
+      "param": {
+        "lower": [
+          [
+            194,
+            244,
+            241
+          ]
+        ],
+        "upper": [
+          255,
+          255,
+          255
+        ]
+      },
+      "type": "ColorMatch"
+    }
+  },
+  "关闭实验未选择弹窗": {
+    "$__mpe_code": {
+      "position": {
+        "x": 4826,
+        "y": 734
+      }
+    },
+    "action": {
+      "param": {
+        "target": [
+          617,
+          412,
+          48,
+          17
+        ]
+      },
+      "type": "Click"
+    },
+    "next": [
+      {
+        "jump_back": true,
+        "name": "意外处理"
+      },
+      "实验循环开始"
+    ]
+  },
+  "四星筛选": {
+    "$__mpe_code": {
+      "position": {
+        "x": 2662,
+        "y": 450
+      }
+    },
+    "action": {
+      "param": {
+        "custom_action": "click_all_custom_reco"
+      },
+      "type": "Custom"
+    },
+    "next": [
+      {
+        "jump_back": true,
+        "name": "意外处理"
+      },
+      "批量选择四星"
+    ],
+    "on_error": [
+      "开始实验室"
+    ],
+    "recognition": {
+      "param": {
+        "custom_recognition": "check_lab_filter"
+      },
+      "type": "Custom"
+    }
+  },
+  "天狼星实验筛选": {
+    "$__mpe_code": {
+      "position": {
+        "x": 2573,
+        "y": 699
+      }
+    },
+    "action": {
+      "param": {
+        "custom_action": "click_all_custom_reco"
+      },
+      "type": "Custom"
+    },
+    "next": [
+      {
+        "jump_back": true,
+        "name": "意外处理"
+      },
+      "天狼星排序确认",
+      "天狼星排序不对"
+    ],
+    "recognition": {
+      "param": {
+        "custom_recognition": "check_lab_filter"
+      },
+      "type": "Custom"
+    }
+  },
+  "天狼星排序不对": {
+    "$__mpe_code": {
+      "position": {
+        "x": 2823,
+        "y": 933
+      }
+    },
+    "action": {
+      "param": {
+        "target": [
+          972,
+          52,
+          92,
+          10
+        ]
+      },
+      "type": "Click"
+    },
+    "next": [
+      {
+        "jump_back": true,
+        "name": "意外处理"
+      },
+      "天狼星排序选择"
+    ]
+  },
+  "天狼星排序确认": {
+    "$__mpe_code": {
+      "position": {
+        "x": 2842,
+        "y": 682
+      }
+    },
+    "next": [
+      "开始寻找天狼星实验卡"
+    ],
+    "recognition": {
+      "param": {
+        "expected": [
+          "按星级从低到高排序"
+        ],
+        "roi": [
+          952,
+          47,
+          129,
+          21
+        ]
+      },
+      "type": "OCR"
+    }
+  },
+  "天狼星排序选择": {
+    "$__mpe_code": {
+      "position": {
+        "x": 3109,
+        "y": 936
+      }
+    },
+    "action": {
+      "param": {},
+      "type": "Click"
+    },
+    "next": [
+      "开始寻找天狼星实验卡"
+    ],
+    "recognition": {
+      "param": {
+        "expected": [
+          "按星级从低到高排序"
+        ],
+        "roi": [
+          952,
+          69,
+          149,
+          101
+        ]
+      },
+      "type": "OCR"
+    }
+  },
+  "完成实验室卡牌选择": {
+    "$__mpe_code": {
+      "position": {
+        "x": 3634,
+        "y": 354
+      }
+    },
+    "action": {
+      "param": {},
+      "type": "Click"
+    },
+    "next": [
+      {
+        "jump_back": true,
+        "name": "意外处理"
+      },
+      "完成实验室卡牌选择",
+      "点击开始实验"
+    ],
+    "on_error": [
+      "开始实验室"
+    ],
+    "recognition": {
+      "param": {
+        "roi": [
+          1111,
+          75,
+          145,
+          158
+        ],
+        "template": [
+          "实验室/确定-选卡.png"
+        ]
+      },
+      "type": "TemplateMatch"
+    }
+  },
+  "实验室分流": {
+    "$__mpe_code": {
+      "position": {
+        "x": 1956,
+        "y": 299
+      }
+    },
+    "next": [
+      "开始低星实验",
+      "开始四星实验",
+      "开始天狼星实验",
+      "无实验任务"
+    ]
+  },
+  "实验室天狼星下一页": {
+    "$__mpe_code": {
+      "position": {
+        "x": 3707,
+        "y": 1663
+      }
+    },
+    "action": {
+      "param": {},
+      "type": "Click"
+    },
+    "post_delay": 200,
+    "recognition": {
+      "param": {
+        "lower": [
+          [
+            0,
+            126,
+            217
+          ]
+        ],
+        "roi": [
+          1060,
+          317,
+          48,
+          64
+        ],
+        "upper": [
+          [
+            10,
+            146,
+            237
+          ]
+        ]
+      },
+      "type": "ColorMatch"
+    }
+  },
+  "实验室天狼星尾页": {
+    "$__mpe_code": {
+      "position": {
+        "x": 3711,
+        "y": 1968
+      }
+    },
+    "next": [
+      "结束天狼星选择"
+    ]
+  },
+  "实验循环开始": {
+    "$__mpe_code": {
+      "position": {
+        "x": 1232,
+        "y": 299
+      }
+    },
+    "next": [
+      {
+        "jump_back": true,
+        "name": "意外处理"
+      },
+      "进入实验室卡牌选择"
+    ]
+  },
+  "实验循环结束": {
+    "$__mpe_code": {
+      "position": {
+        "x": 4967,
+        "y": 356
+      }
+    },
+    "next": [
+      "实验循环开始"
+    ]
+  },
+  "实验整页粉狼": {
+    "$__mpe_code": {
+      "position": {
+        "x": 3707,
+        "y": 1058
+      }
+    },
+    "action": {
+      "param": {
+        "custom_action": "click_all_card"
+      },
+      "type": "Custom"
+    },
+    "enabled": false,
+    "next": [
+      "结束天狼星选择"
+    ],
+    "recognition": {
+      "param": {
+        "roi": [
+          409,
+          39,
+          701,
+          628
+        ],
+        "template": [
+          "实验室/整页粉狼.png"
+        ],
+        "threshold": [
+          0.9
+        ]
+      },
+      "type": "TemplateMatch"
+    }
+  },
+  "实验整页红狼": {
+    "$__mpe_code": {
+      "position": {
+        "x": 3703,
+        "y": 1360
+      }
+    },
+    "action": {
+      "param": {
+        "custom_action": "click_all_card"
+      },
+      "type": "Custom"
+    },
+    "enabled": false,
+    "next": [
+      "结束天狼星选择"
+    ],
+    "recognition": {
+      "param": {
+        "roi": [
+          409,
+          39,
+          701,
+          628
+        ],
+        "template": [
+          "实验室/整页红狼.png"
+        ],
+        "threshold": [
+          0.9
+        ]
+      },
+      "type": "TemplateMatch"
+    }
+  },
+  "实验整页蓝狼": {
+    "$__mpe_code": {
+      "position": {
+        "x": 3684,
+        "y": 775
+      }
+    },
+    "action": {
+      "param": {
+        "custom_action": "click_all_card"
+      },
+      "type": "Custom"
+    },
+    "enabled": true,
+    "next": [
+      "结束天狼星选择"
+    ],
+    "recognition": {
+      "param": {
+        "roi": [
+          409,
+          39,
+          701,
+          628
+        ],
+        "template": [
+          "实验室/整页蓝狼.png"
+        ],
+        "threshold": [
+          0.9
+        ]
+      },
+      "type": "TemplateMatch"
+    }
+  },
+  "开始低星实验": {
+    "$__mpe_code": {
+      "position": {
+        "x": 2313,
+        "y": 127
+      }
+    },
+    "action": {
+      "param": {
+        "custom_action": "update_lab_mode"
+      },
+      "type": "Custom"
+    },
+    "enabled": true,
+    "next": [
+      {
+        "jump_back": true,
+        "name": "意外处理"
+      },
+      "批量选择低星"
+    ]
+  },
+  "开始四星实验": {
+    "$__mpe_code": {
+      "position": {
+        "x": 2294,
+        "y": 436
+      }
+    },
+    "action": {
+      "param": {
+        "custom_action": "update_lab_mode"
+      },
+      "type": "Custom"
+    },
+    "enabled": false,
+    "next": [
+      {
+        "jump_back": true,
+        "name": "意外处理"
+      },
+      "四星筛选"
+    ]
+  },
+  "开始天狼星实验": {
+    "$__mpe_code": {
+      "position": {
+        "x": 2299,
+        "y": 688
+      }
+    },
+    "action": {
+      "param": {
+        "custom_action": "update_lab_mode"
+      },
+      "type": "Custom"
+    },
+    "enabled": false,
+    "next": [
+      {
+        "jump_back": true,
+        "name": "意外处理"
+      },
+      "天狼星实验筛选"
+    ]
+  },
+  "开始实验室": {
+    "$__mpe_code": {
+      "position": {
+        "x": -276,
+        "y": -147
+      }
+    },
+    "next": [
+      {
+        "jump_back": true,
+        "name": "意外处理"
+      },
+      "点击强化",
+      {
+        "jump_back": true,
+        "name": "开始返回主界面"
+      }
+    ]
+  },
+  "开始寻找天狼星实验卡": {
+    "$__mpe_code": {
+      "position": {
+        "x": 3320,
+        "y": 766
+      }
+    },
+    "next": [
+      {
+        "jump_back": true,
+        "name": "意外处理"
+      },
+      "实验整页蓝狼",
+      "实验整页粉狼",
+      "实验整页红狼",
+      {
+        "jump_back": true,
+        "name": "实验室天狼星下一页"
+      },
+      "实验室天狼星尾页"
+    ]
+  },
+  "批量选择低星": {
+    "$__mpe_code": {
+      "position": {
+        "x": 2703,
+        "y": 113
+      }
+    },
+    "action": {
+      "param": {
+        "custom_action": "select_all_low_star"
+      },
+      "type": "Custom"
+    },
+    "next": [
+      {
+        "jump_back": true,
+        "name": "意外处理"
+      },
+      "完成实验室卡牌选择"
+    ]
+  },
+  "批量选择四星": {
+    "$__mpe_code": {
+      "position": {
+        "x": 3051,
+        "y": 471
+      }
+    },
+    "action": {
+      "param": {
+        "custom_action": "click_all_card"
+      },
+      "type": "Custom"
+    },
+    "next": [
+      {
+        "jump_back": true,
+        "name": "意外处理"
+      },
+      "完成实验室卡牌选择"
+    ]
+  },
+  "无实验任务": {
+    "$__mpe_code": {
+      "position": {
+        "x": 2300,
+        "y": 979
+      }
+    },
+    "action": {
+      "param": {},
+      "type": "StopTask"
+    }
+  },
+  "未选择实验卡牌": {
+    "$__mpe_code": {
+      "position": {
+        "x": 4467,
+        "y": 698
+      }
+    },
+    "action": {
+      "param": {
+        "custom_action": "disable_lab_mode"
+      },
+      "type": "Custom"
+    },
+    "next": [
+      "关闭实验未选择弹窗"
+    ],
+    "recognition": {
+      "param": {
+        "expected": [
+          "未选择卡牌"
+        ],
+        "roi": [
+          562,
+          306,
+          154,
+          48
+        ]
+      },
+      "type": "OCR"
+    }
+  },
+  "点击实验室": {
+    "$__mpe_code": {
+      "position": {
+        "x": 600,
+        "y": 294
+      }
+    },
+    "action": {
+      "param": {},
+      "type": "Click"
+    },
+    "next": [
+      {
+        "jump_back": true,
+        "name": "意外处理"
+      },
+      "确认进入实验室"
+    ],
+    "on_error": [
+      "开始实验室"
+    ],
+    "recognition": {
+      "param": {
+        "expected": [
+          "实验室"
+        ],
+        "roi": [
+          29,
+          27,
+          1231,
+          81
+        ]
+      },
+      "type": "OCR"
+    }
+  },
+  "点击开始实验": {
+    "$__mpe_code": {
+      "position": {
+        "x": 4087,
+        "y": 346
+      }
+    },
+    "action": {
+      "param": {},
+      "type": "Click"
+    },
+    "next": [
+      "未选择实验卡牌",
+      {
+        "jump_back": true,
+        "name": "意外处理"
+      },
+      "确定实验道具",
+      "点击开始实验"
+    ],
+    "post_delay": 500,
+    "recognition": {
+      "param": {
+        "roi": [
+          1049,
+          110,
+          144,
+          158
+        ],
+        "template": [
+          "实验室/开始实验.png"
+        ]
+      },
+      "type": "TemplateMatch"
+    }
+  },
+  "点击强化": {
+    "$__mpe_code": {
+      "position": {
+        "x": 321,
+        "y": 145
+      }
+    },
+    "action": {
+      "param": {},
+      "type": "Click"
+    },
+    "next": [
+      {
+        "jump_back": true,
+        "name": "意外处理"
+      },
+      "点击实验室"
+    ],
+    "recognition": {
+      "param": {
+        "expected": [
+          "强化"
+        ],
+        "roi": [
+          693,
+          632,
+          256,
+          89
+        ]
+      },
+      "type": "OCR"
+    }
+  },
+  "确定实验道具": {
+    "$__mpe_code": {
+      "position": {
+        "x": 4473,
+        "y": 376
+      }
+    },
+    "action": {
+      "param": {},
+      "type": "Click"
+    },
+    "next": [
+      {
+        "jump_back": true,
+        "name": "意外处理"
+      },
+      "确定实验道具",
+      "实验循环结束"
+    ],
+    "post_delay": 500,
+    "recognition": {
+      "param": {
+        "roi": [
+          564,
+          529,
+          149,
+          53
+        ],
+        "template": [
+          "实验室/确定-实验室.png"
+        ]
+      },
+      "type": "TemplateMatch"
+    }
+  },
+  "确认进入实验室": {
+    "$__mpe_code": {
+      "position": {
+        "x": 900,
+        "y": 277
+      }
+    },
+    "next": [
+      "实验循环开始"
+    ],
+    "recognition": {
+      "param": {
+        "roi": [
+          1050,
+          118,
+          140,
+          131
+        ],
+        "template": [
+          "实验室/开始实验.png"
+        ]
+      },
+      "type": "TemplateMatch"
+    }
+  },
+  "结束天狼星选择": {
+    "$__mpe_code": {
+      "position": {
+        "x": 4096,
+        "y": 939
+      }
+    },
+    "next": [
+      {
+        "jump_back": true,
+        "name": "意外处理"
+      },
+      "完成实验室卡牌选择"
+    ]
+  },
+  "进入实验室卡牌选择": {
+    "$__mpe_code": {
+      "position": {
+        "x": 1585,
+        "y": 284
+      }
+    },
+    "action": {
+      "param": {
+        "target": [
+          544,
+          256,
+          192,
+          80
+        ]
+      },
+      "type": "Click"
+    },
+    "next": [
+      {
+        "jump_back": true,
+        "name": "意外处理"
+      },
+      "实验室分流"
+    ]
+  }
+}

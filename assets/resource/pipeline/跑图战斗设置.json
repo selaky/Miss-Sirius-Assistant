@@ -1,333 +1,432 @@
 {
-    "开始战斗设置": {
-        "recognition": {
-            "type": "DirectHit"
-        },
-        "action": {
-            "type": "DoNothing"
-        },
-        "pre_delay": 0,
-        "post_delay": 0,
-        "next": ["保存一般普通卡组"]
-    },
-    "保存一般普通卡组": {
-        "recognition": {
-            "type": "DirectHit"
-        },
-        "action": {
-            "type": "Custom",
-            "param": {
-                "custom_action": "save_battle_config",
-                "custom_action_param": {
-                    "config_key": "deck_general_normal",
-                    "config_value": "卡组一"
-                }
-            }
-        },
-        "pre_delay": 0,
-        "post_delay": 0,
-        "rate_limit": 0,
-        "next": ["保存一般暴走卡组"]
-    },
-    "保存一般暴走卡组": {
-        "recognition": {
-            "type": "DirectHit"
-        },
-        "action": {
-            "type": "Custom",
-            "param": {
-                "custom_action": "save_battle_config",
-                "custom_action_param": {
-                    "config_key": "deck_general_rampage",
-                    "config_value": "卡组一"
-                }
-            }
-        },
-        "pre_delay": 0,
-        "post_delay": 0,
-        "rate_limit": 0,
-        "next": ["保存天狼星普通卡组"]
-    },
-    "保存天狼星普通卡组": {
-        "recognition": {
-            "type": "DirectHit"
-        },
-        "action": {
-            "type": "Custom",
-            "param": {
-                "custom_action": "save_battle_config",
-                "custom_action_param": {
-                    "config_key": "deck_sirius_normal",
-                    "config_value": "卡组一"
-                }
-            }
-        },
-        "pre_delay": 0,
-        "post_delay": 0,
-        "rate_limit": 0,
-        "next": ["保存天狼星暴走卡组"]
-    },
-    "保存天狼星暴走卡组": {
-        "recognition": {
-            "type": "DirectHit"
-        },
-        "action": {
-            "type": "Custom",
-            "param": {
-                "custom_action": "save_battle_config",
-                "custom_action_param": {
-                    "config_key": "deck_sirius_rampage",
-                    "config_value": "卡组一"
-                }
-            }
-        },
-        "pre_delay": 0,
-        "post_delay": 0,
-        "rate_limit": 0,
-        "next": ["保存放生开关"]
-    },
-    "保存放生开关": {
-        "recognition": {
-            "type": "DirectHit"
-        },
-        "action": {
-            "type": "Custom",
-            "param": {
-                "custom_action": "save_battle_config",
-                "custom_action_param": {
-                    "config_key": "enable_release",
-                    "config_value": "false"
-                }
-            }
-        },
-        "pre_delay": 0,
-        "post_delay": 0,
-        "rate_limit": 0,
-        "next": ["保存放生卡组"]
-    },
-    "保存放生卡组": {
-        "recognition": {
-            "type": "DirectHit"
-        },
-        "action": {
-            "type": "Custom",
-            "param": {
-                "custom_action": "save_battle_config",
-                "custom_action_param": {
-                    "config_key": "deck_release",
-                    "config_value": "卡组一"
-                }
-            }
-        },
-        "pre_delay": 0,
-        "post_delay": 0,
-        "rate_limit": 0,
-        "next": ["保存放生一般普通"]
-    },
-    "保存放生一般普通": {
-        "recognition": {
-            "type": "DirectHit"
-        },
-        "action": {
-            "type": "Custom",
-            "param": {
-                "custom_action": "save_battle_config",
-                "custom_action_param": {
-                    "config_key": "release_general_normal",
-                    "config_value": "false"
-                }
-            }
-        },
-        "pre_delay": 0,
-        "post_delay": 0,
-        "rate_limit": 0,
-        "next": ["保存放生一般暴走"]
-    },
-    "保存放生一般暴走": {
-        "recognition": {
-            "type": "DirectHit"
-        },
-        "action": {
-            "type": "Custom",
-            "param": {
-                "custom_action": "save_battle_config",
-                "custom_action_param": {
-                    "config_key": "release_general_rampage",
-                    "config_value": "false"
-                }
-            }
-        },
-        "pre_delay": 0,
-        "post_delay": 0,
-        "rate_limit": 0,
-        "next": ["保存放生蓝狼普通"]
-    },
-    "保存放生蓝狼普通": {
-        "recognition": {
-            "type": "DirectHit"
-        },
-        "action": {
-            "type": "Custom",
-            "param": {
-                "custom_action": "save_battle_config",
-                "custom_action_param": {
-                    "config_key": "release_blue_normal",
-                    "config_value": "false"
-                }
-            }
-        },
-        "pre_delay": 0,
-        "post_delay": 0,
-        "rate_limit": 0,
-        "next": ["保存放生蓝狼暴走"]
-    },
-    "保存放生蓝狼暴走": {
-        "recognition": {
-            "type": "DirectHit"
-        },
-        "action": {
-            "type": "Custom",
-            "param": {
-                "custom_action": "save_battle_config",
-                "custom_action_param": {
-                    "config_key": "release_blue_rampage",
-                    "config_value": "false"
-                }
-            }
-        },
-        "pre_delay": 0,
-        "post_delay": 0,
-        "rate_limit": 0,
-        "next": ["保存放生粉狼普通"]
-    },
-    "保存放生粉狼普通": {
-        "recognition": {
-            "type": "DirectHit"
-        },
-        "action": {
-            "type": "Custom",
-            "param": {
-                "custom_action": "save_battle_config",
-                "custom_action_param": {
-                    "config_key": "release_pink_normal",
-                    "config_value": "false"
-                }
-            }
-        },
-        "pre_delay": 0,
-        "post_delay": 0,
-        "rate_limit": 0,
-        "next": ["保存放生粉狼暴走"]
-    },
-    "保存放生粉狼暴走": {
-        "recognition": {
-            "type": "DirectHit"
-        },
-        "action": {
-            "type": "Custom",
-            "param": {
-                "custom_action": "save_battle_config",
-                "custom_action_param": {
-                    "config_key": "release_pink_rampage",
-                    "config_value": "false"
-                }
-            }
-        },
-        "pre_delay": 0,
-        "post_delay": 0,
-        "rate_limit": 0,
-        "next": ["保存放生红狼普通"]
-    },
-    "保存放生红狼普通": {
-        "recognition": {
-            "type": "DirectHit"
-        },
-        "action": {
-            "type": "Custom",
-            "param": {
-                "custom_action": "save_battle_config",
-                "custom_action_param": {
-                    "config_key": "release_red_normal",
-                    "config_value": "false"
-                }
-            }
-        },
-        "pre_delay": 0,
-        "post_delay": 0,
-        "rate_limit": 0,
-        "next": ["保存放生红狼暴走"]
-    },
-    "保存放生红狼暴走": {
-        "recognition": {
-            "type": "DirectHit"
-        },
-        "action": {
-            "type": "Custom",
-            "param": {
-                "custom_action": "save_battle_config",
-                "custom_action_param": {
-                    "config_key": "release_red_rampage",
-                    "config_value": "false"
-                }
-            }
-        },
-        "pre_delay": 0,
-        "post_delay": 0,
-        "rate_limit": 0,
-        "next": ["保存公屏开关"]
-    },
-    "保存公屏开关": {
-        "recognition": {
-            "type": "DirectHit"
-        },
-        "action": {
-            "type": "Custom",
-            "param": {
-                "custom_action": "save_battle_config",
-                "custom_action_param": {
-                    "config_key": "broadcast",
-                    "config_value": "false"
-                }
-            }
-        },
-        "pre_delay": 0,
-        "post_delay": 0,
-        "rate_limit": 0,
-        "next": ["保存公屏附加信息"]
-    },
-    "保存公屏附加信息": {
-        "recognition": {
-            "type": "DirectHit"
-        },
-        "action": {
-            "type": "Custom",
-            "param": {
-                "custom_action": "save_battle_config",
-                "custom_action_param": {
-                    "config_key": "broadcast_addition",
-                    "config_value": "随意刀"
-                }
-            }
-        },
-        "pre_delay": 0,
-        "post_delay": 0,
-        "rate_limit": 0,
-        "next": ["战斗设置完成"]
-    },
-    "战斗设置完成": {
-        "recognition": {
-            "type": "DirectHit"
-        },
-        "action": {
-            "type": "Custom",
-            "param": {
-                "custom_action": "finalize_battle_config"
-            }
-        },
-        "pre_delay": 0,
-        "post_delay": 0,
-        "focus": {
-            "Node.Action.Succeeded": "战斗设置已保存"
-        }
+  "$__mpe_config_新建Pipeline2": {
+    "$__mpe_code": {
+      "filePath": "D:\\Projects\\MSA\\assets\\resource\\pipeline\\跑图战斗设置.json",
+      "filename": "新建Pipeline2",
+      "lastSyncTime": 1770434647437,
+      "prefix": "",
+      "savedViewport": {
+        "x": -3890,
+        "y": 119,
+        "zoom": 0.92
+      },
+      "version": "v1.0.3"
     }
+  },
+  "保存一般普通卡组": {
+    "$__mpe_code": {
+      "position": {
+        "x": 300,
+        "y": 0
+      }
+    },
+    "action": {
+      "param": {
+        "custom_action": "save_battle_config",
+        "custom_action_param": {
+          "config_key": "deck_general_normal",
+          "config_value": "卡组一"
+        }
+      },
+      "type": "Custom"
+    },
+    "next": [
+      "保存一般暴走卡组"
+    ],
+    "post_delay": 0,
+    "pre_delay": 0,
+    "rate_limit": 0
+  },
+  "保存一般暴走卡组": {
+    "$__mpe_code": {
+      "position": {
+        "x": 600,
+        "y": 0
+      }
+    },
+    "action": {
+      "param": {
+        "custom_action": "save_battle_config",
+        "custom_action_param": {
+          "config_key": "deck_general_rampage",
+          "config_value": "卡组一"
+        }
+      },
+      "type": "Custom"
+    },
+    "next": [
+      "保存天狼星普通卡组"
+    ],
+    "post_delay": 0,
+    "pre_delay": 0,
+    "rate_limit": 0
+  },
+  "保存公屏开关": {
+    "$__mpe_code": {
+      "position": {
+        "x": 4500,
+        "y": 0
+      }
+    },
+    "action": {
+      "param": {
+        "custom_action": "save_battle_config",
+        "custom_action_param": {
+          "config_key": "broadcast",
+          "config_value": "false"
+        }
+      },
+      "type": "Custom"
+    },
+    "next": [
+      "保存公屏附加信息"
+    ],
+    "post_delay": 0,
+    "pre_delay": 0,
+    "rate_limit": 0
+  },
+  "保存公屏附加信息": {
+    "$__mpe_code": {
+      "position": {
+        "x": 4800,
+        "y": 0
+      }
+    },
+    "action": {
+      "param": {
+        "custom_action": "save_battle_config",
+        "custom_action_param": {
+          "config_key": "broadcast_addition",
+          "config_value": "随意刀"
+        }
+      },
+      "type": "Custom"
+    },
+    "next": [
+      "战斗设置完成"
+    ],
+    "post_delay": 0,
+    "pre_delay": 0,
+    "rate_limit": 0
+  },
+  "保存天狼星普通卡组": {
+    "$__mpe_code": {
+      "position": {
+        "x": 900,
+        "y": 0
+      }
+    },
+    "action": {
+      "param": {
+        "custom_action": "save_battle_config",
+        "custom_action_param": {
+          "config_key": "deck_sirius_normal",
+          "config_value": "卡组一"
+        }
+      },
+      "type": "Custom"
+    },
+    "next": [
+      "保存天狼星暴走卡组"
+    ],
+    "post_delay": 0,
+    "pre_delay": 0,
+    "rate_limit": 0
+  },
+  "保存天狼星暴走卡组": {
+    "$__mpe_code": {
+      "position": {
+        "x": 1200,
+        "y": 0
+      }
+    },
+    "action": {
+      "param": {
+        "custom_action": "save_battle_config",
+        "custom_action_param": {
+          "config_key": "deck_sirius_rampage",
+          "config_value": "卡组一"
+        }
+      },
+      "type": "Custom"
+    },
+    "next": [
+      "保存放生开关"
+    ],
+    "post_delay": 0,
+    "pre_delay": 0,
+    "rate_limit": 0
+  },
+  "保存放生一般普通": {
+    "$__mpe_code": {
+      "position": {
+        "x": 2100,
+        "y": 0
+      }
+    },
+    "action": {
+      "param": {
+        "custom_action": "save_battle_config",
+        "custom_action_param": {
+          "config_key": "release_general_normal",
+          "config_value": "false"
+        }
+      },
+      "type": "Custom"
+    },
+    "next": [
+      "保存放生一般暴走"
+    ],
+    "post_delay": 0,
+    "pre_delay": 0,
+    "rate_limit": 0
+  },
+  "保存放生一般暴走": {
+    "$__mpe_code": {
+      "position": {
+        "x": 2400,
+        "y": 0
+      }
+    },
+    "action": {
+      "param": {
+        "custom_action": "save_battle_config",
+        "custom_action_param": {
+          "config_key": "release_general_rampage",
+          "config_value": "false"
+        }
+      },
+      "type": "Custom"
+    },
+    "next": [
+      "保存放生蓝狼普通"
+    ],
+    "post_delay": 0,
+    "pre_delay": 0,
+    "rate_limit": 0
+  },
+  "保存放生卡组": {
+    "$__mpe_code": {
+      "position": {
+        "x": 1800,
+        "y": 0
+      }
+    },
+    "action": {
+      "param": {
+        "custom_action": "save_battle_config",
+        "custom_action_param": {
+          "config_key": "deck_release",
+          "config_value": "卡组一"
+        }
+      },
+      "type": "Custom"
+    },
+    "next": [
+      "保存放生一般普通"
+    ],
+    "post_delay": 0,
+    "pre_delay": 0,
+    "rate_limit": 0
+  },
+  "保存放生开关": {
+    "$__mpe_code": {
+      "position": {
+        "x": 1500,
+        "y": 0
+      }
+    },
+    "action": {
+      "param": {
+        "custom_action": "save_battle_config",
+        "custom_action_param": {
+          "config_key": "enable_release",
+          "config_value": "false"
+        }
+      },
+      "type": "Custom"
+    },
+    "next": [
+      "保存放生卡组"
+    ],
+    "post_delay": 0,
+    "pre_delay": 0,
+    "rate_limit": 0
+  },
+  "保存放生粉狼普通": {
+    "$__mpe_code": {
+      "position": {
+        "x": 3300,
+        "y": 0
+      }
+    },
+    "action": {
+      "param": {
+        "custom_action": "save_battle_config",
+        "custom_action_param": {
+          "config_key": "release_pink_normal",
+          "config_value": "false"
+        }
+      },
+      "type": "Custom"
+    },
+    "next": [
+      "保存放生粉狼暴走"
+    ],
+    "post_delay": 0,
+    "pre_delay": 0,
+    "rate_limit": 0
+  },
+  "保存放生粉狼暴走": {
+    "$__mpe_code": {
+      "position": {
+        "x": 3600,
+        "y": 0
+      }
+    },
+    "action": {
+      "param": {
+        "custom_action": "save_battle_config",
+        "custom_action_param": {
+          "config_key": "release_pink_rampage",
+          "config_value": "false"
+        }
+      },
+      "type": "Custom"
+    },
+    "next": [
+      "保存放生红狼普通"
+    ],
+    "post_delay": 0,
+    "pre_delay": 0,
+    "rate_limit": 0
+  },
+  "保存放生红狼普通": {
+    "$__mpe_code": {
+      "position": {
+        "x": 3900,
+        "y": 0
+      }
+    },
+    "action": {
+      "param": {
+        "custom_action": "save_battle_config",
+        "custom_action_param": {
+          "config_key": "release_red_normal",
+          "config_value": "false"
+        }
+      },
+      "type": "Custom"
+    },
+    "next": [
+      "保存放生红狼暴走"
+    ],
+    "post_delay": 0,
+    "pre_delay": 0,
+    "rate_limit": 0
+  },
+  "保存放生红狼暴走": {
+    "$__mpe_code": {
+      "position": {
+        "x": 4200,
+        "y": 0
+      }
+    },
+    "action": {
+      "param": {
+        "custom_action": "save_battle_config",
+        "custom_action_param": {
+          "config_key": "release_red_rampage",
+          "config_value": "false"
+        }
+      },
+      "type": "Custom"
+    },
+    "next": [
+      "保存公屏开关"
+    ],
+    "post_delay": 0,
+    "pre_delay": 0,
+    "rate_limit": 0
+  },
+  "保存放生蓝狼普通": {
+    "$__mpe_code": {
+      "position": {
+        "x": 2700,
+        "y": 0
+      }
+    },
+    "action": {
+      "param": {
+        "custom_action": "save_battle_config",
+        "custom_action_param": {
+          "config_key": "release_blue_normal",
+          "config_value": "false"
+        }
+      },
+      "type": "Custom"
+    },
+    "next": [
+      "保存放生蓝狼暴走"
+    ],
+    "post_delay": 0,
+    "pre_delay": 0,
+    "rate_limit": 0
+  },
+  "保存放生蓝狼暴走": {
+    "$__mpe_code": {
+      "position": {
+        "x": 3000,
+        "y": 0
+      }
+    },
+    "action": {
+      "param": {
+        "custom_action": "save_battle_config",
+        "custom_action_param": {
+          "config_key": "release_blue_rampage",
+          "config_value": "false"
+        }
+      },
+      "type": "Custom"
+    },
+    "next": [
+      "保存放生粉狼普通"
+    ],
+    "post_delay": 0,
+    "pre_delay": 0,
+    "rate_limit": 0
+  },
+  "开始战斗设置": {
+    "$__mpe_code": {
+      "position": {
+        "x": 0,
+        "y": 48
+      }
+    },
+    "next": [
+      "保存一般普通卡组"
+    ],
+    "post_delay": 0,
+    "pre_delay": 0
+  },
+  "战斗设置完成": {
+    "$__mpe_code": {
+      "position": {
+        "x": 5100,
+        "y": 16
+      }
+    },
+    "action": {
+      "param": {
+        "custom_action": "finalize_battle_config"
+      },
+      "type": "Custom"
+    },
+    "focus": {
+      "Node.Action.Succeeded": "战斗设置已加载"
+    },
+    "post_delay": 0,
+    "pre_delay": 0
+  }
 }

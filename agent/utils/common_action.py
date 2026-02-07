@@ -34,3 +34,20 @@ class SetNext(CustomAction):
         common_func.dynamic_set_next(context,pre_node,next_node)
         return CustomAction.RunResult(success=True)
     
+@AgentServer.custom_action("click_all_custom_reco")
+class ClickAllCustomReco(CustomAction):
+    """
+    点击自定义识别返回的所有按钮
+    """
+    def run(self, context: Context, argv: CustomAction.RunArg) -> CustomAction.RunResult:
+        # 获取所有需要点击的位置
+        click_targets = argv.reco_detail.best_result.detail.get("click_targets", [])
+        if not click_targets:
+            logging.info(f"[{argv.node_name}] 没有需要点击的按钮，跳过。")
+            return CustomAction.RunResult(success=True)
+        logging.info(f"[{argv.node_name}] 开始执行点击，共 {len(click_targets)} 个目标。")
+        # 从字典列表中提取 ROI 列表
+        roi_list = [target["roi"] for target in click_targets]
+        common_func.group_click(context, roi_list)
+
+        return CustomAction.RunResult(success=True)

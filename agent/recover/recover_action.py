@@ -24,7 +24,7 @@ class ResetPotionData(CustomAction):
 @AgentServer.custom_action("load_potion_limit")
 class LoadPotionLimit(CustomAction):
     """读取药水设置"""
-    def run(self,context:Context,argv:CustomAction.RunArg) -> bool:
+    def run(self, context: Context, argv: CustomAction.RunArg) -> CustomAction.RunResult:
         # 获取设置参数
         try:
              params = common_func.parse_params(
@@ -59,7 +59,7 @@ class LoadPotionLimit(CustomAction):
 @AgentServer.custom_action("load_free_recover")
 class LoadFreeRecover(CustomAction):
     """读取药水设置"""
-    def run(self,context:Context,argv:CustomAction.RunArg) -> bool:
+    def run(self, context: Context, argv: CustomAction.RunArg) -> CustomAction.RunResult:
         # 获取设置参数
         try:
              params = common_func.parse_params(

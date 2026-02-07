@@ -3,21 +3,21 @@
     "$__mpe_code": {
       "filePath": "D:\\Projects\\MSA\\assets\\resource\\pipeline\\跑图\\恢复.json",
       "filename": "恢复",
-      "lastSyncTime": 1768893862386,
+      "lastSyncTime": 1768987293273,
       "prefix": "",
       "savedViewport": {
-        "x": 165,
-        "y": -227,
-        "zoom": 0.77
+        "x": 68,
+        "y": -62,
+        "zoom": 0.43
       },
-      "version": "v0.16.1"
+      "version": "v1.0.2"
     }
   },
   "$__mpe_external_意外处理_恢复": {
     "$__mpe_code": {
       "position": {
-        "x": 2135,
-        "y": 1469
+        "x": 2152,
+        "y": 1769
       }
     }
   },
@@ -42,11 +42,7 @@
     },
     "next": [
       "结束恢复"
-    ],
-    "recognition": {
-      "param": {},
-      "type": "DirectHit"
-    }
+    ]
   },
   "BC不可用，关闭吃药": {
     "$__mpe_code": {
@@ -93,12 +89,12 @@
       "type": "Click"
     },
     "next": [
-      "BC不可用，放弃战斗",
-      "结束恢复",
       {
         "jump_back": true,
         "name": "意外处理"
-      }
+      },
+      "BC不可用，放弃战斗",
+      "结束恢复"
     ],
     "recognition": {
       "param": {
@@ -122,25 +118,17 @@
         "y": 1255
       }
     },
-    "action": {
-      "param": {},
-      "type": "DoNothing"
-    },
     "next": [
-      "BC不可用，关闭吃药",
-      "BC不可用，放弃战斗",
       {
         "jump_back": true,
         "name": "意外处理"
-      }
+      },
+      "BC不可用，关闭吃药",
+      "BC不可用，放弃战斗"
     ],
     "on_error": [
       "跑图循环开始"
-    ],
-    "recognition": {
-      "param": {},
-      "type": "DirectHit"
-    }
+    ]
   },
   "BigPotion": {
     "$__mpe_code": {
@@ -148,10 +136,6 @@
         "x": 0,
         "y": 223
       }
-    },
-    "action": {
-      "param": {},
-      "type": "DoNothing"
     },
     "recognition": {
       "param": {
@@ -175,10 +159,6 @@
         "y": 0
       }
     },
-    "action": {
-      "param": {},
-      "type": "DoNothing"
-    },
     "recognition": {
       "param": {
         "roi": [
@@ -201,10 +181,6 @@
         "y": 445
       }
     },
-    "action": {
-      "param": {},
-      "type": "DoNothing"
-    },
     "recognition": {
       "param": {
         "expected": [
@@ -223,13 +199,9 @@
   "开始AP恢复": {
     "$__mpe_code": {
       "position": {
-        "x": 291,
-        "y": 656
+        "x": 293,
+        "y": 651
       }
-    },
-    "action": {
-      "param": {},
-      "type": "DoNothing"
     },
     "next": [
       {
@@ -270,10 +242,6 @@
         "y": 1699
       }
     },
-    "action": {
-      "param": {},
-      "type": "DoNothing"
-    },
     "next": [
       "进行BC恢复"
     ],
@@ -309,17 +277,13 @@
         "y": 667
       }
     },
-    "action": {
-      "param": {},
-      "type": "DoNothing"
-    },
     "next": [
-      "开始AP恢复",
-      "开始BC恢复",
       {
         "jump_back": true,
         "name": "意外处理"
-      }
+      },
+      "开始AP恢复",
+      "开始BC恢复"
     ],
     "on_error": [
       "跑图循环开始"
@@ -346,17 +310,9 @@
         "y": 1091
       }
     },
-    "action": {
-      "param": {},
-      "type": "DoNothing"
-    },
     "next": [
       "跑图循环开始"
-    ],
-    "recognition": {
-      "param": {},
-      "type": "DirectHit"
-    }
+    ]
   },
   "输出恢复反馈": {
     "$__mpe_code": {
@@ -365,26 +321,18 @@
         "y": 842
       }
     },
-    "action": {
-      "param": {},
-      "type": "DoNothing"
-    },
     "next": [
-      "顺利完成吃药",
-      "AP药水不可用",
-      "BC药水不可用",
       {
         "jump_back": true,
         "name": "意外处理"
-      }
+      },
+      "顺利完成吃药",
+      "AP药水不可用",
+      "BC药水不可用"
     ],
     "on_error": [
       "跑图循环开始"
-    ],
-    "recognition": {
-      "param": {},
-      "type": "DirectHit"
-    }
+    ]
   },
   "进行AP恢复": {
     "$__mpe_code": {
@@ -398,11 +346,11 @@
       "type": "Click"
     },
     "next": [
-      "输出恢复反馈",
       {
         "jump_back": true,
         "name": "意外处理"
-      }
+      },
+      "输出恢复反馈"
     ],
     "recognition": {
       "param": {
@@ -426,11 +374,11 @@
       "type": "Click"
     },
     "next": [
-      "输出恢复反馈",
       {
         "jump_back": true,
         "name": "意外处理"
-      }
+      },
+      "输出恢复反馈"
     ],
     "recognition": {
       "param": {
@@ -454,12 +402,12 @@
       "type": "Click"
     },
     "next": [
-      "顺利完成吃药",
-      "结束恢复",
       {
         "jump_back": true,
         "name": "意外处理"
-      }
+      },
+      "顺利完成吃药",
+      "结束恢复"
     ],
     "recognition": {
       "param": {
