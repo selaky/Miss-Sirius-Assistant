@@ -41,7 +41,7 @@ class ClickAllCustomReco(CustomAction):
     """
     def run(self, context: Context, argv: CustomAction.RunArg) -> CustomAction.RunResult:
         # 获取所有需要点击的位置
-        click_targets = argv.reco_detail.detail.get("click_targets", [])
+        click_targets = argv.reco_detail.best_result.detail.get("click_targets", [])
         if not click_targets:
             logging.info(f"[{argv.node_name}] 没有需要点击的按钮，跳过。")
             return CustomAction.RunResult(success=True)

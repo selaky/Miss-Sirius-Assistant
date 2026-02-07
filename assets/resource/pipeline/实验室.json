@@ -3,12 +3,12 @@
     "$__mpe_code": {
       "filePath": "D:\\Projects\\MSA\\assets\\resource\\pipeline/实验室.json",
       "filename": "实验室",
-      "lastSyncTime": 1770034069145,
+      "lastSyncTime": 1770439156172,
       "prefix": "",
       "savedViewport": {
-        "x": -2425,
-        "y": -548,
-        "zoom": 0.8
+        "x": -1889,
+        "y": -118,
+        "zoom": 0.61
       },
       "version": "v1.0.3"
     }
@@ -604,8 +604,8 @@
   "未选择实验卡牌": {
     "$__mpe_code": {
       "position": {
-        "x": 4474,
-        "y": 693
+        "x": 4467,
+        "y": 698
       }
     },
     "action": {
@@ -615,7 +615,6 @@
       "type": "Custom"
     },
     "next": [
-      "实验室分流",
       "关闭实验未选择弹窗"
     ],
     "recognition": {
@@ -681,11 +680,11 @@
       "type": "Click"
     },
     "next": [
+      "未选择实验卡牌",
       {
         "jump_back": true,
         "name": "意外处理"
       },
-      "未选择实验卡牌",
       "确定实验道具",
       "点击开始实验"
     ],
