@@ -17,10 +17,6 @@ on:
       - "**.py"
   workflow_dispatch:
 
-env:
-  MAA_FRAMEWORK_VERSION: "v5.5.0"
-  MFAA_VERSION: "v2.6.0-beta.1"
-
 permissions:
   contents: write
   actions: write
@@ -99,13 +95,19 @@ jobs:
           fi
 
       - name: Download MaaFramework
+        id: download_maa
         uses: robinraju/release-downloader@v1
         with:
           repository: MaaXYZ/MaaFramework
           fileName: "MAA-win-${{ matrix.arch }}*"
-          tag: ${{ env.MAA_FRAMEWORK_VERSION }}
+          latest: true
           out-file-path: "deps"
           extract: true
+
+      - name: Print MaaFramework version
+        shell: bash
+        run: |
+          echo "Downloaded MaaFramework: ${{ steps.download_maa.outputs.tag }}"
 
       - name: Download MFAAvalonia
         id: download_mfa
@@ -113,9 +115,14 @@ jobs:
         with:
           repository: SweetSmellFox/MFAAvalonia
           fileName: "MFAAvalonia-*-win-${{ steps.platform.outputs.tag }}*"
-          tag: ${{ env.MFAA_VERSION }}
+          latest: true
           out-file-path: "MFA"
           extract: true
+
+      - name: Print MFAAvalonia version
+        shell: bash
+        run: |
+          echo "Downloaded MFAAvalonia: ${{ steps.download_mfa.outputs.tag }}"
 
       - name: Clean up MFAAvalonia archive on Windows
         shell: bash
@@ -162,12 +169,12 @@ jobs:
           PLATFORM_TAG="win-${{ steps.platform.outputs.tag }}"
           ./install/python/python.exe ./tools/ci/install.py ${{ needs.meta.outputs.tag }} $PLATFORM_TAG
 
-      - name: Create CLI version
-        shell: bash
-        run: |
-          ./install/python/python.exe ./tools/ci/install_cli.py ${{ needs.meta.outputs.tag }}
-          cp -rpvn install/python/. install-cli/python/
-          rm -rf install-cli/deps 2>/dev/null || true
+      # - name: Create CLI version  # 暂停 CLI 版支持
+      #   shell: bash
+      #   run: |
+      #     ./install/python/python.exe ./tools/ci/install_cli.py ${{ needs.meta.outputs.tag }}
+      #     cp -rpvn install/python/. install-cli/python/
+      #     rm -rf install-cli/deps 2>/dev/null || true
 
       - name: Copy MFA files to main version
         shell: bash
@@ -203,261 +210,261 @@ jobs:
           name: MSA-win-${{ matrix.arch }}-${{ needs.meta.outputs.tag }}-Full
           path: "install"
 
-      - uses: actions/upload-artifact@v4
-        with:
-          name: MSA-win-${{ matrix.arch }}-${{ needs.meta.outputs.tag }}-Lite
-          path: "install-cli"
+      # - uses: actions/upload-artifact@v4  # 暂停 Lite 版上传
+      #   with:
+      #     name: MSA-win-${{ matrix.arch }}-${{ needs.meta.outputs.tag }}-Lite
+      #     path: "install-cli"
 
-  linux:
-    needs: meta
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        arch: [aarch64, x86_64]
-      fail-fast: false
+  # linux:  # 暂停非 Windows 平台支持
+  #   needs: meta
+  #   runs-on: ubuntu-latest
+  #   strategy:
+  #     matrix:
+  #       arch: [aarch64, x86_64]
+  #     fail-fast: false
+  #
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #       with:
+  #         submodules: true
+  #
+  #     - name: Set platform variables
+  #       id: platform
+  #       shell: bash
+  #       run: |
+  #         if [ "${{ matrix.arch }}" = "x86_64" ]; then
+  #           echo "tag=x64" >> $GITHUB_OUTPUT
+  #         else
+  #           echo "tag=arm64" >> $GITHUB_OUTPUT
+  #         fi
+  #
+  #     - name: Download MaaFramework for Linux
+  #       uses: robinraju/release-downloader@v1
+  #       with:
+  #         repository: MaaXYZ/MaaFramework
+  #         fileName: "MAA-linux-${{ matrix.arch }}*"
+  #         tag: ${{ env.MAA_FRAMEWORK_VERSION }}
+  #         out-file-path: "deps"
+  #         extract: true
+  #
+  #     - name: Download MFAAvalonia for Linux
+  #       id: download_mfa
+  #       uses: robinraju/release-downloader@v1
+  #       with:
+  #         repository: SweetSmellFox/MFAAvalonia
+  #         fileName: "MFAAvalonia-*-linux-${{ steps.platform.outputs.tag }}*"
+  #         tag: ${{ env.MFAA_VERSION }}
+  #         out-file-path: "MFA"
+  #         extract: true
+  #
+  #     - name: Clean up MFAAvalonia archive on Linux
+  #       shell: bash
+  #       run: |
+  #         ARCHIVE_FILE_PATH="${{ fromJson(steps.download_mfa.outputs.downloaded_files)[0] }}"
+  #         rm -f "${ARCHIVE_FILE_PATH}"
+  #         echo "Archive cleanup command executed for MFAAvalonia on Linux."
+  #
+  #     - name: Convert PNG to ICO
+  #       shell: bash
+  #       run: |
+  #         # 安装 ImageMagick（如果未安装）
+  #         sudo apt-get update && sudo apt-get install -y imagemagick
+  #
+  #         # 转换 PNG 到 ICO
+  #         convert assets/logo/blue.png -define icon:auto-resize=256,128,64,48,32,24,16 msa.ico
+  #
+  #     - name: Download Python dependencies
+  #       shell: bash
+  #       run: |
+  #         python tools/ci/download_deps.py --deps-dir install/deps
+  #
+  #     - name: Install on Linux
+  #       shell: bash
+  #       run: |
+  #         PYTHON_EXECUTABLE="python"
+  #         PLATFORM_TAG="linux-${{ steps.platform.outputs.tag }}"
+  #         echo "Using Python executable: $PYTHON_EXECUTABLE for Linux"
+  #         $PYTHON_EXECUTABLE ./tools/ci/install.py ${{ needs.meta.outputs.tag }} $PLATFORM_TAG
+  #
+  #     - name: Create CLI version
+  #       shell: bash
+  #       run: |
+  #         python ./tools/ci/install_cli.py ${{ needs.meta.outputs.tag }}
+  #         if [ -d "install/python" ]; then
+  #           cp -rpvn install/python/. install-cli/python/
+  #         fi
+  #         rm -rf install-cli/deps 2>/dev/null || true
+  #
+  #     - name: Copy MFA files to main version
+  #       shell: bash
+  #       run: |
+  #         if [ -d "MFA" ]; then
+  #           echo "Copying MFA files to install directory on Linux..."
+  #           mkdir -p install
+  #           rsync -av --ignore-existing MFA/ install/
+  #         else
+  #           echo "MFA directory not found on Linux, skipping copy."
+  #         fi
+  #
+  #     - name: Replace Assets with custom assets folder
+  #       shell: bash
+  #       run: |
+  #         # 删除大写的 Assets 文件夹
+  #         if [ -d "install/Assets" ]; then
+  #           rm -rf install/Assets
+  #           echo "Removed original Assets folder"
+  #         fi
+  #
+  #         # 创建小写的 assets 文件夹
+  #         mkdir -p install/assets
+  #
+  #         # 如果有自定义图标，复制并重命名为 logo.ico
+  #         if [ -f "msa.ico" ]; then
+  #           cp msa.ico install/assets/logo.ico
+  #           echo "Copied custom icon to assets/logo.ico"
+  #         fi
+  #
+  #     - uses: actions/upload-artifact@v4
+  #       with:
+  #         name: MSA-linux-${{ matrix.arch }}-${{ needs.meta.outputs.tag }}-Full
+  #         path: "install"
+  #
+  #     - uses: actions/upload-artifact@v4
+  #       with:
+  #         name: MSA-linux-${{ matrix.arch }}-${{ needs.meta.outputs.tag }}-Lite
+  #         path: "install-cli"
 
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          submodules: true
-
-      - name: Set platform variables
-        id: platform
-        shell: bash
-        run: |
-          if [ "${{ matrix.arch }}" = "x86_64" ]; then
-            echo "tag=x64" >> $GITHUB_OUTPUT
-          else
-            echo "tag=arm64" >> $GITHUB_OUTPUT
-          fi
-
-      - name: Download MaaFramework for Linux
-        uses: robinraju/release-downloader@v1
-        with:
-          repository: MaaXYZ/MaaFramework
-          fileName: "MAA-linux-${{ matrix.arch }}*"
-          tag: ${{ env.MAA_FRAMEWORK_VERSION }}
-          out-file-path: "deps"
-          extract: true
-
-      - name: Download MFAAvalonia for Linux
-        id: download_mfa
-        uses: robinraju/release-downloader@v1
-        with:
-          repository: SweetSmellFox/MFAAvalonia
-          fileName: "MFAAvalonia-*-linux-${{ steps.platform.outputs.tag }}*"
-          tag: ${{ env.MFAA_VERSION }}
-          out-file-path: "MFA"
-          extract: true
-
-      - name: Clean up MFAAvalonia archive on Linux
-        shell: bash
-        run: |
-          ARCHIVE_FILE_PATH="${{ fromJson(steps.download_mfa.outputs.downloaded_files)[0] }}"
-          rm -f "${ARCHIVE_FILE_PATH}"
-          echo "Archive cleanup command executed for MFAAvalonia on Linux."
-
-      - name: Convert PNG to ICO
-        shell: bash
-        run: |
-          # 安装 ImageMagick（如果未安装）
-          sudo apt-get update && sudo apt-get install -y imagemagick
-
-          # 转换 PNG 到 ICO
-          convert assets/logo/blue.png -define icon:auto-resize=256,128,64,48,32,24,16 msa.ico
-
-      - name: Download Python dependencies
-        shell: bash
-        run: |
-          python tools/ci/download_deps.py --deps-dir install/deps
-
-      - name: Install on Linux
-        shell: bash
-        run: |
-          PYTHON_EXECUTABLE="python"
-          PLATFORM_TAG="linux-${{ steps.platform.outputs.tag }}"
-          echo "Using Python executable: $PYTHON_EXECUTABLE for Linux"
-          $PYTHON_EXECUTABLE ./tools/ci/install.py ${{ needs.meta.outputs.tag }} $PLATFORM_TAG
-
-      - name: Create CLI version
-        shell: bash
-        run: |
-          python ./tools/ci/install_cli.py ${{ needs.meta.outputs.tag }}
-          if [ -d "install/python" ]; then
-            cp -rpvn install/python/. install-cli/python/
-          fi
-          rm -rf install-cli/deps 2>/dev/null || true
-
-      - name: Copy MFA files to main version
-        shell: bash
-        run: |
-          if [ -d "MFA" ]; then
-            echo "Copying MFA files to install directory on Linux..."
-            mkdir -p install
-            rsync -av --ignore-existing MFA/ install/
-          else
-            echo "MFA directory not found on Linux, skipping copy."
-          fi
-
-      - name: Replace Assets with custom assets folder
-        shell: bash
-        run: |
-          # 删除大写的 Assets 文件夹
-          if [ -d "install/Assets" ]; then
-            rm -rf install/Assets
-            echo "Removed original Assets folder"
-          fi
-
-          # 创建小写的 assets 文件夹
-          mkdir -p install/assets
-
-          # 如果有自定义图标，复制并重命名为 logo.ico
-          if [ -f "msa.ico" ]; then
-            cp msa.ico install/assets/logo.ico
-            echo "Copied custom icon to assets/logo.ico"
-          fi
-
-      - uses: actions/upload-artifact@v4
-        with:
-          name: MSA-linux-${{ matrix.arch }}-${{ needs.meta.outputs.tag }}-Full
-          path: "install"
-
-      - uses: actions/upload-artifact@v4
-        with:
-          name: MSA-linux-${{ matrix.arch }}-${{ needs.meta.outputs.tag }}-Lite
-          path: "install-cli"
-
-  macos:
-    needs: meta
-    strategy:
-      matrix:
-        include:
-          - arch: x86_64
-            runner: macos-15-intel  # Intel-based macOS runner
-          - arch: aarch64
-            runner: macos-latest  # Apple Silicon macOS runner
-      fail-fast: false
-    runs-on: ${{ matrix.runner }}
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          submodules: true
-
-      - name: Set platform variables
-        id: platform
-        shell: bash
-        run: |
-          if [ "${{ matrix.arch }}" = "x86_64" ]; then
-            echo "tag=x64" >> $GITHUB_OUTPUT
-          else
-            echo "tag=arm64" >> $GITHUB_OUTPUT
-          fi
-
-      - name: Download MaaFramework for macOS
-        uses: robinraju/release-downloader@v1
-        with:
-          repository: MaaXYZ/MaaFramework
-          fileName: "MAA-macos-${{ matrix.arch }}*"
-          tag: ${{ env.MAA_FRAMEWORK_VERSION }}
-          out-file-path: "deps"
-          extract: true
-
-      - name: Download MFAAvalonia for macOS
-        id: download_mfa
-        uses: robinraju/release-downloader@v1
-        with:
-          repository: SweetSmellFox/MFAAvalonia
-          fileName: "MFAAvalonia-*-osx-${{ steps.platform.outputs.tag }}*"
-          tag: ${{ env.MFAA_VERSION }}
-          out-file-path: "MFA"
-          extract: true
-
-      - name: Clean up MFAAvalonia archive on macOS
-        shell: bash
-        run: |
-          ARCHIVE_FILE_PATH="${{ fromJson(steps.download_mfa.outputs.downloaded_files)[0] }}"
-          rm -f "${ARCHIVE_FILE_PATH}"
-          echo "Archive cleanup command executed for MFAAvalonia on macOS."
-
-      - name: Convert PNG to ICO
-        shell: bash
-        run: |
-          # 安装 ImageMagick（如果未安装）
-          brew install imagemagick
-
-          # 转换 PNG 到 ICO
-          magick convert assets/logo/blue.png -define icon:auto-resize=256,128,64,48,32,24,16 msa.ico
-
-      - name: Setup Embed Python on macOS
-        shell: bash
-        run: |
-          python3 tools/ci/setup_embed_python.py
-          EMBED_PYTHON_PATH="./install/python/bin/python3"
-          if [ -f "$EMBED_PYTHON_PATH" ]; then
-            echo "Setting execute permission for $EMBED_PYTHON_PATH"
-            chmod +x "$EMBED_PYTHON_PATH"
-          else
-            echo "Warning: Embedded Python executable not found at $EMBED_PYTHON_PATH. Skipping chmod."
-          fi
-
-      - name: Download Python dependencies
-        shell: bash
-        run: |
-          ./install/python/bin/python3 tools/ci/download_deps.py --deps-dir install/deps
-
-      - name: Install on macOS
-        shell: bash
-        run: |
-          PYTHON_EXECUTABLE="./install/python/bin/python3"
-          PLATFORM_TAG="osx-${{ steps.platform.outputs.tag }}"
-          echo "Using Python executable: $PYTHON_EXECUTABLE for macOS"
-          $PYTHON_EXECUTABLE ./tools/ci/install.py ${{ needs.meta.outputs.tag }} $PLATFORM_TAG
-
-      - name: Create CLI version
-        shell: bash
-        run: |
-          ./install/python/bin/python3 ./tools/ci/install_cli.py ${{ needs.meta.outputs.tag }}
-          cp -rpvn install/python/. install-cli/python/
-          rm -rf install-cli/deps 2>/dev/null || true
-
-      - name: Copy MFA files to main version
-        shell: bash
-        run: |
-          if [ -d "MFA" ]; then
-            echo "Copying MFA files to install directory on macOS..."
-            mkdir -p install
-            rsync -av --ignore-existing MFA/ install/ # Using rsync like on Linux
-          else
-            echo "MFA directory not found on macOS, skipping copy."
-          fi
-
-      - name: Replace Assets with custom assets folder
-        shell: bash
-        run: |
-          # 删除大写的 Assets 文件夹
-          if [ -d "install/Assets" ]; then
-            rm -rf install/Assets
-            echo "Removed original Assets folder"
-          fi
-
-          # 创建小写的 assets 文件夹
-          mkdir -p install/assets
-
-          # 如果有自定义图标，复制并重命名为 logo.ico
-          if [ -f "msa.ico" ]; then
-            cp msa.ico install/assets/logo.ico
-            echo "Copied custom icon to assets/logo.ico"
-          fi
-
-      - uses: actions/upload-artifact@v4
-        with:
-          name: MSA-macos-${{ matrix.arch }}-${{ needs.meta.outputs.tag }}-Full
-          path: "install"
-
-      - uses: actions/upload-artifact@v4
-        with:
-          name: MSA-macos-${{ matrix.arch }}-${{ needs.meta.outputs.tag }}-Lite
-          path: "install-cli"
+  # macos:  # 暂停非 Windows 平台支持
+  #   needs: meta
+  #   strategy:
+  #     matrix:
+  #       include:
+  #         - arch: x86_64
+  #           runner: macos-15-intel  # Intel-based macOS runner
+  #         - arch: aarch64
+  #           runner: macos-latest  # Apple Silicon macOS runner
+  #     fail-fast: false
+  #   runs-on: ${{ matrix.runner }}
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #       with:
+  #         submodules: true
+  #
+  #     - name: Set platform variables
+  #       id: platform
+  #       shell: bash
+  #       run: |
+  #         if [ "${{ matrix.arch }}" = "x86_64" ]; then
+  #           echo "tag=x64" >> $GITHUB_OUTPUT
+  #         else
+  #           echo "tag=arm64" >> $GITHUB_OUTPUT
+  #         fi
+  #
+  #     - name: Download MaaFramework for macOS
+  #       uses: robinraju/release-downloader@v1
+  #       with:
+  #         repository: MaaXYZ/MaaFramework
+  #         fileName: "MAA-macos-${{ matrix.arch }}*"
+  #         tag: ${{ env.MAA_FRAMEWORK_VERSION }}
+  #         out-file-path: "deps"
+  #         extract: true
+  #
+  #     - name: Download MFAAvalonia for macOS
+  #       id: download_mfa
+  #       uses: robinraju/release-downloader@v1
+  #       with:
+  #         repository: SweetSmellFox/MFAAvalonia
+  #         fileName: "MFAAvalonia-*-osx-${{ steps.platform.outputs.tag }}*"
+  #         tag: ${{ env.MFAA_VERSION }}
+  #         out-file-path: "MFA"
+  #         extract: true
+  #
+  #     - name: Clean up MFAAvalonia archive on macOS
+  #       shell: bash
+  #       run: |
+  #         ARCHIVE_FILE_PATH="${{ fromJson(steps.download_mfa.outputs.downloaded_files)[0] }}"
+  #         rm -f "${ARCHIVE_FILE_PATH}"
+  #         echo "Archive cleanup command executed for MFAAvalonia on macOS."
+  #
+  #     - name: Convert PNG to ICO
+  #       shell: bash
+  #       run: |
+  #         # 安装 ImageMagick（如果未安装）
+  #         brew install imagemagick
+  #
+  #         # 转换 PNG 到 ICO
+  #         magick convert assets/logo/blue.png -define icon:auto-resize=256,128,64,48,32,24,16 msa.ico
+  #
+  #     - name: Setup Embed Python on macOS
+  #       shell: bash
+  #       run: |
+  #         python3 tools/ci/setup_embed_python.py
+  #         EMBED_PYTHON_PATH="./install/python/bin/python3"
+  #         if [ -f "$EMBED_PYTHON_PATH" ]; then
+  #           echo "Setting execute permission for $EMBED_PYTHON_PATH"
+  #           chmod +x "$EMBED_PYTHON_PATH"
+  #         else
+  #           echo "Warning: Embedded Python executable not found at $EMBED_PYTHON_PATH. Skipping chmod."
+  #         fi
+  #
+  #     - name: Download Python dependencies
+  #       shell: bash
+  #       run: |
+  #         ./install/python/bin/python3 tools/ci/download_deps.py --deps-dir install/deps
+  #
+  #     - name: Install on macOS
+  #       shell: bash
+  #       run: |
+  #         PYTHON_EXECUTABLE="./install/python/bin/python3"
+  #         PLATFORM_TAG="osx-${{ steps.platform.outputs.tag }}"
+  #         echo "Using Python executable: $PYTHON_EXECUTABLE for macOS"
+  #         $PYTHON_EXECUTABLE ./tools/ci/install.py ${{ needs.meta.outputs.tag }} $PLATFORM_TAG
+  #
+  #     - name: Create CLI version
+  #       shell: bash
+  #       run: |
+  #         ./install/python/bin/python3 ./tools/ci/install_cli.py ${{ needs.meta.outputs.tag }}
+  #         cp -rpvn install/python/. install-cli/python/
+  #         rm -rf install-cli/deps 2>/dev/null || true
+  #
+  #     - name: Copy MFA files to main version
+  #       shell: bash
+  #       run: |
+  #         if [ -d "MFA" ]; then
+  #           echo "Copying MFA files to install directory on macOS..."
+  #           mkdir -p install
+  #           rsync -av --ignore-existing MFA/ install/ # Using rsync like on Linux
+  #         else
+  #           echo "MFA directory not found on macOS, skipping copy."
+  #         fi
+  #
+  #     - name: Replace Assets with custom assets folder
+  #       shell: bash
+  #       run: |
+  #         # 删除大写的 Assets 文件夹
+  #         if [ -d "install/Assets" ]; then
+  #           rm -rf install/Assets
+  #           echo "Removed original Assets folder"
+  #         fi
+  #
+  #         # 创建小写的 assets 文件夹
+  #         mkdir -p install/assets
+  #
+  #         # 如果有自定义图标，复制并重命名为 logo.ico
+  #         if [ -f "msa.ico" ]; then
+  #           cp msa.ico install/assets/logo.ico
+  #           echo "Copied custom icon to assets/logo.ico"
+  #         fi
+  #
+  #     - uses: actions/upload-artifact@v4
+  #       with:
+  #         name: MSA-macos-${{ matrix.arch }}-${{ needs.meta.outputs.tag }}-Full
+  #         path: "install"
+  #
+  #     - uses: actions/upload-artifact@v4
+  #       with:
+  #         name: MSA-macos-${{ matrix.arch }}-${{ needs.meta.outputs.tag }}-Lite
+  #         path: "install-cli"
 
   changelog:
     name: Generate changelog
@@ -487,7 +494,7 @@ jobs:
 
   release:
     if: ${{ needs.meta.outputs.is_release == 'true' }}
-    needs: [meta, windows, linux, macos, changelog]
+    needs: [meta, windows, changelog]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/download-artifact@v4

@@ -411,53 +411,53 @@ def agent(is_dev_mode=False):
             elif version_info["error"]:
                 logger.debug(f"资源版本检查遇到问题: {version_info['error']}")
 
-            # ========== 热更新：基于 manifest 时间戳优化 ==========
-            hot_update_conf = read_hot_update_config()
-            if not hot_update_conf.get("enable_hot_update", True):
-                logger.info("已配置为跳过部分资源热更")
-            else:
-                from utils.manifest_checker import (
-                    check_manifest_updates,
-                    save_manifest_cache_from_result,
-                )
-
-                manifest_result = check_manifest_updates()
-
-                # 如果没有任何更新，跳过热更新
-                if manifest_result["success"] and not manifest_result["has_any_update"]:
-                    logger.debug("资源无更新，跳过热更新")
-                else:
-                    # 有更新或检查失败，执行热更新流程
-                    updated_manifests = manifest_result.get("updated_manifests", [])
-
-                    if updated_manifests or not manifest_result["success"]:
-                        from utils.resource_updater import check_and_update_resources
-
-                        # 只更新有变化的 manifest
-                        manifests = (
-                            updated_manifests if manifest_result["success"] else None
-                        )
-                        if manifests:
-                            logger.debug(f"开始更新 {len(manifests)} 个资源清单...")
-                        else:
-                            logger.debug("开始检查所有资源...")
-
-                        update_result = check_and_update_resources(
-                            resource_manifests=manifests
-                        )
-                        if update_result and update_result.get("updated_files"):
-                            pass
-                        elif update_result and update_result.get("error"):
-                            logger.debug(
-                                f"热更部分资源更新遇到问题: {update_result['error']}"
-                            )
-                        else:
-                            logger.debug("热更部分资源已是最新")
-                    else:
-                        logger.debug("所有 manifest 无更新，跳过热更新")
-
-                # 检查成功后保存 manifest 缓存（无论是否有更新）
-                save_manifest_cache_from_result(manifest_result)
+            # ========== 热更新：暂停（第二阶段重构） ==========
+            # hot_update_conf = read_hot_update_config()
+            # if not hot_update_conf.get("enable_hot_update", True):
+            #     logger.info("已配置为跳过部分资源热更")
+            # else:
+            #     from utils.manifest_checker import (
+            #         check_manifest_updates,
+            #         save_manifest_cache_from_result,
+            #     )
+            #
+            #     manifest_result = check_manifest_updates()
+            #
+            #     # 如果没有任何更新，跳过热更新
+            #     if manifest_result["success"] and not manifest_result["has_any_update"]:
+            #         logger.debug("资源无更新，跳过热更新")
+            #     else:
+            #         # 有更新或检查失败，执行热更新流程
+            #         updated_manifests = manifest_result.get("updated_manifests", [])
+            #
+            #         if updated_manifests or not manifest_result["success"]:
+            #             from utils.resource_updater import check_and_update_resources
+            #
+            #             # 只更新有变化的 manifest
+            #             manifests = (
+            #                 updated_manifests if manifest_result["success"] else None
+            #             )
+            #             if manifests:
+            #                 logger.debug(f"开始更新 {len(manifests)} 个资源清单...")
+            #             else:
+            #                 logger.debug("开始检查所有资源...")
+            #
+            #             update_result = check_and_update_resources(
+            #                 resource_manifests=manifests
+            #             )
+            #             if update_result and update_result.get("updated_files"):
+            #                 pass
+            #             elif update_result and update_result.get("error"):
+            #                 logger.debug(
+            #                     f"热更部分资源更新遇到问题: {update_result['error']}"
+            #                 )
+            #             else:
+            #                 logger.debug("热更部分资源已是最新")
+            #         else:
+            #             logger.debug("所有 manifest 无更新，跳过热更新")
+            #
+            #     # 检查成功后保存 manifest 缓存（无论是否有更新）
+            #     save_manifest_cache_from_result(manifest_result)
             # ========== 热更新结束 ==========
 
         from maa.agent.agent_server import AgentServer

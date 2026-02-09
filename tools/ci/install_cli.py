@@ -9,7 +9,7 @@ script_dir = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(script_dir)
 
 from configure import configure_ocr_model
-from generate_manifest_cache import generate_manifest_cache
+# from generate_manifest_cache import generate_manifest_cache  # 热更新暂停
 
 working_dir = Path(__file__).parent.parent.parent
 install_path = working_dir / Path("install-cli")
@@ -114,6 +114,6 @@ if __name__ == "__main__":
     install_resource()
     install_chores()
     install_agent()
-    install_manifest_cache()
+    # install_manifest_cache()  # 热更新暂停
 
     print(f"Install to {install_path} successfully.")

@@ -14,7 +14,8 @@ import urllib.request
 import urllib.error
 from pathlib import Path
 
-API_BASE_URL = "https://api.1999.fan/api"
+# API_BASE_URL = "https://api.1999.fan/api"  # 热更新暂停，待后续恢复
+API_BASE_URL = ""  # 占位符
 MANIFEST_URL = f"{API_BASE_URL}/manifest.json"
 REQUEST_TIMEOUT = 10
 
