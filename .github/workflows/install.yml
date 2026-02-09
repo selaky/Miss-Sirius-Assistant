@@ -223,6 +223,8 @@ jobs:
       - name: Create Background variant (x86_64 only)
         if: matrix.arch == 'x86_64'
         shell: bash
+        env:
+          PYTHONUTF8: "1"
         run: |
           ./install/python/python.exe ./tools/ci/create_background_variant.py \
             --hook-dir hook/build/bin/Release \
