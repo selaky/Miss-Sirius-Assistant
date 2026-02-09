@@ -28,7 +28,10 @@
       "WebFetch(domain:deepwiki.com)",
       "Bash(ls -la \"D:\\\\Projects\\\\MSA\\\\agent\"\" 2>/dev/null || find \"D:ProjectsMSAagent\" -type f -name \"*.py \")",
       "mcp__mcp-router__resolve-library-id",
-      "WebFetch(domain:1999.fan)"
+      "WebFetch(domain:1999.fan)",
+      "mcp__mcp-router__find_file",
+      "Bash(test:*)",
+      "mcp__mcp-router__sequentialthinking"
     ],
     "deny": [],
     "ask": []
