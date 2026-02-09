@@ -54,14 +54,14 @@ def install_resource():
         interface = json.load(f)
 
     interface["version"] = version
-    interface["custom_title"] = f"M9A {version} | 亿韭韭韭小助手"
+    interface["custom_title"] = f"MSA {version} | 天狼星小助手"
 
     with open(install_path / "interface.json", "w", encoding="utf-8") as f:
         json.dump(interface, f, ensure_ascii=False, indent=4)
 
 
 def install_chores():
-    for file in ["README.md", "LICENSE", "CONTACT", "requirements.txt"]:
+    for file in ["README.md", "LICENSE", "requirements.txt"]:
         shutil.copy2(
             working_dir / file,
             install_path,

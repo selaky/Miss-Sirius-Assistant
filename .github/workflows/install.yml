@@ -132,7 +132,7 @@ jobs:
           choco install imagemagick -y
 
           # 转换 PNG 到 ICO
-          magick convert assets/logo.png -define icon:auto-resize=256,128,64,48,32,24,16 m9a.ico
+          magick convert assets/logo/blue.png -define icon:auto-resize=256,128,64,48,32,24,16 msa.ico
 
       - name: Modify MFAAvalonia exe icon
         if: matrix.arch == 'x86_64'
@@ -142,7 +142,7 @@ jobs:
           curl -L https://github.com/electron/rcedit/releases/download/v2.0.0/rcedit-x64.exe -o rcedit.exe
 
           # 修改 exe 图标
-          ./rcedit.exe "MFA/MFAAvalonia.exe" --set-icon "m9a.ico"
+          ./rcedit.exe "MFA/MFAAvalonia.exe" --set-icon "msa.ico"
 
           echo "MFAAvalonia icon modified successfully"
 
@@ -156,25 +156,16 @@ jobs:
         run: |
           ./install/python/python.exe tools/ci/download_deps.py --deps-dir install/deps
 
-      - name: Download drop_core module
-        shell: bash
-        env:
-          PRIVATE_REPO_TOKEN: ${{ secrets.PRIVATE_REPO_TOKEN }}
-        run: |
-          ./install/python/python.exe tools/ci/download_drop_core.py --os windows --arch ${{ matrix.arch }} || echo "drop_core download skipped"
-
       - name: Install
         shell: bash
         run: |
           PLATFORM_TAG="win-${{ steps.platform.outputs.tag }}"
           ./install/python/python.exe ./tools/ci/install.py ${{ needs.meta.outputs.tag }} $PLATFORM_TAG
-          cp -rpvn tools/registry/. install/
 
       - name: Create CLI version
         shell: bash
         run: |
           ./install/python/python.exe ./tools/ci/install_cli.py ${{ needs.meta.outputs.tag }}
-          cp -rpvn tools/registry/. install-cli/
           cp -rpvn install/python/. install-cli/python/
           rm -rf install-cli/deps 2>/dev/null || true
 
@@ -202,19 +193,19 @@ jobs:
           mkdir -p install/assets
 
           # 如果有自定义图标，复制并重命名为 logo.ico
-          if [ -f "m9a.ico" ]; then
-            cp m9a.ico install/assets/logo.ico
+          if [ -f "msa.ico" ]; then
+            cp msa.ico install/assets/logo.ico
             echo "Copied custom icon to assets/logo.ico"
           fi
 
       - uses: actions/upload-artifact@v4
         with:
-          name: M9A-win-${{ matrix.arch }}-${{ needs.meta.outputs.tag }}-Full
+          name: MSA-win-${{ matrix.arch }}-${{ needs.meta.outputs.tag }}-Full
           path: "install"
 
       - uses: actions/upload-artifact@v4
         with:
-          name: M9A-win-${{ matrix.arch }}-${{ needs.meta.outputs.tag }}-Lite
+          name: MSA-win-${{ matrix.arch }}-${{ needs.meta.outputs.tag }}-Lite
           path: "install-cli"
 
   linux:
@@ -273,19 +264,12 @@ jobs:
           sudo apt-get update && sudo apt-get install -y imagemagick
 
           # 转换 PNG 到 ICO
-          convert assets/logo.png -define icon:auto-resize=256,128,64,48,32,24,16 m9a.ico
+          convert assets/logo/blue.png -define icon:auto-resize=256,128,64,48,32,24,16 msa.ico
 
       - name: Download Python dependencies
         shell: bash
         run: |
           python tools/ci/download_deps.py --deps-dir install/deps
-
-      - name: Download drop_core module
-        shell: bash
-        env:
-          PRIVATE_REPO_TOKEN: ${{ secrets.PRIVATE_REPO_TOKEN }}
-        run: |
-          python tools/ci/download_drop_core.py --os linux --arch ${{ matrix.arch }} || echo "drop_core download skipped"
 
       - name: Install on Linux
         shell: bash
@@ -328,19 +312,19 @@ jobs:
           mkdir -p install/assets
 
           # 如果有自定义图标，复制并重命名为 logo.ico
-          if [ -f "m9a.ico" ]; then
-            cp m9a.ico install/assets/logo.ico
+          if [ -f "msa.ico" ]; then
+            cp msa.ico install/assets/logo.ico
             echo "Copied custom icon to assets/logo.ico"
           fi
 
       - uses: actions/upload-artifact@v4
         with:
-          name: M9A-linux-${{ matrix.arch }}-${{ needs.meta.outputs.tag }}-Full
+          name: MSA-linux-${{ matrix.arch }}-${{ needs.meta.outputs.tag }}-Full
           path: "install"
 
       - uses: actions/upload-artifact@v4
         with:
-          name: M9A-linux-${{ matrix.arch }}-${{ needs.meta.outputs.tag }}-Lite
+          name: MSA-linux-${{ matrix.arch }}-${{ needs.meta.outputs.tag }}-Lite
           path: "install-cli"
 
   macos:
@@ -402,7 +386,7 @@ jobs:
           brew install imagemagick
 
           # 转换 PNG 到 ICO
-          magick convert assets/logo.png -define icon:auto-resize=256,128,64,48,32,24,16 m9a.ico
+          magick convert assets/logo/blue.png -define icon:auto-resize=256,128,64,48,32,24,16 msa.ico
 
       - name: Setup Embed Python on macOS
         shell: bash
@@ -420,13 +404,6 @@ jobs:
         shell: bash
         run: |
           ./install/python/bin/python3 tools/ci/download_deps.py --deps-dir install/deps
-
-      - name: Download drop_core module
-        shell: bash
-        env:
-          PRIVATE_REPO_TOKEN: ${{ secrets.PRIVATE_REPO_TOKEN }}
-        run: |
-          ./install/python/bin/python3 tools/ci/download_drop_core.py --os darwin --arch ${{ matrix.arch }} || echo "drop_core download skipped"
 
       - name: Install on macOS
         shell: bash
@@ -467,19 +444,19 @@ jobs:
           mkdir -p install/assets
 
           # 如果有自定义图标，复制并重命名为 logo.ico
-          if [ -f "m9a.ico" ]; then
-            cp m9a.ico install/assets/logo.ico
+          if [ -f "msa.ico" ]; then
+            cp msa.ico install/assets/logo.ico
             echo "Copied custom icon to assets/logo.ico"
           fi
 
       - uses: actions/upload-artifact@v4
         with:
-          name: M9A-macos-${{ matrix.arch }}-${{ needs.meta.outputs.tag }}-Full
+          name: MSA-macos-${{ matrix.arch }}-${{ needs.meta.outputs.tag }}-Full
           path: "install"
 
       - uses: actions/upload-artifact@v4
         with:
-          name: M9A-macos-${{ matrix.arch }}-${{ needs.meta.outputs.tag }}-Lite
+          name: MSA-macos-${{ matrix.arch }}-${{ needs.meta.outputs.tag }}-Lite
           path: "install-cli"
 
   changelog:
@@ -563,10 +540,10 @@ jobs:
           draft: false
           prerelease: ${{ needs.meta.outputs.is_prerelease == 'true' }}
 
-      - name: Trigger MirrorChyanUploading
-        shell: bash
-        run: |
-          gh workflow run --repo $GITHUB_REPOSITORY mirrorchyan.yml -f tag=${{ needs.meta.outputs.tag }}
-          gh workflow run --repo $GITHUB_REPOSITORY mirrorchyan_release_note.yml -f tag=${{ needs.meta.outputs.tag }}
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # - name: Trigger MirrorChyanUploading
+      #   shell: bash
+      #   run: |
+      #     gh workflow run --repo $GITHUB_REPOSITORY mirrorchyan.yml -f tag=${{ needs.meta.outputs.tag }}
+      #     gh workflow run --repo $GITHUB_REPOSITORY mirrorchyan_release_note.yml -f tag=${{ needs.meta.outputs.tag }}
+      #   env:
+      #     GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
