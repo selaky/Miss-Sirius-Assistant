@@ -132,14 +132,15 @@ jobs:
           echo "Archive cleanup command executed for MFAAvalonia on Windows."
 
       - name: Convert PNG to ICO
-        if: matrix.arch == 'x86_64'
         shell: bash
         run: |
           # 安装 ImageMagick
           choco install imagemagick -y
 
-          # 转换 PNG 到 ICO
-          magick convert assets/logo/blue.png -define icon:auto-resize=256,128,64,48,32,24,16 msa.ico
+          # 生成原版图标（蓝色）
+          magick convert assets/logo/blue.png -define icon:auto-resize=256,128,64,48,32,24,16 msa-base.ico
+          # 生成后台版图标（粉色）
+          magick convert assets/logo/pink.png -define icon:auto-resize=256,128,64,48,32,24,16 msa-bg.ico
 
       - name: Modify MFAAvalonia exe icon
         if: matrix.arch == 'x86_64'
@@ -148,10 +149,19 @@ jobs:
           # 下载 rcedit
           curl -L https://github.com/electron/rcedit/releases/download/v2.0.0/rcedit-x64.exe -o rcedit.exe
 
-          # 修改 exe 图标
-          ./rcedit.exe "MFA/MFAAvalonia.exe" --set-icon "msa.ico"
+          # 原版使用蓝色图标
+          ./rcedit.exe "MFA/MFAAvalonia.exe" --set-icon "msa-base.ico"
 
           echo "MFAAvalonia icon modified successfully"
+
+      - name: Build Hook module (x86_64 only)
+        if: matrix.arch == 'x86_64'
+        shell: bash
+        run: |
+          cmake -S hook -B hook/build -DCMAKE_BUILD_TYPE=Release
+          cmake --build hook/build --config Release
+          echo "Hook module built successfully"
+          ls -la hook/build/bin/Release/
 
       - name: Setup Embed Python on Windows
         shell: bash
@@ -200,15 +210,29 @@ jobs:
           mkdir -p install/assets
 
           # 如果有自定义图标，复制并重命名为 logo.ico
-          if [ -f "msa.ico" ]; then
-            cp msa.ico install/assets/logo.ico
+          if [ -f "msa-base.ico" ]; then
+            cp msa-base.ico install/assets/logo.ico
             echo "Copied custom icon to assets/logo.ico"
           fi
 
       - uses: actions/upload-artifact@v4
         with:
-          name: MSA-win-${{ matrix.arch }}-${{ needs.meta.outputs.tag }}-Full
+          name: MSA-win-${{ matrix.arch }}-${{ needs.meta.outputs.tag }}-Base
           path: "install"
+
+      - name: Create Background variant (x86_64 only)
+        if: matrix.arch == 'x86_64'
+        shell: bash
+        run: |
+          ./install/python/python.exe ./tools/ci/create_background_variant.py \
+            --hook-dir hook/build/bin/Release \
+            --icon msa-bg.ico
+
+      - uses: actions/upload-artifact@v4
+        if: matrix.arch == 'x86_64'
+        with:
+          name: MSA-win-x86_64-${{ needs.meta.outputs.tag }}-Background
+          path: "install-bg"
 
       # - uses: actions/upload-artifact@v4  # 暂停 Lite 版上传
       #   with:

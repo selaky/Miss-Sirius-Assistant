@@ -73,6 +73,12 @@ def install_resource():
     interface["version"] = version
     interface["custom_title"] = f"MSA {version} | 天狼星小助手"
 
+    # 原版使用前台控制方式
+    for controller in interface.get("controller", []):
+        if controller.get("type") == "Win32" and "win32" in controller:
+            controller["win32"]["mouse"] = "Seize"
+            controller["win32"]["keyboard"] = "Seize"
+
     with open(install_path / "interface.json", "w", encoding="utf-8") as f:
         json.dump(interface, f, ensure_ascii=False, indent=4)
 
