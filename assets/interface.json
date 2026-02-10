@@ -124,6 +124,12 @@
             ]
         },
         {
+            "name": "性能诊断测试",
+            "entry": "诊断入口",
+            "default_check": false,
+            "description": "### 性能退化诊断工具\n快速积累 pipeline 节点，用于测试自定义识别回调是否会随节点数增长而变慢。\n\n**使用前需在 agent/custom/__init__.py 中取消注释诊断模块的导入。**"
+        },
+        {
             "name": "世界BOSS",
             "entry": "开始世界BOSS",
             "default_check": false,

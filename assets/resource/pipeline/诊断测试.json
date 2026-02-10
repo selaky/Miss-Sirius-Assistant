@@ -1,0 +1,88 @@
+{
+    "诊断入口": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "诊断探针"
+        ]
+    },
+    "诊断探针": {
+        "recognition": {
+            "type": "Custom",
+            "param": {
+                "custom_recognition": "perf_probe",
+                "custom_recognition_param": {
+                    "max_iterations": 3000,
+                    "log_interval": 100
+                }
+            }
+        },
+        "action": "DoNothing",
+        "next": [
+            "诊断填充A"
+        ]
+    },
+    "诊断填充A": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "诊断填充B"
+        ]
+    },
+    "诊断填充B": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "诊断填充C"
+        ]
+    },
+    "诊断填充C": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "诊断填充D"
+        ]
+    },
+    "诊断填充D": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "诊断填充E"
+        ]
+    },
+    "诊断填充E": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "诊断填充F"
+        ]
+    },
+    "诊断填充F": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "诊断填充G"
+        ]
+    },
+    "诊断填充G": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "诊断填充H"
+        ]
+    },
+    "诊断填充H": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "诊断填充I"
+        ]
+    },
+    "诊断填充I": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "诊断探针"
+        ]
+    }
+}
